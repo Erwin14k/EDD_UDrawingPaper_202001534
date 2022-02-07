@@ -139,4 +139,32 @@ public class LinkedList {
         
     }
     
+    public void uptadeFreeWindowState(int id){
+        LinkedListNode temp=first;
+        while(temp!=null){
+            if (temp.window.getId()==id){
+                temp.window.setState("libre");
+                break;
+            }else{
+                temp=temp.next;
+            } 
+            
+        }
+        
+    }
+    
+    public void uptadeWindowStackList(int id, Image image){
+        LinkedListNode temp=first;
+        while(temp!=null){
+            if (temp.window.getId()==id){
+                temp.window.getStacklist().insert(image);
+                break;
+            }else{
+                temp=temp.next;
+            } 
+            
+        }
+        
+    }
+    
 }

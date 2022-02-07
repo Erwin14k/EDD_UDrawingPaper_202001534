@@ -92,6 +92,7 @@ public class Queue {
             if (temp.clientC.getId()==id){
                 temp.clientC.setIdWindow(idWindow);
                 temp.clientC.setSteps(temp.clientC.getSteps()+1);
+                temp.clientC.setState("ventanilla");
                 break;
             }else{
                 temp=temp.next;

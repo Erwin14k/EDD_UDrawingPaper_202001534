@@ -28,6 +28,7 @@ public class UDrawingPaper {
     static Queue quequeHandler= new Queue();
     static LinkedList linkedListHandler=new LinkedList();
     static ClientWindow clientWindowHandler=new ClientWindow();
+    static AttendedList attendedListHandler = new AttendedList();
     //Variable global que guarda el número de clientes.
     static int clientsCounter=0;
     //Variable que controla en que paso vamos
@@ -190,7 +191,7 @@ public class UDrawingPaper {
             int totalImagesCounter=colorImageCounter+bwImageCounter; 
             
             // Se crea el objeto cliente
-            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0);
+            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter);
             //El objeto cliente se agrega a la cola
             quequeHandler.insert(newClient);
             //Vaciamos nuestra variable que venía vacía inicialmente
@@ -214,6 +215,7 @@ public class UDrawingPaper {
     }
     public static void masterMindAlgorithm(){
         stepsCounter++;
+        boolean clientCan=false;
         System.out.println("=============Paso Número: "+stepsCounter+"=============");
         /*Primera fase del algoritmo, verifica cual es el primer cliente de la cola,
         el primero de la lista avanza a ventanillas, si y solo sí alguna está libre*/
@@ -231,22 +233,39 @@ public class UDrawingPaper {
             System.out.println("El cliente con el id: "+idActualClient+" Se traslada a la ventanilla "+availableWindow);
             //Se procede a recolectar los datos del cliente antes de eliminar de cola.
             Client updateClient= quequeHandler.firstInQueue();
-            clientWindowHandler.insert(updateClient);
+            clientWindowHandler.finalInsert(updateClient);
             //Se elimina el cliente de la cola.
             quequeHandler.delete();
             //Se actualiza la ventanilla a estado ocupada
             linkedListHandler.uptadeBusyWindowState(availableWindow);
+            clientCan=false;
      
         //Si no hay ventanilla disponible, no hay movimiento en la cola
-        }else{
+        }/*else{
             System.out.println("En este paso no hay ventanilla disponible, el cliente debe esperar");
-        }
+        }*/
         
         /*Ya verificada la primera fase del movimiento de cola a ventanilla se
-        procede a realizar el proceso de entrga de imágenes a ventanilla*/
+        procede a realizar el proceso de entrga de imágenes a ventanilla.
+        Se verifica que clientes están en ventanilla y hacen entrega de una
+        imágen en caso aún tengan que entregar, si no pasan a la lista de espera
+        de impresión.*/
+        if(clientCan){
+            System.out.println("hola");
+            clientWindowHandler.giveImageToTheWindow2();
+            
+        }else{
+            clientWindowHandler.giveImageToTheWindow(idActualClient);
+            
+        }
+        //clientWindowHandler.travelList();
         
         
         
+        
+        
+        
+             
     }
 
     

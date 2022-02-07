@@ -14,8 +14,10 @@ public class Client {
     private String state;
     private int totalImages;
     private int imgCounter;
+    private int missingColor;
+    private int missingBw;
     
-    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter){
+    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter,int missingColor, int missingBw){
         this.id = id;
         this.name = name;
         this.colorImageCounter= colorImageCounter;
@@ -25,7 +27,25 @@ public class Client {
         this.state=state;
         this.totalImages=totalImages;
         this.imgCounter=imgCounter;
+        this.missingColor=missingColor;
+        this.missingBw=missingBw;
 }
+
+    public int getMissingColor() {
+        return missingColor;
+    }
+
+    public void setMissingColor(int missingColor) {
+        this.missingColor = missingColor;
+    }
+
+    public int getMissingBw() {
+        return missingBw;
+    }
+
+    public void setMissingBw(int missingBw) {
+        this.missingBw = missingBw;
+    }
 
     public int getId() {
         return id;

@@ -11,7 +11,8 @@ package udrawingpaper;
  */
 public class ClientWindow {
     private ClientWindowNode first;
-    private int countClients=0; 
+    private int countClients=0;
+    UDrawingPaper uDrawinPaperHandler= new UDrawingPaper();
     
     
     public boolean isEmpty(){
@@ -96,6 +97,27 @@ public class ClientWindow {
             }  
         }
     }
+    public void deleteById(int id){
+    ClientWindowNode temp = first;
+    ClientWindowNode previous = null;
+    while (temp!=null && temp.client.getId() != id){
+        previous=temp;
+        temp = temp.next;
+        
+    }
+    if (previous==null){
+        first = temp.next;
+        temp.next = null; 
+    }
+      
+    else if(temp !=null){
+        previous.next = temp.next;
+        temp.next = null;
+        
+    }
+        
+      
+    }
     
     public int countClients(){
         return countClients;
@@ -115,6 +137,87 @@ public class ClientWindow {
             }while(temp != null);
         }
     }
+    
+    public void giveImageToTheWindow(int idClient){
+        if(first == null){
+            System.out.println("En este paso no se hacen entregas en ventanilla, ya que no hay clientes en ellas.");
+        }
+        else{
+            ClientWindowNode temp = first;
+            while(temp != null){
+                if (temp.client.getTotalImages()!=temp.client.getImgCounter() && temp.client.getState().equals("ventanilla")){
+                    if(temp.client.getId()!=idClient){
+                        if (temp.client.getMissingColor()>0){
+                            Image newImageColor=new Image(temp.client.getId(), "color", "ventanilla");
+                            temp.client.setMissingColor(temp.client.getMissingColor()-1);
+                            uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageColor);
+                        
+                        }else if(temp.client.getMissingBw()>0){
+                            Image newImageBw=new Image(temp.client.getId(), "bw", "ventanilla");
+                            temp.client.setMissingBw(temp.client.getMissingBw()-1);
+                            uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageBw);
+                        }
+                        System.out.println("El cliente con el id: "+temp.client.getId()+" Entega Imagen en ventanilla No."+temp.client.getIdWindow());
+                        temp.client.setSteps(temp.client.getSteps()+1);
+                        temp.client.setImgCounter(temp.client.getImgCounter()+1);
+                        
+                    }
+                }else{
+                    
+                    System.out.println("El cliente con el id: "+temp.client.getId()+" Fue atendido, entra en lista de espera!!");
+                    temp.client.setState("listaDeEspera");
+                    uDrawinPaperHandler.attendedListHandler.insert(temp.client);
+                    uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                    deleteById(temp.client.getId());
+                    
+                }
+                //System.out.println("hola");
+                temp = temp.next;
+            }
+        }
+    }
+    
+    public void giveImageToTheWindow2(){
+        if(first == null){
+            System.out.println("En este paso no se hacen entregas en ventanilla, ya que no hay clientes en ellas.");
+        }
+        else{
+            ClientWindowNode temp = first;
+            while(temp != null){
+                if (temp.client.getTotalImages()!=temp.client.getImgCounter() && temp.client.getState().equals("ventanilla") ){
+                    if (temp.client.getMissingColor()>0){
+                        Image newImageColor=new Image(temp.client.getId(), "color", "ventanilla");
+                        temp.client.setMissingColor(temp.client.getMissingColor()-1);
+                        uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageColor);
+                        
+                    }else if(temp.client.getMissingBw()>0){
+                        Image newImageBw=new Image(temp.client.getId(), "bw", "ventanilla");
+                        temp.client.setMissingBw(temp.client.getMissingBw()-1);
+                        uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageBw);
+                    }
+                    
+                    System.out.println("El cliente con el id: "+temp.client.getId()+" Entega Imagen en ventanilla No."+temp.client.getIdWindow());
+                    temp.client.setSteps(temp.client.getSteps()+1);
+                    temp.client.setImgCounter(temp.client.getImgCounter()+1);
+                    
+                    
+                    
+                }else{
+                    System.out.println("El cliente con el id: "+temp.client.getId()+" Fue atendido, entra en lista de espera!!");
+                    temp.client.setState("listaDeEspera");
+                    uDrawinPaperHandler.attendedListHandler.insert(temp.client);
+                    uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                    deleteById(temp.client.getId());
+                    
+                    
+                }
+                //System.out.println("hola2");
+                temp = temp.next;
+            }
+        }
+    }
+    
+   
     
     
 }
