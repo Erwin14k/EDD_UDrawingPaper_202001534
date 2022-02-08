@@ -72,6 +72,16 @@ public class PrinterQueue {
         }
     }
     
+    public int idClientFirstImageInQueue(){
+        if (begin!=null){
+            return begin.image.getIdClient();
+        }
+        return -1;
+    }
+    public Image FirstImageInQueue(){
+        return begin.image;
+    }
+    
 
     /*public void updateStateFree(int id){
         PrinterQueueNode temp=begin;

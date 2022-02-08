@@ -87,6 +87,39 @@ public class StackList {
         }
         
     }
+    public String collectStackList(){
+        String graphText="";
+        String conections="";
+        StackListNode temp=ultimate;
+        while(temp!=null){
+            graphText+="N"+temp.hashCode()+"[label=\""+"Cliente "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return graphText;
+        
+    }
+    public String collectCollections(){
+        String graphText="";
+        String conections="";
+        StackListNode temp=ultimate;
+        if(ultimate!=null){
+           conections+="N"+ultimate.hashCode()+"\n";
+        }
+        
+        while(temp!=null){
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+"Cliente "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return conections;
+        
+    }
 }
     
     

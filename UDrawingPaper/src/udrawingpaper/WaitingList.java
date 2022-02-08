@@ -10,25 +10,47 @@ package udrawingpaper;
  * @author Erwin14k
  */
 public class WaitingList {
-    private AttendedListNode first;
+    private WaitingNode first;
     private int countClients=0;
+    UDrawingPaper uDrawinPaperHandler= new UDrawingPaper();
     
     public boolean isEmpty(){
         return first==null;
     }
+    public void deleteById(int id){
+    WaitingNode temp = first;
+    WaitingNode previous = null;
+    while (temp!=null && temp.client.getId() != id){
+        previous=temp;
+        temp = temp.next;
+        
+    }
+    if (previous==null){
+        first = temp.next;
+        temp.next = null; 
+    }
+      
+    else if(temp !=null){
+        previous.next = temp.next;
+        temp.next = null;
+        
+    }
+        
+      
+    }
     
     public void insert(Client client){
-        AttendedListNode node = new AttendedListNode(client);
+        WaitingNode node = new WaitingNode(client);
         node.next=first;
         first=node; 
         countClients++;
     }
     public void finalInsert(Client client){
-        AttendedListNode node= new AttendedListNode(client);
+        WaitingNode node= new WaitingNode(client);
         if(first==null){
         first=node;
         }else{
-            AttendedListNode pointer= first;
+            WaitingNode pointer= first;
             while(pointer.next!=null){
                 pointer=pointer.next;
                 }
@@ -37,11 +59,11 @@ public class WaitingList {
         countClients++;
     }
     public void personalizeInsert(int id,Client client){
-        AttendedListNode node= new AttendedListNode(client);
+        WaitingNode node= new WaitingNode(client);
         if(first==null){
             first=node;
         }else{
-            AttendedListNode pointer=first;
+            WaitingNode pointer=first;
             int counter =0;
             while(counter< id && pointer.next !=null){
                 pointer=pointer.next;
@@ -57,7 +79,7 @@ public class WaitingList {
         if (first==null){
             return null;
         }else{
-            AttendedListNode pointer=first;
+            WaitingNode pointer=first;
             int counter=0;
             while(counter < id && pointer.next != null){
                 pointer = pointer.next;
@@ -72,7 +94,7 @@ public class WaitingList {
     }
     public void deleteFirst(){
         if(first!=null){
-            AttendedListNode begin=first;
+            WaitingNode begin=first;
             first=first.next;
             begin.next=null;
             countClients--;
@@ -86,7 +108,7 @@ public class WaitingList {
                 countClients--;
            }else{
             
-            AttendedListNode pointer=first;
+            WaitingNode pointer=first;
             while(pointer.next.next!=null){
                 pointer=pointer.next;
             }
@@ -98,6 +120,57 @@ public class WaitingList {
     
     public int countClients(){
         return countClients;
+    }
+    
+    public void updateWaitingStatus(int idClient, Image image){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            WaitingNode temp = first;
+            do{
+                if(temp.client.getId()==idClient){
+                    temp.client.getImageList().finalInsert(image);
+                    temp.client.setWaitingCounter(temp.client.getWaitingCounter()-1);
+                    if(temp.client.getWaitingCounter()==0){
+                        uDrawinPaperHandler.attendedListHandler.finalInsert(temp.client);
+                        deleteById(temp.client.getId());
+                        
+                    }
+                }
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void validateClientsToPrint(){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            WaitingNode temp = first;
+            do{
+                temp.client.setCanYouPrint(true);
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public boolean  checkTheValidation(int id){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            WaitingNode temp = first;
+            do{
+                if(temp.client.getId()==id && temp.client.isCanYouPrint()){
+                    return true;
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return false;
     }
     
 }

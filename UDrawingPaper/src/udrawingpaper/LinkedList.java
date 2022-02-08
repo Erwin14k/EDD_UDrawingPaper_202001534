@@ -1,6 +1,10 @@
 
 package udrawingpaper;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Erwin14k
@@ -9,7 +13,7 @@ package udrawingpaper;
 public class LinkedList {
     private LinkedListNode first;
     private int countWindows=0; 
-    
+    UDrawingPaper uDrawinPaperHandler= new UDrawingPaper();
     
     public boolean isEmpty(){
         return first==null;
@@ -200,6 +204,61 @@ public class LinkedList {
             
         }
         
+    }
+    
+    public String graphvizGenerator() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\ejemplo.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ListaVentanillas.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        String finalText="digraph G{\nnode [shape=box];\n";
+        LinkedListNode temp = first;
+        String rankSame="{rank=same; ";
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+"Ventanilla No."+temp.window.getId()+"\"];\n";
+            nodes+=temp.window.getStacklist().collectStackList();
+            conections+="N"+temp.hashCode()+ " -> ";
+            conections+=temp.window.getStacklist().collectCollections();
+            conections+="start"+ " -> "+"N"+temp.hashCode()+";\n";
+            if (temp.next!=null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+                rankSame+="N"+temp.hashCode()+",";
+            }else{
+                rankSame+="N"+temp.hashCode();
+            }
+            
+            temp = temp.next;
+            
+        }
+        rankSame+="};";
+        
+        
+        finalText+=nodes+"\n";
+        finalText+=conections+"\n";
+        finalText+="start [shape=Mdiamond label=\"Lista De Pilas De Ventanillas\"];";
+        finalText+=rankSame;
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
     }
     
 }

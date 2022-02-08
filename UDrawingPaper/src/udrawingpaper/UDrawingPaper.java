@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -24,6 +25,7 @@ public class UDrawingPaper {
     //Estos scanners, recolectarán la información ingresada en consola
     static Scanner optionsScanner = new Scanner(System.in);
     static Scanner routeCollectorScanner = new Scanner(System.in);
+    static Scanner stepsScanner=new Scanner(System.in);
     //Instanciamos nuestras clases para poder usarlas
     static Queue quequeHandler= new Queue();
     static LinkedList linkedListHandler=new LinkedList();
@@ -37,17 +39,17 @@ public class UDrawingPaper {
     static int stepsCounter=0;
     static PrinterQueue printerQueue1=new PrinterQueue();
     static PrinterQueue printerQueue2=new PrinterQueue();
-    static Printer colorPrinter= new Printer(1, "libre", printerQueue1, 0);
-    static Printer bwPrinter= new Printer(2, "libre", printerQueue2, 0);
-    
+    static Printer colorPrinter= new Printer(1, "lista", printerQueue1, 2);
+    static Printer bwPrinter= new Printer(2, "lista", printerQueue2, 1);
+    static int freeTime=0;
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         mainMenu();
     }
     /*En este caso se crea la función menú, la cual servirá para controlar 
     el flujo de la aplicación*/
-    public static void mainMenu(){
+    public static void mainMenu() throws IOException{
     
         
         /* Se instancia un Do-While, esto con el objetivo de mostrar el menú las veces que sea 
@@ -56,11 +58,9 @@ public class UDrawingPaper {
             System.out.println("\n\n\n");
             System.out.println("==========Erwin14k UDrawing Paper========");
             System.out.println("| 1.Parámetros Iniciales                |");
-            System.out.println("| 2.Ejectutar Paso                      |");
-            System.out.println("| 3.Estado En Memoria De Las Estructuras|");
-            System.out.println("| 4.Generar Reportes                    |");
-            System.out.println("| 5.Información Del Estudiante          |");
-            System.out.println("| 6.Salir                               |");
+            System.out.println("| 2.Entrar Al Menú De Operaciones       |");
+            System.out.println("| 3.Información Del Estudiante          |");
+            System.out.println("| 4.Salir                               |");
             System.out.println("=========================================");;
             System.out.println();
             System.out.println("Teclee la opción requerida: ");
@@ -75,15 +75,8 @@ public class UDrawingPaper {
                 parametersMenu();
             case 2:
                 System.out.println("\n\n\n");
-                masterMindAlgorithm();
-                mainMenu();
+                stepMenu();
             case 3:
-                System.out.println("opcion 3 no está disponible por el momento");
-                mainMenu();
-            case 4:
-                System.out.println("La generación de reportes no está disponible");
-                mainMenu();
-            case 5:
                 System.out.println("\n\n\n");
                 System.out.println("=========Datos Estudiante========");
                 System.out.println("| Erwin Fernando Vásquez Peñate |");
@@ -93,12 +86,12 @@ public class UDrawingPaper {
                 System.out.println("| Primer Semestre 2021          |");
                 System.out.println("=================================");
                 mainMenu();
-             case 6:
+             case 4:
                 System.exit(0);
                 optionsScanner.close();
             }
     }
-    public static void parametersMenu(){
+    public static void parametersMenu() throws IOException{
         do {
             System.out.println("\n\n\n");
             System.out.println("======Parámetros Iniciales=====");
@@ -198,7 +191,7 @@ public class UDrawingPaper {
             
             // Se crea el objeto cliente
             ImageLinkedList tempImageList = new ImageLinkedList();
-            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList);
+            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList,totalImagesCounter,false);
             //El objeto cliente se agrega a la cola
             quequeHandler.insert(newClient);
             //Vaciamos nuestra variable que venía vacía inicialmente
@@ -270,19 +263,99 @@ public class UDrawingPaper {
         impresiones. Estas líneas comentadas, solo es para ver el comportamiento
         de las pilas en ventanilla y colas de impresión.*/
         
-        /*System.out.println("Pila ventanilla 1: ");
+        System.out.println("Pila ventanilla 1: ");
         linkedListHandler.travelListById(1);
         System.out.println("Pila Ventanilla 2:");
         linkedListHandler.travelListById(2);
         System.out.println("Cola de impresión de la impresora a color:");
         colorPrinter.getPrinterQueue().showQueue();
         System.out.println("Cola de impresión de la impresora a bw:");
-        bwPrinter.getPrinterQueue().showQueue();*/  
+        bwPrinter.getPrinterQueue().showQueue(); 
+        colorPrinterStatus();
+        bwPrinterStatus();
+        waitingListHandler.validateClientsToPrint();
     }
-    public static void printerStatus(){
-        
-    }
-   
-
+    public static void colorPrinterStatus(){
+        int validateId=colorPrinter.getPrinterQueue().idClientFirstImageInQueue();
+        if(colorPrinter.getSecondsToBeFree()==2 && colorPrinter.getPrinterQueue().isEmpty() ){
+            //System.out.println("aaaa");
+            freeTime++;
+        }else if (colorPrinter.getSecondsToBeFree()==2 && !colorPrinter.getPrinterQueue().isEmpty() && waitingListHandler.checkTheValidation(validateId)){
+            //System.out.println("Vale aquí si entra");
+            colorPrinter.setSecondsToBeFree(colorPrinter.getSecondsToBeFree()-1);
+           
+        }
+        else if(colorPrinter.getSecondsToBeFree()==1 && !colorPrinter.getPrinterQueue().isEmpty()){
+            colorPrinter.setSecondsToBeFree(colorPrinter.getSecondsToBeFree()-1);
+            if(colorPrinter.getSecondsToBeFree()==0){
+                //System.out.println("Debería eliminar");
+                int idClient=colorPrinter.getPrinterQueue().idClientFirstImageInQueue();
+                Image tempImage=colorPrinter.getPrinterQueue().FirstImageInQueue();
+                System.out.println("Cliente No. "+idClient+" Recibe una imágen impresa a color");
+                waitingListHandler.updateWaitingStatus(idClient, tempImage);
+                colorPrinter.getPrinterQueue().delete();
+                colorPrinter.setSecondsToBeFree(2);
+            
+            }   
+        } 
+    }    
     
-}
+    public static void bwPrinterStatus(){
+        int validateId=bwPrinter.getPrinterQueue().idClientFirstImageInQueue();
+        if(bwPrinter.getSecondsToBeFree()==1 && bwPrinter.getPrinterQueue().isEmpty() ){
+            //System.out.println("aaaa");
+            freeTime++;
+        }else if (bwPrinter.getSecondsToBeFree()==1 && !bwPrinter.getPrinterQueue().isEmpty() && waitingListHandler.checkTheValidation(validateId)){
+            //System.out.println("Vale aquí si entra");
+            bwPrinter.setSecondsToBeFree(bwPrinter.getSecondsToBeFree()-1);
+            int idClient=bwPrinter.getPrinterQueue().idClientFirstImageInQueue();
+                Image tempImage=bwPrinter.getPrinterQueue().FirstImageInQueue();
+                System.out.println("Cliente No. "+idClient+" Recibe una imágen impresa a blanco y negro");
+                waitingListHandler.updateWaitingStatus(idClient, tempImage);
+                bwPrinter.getPrinterQueue().delete();
+                bwPrinter.setSecondsToBeFree(1);
+           
+        }
+         
+        }
+   public static void stepMenu() throws IOException{
+       int stepOption=0;
+       do {
+            System.out.println("\n\n\n");
+            System.out.println("==========Erwin14k UDrawing Paper========");
+            System.out.println("| 1.Ejectutar Paso                      |");
+            System.out.println("| 2.Estado En Memoria De Las Estructuras|");
+            System.out.println("| 3.Generar Reportes                    |");
+            System.out.println("| 4.Información Cliente Específico      |");
+            System.out.println("| 5.Volver al menú principal            |");
+            System.out.println("=========================================");;
+            System.out.println();
+            System.out.println("Teclee la opción requerida: ");
+             //Variable que almacena el dígito de la opción seleccionada
+            stepOption = stepsScanner.nextInt();
+            //Lo hará hasta que se cumpla la condición del while
+        } while (stepOption < 1 || stepOption >5);
+       switch (stepOption) {
+            case 1:
+                System.out.println("\n\n\n");
+                masterMindAlgorithm();
+                stepMenu();
+            case 2:
+                linkedListHandler.graphvizGenerator();
+                stepMenu();
+            case 3:
+                System.out.println("opcion 3 no está disponible por el momento");
+                stepMenu();
+            case 4:
+                System.out.println("no está disponible");
+                stepMenu();
+            case 5:
+                mainMenu();
+            }
+       
+   }
+}   
+    
+    
+    
+

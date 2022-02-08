@@ -17,8 +17,10 @@ public class Client {
     private int missingColor;
     private int missingBw;
     private ImageLinkedList imageList;
+    private int waitingCounter;
+    private boolean canYouPrint;
     
-    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter,int missingColor, int missingBw,ImageLinkedList imageList){
+    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter,int missingColor, int missingBw,ImageLinkedList imageList,int waitingCounter,boolean canYouPrint){
         this.id = id;
         this.name = name;
         this.colorImageCounter= colorImageCounter;
@@ -31,7 +33,25 @@ public class Client {
         this.missingColor=missingColor;
         this.missingBw=missingBw;
         this.imageList=imageList;
+        this.waitingCounter=waitingCounter;
+        this.canYouPrint=canYouPrint;
 }
+
+    public boolean isCanYouPrint() {
+        return canYouPrint;
+    }
+
+    public void setCanYouPrint(boolean canYouPrint) {
+        this.canYouPrint = canYouPrint;
+    }
+
+    public int getWaitingCounter() {
+        return waitingCounter;
+    }
+
+    public void setWaitingCounter(int waitingCounter) {
+        this.waitingCounter = waitingCounter;
+    }
 
     public int getMissingColor() {
         return missingColor;
