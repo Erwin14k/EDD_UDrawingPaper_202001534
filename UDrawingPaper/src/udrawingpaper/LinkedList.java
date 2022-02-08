@@ -5,6 +5,7 @@ package udrawingpaper;
  *
  * @author Erwin14k
  */
+
 public class LinkedList {
     private LinkedListNode first;
     private int countWindows=0; 
@@ -108,6 +109,40 @@ public class LinkedList {
                 System.out.println(temp.window.getState());
                 System.out.println(temp.window.getStacklist().showUltimate());
                 System.out.println("----------------");
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void travelListById(int id){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            LinkedListNode temp = first;
+            do{
+                if(temp.window.getId()==id){
+                    temp.window.getStacklist().showData();
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void giveImagesToPrinters(int idClient, int idWindow){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            LinkedListNode temp = first;
+            do{
+                //System.out.println("Cliente: "+id);
+                if(temp.window.getId()==idWindow){
+                temp.window.getStacklist().moveImages(idClient);
+                temp.window.getStacklist().empyStack();
+                }
                 temp = temp.next;
             }while(temp != null);
         }

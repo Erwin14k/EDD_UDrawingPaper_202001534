@@ -137,46 +137,54 @@ public class ClientWindow {
             }while(temp != null);
         }
     }
-    
+    // Método que sirve para que los clientes en ventanilla den una imagen por paso
     public void giveImageToTheWindow(int idClient){
+        //Pirmero se verifica que si hayan clientes en ventanilla
         if(first == null){
             System.out.println("En este paso no se hacen entregas en ventanilla, ya que no hay clientes en ellas.");
         }
         else{
             ClientWindowNode temp = first;
+            //Ciclo while, para recorrer la lista de los clientes en ventanilla
             while(temp != null){
+                //Se verifica que el cliente si tenga imagenes por entregar y que su estado sea estar en ventanilla.
                 if (temp.client.getTotalImages()!=temp.client.getImgCounter() && temp.client.getState().equals("ventanilla")){
+                    //Este if es solo para validar que el cliente que acaba de entrar a ventanilla en el paso actual no pueda entregar imagen.
                     if(temp.client.getId()!=idClient){
+                        //Se verifica que tenga imagenes de color por entregar
                         if (temp.client.getMissingColor()>0){
                             Image newImageColor=new Image(temp.client.getId(), "color", "ventanilla");
                             temp.client.setMissingColor(temp.client.getMissingColor()-1);
                             uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageColor);
-                        
+                        //Si no tiene se verifica que tenga imagenes en blanco y negro
                         }else if(temp.client.getMissingBw()>0){
                             Image newImageBw=new Image(temp.client.getId(), "bw", "ventanilla");
                             temp.client.setMissingBw(temp.client.getMissingBw()-1);
                             uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageBw);
                         }
-                        System.out.println("El cliente con el id: "+temp.client.getId()+" Entega Imagen en ventanilla No."+temp.client.getIdWindow());
+                        //Se hace la entrega la imagen en ventanilla
+                        System.out.println("El cliente con el id: "+temp.client.getId()+" Entrega Imagen en ventanilla No."+temp.client.getIdWindow());
                         temp.client.setSteps(temp.client.getSteps()+1);
                         temp.client.setImgCounter(temp.client.getImgCounter()+1);
                         
                     }
                 }else{
-                    
+                    //Este else sirve para ver que clientes ya cumplieron con su entrega de imágnes, los cuales son trasladados a lista de espera.
                     System.out.println("El cliente con el id: "+temp.client.getId()+" Fue atendido, entra en lista de espera!!");
                     temp.client.setState("listaDeEspera");
-                    uDrawinPaperHandler.attendedListHandler.insert(temp.client);
+                    temp.client.setSteps(temp.client.getSteps()+1);
+                    uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
                     uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                    uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
                     deleteById(temp.client.getId());
                     
                 }
-                //System.out.println("hola");
+                
                 temp = temp.next;
             }
         }
     }
-    
+    //Este método es lo mismo que el de arriba, con la única diferencia de que aquí no se valida lo del cliente que acaba de entrar.
     public void giveImageToTheWindow2(){
         if(first == null){
             System.out.println("En este paso no se hacen entregas en ventanilla, ya que no hay clientes en ellas.");
@@ -196,7 +204,7 @@ public class ClientWindow {
                         uDrawinPaperHandler.linkedListHandler.uptadeWindowStackList(temp.client.getIdWindow(), newImageBw);
                     }
                     
-                    System.out.println("El cliente con el id: "+temp.client.getId()+" Entega Imagen en ventanilla No."+temp.client.getIdWindow());
+                    System.out.println("El cliente con el id: "+temp.client.getId()+" Entrega Imagen en ventanilla No."+temp.client.getIdWindow());
                     temp.client.setSteps(temp.client.getSteps()+1);
                     temp.client.setImgCounter(temp.client.getImgCounter()+1);
                     
@@ -205,13 +213,15 @@ public class ClientWindow {
                 }else{
                     System.out.println("El cliente con el id: "+temp.client.getId()+" Fue atendido, entra en lista de espera!!");
                     temp.client.setState("listaDeEspera");
-                    uDrawinPaperHandler.attendedListHandler.insert(temp.client);
+                    temp.client.setSteps(temp.client.getSteps()+1);
+                    uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
                     uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                    uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
                     deleteById(temp.client.getId());
                     
                     
                 }
-                //System.out.println("hola2");
+                ;
                 temp = temp.next;
             }
         }

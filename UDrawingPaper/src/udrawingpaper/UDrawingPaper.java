@@ -29,10 +29,16 @@ public class UDrawingPaper {
     static LinkedList linkedListHandler=new LinkedList();
     static ClientWindow clientWindowHandler=new ClientWindow();
     static AttendedList attendedListHandler = new AttendedList();
+    static WaitingList waitingListHandler = new WaitingList();
+    static PrinterQueue printerQueueHandler= new PrinterQueue();
     //Variable global que guarda el número de clientes.
     static int clientsCounter=0;
     //Variable que controla en que paso vamos
     static int stepsCounter=0;
+    static PrinterQueue printerQueue1=new PrinterQueue();
+    static PrinterQueue printerQueue2=new PrinterQueue();
+    static Printer colorPrinter= new Printer(1, "libre", printerQueue1, 0);
+    static Printer bwPrinter= new Printer(2, "libre", printerQueue2, 0);
     
 
     
@@ -191,7 +197,8 @@ public class UDrawingPaper {
             int totalImagesCounter=colorImageCounter+bwImageCounter; 
             
             // Se crea el objeto cliente
-            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter);
+            ImageLinkedList tempImageList = new ImageLinkedList();
+            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList);
             //El objeto cliente se agrega a la cola
             quequeHandler.insert(newClient);
             //Vaciamos nuestra variable que venía vacía inicialmente
@@ -203,7 +210,7 @@ public class UDrawingPaper {
     public static String personalizeJson(String content){
         /*Variable importantísima llamada rgxIDontWant, la cuál almacena una expresión 
         regular para eliminar del archivo json todas las coincidencias.*/
-        String rgxIDontWant="\"Cliente[0-9]*\":";
+        String rgxIDontWant="\"Cliente[0-9]+\":";
         //Variable para almacenar content con las coincidencias borradas
         String contentWithoutRgx = content.replaceAll(rgxIDontWant, "");
         //Variable la cuál guarda un string reemplaza el primer caracter "{" por "["
@@ -251,22 +258,31 @@ public class UDrawingPaper {
         imágen en caso aún tengan que entregar, si no pasan a la lista de espera
         de impresión.*/
         if(clientCan){
-            System.out.println("hola");
+            //System.out.println("hola");
             clientWindowHandler.giveImageToTheWindow2();
             
         }else{
             clientWindowHandler.giveImageToTheWindow(idActualClient);
             
         }
-        //clientWindowHandler.travelList();
         
+        /*La tercera fase del proceso, se maneja todo lo relacionado con las 
+        impresiones. Estas líneas comentadas, solo es para ver el comportamiento
+        de las pilas en ventanilla y colas de impresión.*/
         
-        
-        
-        
-        
-             
+        /*System.out.println("Pila ventanilla 1: ");
+        linkedListHandler.travelListById(1);
+        System.out.println("Pila Ventanilla 2:");
+        linkedListHandler.travelListById(2);
+        System.out.println("Cola de impresión de la impresora a color:");
+        colorPrinter.getPrinterQueue().showQueue();
+        System.out.println("Cola de impresión de la impresora a bw:");
+        bwPrinter.getPrinterQueue().showQueue();*/  
     }
+    public static void printerStatus(){
+        
+    }
+   
 
     
 }
