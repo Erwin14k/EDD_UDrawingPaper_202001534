@@ -142,6 +142,19 @@ public class WaitingList {
             }while(temp != null);
         }
     }
+    public void updateStepsStatus(){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+            WaitingNode temp = first;
+        
+            
+            do{
+                temp.client.setSteps(temp.client.getSteps()+1);
+                temp = temp.next;
+            }while(temp != null);
+        }
+        }
+    
     
     public void validateClientsToPrint(){
         if(first == null){

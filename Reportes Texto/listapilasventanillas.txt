@@ -1,0 +1,9 @@
+digraph G{
+node [shape=box];
+N1595428806[label="Ventanilla No.1"];
+N1072408673[label="Ventanilla No.2"];
+
+N1595428806 -> N1072408673;
+
+start [shape=Mdiamond label="Lista De Pilas De Ventanillas"];{rank=same; N1595428806,N1072408673};}
+}

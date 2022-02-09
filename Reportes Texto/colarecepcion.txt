@@ -1,0 +1,7 @@
+digraph G{
+node [shape=box];
+
+{rank= same;
+
+start [shape=Mdiamond label="Cola De Recepción"];}
+}

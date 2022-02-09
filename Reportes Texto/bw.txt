@@ -1,0 +1,6 @@
+digraph G{
+node [shape=box];
+
+
+start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];{rank=same;}
+}

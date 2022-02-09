@@ -207,8 +207,8 @@ public class LinkedList {
     }
     
     public String graphvizGenerator() throws IOException{
-        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\ejemplo.txt";
-        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ListaVentanillas.png";
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\listapilasventanillas.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ListaPilasVentanillas.png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -220,10 +220,12 @@ public class LinkedList {
         String nodes="";
         while(temp != null){
             nodes+="N"+temp.hashCode()+"[label=\""+"Ventanilla No."+temp.window.getId()+"\"];\n";
+            if(!temp.window.getStacklist().isEmpty()){
             nodes+=temp.window.getStacklist().collectStackList();
             conections+="N"+temp.hashCode()+ " -> ";
             conections+=temp.window.getStacklist().collectCollections();
             conections+="start"+ " -> "+"N"+temp.hashCode()+";\n";
+            }
             if (temp.next!=null){
                 conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
                 rankSame+="N"+temp.hashCode()+",";

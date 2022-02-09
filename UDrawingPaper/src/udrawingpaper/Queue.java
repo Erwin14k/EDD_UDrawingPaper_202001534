@@ -10,6 +10,9 @@ import java.io.FileReader;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -116,6 +119,50 @@ public class Queue {
     }else{
             return -1;
         }
+    }
+    
+    public String graphvizGenerator() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\colarecepcion.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ColaRecepción.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        String finalText="digraph G{\nnode [shape=box];\n";
+        QueueNode temp = begin;
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+"Cliente con id No. "+temp.clientC.getId()+"\n"+temp.clientC.getName()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            temp = temp.next;
+        }
+        
+        finalText+=nodes+"\n";
+        
+        finalText+="{rank= same;\n"+conections+"\n";
+        
+        finalText+="start [shape=Mdiamond label=\"Cola De Recepción\"];";
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
     }
 }
 

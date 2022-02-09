@@ -6,8 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -342,6 +344,11 @@ public class UDrawingPaper {
                 stepMenu();
             case 2:
                 linkedListHandler.graphvizGenerator();
+                quequeHandler.graphvizGenerator();
+                colorprinterGraphvizGenerator();
+                bwprinterGraphvizGenerator();
+                attendedListHandler.graphvizGenerator();
+                waitingListHandler.updateStepsStatus();
                 stepMenu();
             case 3:
                 System.out.println("opcion 3 no está disponible por el momento");
@@ -354,6 +361,97 @@ public class UDrawingPaper {
             }
        
    }
+   public static String colorprinterGraphvizGenerator() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\color.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ColaImpresoraColor.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        String finalText="digraph G{\nnode [shape=box];\n";
+        
+        String rankSame="{rank=same; ";
+        String conections="";
+        String nodes="";
+        String collectQueueImages="",collectConection="";
+        if(!colorPrinter.getPrinterQueue().isEmpty()){
+            collectQueueImages=colorPrinter.getPrinterQueue().collectPrinterQueue();
+            collectConection=colorPrinter.getPrinterQueue().collectConections();
+            nodes+=collectQueueImages;
+            conections=collectConection;
+            finalText+="start"+" -> "+"N"+colorPrinter.getPrinterQueue().begin.hashCode()+";\n";
+        }
+        
+        finalText+=nodes+"\n";
+        finalText+=conections+"\n";
+        
+        finalText+="start [shape=Mdiamond label=\"Cola Impresora a color\"];";
+        finalText+=rankSame;
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
+   
+    public static String bwprinterGraphvizGenerator() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\bw.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ColaImpresoraBW.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        String finalText="digraph G{\nnode [shape=box];\n";
+        
+        
+        String conections="";
+        String nodes="";
+        String collectQueueImages="",collectConection="";
+        if(!bwPrinter.getPrinterQueue().isEmpty()){
+            collectQueueImages=bwPrinter.getPrinterQueue().collectPrinterQueue();
+            collectConection=bwPrinter.getPrinterQueue().collectConections();
+            nodes+=collectQueueImages;
+            conections=collectConection;
+            finalText+="start"+" -> "+"N"+bwPrinter.getPrinterQueue().begin.hashCode()+";\n";
+        }
+        
+        finalText+=nodes+"\n";
+        finalText+=conections+"\n";
+        
+        finalText+="start [shape=Mdiamond label=\"Cola Impresora a Blanco y negro\"];";
+        String rankSame="{rank=same;" ;
+        finalText+=rankSame;
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
+   
 }   
     
     

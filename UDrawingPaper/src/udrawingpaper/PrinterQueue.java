@@ -5,12 +5,16 @@
  */
 package udrawingpaper;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Erwin14k
  */
 public class PrinterQueue {
-    private PrinterQueueNode begin,end;
+    public PrinterQueueNode begin,end;
     public int size;
     public PrinterQueue(){
         begin=null;
@@ -82,6 +86,39 @@ public class PrinterQueue {
         return begin.image;
     }
     
+    public String collectPrinterQueue(){
+        String graphText="";
+        String conections="";
+        PrinterQueueNode temp=begin;
+        while(temp!=null){
+            graphText+="N"+temp.hashCode()+"[label=\""+"Imagen Del cliente:  "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return graphText;
+        
+    }
+    public String collectConections(){
+        String graphText="";
+        String conections="";
+        PrinterQueueNode temp=begin;
+        if(begin!=null){
+           conections+="N"+begin.hashCode()+"\n";
+        }
+        
+        while(temp!=null){
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+"Cliente "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return conections;
+        
+    }
 
     /*public void updateStateFree(int id){
         PrinterQueueNode temp=begin;
