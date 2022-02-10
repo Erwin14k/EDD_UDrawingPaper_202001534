@@ -193,7 +193,7 @@ public class UDrawingPaper {
             
             // Se crea el objeto cliente
             ImageLinkedList tempImageList = new ImageLinkedList();
-            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList,totalImagesCounter,false);
+            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList,totalImagesCounter,false,"no");
             //El objeto cliente se agrega a la cola
             quequeHandler.insert(newClient);
             //Vaciamos nuestra variable que venía vacía inicialmente
@@ -261,18 +261,26 @@ public class UDrawingPaper {
             
         }
         
+        //En es te caso se eliminan a todos los atendidos en este caso.
+        int chekIntruders=-1;
+        do{
+            clientWindowHandler.deleteOfTheWindow();
+            chekIntruders=clientWindowHandler.checkIntruders();
+        }while(chekIntruders!=0);
+        
+        
         /*La tercera fase del proceso, se maneja todo lo relacionado con las 
         impresiones. Estas líneas comentadas, solo es para ver el comportamiento
         de las pilas en ventanilla y colas de impresión.*/
         
-        System.out.println("Pila ventanilla 1: ");
+        /*System.out.println("Pila ventanilla 1: ");
         linkedListHandler.travelListById(1);
         System.out.println("Pila Ventanilla 2:");
         linkedListHandler.travelListById(2);
         System.out.println("Cola de impresión de la impresora a color:");
         colorPrinter.getPrinterQueue().showQueue();
         System.out.println("Cola de impresión de la impresora a bw:");
-        bwPrinter.getPrinterQueue().showQueue(); 
+        bwPrinter.getPrinterQueue().showQueue();*/ 
         colorPrinterStatus();
         bwPrinterStatus();
         waitingListHandler.validateClientsToPrint();

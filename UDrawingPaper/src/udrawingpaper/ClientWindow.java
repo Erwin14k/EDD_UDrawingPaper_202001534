@@ -137,6 +137,36 @@ public class ClientWindow {
             }while(temp != null);
         }
     }
+    
+    public void deleteOfTheWindow(){
+        if(first == null){
+        }
+        else{
+            ClientWindowNode temp = first;
+            do{
+                if(temp.client.getDeleteWindow().equals("si")){
+                    deleteById(temp.client.getId());
+                }
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    public int checkIntruders(){
+        int intrudersCounter=0;
+        if(first == null){
+        }
+        else{
+            ClientWindowNode temp = first;
+            do{
+                if(temp.client.getDeleteWindow().equals("si")){
+                    intrudersCounter++;
+                }
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return intrudersCounter;
+    }
+    
     // Método que sirve para que los clientes en ventanilla den una imagen por paso
     public void giveImageToTheWindow(int idClient){
         //Pirmero se verifica que si hayan clientes en ventanilla
@@ -176,7 +206,8 @@ public class ClientWindow {
                     uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
                     uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
                     uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
-                    deleteById(temp.client.getId());
+                    temp.client.setDeleteWindow("si");
+                    //deleteById(temp.client.getId());
                     
                 }
                 
@@ -217,11 +248,11 @@ public class ClientWindow {
                     uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
                     uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
                     uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
-                    deleteById(temp.client.getId());
+                    temp.client.setDeleteWindow("si");
+                    //deleteById(temp.client.getId());
                     
                     
                 }
-                ;
                 temp = temp.next;
             }
         }

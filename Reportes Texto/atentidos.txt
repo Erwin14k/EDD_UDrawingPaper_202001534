@@ -1,14 +1,7 @@
 digraph G{
 node [shape=box];
-N189568618[label="Cliente con id No. 2
-Nombre: Juan Perez
-Total imágenes: 3"];
-N793589513[label="Cliente con id No. 1
-Nombre: Andres Lopez
-Total imágenes: 5"];
 
 {rank= same;
-N793589513 -> N189568618;
 
 start [shape=Mdiamond label="Lista Clientes Atendidos"];}
 }

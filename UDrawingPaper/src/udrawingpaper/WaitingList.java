@@ -143,7 +143,7 @@ public class WaitingList {
         }
     }
     public void updateStepsStatus(){
-        if(first == null){
+        if(first != null){
             //System.err.print("La lista se encuentra vacia");
             WaitingNode temp = first;
         

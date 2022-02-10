@@ -1,7 +1,33 @@
 digraph G{
 node [shape=box];
+N317574433[label="Cliente con id No. 7
+Oscar Figueroa"];
+N885284298[label="Cliente con id No. 8
+Hector Cardozo"];
+N1389133897[label="Cliente con id No. 9
+Miguel Diaz"];
+N1534030866[label="Cliente con id No. 10
+Adriana Santizo"];
+N664223387[label="Cliente con id No. 11
+Jimena Vargas"];
+N824909230[label="Cliente con id No. 12
+Valeria Alonzo"];
+N122883338[label="Cliente con id No. 13
+Susan Gomez"];
+N666641942[label="Cliente con id No. 14
+Kelly Caceres"];
+N960604060[label="Cliente con id No. 15
+Javier Andrade"];
 
 {rank= same;
+N885284298 -> N317574433;
+N1389133897 -> N885284298;
+N1534030866 -> N1389133897;
+N664223387 -> N1534030866;
+N824909230 -> N664223387;
+N122883338 -> N824909230;
+N666641942 -> N122883338;
+N960604060 -> N666641942;
 
 start [shape=Mdiamond label="Cola De Recepción"];}
 }

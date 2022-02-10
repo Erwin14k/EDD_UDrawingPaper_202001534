@@ -1,9 +1,19 @@
 digraph G{
 node [shape=box];
 N1595428806[label="Ventanilla No.1"];
-N1072408673[label="Ventanilla No.2"];
+N1028214719[label="Cliente 5 color"];
+N189568618[label="Ventanilla No.2"];
+N500977346[label="Cliente 4 color"];
+N20132171[label="Cliente 4 color"];
+N793589513[label="Ventanilla No.3"];
 
-N1595428806 -> N1072408673;
+N1595428806 -> N1028214719
+start -> N1595428806;
+N1595428806 -> N189568618;
+N189568618 -> N500977346
+N500977346 -> N20132171;
+start -> N189568618;
+N189568618 -> N793589513;
 
-start [shape=Mdiamond label="Lista De Pilas De Ventanillas"];{rank=same; N1595428806,N1072408673};}
+start [shape=Mdiamond label="Lista De Pilas De Ventanillas"];{rank=same; N1595428806,N189568618,N793589513};}
 }
