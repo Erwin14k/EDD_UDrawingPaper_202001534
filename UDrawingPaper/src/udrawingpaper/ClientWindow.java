@@ -200,7 +200,7 @@ public class ClientWindow {
                     }
                 }else{
                     //Este else sirve para ver que clientes ya cumplieron con su entrega de imágnes, los cuales son trasladados a lista de espera.
-                    System.out.println("El cliente con el id: "+temp.client.getId()+" Fue atendido, entra en lista de espera!!");
+                    System.out.println("El cliente con el id: "+temp.client.getId()+" Sale de Ventanilla, entra en lista de espera!!");
                     temp.client.setState("listaDeEspera");
                     temp.client.setSteps(temp.client.getSteps()+1);
                     uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);

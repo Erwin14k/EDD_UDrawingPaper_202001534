@@ -1,21 +1,14 @@
 digraph G{
 node [shape=box];
-start -> N1338668845;
+start -> N960604060;
+N960604060[label="Imagen Del cliente:  2 color"];
+N1349393271[label="Imagen Del cliente:  2 color"];
 N1338668845[label="Imagen Del cliente:  2 color"];
-N159413332[label="Imagen Del cliente:  2 color"];
-N186370029[label="Imagen Del cliente:  1 color"];
-N2094548358[label="Imagen Del cliente:  1 color"];
-N51228289[label="Imagen Del cliente:  1 color"];
-N455896770[label="Imagen Del cliente:  3 color"];
-N1323165413[label="Imagen Del cliente:  3 color"];
 
-N1338668845
-N1338668845 -> N159413332;
-N159413332 -> N186370029;
-N186370029 -> N2094548358;
-N2094548358 -> N51228289;
-N51228289 -> N455896770;
-N455896770 -> N1323165413;
+{rank= same;
+N960604060
+N960604060 -> N1349393271;
+N1349393271 -> N1338668845;
 
 start [shape=Mdiamond label="Cola Impresora a color"];{rank=same; }
 }

@@ -5,6 +5,10 @@
  */
 package udrawingpaper;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Erwin14k
@@ -133,7 +137,12 @@ public class WaitingList {
                     temp.client.getImageList().finalInsert(image);
                     temp.client.setWaitingCounter(temp.client.getWaitingCounter()-1);
                     if(temp.client.getWaitingCounter()==0){
+                        temp.client.setSteps(uDrawinPaperHandler.stepsCounter-temp.client.getInitialStep());
                         uDrawinPaperHandler.attendedListHandler.finalInsert(temp.client);
+                        uDrawinPaperHandler.bwDataList.bwDataSorting(temp.client);
+                        uDrawinPaperHandler.colorDataList.colorDataSorting(temp.client);
+                        uDrawinPaperHandler.stepsDataList.stepsDataSorting(temp.client);
+                        System.out.println("El cliente con id: "+temp.client.getId()+" Fue atendido, sale del sistema!");
                         deleteById(temp.client.getId());
                         
                     }
@@ -184,6 +193,66 @@ public class WaitingList {
             }while(temp != null);
         }
         return false;
+    }
+    
+    public String graphvizGenerator() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\listaespera.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\ListaEspera.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        String finalText="digraph G{\nnode [shape=box];\n";
+        WaitingNode temp = first;
+        String rankSame="{rank=same; ";
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+"Cliente Id No."+temp.client.getId()+"\"];\n";
+            if(!temp.client.getImageList().isEmpty()){
+                nodes+=temp.client.getImageList().collectLinkedList();
+                conections+="N"+temp.hashCode()+ " -> ";
+                conections+=temp.client.getImageList().collectConnections();
+                //conections+="start"+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            if (temp.next!=null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+                rankSame+="N"+temp.hashCode()+",";
+            }else{
+                conections+="N"+temp.hashCode()+ " -> "+"N"+first.hashCode()+";\n";
+                conections+="N"+first.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+                rankSame+="N"+temp.hashCode();
+            }
+            
+            temp = temp.next;
+            
+        }
+        rankSame+="};";
+        
+        
+        finalText+=nodes+"\n";
+        finalText+=conections+"\n";
+        finalText+="start [shape=Mdiamond label=\"Lista De Espera De Clientes\"];";
+        finalText+=rankSame;
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
     }
     
 }

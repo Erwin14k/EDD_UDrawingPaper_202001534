@@ -28,6 +28,8 @@ public class UDrawingPaper {
     static Scanner optionsScanner = new Scanner(System.in);
     static Scanner routeCollectorScanner = new Scanner(System.in);
     static Scanner stepsScanner=new Scanner(System.in);
+    static Scanner reportsScanner=new Scanner(System.in);
+    static Scanner clientScanner=new Scanner(System.in);
     //Instanciamos nuestras clases para poder usarlas
     static Queue quequeHandler= new Queue();
     static LinkedList linkedListHandler=new LinkedList();
@@ -44,6 +46,9 @@ public class UDrawingPaper {
     static Printer colorPrinter= new Printer(1, "lista", printerQueue1, 2);
     static Printer bwPrinter= new Printer(2, "lista", printerQueue2, 1);
     static int freeTime=0;
+    static AttendedList bwDataList=new AttendedList();
+    static AttendedList colorDataList=new AttendedList();
+    static AttendedList stepsDataList=new AttendedList();
 
     
     public static void main(String[] args) throws IOException {
@@ -85,7 +90,7 @@ public class UDrawingPaper {
                 System.out.println("| 20 años                       |");
                 System.out.println("| 202001534                     |");
                 System.out.println("| Estructura De Datos Sección'C'|");
-                System.out.println("| Primer Semestre 2021          |");
+                System.out.println("| Primer Semestre 2022          |");
                 System.out.println("=================================");
                 mainMenu();
              case 4:
@@ -193,7 +198,7 @@ public class UDrawingPaper {
             
             // Se crea el objeto cliente
             ImageLinkedList tempImageList = new ImageLinkedList();
-            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList,totalImagesCounter,false,"no");
+            Client newClient = new Client(id, name,colorImageCounter, bwImageCounter,0,-1,"recepción",totalImagesCounter,0,colorImageCounter,bwImageCounter,tempImageList,totalImagesCounter,false,"no",0);
             //El objeto cliente se agrega a la cola
             quequeHandler.insert(newClient);
             //Vaciamos nuestra variable que venía vacía inicialmente
@@ -259,15 +264,23 @@ public class UDrawingPaper {
         }else{
             clientWindowHandler.giveImageToTheWindow(idActualClient);
             
+            
+            
         }
         
-        //En es te caso se eliminan a todos los atendidos en este caso.
+        //Aquí se eliminan a todos los atendidos en este caso.
         int chekIntruders=-1;
         do{
             clientWindowHandler.deleteOfTheWindow();
             chekIntruders=clientWindowHandler.checkIntruders();
         }while(chekIntruders!=0);
-        
+        //Para verificar si hay alguna ventanilla libre luego de las entregas de las imágenes.
+        /*if(linkedListHandler.isAWindowOpen()!=-1){
+            int idActualClient2=quequeHandler.firstIdInQueue();
+            int availableWindow2=linkedListHandler.isAWindowOpen();
+            
+            
+        }*/
         
         /*La tercera fase del proceso, se maneja todo lo relacionado con las 
         impresiones. Estas líneas comentadas, solo es para ver el comportamiento
@@ -338,7 +351,7 @@ public class UDrawingPaper {
             System.out.println("| 3.Generar Reportes                    |");
             System.out.println("| 4.Información Cliente Específico      |");
             System.out.println("| 5.Volver al menú principal            |");
-            System.out.println("=========================================");;
+            System.out.println("=========================================");
             System.out.println();
             System.out.println("Teclee la opción requerida: ");
              //Variable que almacena el dígito de la opción seleccionada
@@ -351,18 +364,56 @@ public class UDrawingPaper {
                 masterMindAlgorithm();
                 stepMenu();
             case 2:
+                //Se genera un grafo de la lista de pilas de las ventanillas
                 linkedListHandler.graphvizGenerator();
+                //Se genera un grafo de la cola de recepción
                 quequeHandler.graphvizGenerator();
+                //Se genera un grafo de la cola de impresión a color
                 colorprinterGraphvizGenerator();
+                //Se genera un grafo de la cola de impresión a blanco y negro
                 bwprinterGraphvizGenerator();
+                //Se genera un grafo de la lista de atendidos
                 attendedListHandler.graphvizGenerator();
-                waitingListHandler.updateStepsStatus();
+                //waitingListHandler.updateStepsStatus();
+                //Se genera un grafo de la lista de espera de clientes.
+                waitingListHandler.graphvizGenerator();
                 stepMenu();
             case 3:
-                System.out.println("opcion 3 no está disponible por el momento");
-                stepMenu();
+                int reportsOption=0;
+                do {
+                     System.out.println("\n\n\n");
+                     System.out.println("==========Erwin14k UDrawing Paper=========");
+                     System.out.println("| 1.Top clientes con más imágenes bw     |");
+                     System.out.println("| 2.Top clientes con más imágenes a color|");
+                     System.out.println("| 3.Top clientes con más pasos en sistema|");
+                     System.out.println("| 4.Volver al menú de operaciones        |");
+                     System.out.println("==========================================");
+                     System.out.println();
+                     System.out.println("Teclee la opción requerida: ");
+                      //Variable que almacena el dígito de la opción seleccionada
+                     reportsOption = reportsScanner.nextInt();
+                     //Lo hará hasta que se cumpla la condición del while
+                 } while (reportsOption < 1 || reportsOption >4);
+                switch (reportsOption) {
+                    case 1:
+                        System.out.println("\n\n\n");
+                        bwDataList.topBwReport();
+                        stepMenu();
+                    case 2:
+                        System.out.println("\n\n\n");
+                        colorDataList.topColorReport();
+                        stepMenu();
+                    case 3:
+                        System.out.println("\n\n\n");
+                        stepsDataList.topStepsReport();
+                        stepMenu();
+                }
+                
             case 4:
-                System.out.println("no está disponible");
+                System.out.println("Teclee el id del cliente buscado (Tiene que ser un cliente ya atendido): ");
+                //Variable que almacena el dígito de la opción seleccionada
+                int clientOption = clientScanner.nextInt();
+                attendedListHandler.specificClientReport(clientOption);
                 stepMenu();
             case 5:
                 mainMenu();
@@ -390,7 +441,7 @@ public class UDrawingPaper {
         }
         
         finalText+=nodes+"\n";
-        finalText+=conections+"\n";
+        finalText+="{rank= same;\n"+conections+"\n";
         
         finalText+="start [shape=Mdiamond label=\"Cola Impresora a color\"];";
         finalText+=rankSame;
@@ -435,12 +486,10 @@ public class UDrawingPaper {
         }
         
         finalText+=nodes+"\n";
-        finalText+=conections+"\n";
+        finalText+="{rank= same;\n"+conections+"\n";
         
         finalText+="start [shape=Mdiamond label=\"Cola Impresora a Blanco y negro\"];";
-        String rankSame="{rank=same;" ;
-        finalText+=rankSame;
-        finalText+="}\n}";
+        
         FileWriter fw = new FileWriter(route);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(finalText);

@@ -143,4 +143,186 @@ public class AttendedList {
         
         return finalText;
     }
+    
+    public void bwDataSorting(Client client){
+        AttendedListNode newNode=new AttendedListNode(client);
+        AttendedListNode temp1;
+        AttendedListNode temp2;
+        if(first==null){
+            first=newNode;
+            newNode.next=null;
+            
+        }else{
+            temp1=first;
+            while(temp1!=null){
+                temp2=temp1.next;
+                if(newNode.client.getBwImageCounter()>temp1.client.getBwImageCounter()){
+                    newNode.next=first;
+                    first=newNode;
+                    break;
+                }else{
+                    if(newNode.client.getBwImageCounter()<temp1.client.getBwImageCounter()&&temp2==null){
+                        temp1.next=newNode;
+                        newNode.next=null;
+                        break;
+                    }else{
+                        if(temp1.client.getBwImageCounter()>newNode.client.getBwImageCounter()&& temp2.client.getBwImageCounter()<=newNode.client.getBwImageCounter()){
+                            temp1.next=newNode;
+                            newNode.next=temp2;
+                            break;
+                        }else{
+                            temp1=temp1.next;
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    public void colorDataSorting(Client client){
+        AttendedListNode newNode=new AttendedListNode(client);
+        AttendedListNode temp1;
+        AttendedListNode temp2;
+        if(first==null){
+            first=newNode;
+            newNode.next=null;
+            
+        }else{
+            temp1=first;
+            while(temp1!=null){
+                temp2=temp1.next;
+                if(newNode.client.getColorImageCounter()>temp1.client.getColorImageCounter()){
+                    newNode.next=first;
+                    first=newNode;
+                    break;
+                }else{
+                    if(newNode.client.getColorImageCounter()<temp1.client.getColorImageCounter()&&temp2==null){
+                        temp1.next=newNode;
+                        newNode.next=null;
+                        break;
+                    }else{
+                        if(temp1.client.getColorImageCounter()>newNode.client.getColorImageCounter()&& temp2.client.getColorImageCounter()<=newNode.client.getColorImageCounter()){
+                            temp1.next=newNode;
+                            newNode.next=temp2;
+                            break;
+                        }else{
+                            temp1=temp1.next;
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    public void stepsDataSorting(Client client){
+        AttendedListNode newNode=new AttendedListNode(client);
+        AttendedListNode temp1;
+        AttendedListNode temp2;
+        if(first==null){
+            first=newNode;
+            newNode.next=null;
+            
+        }else{
+            temp1=first;
+            while(temp1!=null){
+                temp2=temp1.next;
+                if(newNode.client.getSteps()>temp1.client.getSteps()){
+                    newNode.next=first;
+                    first=newNode;
+                    break;
+                }else{
+                    if(newNode.client.getSteps()<temp1.client.getSteps()&&temp2==null){
+                        temp1.next=newNode;
+                        newNode.next=null;
+                        break;
+                    }else{
+                        if(temp1.client.getSteps()>newNode.client.getSteps()&& temp2.client.getSteps()<=newNode.client.getSteps()){
+                            temp1.next=newNode;
+                            newNode.next=temp2;
+                            break;
+                        }else{
+                            temp1=temp1.next;
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    public void topBwReport(){
+        int positionCounter=1;
+        if(first == null){
+            System.err.print("El reporte de top clientes con más imágenes en blanco y negro no se puede realizar debdo a que la lista de clientes atendidos está vacía!!");
+        }
+        else{
+            AttendedListNode temp = first;
+            do{
+                System.out.println("---------------Top Clientes Bw Images-----------------");
+                System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Imágenes bw: "+temp.client.getBwImageCounter());
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        System.out.println("******************************************************");
+    }
+    public void topColorReport(){
+        int positionCounter=1;
+        if(first == null){
+            System.err.print("El reporte de top clientes con más imágenes a color no se puede realizar debdo a que la lista de clientes atendidos está vacía!!");
+        }
+        else{
+            AttendedListNode temp = first;
+            do{
+                System.out.println("---------------Top Clientes Color Images-----------------");
+                System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Imágenes a Color: "+temp.client.getColorImageCounter());
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        System.out.println("*********************************************************");
+    }
+    public void topStepsReport(){
+        int positionCounter=1;
+        if(first == null){
+            System.err.print("El reporte de top clientes con más pasos en el sistema no se puede realizar debdo a que la lista de clientes atendidos está vacía!!");
+        }
+        else{
+            AttendedListNode temp = first;
+            do{
+                System.out.println("---------------Top Clientes Pasos En Sistema-----------------");
+                System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Pasos en sistema: "+temp.client.getSteps());
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        
+        System.out.println("*************************************************************");
+    }
+    
+    public void specificClientReport(int id){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            AttendedListNode temp = first;
+            do{
+                if(temp.client.getId()==id){
+                    System.out.println("---------------Reporte Cliente Específico-----------------");
+                    System.out.println("Id: "+temp.client.getId());
+                    System.out.println("Nombre: "+temp.client.getName());
+                    System.out.println("Imágenes Bw Impresas: "+temp.client.getBwImageCounter());
+                    System.out.println("Imágenes A Color Impresas: "+temp.client.getColorImageCounter());
+                    System.out.println("Pasos En Sistema: "+temp.client.getSteps());
+                    System.out.println("***********************************************************");
+                    break;
+                }
+                temp = temp.next;
+            }while(temp != null);
+            System.out.println("El cliente buscado no existe, o no ha sido atendido");
+        }
+    }
 }

@@ -20,8 +20,9 @@ public class Client {
     private int waitingCounter;
     private boolean canYouPrint;
     private String deleteWindow;
+    private int initialStep;
     
-    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter,int missingColor, int missingBw,ImageLinkedList imageList,int waitingCounter,boolean canYouPrint,String deleteWindow){
+    public Client(int  id, String name, int colorImageCounter, int bwImageCounter,int steps,int idWindow,String state,int totalImages,int imgCounter,int missingColor, int missingBw,ImageLinkedList imageList,int waitingCounter,boolean canYouPrint,String deleteWindow,int initialStep){
         this.id = id;
         this.name = name;
         this.colorImageCounter= colorImageCounter;
@@ -37,7 +38,16 @@ public class Client {
         this.waitingCounter=waitingCounter;
         this.canYouPrint=canYouPrint;
         this.deleteWindow=deleteWindow;
+        this.initialStep=initialStep;
 }
+
+    public int getInitialStep() {
+        return initialStep;
+    }
+
+    public void setInitialStep(int initialStep) {
+        this.initialStep = initialStep;
+    }
 
     public String getDeleteWindow() {
         return deleteWindow;

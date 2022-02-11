@@ -1,9 +1,6 @@
 digraph G{
 node [shape=box];
-start -> N1880587981;
-N1880587981[label="Imagen Del cliente:  3 bw"];
 
-N1880587981
+{rank= same;
 
-start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];{rank=same;}
-}
+start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];
