@@ -260,9 +260,11 @@ public class AttendedList {
         }
         else{
             AttendedListNode temp = first;
+            System.out.println("---------------Top Clientes Bw Images-----------------");
             do{
-                System.out.println("---------------Top Clientes Bw Images-----------------");
+                
                 System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Imágenes bw: "+temp.client.getBwImageCounter());
+                positionCounter++;
                 temp = temp.next;
             }while(temp != null);
             
@@ -276,9 +278,11 @@ public class AttendedList {
         }
         else{
             AttendedListNode temp = first;
+            System.out.println("---------------Top Clientes Color Images-----------------");
             do{
-                System.out.println("---------------Top Clientes Color Images-----------------");
+                
                 System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Imágenes a Color: "+temp.client.getColorImageCounter());
+                positionCounter++;
                 temp = temp.next;
             }while(temp != null);
             
@@ -292,9 +296,11 @@ public class AttendedList {
         }
         else{
             AttendedListNode temp = first;
+            System.out.println("---------------Top Clientes Pasos En Sistema-----------------");
             do{
-                System.out.println("---------------Top Clientes Pasos En Sistema-----------------");
+                
                 System.out.println(positionCounter+". Id: "+temp.client.getId()+"--"+temp.client.getName()+"-- Pasos en sistema: "+temp.client.getSteps());
+                positionCounter++;
                 temp = temp.next;
             }while(temp != null);
             
@@ -303,7 +309,7 @@ public class AttendedList {
         System.out.println("*************************************************************");
     }
     
-    public void specificClientReport(int id){
+    public boolean specificClientReport(int id){
         if(first == null){
             System.err.print("La lista se encuentra vacia");
         }
@@ -318,11 +324,12 @@ public class AttendedList {
                     System.out.println("Imágenes A Color Impresas: "+temp.client.getColorImageCounter());
                     System.out.println("Pasos En Sistema: "+temp.client.getSteps());
                     System.out.println("***********************************************************");
-                    break;
+                    return true;
                 }
                 temp = temp.next;
             }while(temp != null);
-            System.out.println("El cliente buscado no existe, o no ha sido atendido");
         }
+        System.out.println("El cliente buscado no existe, o no ha sido atendido");
+        return false;
     }
 }

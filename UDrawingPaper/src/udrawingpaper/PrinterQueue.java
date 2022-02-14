@@ -91,7 +91,7 @@ public class PrinterQueue {
         String conections="";
         PrinterQueueNode temp=begin;
         while(temp!=null){
-            graphText+="N"+temp.hashCode()+"[label=\""+"Imagen Del cliente:  "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
+            graphText+="N"+temp.hashCode()+"[label=\""+"Imagen Del cliente: "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
             if(temp.next != null){
                 conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
             }
@@ -112,7 +112,7 @@ public class PrinterQueue {
             
             graphText+="N"+temp.hashCode()+"[label=\""+"Cliente "+temp.image.getIdClient()+" "+temp.image.getFormat()+"\"];\n";
             if(temp.next != null){
-                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
             }
             temp=temp.next;
         } 

@@ -3,4 +3,5 @@ node [shape=box];
 
 {rank= same;
 
-start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];
+start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];}
+}

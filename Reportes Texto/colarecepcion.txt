@@ -1,33 +1,45 @@
 digraph G{
 node [shape=box];
-N793589513[label="Cliente con id No. 3
+N1867083167[label="Cliente con id No. 3
 Luiz Higueros"];
-N1313922862[label="Cliente con id No. 4
+N1915910607[label="Cliente con id No. 4
 Juan Marquez"];
-N495053715[label="Cliente con id No. 5
+N284720968[label="Cliente con id No. 5
 Pedro Barrios"];
-N1922154895[label="Cliente con id No. 6
+N189568618[label="Cliente con id No. 6
 Alvaro Valenzuela"];
-N883049899[label="Cliente con id No. 7
+N793589513[label="Cliente con id No. 7
 Oscar Figueroa"];
-N2093176254[label="Cliente con id No. 8
+N1313922862[label="Cliente con id No. 8
 Hector Cardozo"];
-N1854731462[label="Cliente con id No. 9
+N495053715[label="Cliente con id No. 9
 Miguel Diaz"];
-N317574433[label="Cliente con id No. 10
+N1922154895[label="Cliente con id No. 10
 Adriana Santizo"];
-N885284298[label="Cliente con id No. 11
+N883049899[label="Cliente con id No. 11
 Jimena Vargas"];
-N1389133897[label="Cliente con id No. 12
+N2093176254[label="Cliente con id No. 12
 Valeria Alonzo"];
-N1534030866[label="Cliente con id No. 13
+N1854731462[label="Cliente con id No. 13
 Susan Gomez"];
-N664223387[label="Cliente con id No. 14
+N317574433[label="Cliente con id No. 14
 Kelly Caceres"];
-N824909230[label="Cliente con id No. 15
+N885284298[label="Cliente con id No. 15
 Javier Andrade"];
+N1389133897[label="Cliente con id No. 16
+Hector Osorio"];
+N1534030866[label="Cliente con id No. 17
+Monica Marquez"];
+N664223387[label="Cliente con id No. 18
+Monica Mejia"];
+N824909230[label="Cliente con id No. 19
+Elena Mejia"];
 
 {rank= same;
+N1915910607 -> N1867083167;
+N284720968 -> N1915910607;
+N189568618 -> N284720968;
+N793589513 -> N189568618;
 N1313922862 -> N793589513;
 N495053715 -> N1313922862;
 N1922154895 -> N495053715;

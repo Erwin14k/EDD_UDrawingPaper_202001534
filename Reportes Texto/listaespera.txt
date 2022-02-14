@@ -1,9 +1,6 @@
 digraph G{
 node [shape=box];
-N159413332[label="Cliente Id No.2"];
 
-N159413332 -> N159413332;
-N159413332 -> N159413332;
 
-start [shape=Mdiamond label="Lista De Espera De Clientes"];{rank=same; N159413332};}
+start [shape=Mdiamond label="Lista De Espera De Clientes"];{rank=same; };}
 }

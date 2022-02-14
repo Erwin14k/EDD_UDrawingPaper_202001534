@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -49,9 +52,18 @@ public class UDrawingPaper {
     static AttendedList bwDataList=new AttendedList();
     static AttendedList colorDataList=new AttendedList();
     static AttendedList stepsDataList=new AttendedList();
+    static ArrayList randomNames = new ArrayList();
+    static ArrayList randomLastNames = new ArrayList();
+    
+    //namesList.add("Iago","Elias","Brandon","Catalina","Ana","Belen","Adela","Elena","María","Erwin","Javier","Hector","Wilmer","Fernando","Lucía");
+    //static String[] lastNames={"Zurita","Florez","Vergara","Castellanos","Sánchez","Rojo","Pinto","Jara","Suarez","Orozco","Gaviria","Robles","Herrera","Salazar","Montilla"};
+
+    public UDrawingPaper() {
+    }
 
     
     public static void main(String[] args) throws IOException {
+        fillRandomNamesLists();
         mainMenu();
     }
     /*En este caso se crea la función menú, la cual servirá para controlar 
@@ -221,6 +233,7 @@ public class UDrawingPaper {
         return lastSymbolDelete;
     }
     public static void masterMindAlgorithm(){
+        createRandomClients();
         stepsCounter++;
         boolean clientCan=false;
         System.out.println("=============Paso Número: "+stepsCounter+"=============");
@@ -372,6 +385,7 @@ public class UDrawingPaper {
                 colorprinterGraphvizGenerator();
                 //Se genera un grafo de la cola de impresión a blanco y negro
                 bwprinterGraphvizGenerator();
+                colorprinterGraphvizGenerator();
                 //Se genera un grafo de la lista de atendidos
                 attendedListHandler.graphvizGenerator();
                 //waitingListHandler.updateStepsStatus();
@@ -379,35 +393,7 @@ public class UDrawingPaper {
                 waitingListHandler.graphvizGenerator();
                 stepMenu();
             case 3:
-                int reportsOption=0;
-                do {
-                     System.out.println("\n\n\n");
-                     System.out.println("==========Erwin14k UDrawing Paper=========");
-                     System.out.println("| 1.Top clientes con más imágenes bw     |");
-                     System.out.println("| 2.Top clientes con más imágenes a color|");
-                     System.out.println("| 3.Top clientes con más pasos en sistema|");
-                     System.out.println("| 4.Volver al menú de operaciones        |");
-                     System.out.println("==========================================");
-                     System.out.println();
-                     System.out.println("Teclee la opción requerida: ");
-                      //Variable que almacena el dígito de la opción seleccionada
-                     reportsOption = reportsScanner.nextInt();
-                     //Lo hará hasta que se cumpla la condición del while
-                 } while (reportsOption < 1 || reportsOption >4);
-                switch (reportsOption) {
-                    case 1:
-                        System.out.println("\n\n\n");
-                        bwDataList.topBwReport();
-                        stepMenu();
-                    case 2:
-                        System.out.println("\n\n\n");
-                        colorDataList.topColorReport();
-                        stepMenu();
-                    case 3:
-                        System.out.println("\n\n\n");
-                        stepsDataList.topStepsReport();
-                        stepMenu();
-                }
+                reportsMenu();
                 
             case 4:
                 System.out.println("Teclee el id del cliente buscado (Tiene que ser un cliente ya atendido): ");
@@ -418,6 +404,40 @@ public class UDrawingPaper {
             case 5:
                 mainMenu();
             }
+       
+   }
+   public static void reportsMenu() throws IOException{
+       int reportsOption=0;
+        do {
+            System.out.println("\n\n\n");
+            System.out.println("==========Erwin14k UDrawing Paper=========");
+            System.out.println("| 1.Top clientes con más imágenes bw     |");
+            System.out.println("| 2.Top clientes con más imágenes a color|");
+            System.out.println("| 3.Top clientes con más pasos en sistema|");
+            System.out.println("| 4.Volver al menú de operaciones        |");
+            System.out.println("==========================================");
+            System.out.println();
+            System.out.println("Teclee la opción requerida: ");
+            //Variable que almacena el dígito de la opción seleccionada
+            reportsOption = reportsScanner.nextInt();
+            //Lo hará hasta que se cumpla la condición del while
+        } while (reportsOption < 1 || reportsOption >4);
+        switch (reportsOption) {
+            case 1:
+                System.out.println("\n\n\n");
+                bwDataList.topBwReport();
+                reportsMenu();
+            case 2:
+                System.out.println("\n\n\n");
+                colorDataList.topColorReport();
+                reportsMenu();
+            case 3:
+                System.out.println("\n\n\n");
+                stepsDataList.topStepsReport();
+                reportsMenu();
+            case 4:
+                stepMenu();
+                }
        
    }
    public static String colorprinterGraphvizGenerator() throws IOException{
@@ -437,14 +457,14 @@ public class UDrawingPaper {
             collectConection=colorPrinter.getPrinterQueue().collectConections();
             nodes+=collectQueueImages;
             conections=collectConection;
-            finalText+="start"+" -> "+"N"+colorPrinter.getPrinterQueue().begin.hashCode()+";\n";
+            //finalText+="start"+" -> "+"N"+colorPrinter.getPrinterQueue().begin.hashCode()+";\n";
         }
         
         finalText+=nodes+"\n";
         finalText+="{rank= same;\n"+conections+"\n";
         
         finalText+="start [shape=Mdiamond label=\"Cola Impresora a color\"];";
-        finalText+=rankSame;
+        //finalText+=rankSame;
         finalText+="}\n}";
         FileWriter fw = new FileWriter(route);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -482,14 +502,14 @@ public class UDrawingPaper {
             collectConection=bwPrinter.getPrinterQueue().collectConections();
             nodes+=collectQueueImages;
             conections=collectConection;
-            finalText+="start"+" -> "+"N"+bwPrinter.getPrinterQueue().begin.hashCode()+";\n";
+            //finalText+="start"+" -> "+"N"+bwPrinter.getPrinterQueue().begin.hashCode()+";\n";
         }
         
         finalText+=nodes+"\n";
         finalText+="{rank= same;\n"+conections+"\n";
         
         finalText+="start [shape=Mdiamond label=\"Cola Impresora a Blanco y negro\"];";
-        
+        finalText+="}\n}";
         FileWriter fw = new FileWriter(route);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(finalText);
@@ -508,7 +528,75 @@ public class UDrawingPaper {
         
         return finalText;
     }
-   
+   public static void createRandomClients(){
+        Random r = new Random();
+        int numberRandomClients = r.nextInt(3-0)+0;
+        int bwRandom=r.nextInt(2-0)+0;
+        int colorRandom=r.nextInt(2-0)+0;
+        int totalImages=bwRandom+colorRandom;
+        for (int i = 0; i < numberRandomClients; i++) {
+            clientsCounter++;
+            String tempName="";
+            String tempLastName="";
+            String randomName="";
+            ImageLinkedList tempImageList = new ImageLinkedList();
+            int a = (int) (Math.random() * 20);
+            int b = (int) (Math.random() * 20);
+            tempName=randomNames.get(a).toString();
+            tempLastName=randomLastNames.get(b).toString();
+            randomName=tempName+" "+tempLastName;
+            
+            Client newClient = new Client(clientsCounter, randomName,colorRandom, bwRandom,0,-1,"recepción",totalImages,0,colorRandom,bwRandom,tempImageList,totalImages,false,"no",0);
+            quequeHandler.insert(newClient);
+        }
+   }
+   public static void fillRandomNamesLists(){
+       //Se meten nombres al arreglo de nombres para elegir aleatoriamente
+       randomNames.add("Iago");
+       randomNames.add("Igor");
+       randomNames.add("Elias");
+       randomNames.add("Brandon");
+       randomNames.add("Catalina");
+       randomNames.add("Ana");
+       randomNames.add("Belen");
+       randomNames.add("Adela");
+       randomNames.add("Elena");
+       randomNames.add("Adriana");
+       randomNames.add("Maria");
+       randomNames.add("Erwin");
+       randomNames.add("Javier");
+       randomNames.add("Jorge");
+       randomNames.add("Matias");
+       randomNames.add("Hector");
+       randomNames.add("Monica");
+       randomNames.add("Lucia");
+       randomNames.add("Fernanda");
+       randomNames.add("Julian");
+       //Se insertan apellidos a la lista de apellidos para escoger aleatoriamente
+       randomLastNames.add("Rojo");
+       randomLastNames.add("Pinto");
+       randomLastNames.add("Vasquez");
+       randomLastNames.add("Rosales");
+       randomLastNames.add("Sanchez");
+       randomLastNames.add("Orozco");
+       randomLastNames.add("Luna");
+       randomLastNames.add("Castro");
+       randomLastNames.add("Ortiz");
+       randomLastNames.add("Mejia");
+       randomLastNames.add("Garcia");
+       randomLastNames.add("Muñoz");
+       randomLastNames.add("Pelaez");
+       randomLastNames.add("Bermudez");
+       randomLastNames.add("Osorio");
+       randomLastNames.add("Orantes");
+       randomLastNames.add("Santizo");
+       randomLastNames.add("Marquez");
+       randomLastNames.add("Gonzalez");
+       randomLastNames.add("Marroquin");
+       
+       
+       
+   }
 }   
     
     
