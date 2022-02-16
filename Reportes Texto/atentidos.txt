@@ -1,7 +1,36 @@
 digraph G{
 node [shape=box];
+N1104106489[label="Cliente con id No. 1
+Nombre: Andres Lopez
+Total imágenes: 5
+Total Pasos En Sistema: 15"];
+N237061348[label="Cliente con id No. 3
+Nombre: Luiz Higueros
+Total imágenes: 6
+Total Pasos En Sistema: 19"];
+N1685538367[label="Cliente con id No. 2
+Nombre: Juan Perez
+Total imágenes: 8
+Total Pasos En Sistema: 29"];
+N1030870354[label="Cliente con id No. 4
+Nombre: Juan Marquez
+Total imágenes: 6
+Total Pasos En Sistema: 35"];
+N485815673[label="Cliente con id No. 7
+Nombre: Oscar Figueroa
+Total imágenes: 3
+Total Pasos En Sistema: 37"];
+N410424423[label="Cliente con id No. 6
+Nombre: Alvaro Valenzuela
+Total imágenes: 8
+Total Pasos En Sistema: 43"];
 
 {rank= same;
+N237061348 -> N1104106489;
+N1685538367 -> N237061348;
+N1030870354 -> N1685538367;
+N485815673 -> N1030870354;
+N410424423 -> N485815673;
 
 start [shape=Mdiamond label="Lista Clientes Atendidos"];}
 }

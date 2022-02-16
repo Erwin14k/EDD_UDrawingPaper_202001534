@@ -143,10 +143,10 @@ public class UDrawingPaper {
                     StackList tempStack=new StackList();
                     Window newWindow = new Window(i+1,"libre",tempStack);
                     linkedListHandler.finalInsert(newWindow);
-                    System.out.println(newWindow.getId());
+                    //System.out.println(newWindow.getId());
                 }
                 System.out.println("Las ventanillas disponibles son: "+ windowsNumber);
-                linkedListHandler.travelList();
+                //linkedListHandler.travelList();
                 parametersMenu();
             case 3:
                 mainMenu();
@@ -552,9 +552,9 @@ public class UDrawingPaper {
    }
    public static void fillRandomNamesLists(){
        //Se meten nombres al arreglo de nombres para elegir aleatoriamente
-       randomNames.add("Iago");
-       randomNames.add("Igor");
-       randomNames.add("Elias");
+       randomNames.add("Pepe");
+       randomNames.add("Luuk");
+       randomNames.add("Katherine");
        randomNames.add("Brandon");
        randomNames.add("Catalina");
        randomNames.add("Ana");

@@ -1,7 +1,23 @@
 digraph G{
 node [shape=box];
+N1637506559[label="Imagen Del cliente: 10 bw"];
+N517380410[label="Imagen Del cliente: 10 bw"];
+N2117255219[label="Imagen Del cliente: 10 bw"];
+N2058534881[label="Imagen Del cliente: 10 bw"];
+N1232367853[label="Imagen Del cliente: 10 bw"];
+N1673605040[label="Imagen Del cliente: 11 bw"];
+N186276003[label="Imagen Del cliente: 12 bw"];
+N1681433494[label="Imagen Del cliente: 13 bw"];
 
 {rank= same;
+N1637506559
+N517380410 -> N1637506559;
+N2117255219 -> N517380410;
+N2058534881 -> N2117255219;
+N1232367853 -> N2058534881;
+N1673605040 -> N1232367853;
+N186276003 -> N1673605040;
+N1681433494 -> N186276003;
 
 start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];}
 }
