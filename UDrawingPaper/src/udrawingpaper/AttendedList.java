@@ -143,6 +143,139 @@ public class AttendedList {
         
         return finalText;
     }
+    public String topBwReportByGraphviz() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\topbw.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\TopBW.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        int count=1;
+        String finalText="digraph G{\nnode [shape=box];\n";
+        AttendedListNode temp = first;
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+count+". "+"Cliente con id No. "+temp.client.getId()+"\n"+"Nombre: "+temp.client.getName()+"\n"+"Total imágenes BW: "+temp.client.getBwImageCounter()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            count++;
+            temp = temp.next;
+        }
+        
+        finalText+=nodes+"\n";
+        
+        finalText+="{rank= same;\n"+conections+"\n";
+        //finalText+="start"+" -> "+"N"+begin.hashCode()+";\n";
+        finalText+="start [shape=Mdiamond label=\"TOP CLIENTES CON MENOS IMÁGENES BW\"];";
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
+    public String topColorReportByGraphviz() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\topcolor.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\TopColor.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        int count=1;
+        String finalText="digraph G{\nnode [shape=box];\n";
+        AttendedListNode temp = first;
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+count+". "+"Cliente con id No. "+temp.client.getId()+"\n"+"Nombre: "+temp.client.getName()+"\n"+"Total imágenes Color: "+temp.client.getColorImageCounter()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            temp = temp.next;
+            count++;
+        }
+        
+        finalText+=nodes+"\n";
+        
+        finalText+="{rank= same;\n"+conections+"\n";
+        //finalText+="start"+" -> "+"N"+begin.hashCode()+";\n";
+        finalText+="start [shape=Mdiamond label=\"TOP CLIENTES CON MÁS IMÁGENES COLOR\"];";
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
+    public String topStepsReportByGraphviz() throws IOException{
+        String route="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Texto\\toppasos.txt";
+        String graph="C:\\Users\\Erwin14k\\Documents\\EDD_PROYECTO_FASE1_202001534\\Reportes Img\\TopPasos.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        int count=1;
+        String finalText="digraph G{\nnode [shape=box];\n";
+        AttendedListNode temp = first;
+        String conections="";
+        String nodes="";
+        while(temp != null){
+            nodes+="N"+temp.hashCode()+"[label=\""+count+". "+"Cliente con id No. "+temp.client.getId()+"\n"+"Nombre: "+temp.client.getName()+"\n"+"Pasos Totales: "+temp.client.getSteps()+"\"];\n";
+
+            if(temp.next != null){
+                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+            temp = temp.next;
+            count++;
+        }
+        
+        finalText+=nodes+"\n";
+        
+        finalText+="{rank= same;\n"+conections+"\n";
+        //finalText+="start"+" -> "+"N"+begin.hashCode()+";\n";
+        finalText+="start [shape=Mdiamond label=\"TOP CLIENTES CON MÁS PASOS EN SISTEMA\"];";
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
     
     public void bwDataSorting(Client client){
         AttendedListNode newNode=new AttendedListNode(client);
@@ -156,17 +289,17 @@ public class AttendedList {
             temp1=first;
             while(temp1!=null){
                 temp2=temp1.next;
-                if(newNode.client.getBwImageCounter()>temp1.client.getBwImageCounter()){
+                if(newNode.client.getBwImageCounter()<temp1.client.getBwImageCounter()){
                     newNode.next=first;
                     first=newNode;
                     break;
                 }else{
-                    if(newNode.client.getBwImageCounter()<temp1.client.getBwImageCounter()&&temp2==null){
+                    if(newNode.client.getBwImageCounter()>temp1.client.getBwImageCounter()&&temp2==null){
                         temp1.next=newNode;
                         newNode.next=null;
                         break;
                     }else{
-                        if(temp1.client.getBwImageCounter()>newNode.client.getBwImageCounter()&& temp2.client.getBwImageCounter()<=newNode.client.getBwImageCounter()){
+                        if(temp1.client.getBwImageCounter()<newNode.client.getBwImageCounter()&& temp2.client.getBwImageCounter()>=newNode.client.getBwImageCounter()){
                             temp1.next=newNode;
                             newNode.next=temp2;
                             break;

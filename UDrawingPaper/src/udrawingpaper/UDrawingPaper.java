@@ -253,13 +253,25 @@ public class UDrawingPaper {
             System.out.println("El cliente con el id: "+idActualClient+" Se traslada a la ventanilla "+availableWindow);
             //Se procede a recolectar los datos del cliente antes de eliminar de cola.
             Client updateClient= quequeHandler.firstInQueue();
+            if (updateClient.getTotalImages()==0){
+                System.out.println("El cliente con el id "+updateClient.getId()+" No tiene imágenes para imprimir, sale del sistema! ");
+                updateClient.setSteps(stepsCounter-updateClient.getInitialStep());
+                attendedListHandler.finalInsert(updateClient);
+                bwDataList.bwDataSorting(updateClient);
+                colorDataList.colorDataSorting(updateClient);
+                stepsDataList.stepsDataSorting(updateClient);
+                quequeHandler.delete();
+            }
+            else{
+                
+            
             clientWindowHandler.finalInsert(updateClient);
             //Se elimina el cliente de la cola.
             quequeHandler.delete();
             //Se actualiza la ventanilla a estado ocupada
             linkedListHandler.uptadeBusyWindowState(availableWindow);
             clientCan=false;
-     
+            }
         //Si no hay ventanilla disponible, no hay movimiento en la cola
         }/*else{
             System.out.println("En este paso no hay ventanilla disponible, el cliente debe esperar");
@@ -411,7 +423,7 @@ public class UDrawingPaper {
         do {
             System.out.println("\n\n\n");
             System.out.println("==========Erwin14k UDrawing Paper=========");
-            System.out.println("| 1.Top clientes con más imágenes bw     |");
+            System.out.println("| 1.Top clientes con menos imágenes bw   |");
             System.out.println("| 2.Top clientes con más imágenes a color|");
             System.out.println("| 3.Top clientes con más pasos en sistema|");
             System.out.println("| 4.Volver al menú de operaciones        |");
@@ -426,14 +438,17 @@ public class UDrawingPaper {
             case 1:
                 System.out.println("\n\n\n");
                 bwDataList.topBwReport();
+                bwDataList.topBwReportByGraphviz();
                 reportsMenu();
             case 2:
                 System.out.println("\n\n\n");
                 colorDataList.topColorReport();
+                colorDataList.topColorReportByGraphviz();
                 reportsMenu();
             case 3:
                 System.out.println("\n\n\n");
                 stepsDataList.topStepsReport();
+                stepsDataList.topStepsReportByGraphviz();
                 reportsMenu();
             case 4:
                 stepMenu();
@@ -597,6 +612,8 @@ public class UDrawingPaper {
        
        
    }
+   
+   
 }   
     
     

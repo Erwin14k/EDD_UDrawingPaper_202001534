@@ -1,47 +1,31 @@
 digraph G{
 node [shape=box];
-N200006406[label="Imagen Del cliente: 5 color"];
-N2052001577[label="Imagen Del cliente: 5 color"];
-N1160264930[label="Imagen Del cliente: 5 color"];
-N544724190[label="Imagen Del cliente: 5 color"];
-N1972439101[label="Imagen Del cliente: 5 color"];
-N2007328737[label="Imagen Del cliente: 5 color"];
-N1936628443[label="Imagen Del cliente: 5 color"];
-N1830908236[label="Imagen Del cliente: 8 color"];
-N277630005[label="Imagen Del cliente: 8 color"];
-N1288354730[label="Imagen Del cliente: 8 color"];
-N1274370218[label="Imagen Del cliente: 8 color"];
-N758705033[label="Imagen Del cliente: 10 color"];
-N1604839423[label="Imagen Del cliente: 10 color"];
-N1177096266[label="Imagen Del cliente: 10 color"];
-N670576685[label="Imagen Del cliente: 11 color"];
-N1299641336[label="Imagen Del cliente: 11 color"];
-N764308918[label="Imagen Del cliente: 12 color"];
-N598446861[label="Imagen Del cliente: 12 color"];
-N1161082381[label="Imagen Del cliente: 13 color"];
-N1067938912[label="Imagen Del cliente: 13 color"];
+N521645586[label="Imagen Del cliente: 9 color"];
+N1296064247[label="Imagen Del cliente: 10 color"];
+N1637070917[label="Imagen Del cliente: 10 color"];
+N780237624[label="Imagen Del cliente: 10 color"];
+N205797316[label="Imagen Del cliente: 11 color"];
+N1128032093[label="Imagen Del cliente: 11 color"];
+N1066516207[label="Imagen Del cliente: 12 color"];
+N443308702[label="Imagen Del cliente: 12 color"];
+N935044096[label="Imagen Del cliente: 13 color"];
+N396180261[label="Imagen Del cliente: 13 color"];
+N625576447[label="Imagen Del cliente: 14 color"];
+N1560911714[label="Imagen Del cliente: 14 color"];
 
 {rank= same;
-N200006406
-N2052001577 -> N200006406;
-N1160264930 -> N2052001577;
-N544724190 -> N1160264930;
-N1972439101 -> N544724190;
-N2007328737 -> N1972439101;
-N1936628443 -> N2007328737;
-N1830908236 -> N1936628443;
-N277630005 -> N1830908236;
-N1288354730 -> N277630005;
-N1274370218 -> N1288354730;
-N758705033 -> N1274370218;
-N1604839423 -> N758705033;
-N1177096266 -> N1604839423;
-N670576685 -> N1177096266;
-N1299641336 -> N670576685;
-N764308918 -> N1299641336;
-N598446861 -> N764308918;
-N1161082381 -> N598446861;
-N1067938912 -> N1161082381;
+N521645586
+N1296064247 -> N521645586;
+N1637070917 -> N1296064247;
+N780237624 -> N1637070917;
+N205797316 -> N780237624;
+N1128032093 -> N205797316;
+N1066516207 -> N1128032093;
+N443308702 -> N1066516207;
+N935044096 -> N443308702;
+N396180261 -> N935044096;
+N625576447 -> N396180261;
+N1560911714 -> N625576447;
 
 start [shape=Mdiamond label="Cola Impresora a color"];}
 }

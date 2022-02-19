@@ -1,135 +1,168 @@
 digraph G{
 node [shape=box];
-N1534030866[label="Cliente con id No. 15
-Javier Andrade"];
-N664223387[label="Cliente con id No. 16
-Matias Pinto"];
-N824909230[label="Cliente con id No. 17
-Maria Ortiz"];
-N666641942[label="Cliente con id No. 18
-Adriana Bermudez"];
-N960604060[label="Cliente con id No. 19
-Catalina Sanchez"];
-N1880587981[label="Cliente con id No. 20
-Erwin Garcia"];
-N511754216[label="Cliente con id No. 21
-Ana Luna"];
-N1721931908[label="Cliente con id No. 22
-Brandon Bermudez"];
-N1198108795[label="Cliente con id No. 23
-Pepe Marroquin"];
-N1706234378[label="Cliente con id No. 24
-Elena Orozco"];
-N2128227771[label="Cliente con id No. 25
-Katherine Orozco"];
-N1702297201[label="Cliente con id No. 26
-Erwin Gonzalez"];
-N1996181658[label="Cliente con id No. 27
-Ana Ortiz"];
-N806353501[label="Cliente con id No. 28
-Ana Marroquin"];
-N396180261[label="Cliente con id No. 29
-Maria Ortiz"];
-N625576447[label="Cliente con id No. 30
+N1915910607[label="Cliente con id No. 17
+Luuk Vasquez"];
+N284720968[label="Cliente con id No. 18
+Monica Marroquin"];
+N189568618[label="Cliente con id No. 19
+Monica Santizo"];
+N793589513[label="Cliente con id No. 20
+Hector Gonzalez"];
+N1313922862[label="Cliente con id No. 21
+Hector Sanchez"];
+N495053715[label="Cliente con id No. 22
+Maria Luna"];
+N1922154895[label="Cliente con id No. 23
+Hector Orantes"];
+N883049899[label="Cliente con id No. 24
+Brandon Rosales"];
+N2093176254[label="Cliente con id No. 25
+Belen Gonzalez"];
+N1854731462[label="Cliente con id No. 26
+Elena Sanchez"];
+N317574433[label="Cliente con id No. 27
+Brandon Pelaez"];
+N885284298[label="Cliente con id No. 28
+Katherine Vasquez"];
+N1389133897[label="Cliente con id No. 29
 Katherine Muñoz"];
-N565760380[label="Cliente con id No. 31
-Fernanda Luna"];
-N6566818[label="Cliente con id No. 32
-Elena Luna"];
-N1494279232[label="Cliente con id No. 33
-Hector Marquez"];
-N501263526[label="Cliente con id No. 34
-Javier Vasquez"];
-N626202354[label="Cliente con id No. 35
-Julian Santizo"];
-N1099983479[label="Cliente con id No. 36
-Elena Bermudez"];
-N1268447657[label="Cliente con id No. 37
-Jorge Sanchez"];
-N1401420256[label="Cliente con id No. 38
-Matias Pinto"];
-N1851691492[label="Cliente con id No. 39
-Hector Osorio"];
-N752848266[label="Cliente con id No. 40
+N1534030866[label="Cliente con id No. 30
+Adriana Rosales"];
+N664223387[label="Cliente con id No. 31
+Adela Orozco"];
+N824909230[label="Cliente con id No. 32
+Luuk Bermudez"];
+N122883338[label="Cliente con id No. 33
 Catalina Vasquez"];
-N815033865[label="Cliente con id No. 41
-Julian Gonzalez"];
-N1555093762[label="Cliente con id No. 42
-Julian Muñoz"];
-N1190900417[label="Cliente con id No. 43
-Adela Osorio"];
-N379110473[label="Cliente con id No. 44
-Hector Pinto"];
-N99550389[label="Cliente con id No. 45
-Monica Pelaez"];
-N1598924227[label="Cliente con id No. 46
-Adela Luna"];
-N1144748369[label="Cliente con id No. 47
-Katherine Castro"];
-N340870931[label="Cliente con id No. 48
+N666641942[label="Cliente con id No. 34
+Lucia Osorio"];
+N960604060[label="Cliente con id No. 35
+Katherine Orantes"];
+N1349393271[label="Cliente con id No. 36
+Matias Garcia"];
+N1338668845[label="Cliente con id No. 37
+Erwin Marquez"];
+N159413332[label="Cliente con id No. 38
+Adela Castro"];
+N1028214719[label="Cliente con id No. 39
+Monica Marroquin"];
+N500977346[label="Cliente con id No. 40
+Adela Marroquin"];
+N20132171[label="Cliente con id No. 41
+Erwin Santizo"];
+N186370029[label="Cliente con id No. 42
+Hector Luna"];
+N2094548358[label="Cliente con id No. 43
+Ana Marquez"];
+N51228289[label="Cliente con id No. 44
+Maria Sanchez"];
+N455896770[label="Cliente con id No. 45
+Ana Bermudez"];
+N1323165413[label="Cliente con id No. 46
+Ana Pelaez"];
+N1880587981[label="Cliente con id No. 47
+Catalina Muñoz"];
+N511754216[label="Cliente con id No. 48
+Hector Castro"];
+N1721931908[label="Cliente con id No. 49
+Matias Orozco"];
+N1198108795[label="Cliente con id No. 50
+Adriana Santizo"];
+N214126413[label="Cliente con id No. 51
 Ana Luna"];
-N1768305536[label="Cliente con id No. 49
-Catalina Gonzalez"];
-N1530388690[label="Cliente con id No. 50
-Jorge Gonzalez"];
-N1146743572[label="Cliente con id No. 51
-Monica Luna"];
-N1512981843[label="Cliente con id No. 52
-Fernanda Vasquez"];
-N42768293[label="Cliente con id No. 53
-Belen Marquez"];
-N1717159510[label="Cliente con id No. 54
-Lucia Castro"];
-N1834188994[label="Cliente con id No. 55
-Hector Orozco"];
-N1174361318[label="Cliente con id No. 56
-Adela Santizo"];
-N589873731[label="Cliente con id No. 57
-Matias Pelaez"];
+N396873410[label="Cliente con id No. 52
+Pepe Bermudez"];
+N1706234378[label="Cliente con id No. 53
+Jorge Luna"];
+N1867750575[label="Cliente con id No. 54
+Katherine Osorio"];
+N2046562095[label="Cliente con id No. 55
+Maria Castro"];
+N1342443276[label="Cliente con id No. 56
+Katherine Orantes"];
+N769287236[label="Cliente con id No. 57
+Hector Garcia"];
+N1587487668[label="Cliente con id No. 58
+Maria Castro"];
+N1199823423[label="Cliente con id No. 59
+Belen Sanchez"];
+N932172204[label="Cliente con id No. 60
+Hector Orantes"];
+N1225358173[label="Cliente con id No. 61
+Elena Santizo"];
+N1848402763[label="Cliente con id No. 62
+Elena Garcia"];
+N933699219[label="Cliente con id No. 63
+Julian Rojo"];
+N2121055098[label="Cliente con id No. 64
+Brandon Marquez"];
+N2084435065[label="Cliente con id No. 65
+Katherine Rosales"];
+N1896277646[label="Cliente con id No. 66
+Belen Ortiz"];
+N2128227771[label="Cliente con id No. 67
+Adela Sanchez"];
+N1702297201[label="Cliente con id No. 68
+Maria Osorio"];
+N1996181658[label="Cliente con id No. 69
+Hector Castro"];
+N806353501[label="Cliente con id No. 70
+Luuk Sanchez"];
 
 {rank= same;
+N284720968 -> N1915910607;
+N189568618 -> N284720968;
+N793589513 -> N189568618;
+N1313922862 -> N793589513;
+N495053715 -> N1313922862;
+N1922154895 -> N495053715;
+N883049899 -> N1922154895;
+N2093176254 -> N883049899;
+N1854731462 -> N2093176254;
+N317574433 -> N1854731462;
+N885284298 -> N317574433;
+N1389133897 -> N885284298;
+N1534030866 -> N1389133897;
 N664223387 -> N1534030866;
 N824909230 -> N664223387;
-N666641942 -> N824909230;
+N122883338 -> N824909230;
+N666641942 -> N122883338;
 N960604060 -> N666641942;
-N1880587981 -> N960604060;
+N1349393271 -> N960604060;
+N1338668845 -> N1349393271;
+N159413332 -> N1338668845;
+N1028214719 -> N159413332;
+N500977346 -> N1028214719;
+N20132171 -> N500977346;
+N186370029 -> N20132171;
+N2094548358 -> N186370029;
+N51228289 -> N2094548358;
+N455896770 -> N51228289;
+N1323165413 -> N455896770;
+N1880587981 -> N1323165413;
 N511754216 -> N1880587981;
 N1721931908 -> N511754216;
 N1198108795 -> N1721931908;
-N1706234378 -> N1198108795;
-N2128227771 -> N1706234378;
+N214126413 -> N1198108795;
+N396873410 -> N214126413;
+N1706234378 -> N396873410;
+N1867750575 -> N1706234378;
+N2046562095 -> N1867750575;
+N1342443276 -> N2046562095;
+N769287236 -> N1342443276;
+N1587487668 -> N769287236;
+N1199823423 -> N1587487668;
+N932172204 -> N1199823423;
+N1225358173 -> N932172204;
+N1848402763 -> N1225358173;
+N933699219 -> N1848402763;
+N2121055098 -> N933699219;
+N2084435065 -> N2121055098;
+N1896277646 -> N2084435065;
+N2128227771 -> N1896277646;
 N1702297201 -> N2128227771;
 N1996181658 -> N1702297201;
 N806353501 -> N1996181658;
-N396180261 -> N806353501;
-N625576447 -> N396180261;
-N565760380 -> N625576447;
-N6566818 -> N565760380;
-N1494279232 -> N6566818;
-N501263526 -> N1494279232;
-N626202354 -> N501263526;
-N1099983479 -> N626202354;
-N1268447657 -> N1099983479;
-N1401420256 -> N1268447657;
-N1851691492 -> N1401420256;
-N752848266 -> N1851691492;
-N815033865 -> N752848266;
-N1555093762 -> N815033865;
-N1190900417 -> N1555093762;
-N379110473 -> N1190900417;
-N99550389 -> N379110473;
-N1598924227 -> N99550389;
-N1144748369 -> N1598924227;
-N340870931 -> N1144748369;
-N1768305536 -> N340870931;
-N1530388690 -> N1768305536;
-N1146743572 -> N1530388690;
-N1512981843 -> N1146743572;
-N42768293 -> N1512981843;
-N1717159510 -> N42768293;
-N1834188994 -> N1717159510;
-N1174361318 -> N1834188994;
-N589873731 -> N1174361318;
 
 start [shape=Mdiamond label="Cola De Recepción"];}
 }

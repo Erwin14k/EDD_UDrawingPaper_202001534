@@ -1,0 +1,38 @@
+digraph G{
+node [shape=box];
+N1394438858[label="1. Cliente con id No. 5
+Nombre: Pedro Barrios
+Total imágenes Color: 7"];
+N584634336[label="2. Cliente con id No. 2
+Nombre: Juan Perez
+Total imágenes Color: 5"];
+N1469821799[label="3. Cliente con id No. 8
+Nombre: Hector Cardozo
+Total imágenes Color: 4"];
+N501263526[label="4. Cliente con id No. 6
+Nombre: Alvaro Valenzuela
+Total imágenes Color: 3"];
+N626202354[label="5. Cliente con id No. 4
+Nombre: Juan Marquez
+Total imágenes Color: 3"];
+N1099983479[label="6. Cliente con id No. 7
+Nombre: Oscar Figueroa
+Total imágenes Color: 1"];
+N1268447657[label="7. Cliente con id No. 1
+Nombre: Andres Lopez
+Total imágenes Color: 1"];
+N1401420256[label="8. Cliente con id No. 3
+Nombre: Luiz Higueros
+Total imágenes Color: 0"];
+
+{rank= same;
+N584634336 -> N1394438858;
+N1469821799 -> N584634336;
+N501263526 -> N1469821799;
+N626202354 -> N501263526;
+N1099983479 -> N626202354;
+N1268447657 -> N1099983479;
+N1401420256 -> N1268447657;
+
+start [shape=Mdiamond label="TOP CLIENTES CON MÁS IMÁGENES COLOR"];}
+}

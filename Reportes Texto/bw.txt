@@ -1,23 +1,55 @@
 digraph G{
 node [shape=box];
-N1637506559[label="Imagen Del cliente: 10 bw"];
-N517380410[label="Imagen Del cliente: 10 bw"];
-N2117255219[label="Imagen Del cliente: 10 bw"];
-N2058534881[label="Imagen Del cliente: 10 bw"];
-N1232367853[label="Imagen Del cliente: 10 bw"];
-N1673605040[label="Imagen Del cliente: 11 bw"];
-N186276003[label="Imagen Del cliente: 12 bw"];
-N1681433494[label="Imagen Del cliente: 13 bw"];
+N939047783[label="Imagen Del cliente: 9 bw"];
+N1237514926[label="Imagen Del cliente: 9 bw"];
+N548246552[label="Imagen Del cliente: 9 bw"];
+N835648992[label="Imagen Del cliente: 9 bw"];
+N1134517053[label="Imagen Del cliente: 9 bw"];
+N492228202[label="Imagen Del cliente: 9 bw"];
+N1368884364[label="Imagen Del cliente: 9 bw"];
+N401625763[label="Imagen Del cliente: 9 bw"];
+N772777427[label="Imagen Del cliente: 9 bw"];
+N83954662[label="Imagen Del cliente: 10 bw"];
+N1751075886[label="Imagen Del cliente: 10 bw"];
+N2108649164[label="Imagen Del cliente: 10 bw"];
+N777874839[label="Imagen Del cliente: 10 bw"];
+N596512129[label="Imagen Del cliente: 10 bw"];
+N824318946[label="Imagen Del cliente: 10 bw"];
+N930990596[label="Imagen Del cliente: 10 bw"];
+N1921595561[label="Imagen Del cliente: 10 bw"];
+N565760380[label="Imagen Del cliente: 10 bw"];
+N6566818[label="Imagen Del cliente: 10 bw"];
+N1494279232[label="Imagen Del cliente: 11 bw"];
+N1650967483[label="Imagen Del cliente: 12 bw"];
+N87285178[label="Imagen Del cliente: 13 bw"];
+N610998173[label="Imagen Del cliente: 14 bw"];
+N2047329716[label="Imagen Del cliente: 16 bw"];
 
 {rank= same;
-N1637506559
-N517380410 -> N1637506559;
-N2117255219 -> N517380410;
-N2058534881 -> N2117255219;
-N1232367853 -> N2058534881;
-N1673605040 -> N1232367853;
-N186276003 -> N1673605040;
-N1681433494 -> N186276003;
+N939047783
+N1237514926 -> N939047783;
+N548246552 -> N1237514926;
+N835648992 -> N548246552;
+N1134517053 -> N835648992;
+N492228202 -> N1134517053;
+N1368884364 -> N492228202;
+N401625763 -> N1368884364;
+N772777427 -> N401625763;
+N83954662 -> N772777427;
+N1751075886 -> N83954662;
+N2108649164 -> N1751075886;
+N777874839 -> N2108649164;
+N596512129 -> N777874839;
+N824318946 -> N596512129;
+N930990596 -> N824318946;
+N1921595561 -> N930990596;
+N565760380 -> N1921595561;
+N6566818 -> N565760380;
+N1494279232 -> N6566818;
+N1650967483 -> N1494279232;
+N87285178 -> N1650967483;
+N610998173 -> N87285178;
+N2047329716 -> N610998173;
 
 start [shape=Mdiamond label="Cola Impresora a Blanco y negro"];}
 }

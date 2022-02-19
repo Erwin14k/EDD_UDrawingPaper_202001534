@@ -1,0 +1,38 @@
+digraph G{
+node [shape=box];
+N1144748369[label="1. Cliente con id No. 8
+Nombre: Hector Cardozo
+Pasos Totales: 6"];
+N340870931[label="2. Cliente con id No. 7
+Nombre: Oscar Figueroa
+Pasos Totales: 2"];
+N1768305536[label="3. Cliente con id No. 5
+Nombre: Pedro Barrios
+Pasos Totales: 3"];
+N1530388690[label="4. Cliente con id No. 6
+Nombre: Alvaro Valenzuela
+Pasos Totales: 5"];
+N1146743572[label="5. Cliente con id No. 4
+Nombre: Juan Marquez
+Pasos Totales: 3"];
+N1512981843[label="6. Cliente con id No. 2
+Nombre: Juan Perez
+Pasos Totales: 3"];
+N42768293[label="7. Cliente con id No. 3
+Nombre: Luiz Higueros
+Pasos Totales: 1"];
+N1717159510[label="8. Cliente con id No. 1
+Nombre: Andres Lopez
+Pasos Totales: 0"];
+
+{rank= same;
+N340870931 -> N1144748369;
+N1768305536 -> N340870931;
+N1530388690 -> N1768305536;
+N1146743572 -> N1530388690;
+N1512981843 -> N1146743572;
+N42768293 -> N1512981843;
+N1717159510 -> N42768293;
+
+start [shape=Mdiamond label="TOP CLIENTES CON MÁS PASOS EN SISTEMA"];}
+}

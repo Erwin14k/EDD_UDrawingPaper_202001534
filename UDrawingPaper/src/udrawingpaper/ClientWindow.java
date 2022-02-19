@@ -197,6 +197,17 @@ public class ClientWindow {
                         temp.client.setSteps(temp.client.getSteps()+1);
                         temp.client.setImgCounter(temp.client.getImgCounter()+1);
                         
+                        if(temp.client.getTotalImages()==temp.client.getImgCounter()){
+                            System.out.println("El cliente con el id: "+temp.client.getId()+" Sale de Ventanilla, entra en lista de espera!!");
+                            temp.client.setState("listaDeEspera");
+                            temp.client.setSteps(temp.client.getSteps()+1);
+                            uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
+                            uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                            uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
+                            temp.client.setDeleteWindow("si");
+                            
+                        }
+                        
                     }
                 }else{
                     //Este else sirve para ver que clientes ya cumplieron con su entrega de imágnes, los cuales son trasladados a lista de espera.
@@ -238,6 +249,17 @@ public class ClientWindow {
                     System.out.println("El cliente con el id: "+temp.client.getId()+" Entrega Imagen en ventanilla No."+temp.client.getIdWindow());
                     temp.client.setSteps(temp.client.getSteps()+1);
                     temp.client.setImgCounter(temp.client.getImgCounter()+1);
+                    
+                    if(temp.client.getTotalImages()==temp.client.getImgCounter()){
+                            System.out.println("El cliente con el id: "+temp.client.getId()+" Sale de Ventanilla, entra en lista de espera!!");
+                            temp.client.setState("listaDeEspera");
+                            temp.client.setSteps(temp.client.getSteps()+1);
+                            uDrawinPaperHandler.waitingListHandler.finalInsert(temp.client);
+                            uDrawinPaperHandler.linkedListHandler.uptadeFreeWindowState(temp.client.getIdWindow());
+                            uDrawinPaperHandler.linkedListHandler.giveImagesToPrinters(temp.client.getId(),temp.client.getIdWindow());
+                            temp.client.setDeleteWindow("si");
+                            
+                        }
                     
                     
                     

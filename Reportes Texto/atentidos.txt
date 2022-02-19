@@ -1,36 +1,46 @@
 digraph G{
 node [shape=box];
-N1104106489[label="Cliente con id No. 1
+N648129364[label="Cliente con id No. 1
 Nombre: Andres Lopez
-Total imágenes: 5
-Total Pasos En Sistema: 15"];
-N237061348[label="Cliente con id No. 3
+Total imágenes: 1
+Total Pasos En Sistema: 4"];
+N1029991479[label="Cliente con id No. 3
 Nombre: Luiz Higueros
-Total imágenes: 6
-Total Pasos En Sistema: 19"];
-N1685538367[label="Cliente con id No. 2
+Total imágenes: 1
+Total Pasos En Sistema: 5"];
+N1104106489[label="Cliente con id No. 2
 Nombre: Juan Perez
 Total imágenes: 8
-Total Pasos En Sistema: 29"];
-N1030870354[label="Cliente con id No. 4
+Total Pasos En Sistema: 20"];
+N94438417[label="Cliente con id No. 4
 Nombre: Juan Marquez
 Total imágenes: 6
-Total Pasos En Sistema: 35"];
-N485815673[label="Cliente con id No. 7
-Nombre: Oscar Figueroa
-Total imágenes: 3
-Total Pasos En Sistema: 37"];
-N410424423[label="Cliente con id No. 6
+Total Pasos En Sistema: 26"];
+N787604730[label="Cliente con id No. 6
 Nombre: Alvaro Valenzuela
 Total imágenes: 8
-Total Pasos En Sistema: 43"];
+Total Pasos En Sistema: 32"];
+N812265671[label="Cliente con id No. 5
+Nombre: Pedro Barrios
+Total imágenes: 10
+Total Pasos En Sistema: 46"];
+N193064360[label="Cliente con id No. 7
+Nombre: Oscar Figueroa
+Total imágenes: 3
+Total Pasos En Sistema: 48"];
+N109961541[label="Cliente con id No. 8
+Nombre: Hector Cardozo
+Total imágenes: 10
+Total Pasos En Sistema: 56"];
 
 {rank= same;
-N237061348 -> N1104106489;
-N1685538367 -> N237061348;
-N1030870354 -> N1685538367;
-N485815673 -> N1030870354;
-N410424423 -> N485815673;
+N1029991479 -> N648129364;
+N1104106489 -> N1029991479;
+N94438417 -> N1104106489;
+N787604730 -> N94438417;
+N812265671 -> N787604730;
+N193064360 -> N812265671;
+N109961541 -> N193064360;
 
 start [shape=Mdiamond label="Lista Clientes Atendidos"];}
 }
