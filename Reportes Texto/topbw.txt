@@ -1,38 +1,14 @@
 digraph G{
 node [shape=box];
-N1851691492[label="1. Cliente con id No. 1
+N777874839[label="1. Cliente con id No. 1
 Nombre: Andres Lopez
-Total imágenes BW: 0"];
-N752848266[label="2. Cliente con id No. 3
+Total im�genes BW: 0"];
+N596512129[label="2. Cliente con id No. 3
 Nombre: Luiz Higueros
-Total imágenes BW: 1"];
-N815033865[label="3. Cliente con id No. 7
-Nombre: Oscar Figueroa
-Total imágenes BW: 2"];
-N1555093762[label="4. Cliente con id No. 5
-Nombre: Pedro Barrios
-Total imágenes BW: 3"];
-N1190900417[label="5. Cliente con id No. 4
-Nombre: Juan Marquez
-Total imágenes BW: 3"];
-N379110473[label="6. Cliente con id No. 2
-Nombre: Juan Perez
-Total imágenes BW: 3"];
-N99550389[label="7. Cliente con id No. 6
-Nombre: Alvaro Valenzuela
-Total imágenes BW: 5"];
-N1598924227[label="8. Cliente con id No. 8
-Nombre: Hector Cardozo
-Total imágenes BW: 6"];
+Total im�genes BW: 1"];
 
 {rank= same;
-N752848266 -> N1851691492;
-N815033865 -> N752848266;
-N1555093762 -> N815033865;
-N1190900417 -> N1555093762;
-N379110473 -> N1190900417;
-N99550389 -> N379110473;
-N1598924227 -> N99550389;
+N596512129 -> N777874839;
 
-start [shape=Mdiamond label="TOP CLIENTES CON MÁS IMÁGENES BW"];}
+start [shape=Mdiamond label="TOP CLIENTES CON MENOS IM�GENES BW"];}
 }
