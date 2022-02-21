@@ -1,14 +1,12 @@
 digraph G{
 node [shape=box];
-N548246552[label="Imagen Del cliente: 2 bw"];
-N835648992[label="Imagen Del cliente: 2 bw"];
+N835648992[label="Imagen Del cliente: 3 bw"];
 N1134517053[label="Imagen Del cliente: 4 bw"];
 N492228202[label="Imagen Del cliente: 4 bw"];
 N1368884364[label="Imagen Del cliente: 4 bw"];
 
 {rank= same;
-N548246552
-N835648992 -> N548246552;
+N835648992
 N1134517053 -> N835648992;
 N492228202 -> N1134517053;
 N1368884364 -> N492228202;

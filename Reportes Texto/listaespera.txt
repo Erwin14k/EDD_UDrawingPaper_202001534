@@ -1,14 +1,19 @@
 digraph G{
 node [shape=box];
-N83954662[label="Cliente Id No.2"];
-N1751075886[label="Cliente 2 bw"];
-N2108649164[label="Cliente Id No.4"];
+N83954662[label="Cliente Id No.3"];
+N1751075886[label="Cliente 3 bw"];
+N2108649164[label="Cliente 3 bw"];
+N777874839[label="Cliente Id No.4"];
+N596512129[label="Cliente Id No.6"];
 
 N83954662 -> N1751075886
-N83954662 -> N2108649164;
-N2108649164 -> N83954662;
-N2108649164 -> N83954662;
-N83954662 -> N2108649164;
+N1751075886 -> N2108649164;
+N83954662 -> N777874839;
+N777874839 -> N83954662;
+N777874839 -> N596512129;
+N596512129 -> N777874839;
+N596512129 -> N83954662;
+N83954662 -> N596512129;
 
-start [shape=Mdiamond label="Lista De Espera De Clientes"];{rank=same; N83954662,N2108649164};}
+start [shape=Mdiamond label="Lista De Espera De Clientes"];{rank=same; N83954662,N777874839,N596512129};}
 }

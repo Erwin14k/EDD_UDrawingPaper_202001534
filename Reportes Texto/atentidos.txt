@@ -1,13 +1,13 @@
 digraph G{
 node [shape=box];
 N401625763[label="Cliente con id No. 1
-Nombre: Andres Lopez
-Total imágenes: 1
-Total Pasos En Sistema: 4"];
-N772777427[label="Cliente con id No. 3
-Nombre: Luiz Higueros
-Total imágenes: 1
-Total Pasos En Sistema: 5"];
+Nombre: Polly Rodriguez
+Total imÃ¡genes: 5
+Total Pasos En Sistema: 12"];
+N772777427[label="Cliente con id No. 2
+Nombre: Yang Wiggins
+Total imÃ¡genes: 5
+Total Pasos En Sistema: 14"];
 
 {rank= same;
 N772777427 -> N401625763;

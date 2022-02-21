@@ -1,53 +1,175 @@
 digraph G{
 node [shape=box];
-N1867750575[label="Cliente con id No. 6
-Alvaro Valenzuela"];
-N2046562095[label="Cliente con id No. 7
-Oscar Figueroa"];
-N1342443276[label="Cliente con id No. 8
-Hector Cardozo"];
-N769287236[label="Cliente con id No. 9
-Miguel Diaz"];
-N1587487668[label="Cliente con id No. 10
-Adriana Santizo"];
-N1199823423[label="Cliente con id No. 11
-Jimena Vargas"];
-N932172204[label="Cliente con id No. 12
-Valeria Alonzo"];
-N1225358173[label="Cliente con id No. 13
-Susan Gomez"];
-N1848402763[label="Cliente con id No. 14
-Kelly Caceres"];
-N933699219[label="Cliente con id No. 15
-Javier Andrade"];
-N2121055098[label="Cliente con id No. 16
-Elena Ortiz"];
-N2084435065[label="Cliente con id No. 17
-Adriana Orozco"];
-N1896277646[label="Cliente con id No. 18
-Matias Castro"];
-N2128227771[label="Cliente con id No. 19
-Katherine Pinto"];
-N1702297201[label="Cliente con id No. 20
-Adriana Mejia"];
-N1996181658[label="Cliente con id No. 21
-Katherine Mejia"];
-N806353501[label="Cliente con id No. 22
-Adriana Santizo"];
-N521645586[label="Cliente con id No. 23
-Lucia Muñoz"];
-N1296064247[label="Cliente con id No. 24
-Adriana Luna"];
-N1637070917[label="Cliente con id No. 25
-Adela Castro"];
-N780237624[label="Cliente con id No. 26
-Maria Luna"];
-N205797316[label="Cliente con id No. 27
-Erwin Santizo"];
-N1128032093[label="Cliente con id No. 28
-Ana Garcia"];
+N284720968[label="Cliente con id No. 7
+Leach Ross"];
+N189568618[label="Cliente con id No. 8
+Tabatha Pickett"];
+N793589513[label="Cliente con id No. 9
+Tommie Mcpherson"];
+N1313922862[label="Cliente con id No. 10
+Shannon Johnston"];
+N495053715[label="Cliente con id No. 11
+Leigh Bright"];
+N1922154895[label="Cliente con id No. 12
+Alyce Alford"];
+N883049899[label="Cliente con id No. 13
+Haley Rosario"];
+N2093176254[label="Cliente con id No. 14
+Durham Logan"];
+N1854731462[label="Cliente con id No. 15
+Elinor Ford"];
+N317574433[label="Cliente con id No. 16
+Noelle Morse"];
+N885284298[label="Cliente con id No. 17
+Gutierrez Casey"];
+N1389133897[label="Cliente con id No. 18
+Long Meyer"];
+N1534030866[label="Cliente con id No. 19
+Geraldine Pierce"];
+N664223387[label="Cliente con id No. 20
+Roman Branch"];
+N824909230[label="Cliente con id No. 21
+Pruitt Perez"];
+N122883338[label="Cliente con id No. 22
+Nola Winters"];
+N666641942[label="Cliente con id No. 23
+Gay Mcmillan"];
+N960604060[label="Cliente con id No. 24
+Carolyn Harmon"];
+N1349393271[label="Cliente con id No. 25
+Jolene Mccall"];
+N1338668845[label="Cliente con id No. 26
+Evelyn Fitzgerald"];
+N159413332[label="Cliente con id No. 27
+Hudson Lancaster"];
+N1028214719[label="Cliente con id No. 28
+Ellison Hood"];
+N500977346[label="Cliente con id No. 29
+Whitney Clayton"];
+N20132171[label="Cliente con id No. 30
+Moore Horton"];
+N186370029[label="Cliente con id No. 31
+Maggie Levine"];
+N2094548358[label="Cliente con id No. 32
+Andrews Vance"];
+N51228289[label="Cliente con id No. 33
+Dixie Howard"];
+N455896770[label="Cliente con id No. 34
+Heidi Lowery"];
+N1323165413[label="Cliente con id No. 35
+Bennett Malone"];
+N1880587981[label="Cliente con id No. 36
+Witt Forbes"];
+N511754216[label="Cliente con id No. 37
+Erma Barron"];
+N1721931908[label="Cliente con id No. 38
+Mabel Nicholson"];
+N1198108795[label="Cliente con id No. 39
+Maddox Frazier"];
+N214126413[label="Cliente con id No. 40
+Brigitte Wheeler"];
+N396873410[label="Cliente con id No. 41
+Christa Mendoza"];
+N1706234378[label="Cliente con id No. 42
+Etta Blake"];
+N1867750575[label="Cliente con id No. 43
+Macdonald Murray"];
+N2046562095[label="Cliente con id No. 44
+Garza York"];
+N1342443276[label="Cliente con id No. 45
+Hatfield Sykes"];
+N769287236[label="Cliente con id No. 46
+Washington Dickerson"];
+N1587487668[label="Cliente con id No. 47
+Ethel Cortez"];
+N1199823423[label="Cliente con id No. 48
+Vicky Jimenez"];
+N932172204[label="Cliente con id No. 49
+Romero Sanders"];
+N1225358173[label="Cliente con id No. 50
+Shana Burke"];
+N1848402763[label="Cliente con id No. 51
+Javier Luna"];
+N933699219[label="Cliente con id No. 52
+Monica Orozco"];
+N2121055098[label="Cliente con id No. 53
+Catalina Marquez"];
+N2084435065[label="Cliente con id No. 54
+Hector Santizo"];
+N1896277646[label="Cliente con id No. 55
+Katherine Vasquez"];
+N2128227771[label="Cliente con id No. 56
+Belen Marquez"];
+N1702297201[label="Cliente con id No. 57
+Matias Vasquez"];
+N1996181658[label="Cliente con id No. 58
+Julian Ortiz"];
+N806353501[label="Cliente con id No. 59
+Catalina Mejia"];
+N521645586[label="Cliente con id No. 60
+Brandon Santizo"];
+N1296064247[label="Cliente con id No. 61
+Monica Bermudez"];
+N1637070917[label="Cliente con id No. 62
+Jorge Sanchez"];
+N780237624[label="Cliente con id No. 63
+Hector Mejia"];
+N205797316[label="Cliente con id No. 64
+Matias Mejia"];
+N1128032093[label="Cliente con id No. 65
+Julian Rosales"];
+N1066516207[label="Cliente con id No. 66
+Maria Marquez"];
+N443308702[label="Cliente con id No. 67
+Hector Bermudez"];
+N935044096[label="Cliente con id No. 68
+Maria Pelaez"];
+N396180261[label="Cliente con id No. 69
+Monica Osorio"];
+N625576447[label="Cliente con id No. 70
+Maria Bermudez"];
+N1560911714[label="Cliente con id No. 71
+Catalina Santizo"];
+N939047783[label="Cliente con id No. 72
+Ana Castro"];
 
 {rank= same;
+N189568618 -> N284720968;
+N793589513 -> N189568618;
+N1313922862 -> N793589513;
+N495053715 -> N1313922862;
+N1922154895 -> N495053715;
+N883049899 -> N1922154895;
+N2093176254 -> N883049899;
+N1854731462 -> N2093176254;
+N317574433 -> N1854731462;
+N885284298 -> N317574433;
+N1389133897 -> N885284298;
+N1534030866 -> N1389133897;
+N664223387 -> N1534030866;
+N824909230 -> N664223387;
+N122883338 -> N824909230;
+N666641942 -> N122883338;
+N960604060 -> N666641942;
+N1349393271 -> N960604060;
+N1338668845 -> N1349393271;
+N159413332 -> N1338668845;
+N1028214719 -> N159413332;
+N500977346 -> N1028214719;
+N20132171 -> N500977346;
+N186370029 -> N20132171;
+N2094548358 -> N186370029;
+N51228289 -> N2094548358;
+N455896770 -> N51228289;
+N1323165413 -> N455896770;
+N1880587981 -> N1323165413;
+N511754216 -> N1880587981;
+N1721931908 -> N511754216;
+N1198108795 -> N1721931908;
+N214126413 -> N1198108795;
+N396873410 -> N214126413;
+N1706234378 -> N396873410;
+N1867750575 -> N1706234378;
 N2046562095 -> N1867750575;
 N1342443276 -> N2046562095;
 N769287236 -> N1342443276;
@@ -70,6 +192,13 @@ N1637070917 -> N1296064247;
 N780237624 -> N1637070917;
 N205797316 -> N780237624;
 N1128032093 -> N205797316;
+N1066516207 -> N1128032093;
+N443308702 -> N1066516207;
+N935044096 -> N443308702;
+N396180261 -> N935044096;
+N625576447 -> N396180261;
+N1560911714 -> N625576447;
+N939047783 -> N1560911714;
 
-start [shape=Mdiamond label="Cola De Recepción"];}
+start [shape=Mdiamond label="Cola De RecepciÃ³n"];}
 }
