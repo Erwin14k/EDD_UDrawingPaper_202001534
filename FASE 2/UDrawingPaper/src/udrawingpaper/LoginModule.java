@@ -12,13 +12,36 @@ import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.math.BigInteger;
+
 /**
  *
  * @author Erwin14k
  */
 public class LoginModule {
+    //Variable importantísima, ya que nos indica que usuario está loggeado.
+    static BigInteger userLogged;
+    //Instancias que se usarán en la ejecución de la aplicación
     static BinarySearchTree bstTreeHandler= new BinarySearchTree();
     static SelfBalancingTree avlTreeHandler= new SelfBalancingTree();
+    static ClientList clientListHandler = new ClientList();
+    //Objeto de tipo admin, este objeto es para validar el inicio de sesión como admin
+    static BigInteger adminCode=new BigInteger("0");
+    static Admin admin=new Admin("admin","EDD2022",adminCode);
+    //Variables que almacenan el texto de los json antes de ser parseados
+    public static String clientsJsonContent="";
+    public static String imagesJsonContent="";
+    public static String layersJsonContent="";
+    public static String albumsJsonContent="";
+    
+    
+    
     public static void main(String[] args) throws IOException {
             loginFrameModule();
     }
@@ -120,11 +143,39 @@ public class LoginModule {
         loginButton.setFont(font3);
         loginButton.setBackground(Color.yellow);
         loginButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent e){  
-                try {
-                    clientReports();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+            public void mouseClicked(MouseEvent e){ 
+                
+                if((usernameTF.getText().equals(admin.getUser()))&&(passwordTF.getText().equals(admin.getPassword()))){
+                    System.out.println(usernameTF.getText()+"--"+admin.getUser());
+                    try {
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Inicio De Sesión Exitoso Admin!!</p></html>" );
+                        loginFrame.dispose();
+                        userLogged=admin.getCode();
+                        adminView();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    if(usernameTF.getText().matches("[0-9]+")){
+                        BigInteger dpi=new BigInteger(usernameTF.getText());
+                        if(clientListHandler.loginValidation(dpi,passwordTF.getText())==true){
+                            
+                            String tempName=clientListHandler.nameByDpi(dpi);
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Le Damos La Bienvenida A: </p><center><p style=\"color:blue; font:20px;\">"+tempName+"</p></center></html>" );
+                            userLogged=dpi;
+                            loginFrame.dispose();
+                            try {
+                                clientView();
+                            } catch (IOException ex) {
+                                Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                
+                        }else{
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Dpi / Contraseña Incorrectos, Intente De Nuevo!!</p></html>" );
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Dpi / Contraseña Incorrectos, Intente De Nuevo!!</p></html>" );
+                    }    
                 }
             }
         }); 
@@ -181,7 +232,7 @@ public class LoginModule {
         clientsRegister.getContentPane().setBackground(Color.BLUE);
         //Se le indica al frame que hacer en caso de que se cierre el mismo,
         //en este caso la aplicación termina su ejecución
-        clientsRegister.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        clientsRegister.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         // Con esto obtenemos las dimensiones de resolución de pantlla
         Toolkit myScreen= Toolkit.getDefaultToolkit();
         Dimension sizeScreen = myScreen.getScreenSize();
@@ -275,7 +326,29 @@ public class LoginModule {
         registerButton.setBackground(Color.yellow);
         registerButton.setIcon(iconobtn);
         registerButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent e4){  
+            public void mouseClicked(MouseEvent e4){
+                if(codeT.getText().matches("[0-9]+")){
+                    if((!nameT.getText().equals(""))&&(!passT.getText().equals(""))){
+                        BigInteger temp=new BigInteger(codeT.getText());
+                        SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0);
+                        clientListHandler.finalInsert(newClient);
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
+                        clientsRegister.dispose();
+                        try {
+                            loginFrameModule();
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes llenar todos los campos, intenta de nuevo!!</p></html>" );
+                    }
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El dpi tiene que ser un número entero, intenta de nuevo!!</p></html>" );
+                }
+                
                       
                           
             }      
@@ -305,19 +378,22 @@ public class LoginModule {
         }); 
         
         clientsRegister.add(exitButton);
+        
+        clientsRegister.repaint();
             
             
             
             
         }
     
-    
+    //El frame que visualiza el admin al estar loggeado.
     public static void adminView() throws IOException {
             
         //Creamos unos tipos de letra, que nos servirán más adelante
         Font font =new Font("Arial",Font.BOLD,36);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
         Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        Font font4 =new Font("Arial",Font.BOLD,18);
         
         
         //=========================Creación del Frame del Admin==============================
@@ -334,7 +410,7 @@ public class LoginModule {
         adminView.getContentPane().setBackground(Color.orange);
         //Se le indica al frame que hacer en caso de que se cierre el mismo,
         //en este caso la aplicación termina su ejecución
-        adminView.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        adminView.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         // Con esto obtenemos las dimensiones de resolución de pantlla
         Toolkit myScreen= Toolkit.getDefaultToolkit();
         Dimension sizeScreen = myScreen.getScreenSize();
@@ -361,18 +437,7 @@ public class LoginModule {
         adminView.add(titleM);
  
        
-        //Creamos un botón de Carga Masiva
-        JButton bulkLoadButton = new JButton("Carga Masiva");
-        bulkLoadButton.setLayout(null);
-        bulkLoadButton.setVisible(true);
-        bulkLoadButton.setBounds(20, 630, 300, 60);
-        bulkLoadButton.setBackground(Color.yellow);
-        bulkLoadButton.setFont(font3);
-        bulkLoadButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-            }
-        }); 
-        adminView.add(bulkLoadButton);
+        
         
         //Botón para crear un nuevo cliente
         JButton newClient = new JButton("");
@@ -383,7 +448,9 @@ public class LoginModule {
         newClient.setBackground(Color.green);
         newClient.setIcon(iconobtn);
         newClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                adminView.dispose();
+                clientsCreation();
             }
         }); 
         adminView.add(newClient);
@@ -397,7 +464,9 @@ public class LoginModule {
         deleteClient.setBackground(Color.red);
         deleteClient.setIcon(iconobtn2);
         deleteClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){  
+                adminView.dispose();
+                deleteClient();
             }
         }); 
         adminView.add(deleteClient);
@@ -411,7 +480,9 @@ public class LoginModule {
         updateClient.setBackground(Color.magenta);
         updateClient.setIcon(iconobtn3);
         updateClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                adminView.dispose();
+                updateClient();
             }
         }); 
         adminView.add(updateClient);
@@ -425,7 +496,13 @@ public class LoginModule {
         logOutButton.setBackground(Color.red);
         logOutButton.setIcon(iconobtn4);
         logOutButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                adminView.dispose();
+                try {
+                    loginFrameModule();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         adminView.add(logOutButton);
@@ -458,22 +535,58 @@ public class LoginModule {
         //=========================Creación de Tabla =========================
         
         int n=0;
-        String[] header = {"DPI","Nombre","Password","No. Álbumes","No. Imágenes","No. Capas"}; 
-        Object[][] clientArray;
-        clientArray = new Object[1][6];
-           
-        JScrollPane clientsDataTableSC= new JScrollPane();
+        String[] header = {"DPI","Nombre","Password","No. Álbumes","No. Img","Capas"}; 
+        JTable clientTable = new JTable(clientListHandler.returnClientsData(), header);
+        JScrollPane clientsDataTableSC= new JScrollPane(clientTable);
+        
         clientsDataTableSC.getViewport().setBackground(Color.white);
         //Aignando el tamaño
         //Creando la tabla con los datos definidos anteriormente
-        JTable clientable = new JTable(clientArray, header);
-        clientable.getTableHeader().setBackground(Color.decode("#1D2A3B"));
-        clientable.getTableHeader().setForeground(Color.WHITE);
-        clientable.setBackground(Color.WHITE);
-        clientsDataTableSC.setFont(font2);
-        clientsDataTableSC.setViewportView(clientable);
-        clientsDataTableSC.setBounds(20, 100, 700, 500);
+        
+        clientTable.getTableHeader().setBackground(Color.decode("#1D2A3B"));
+        clientTable.getTableHeader().setForeground(Color.WHITE);
+        clientTable.getTableHeader().setFont(font4);
+        clientTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        clientTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        clientTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+        clientTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        clientTable.getColumnModel().getColumn(4).setPreferredWidth(60);
+        clientTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+        clientTable.setRowHeight(40);
+        clientTable.setFont(font4);
+        
+        
+        //clientable.setBackground(Color.WHITE);
+        clientsDataTableSC.setBounds(20, 100, 800, 500);
+        clientsDataTableSC.setViewportView(clientTable);
+        
         adminView.add(clientsDataTableSC);
+      
+        
+        //Creamos un botón de Carga Masiva
+        JButton bulkLoadButton = new JButton("Carga Masiva");
+        bulkLoadButton.setLayout(null);
+        bulkLoadButton.setVisible(true);
+        bulkLoadButton.setBounds(20, 630, 300, 60);
+        bulkLoadButton.setBackground(Color.yellow);
+        bulkLoadButton.setFont(font3);
+        bulkLoadButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                adminView.dispose();
+                readClientsJson();
+                clientsBulkLoad();
+                clientListHandler.travel();
+                try {
+                    adminView();
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+            }
+        }); 
+        adminView.add(bulkLoadButton);
         
       
        
@@ -486,7 +599,7 @@ public class LoginModule {
             
             
         }
-    
+    //El frame que visualiza el cliente al estar loggeado.
     public static void clientView() throws IOException {
             
         //Creamos unos tipos de letra, que nos servirán más adelante
@@ -498,18 +611,18 @@ public class LoginModule {
         //=========================Creación del Frame del Admin==============================
         
         //Se crea el frame y se le agrega un título
-        JFrame adminView = new JFrame("UDrawing Paper");
-        adminView.setLayout(null);
+        JFrame clientView = new JFrame("UDrawing Paper");
+        clientView.setLayout(null);
         
         //Se hace visible el frame
-        adminView.setVisible(true);
+        clientView.setVisible(true);
         // Se restringe al frame a no poder cambiar de tamaño
-        adminView.setResizable(false);
+        clientView.setResizable(false);
         //Se le coloca un color de fondo al frame
-        adminView.getContentPane().setBackground(Color.orange);
+        clientView.getContentPane().setBackground(Color.orange);
         //Se le indica al frame que hacer en caso de que se cierre el mismo,
         //en este caso la aplicación termina su ejecución
-        adminView.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        clientView.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         // Con esto obtenemos las dimensiones de resolución de pantlla
         Toolkit myScreen= Toolkit.getDefaultToolkit();
         Dimension sizeScreen = myScreen.getScreenSize();
@@ -518,12 +631,12 @@ public class LoginModule {
         // Guardamos la anchura de la dimension de pantalla
         int w= sizeScreen.width;
         //Le agreamos un tamaño al frame admin
-        adminView.setSize(1600,800);
+        clientView.setSize(1600,800);
         //Le agreamos una locación al frame admin
-        adminView.setLocation(w/4,h/4);
+        clientView.setLocation(w/4,h/4);
         //Le agreamos un  ícono al frame admin
         Image myIcon= myScreen.getImage("iconoLogin.png");
-        adminView.setIconImage(myIcon);
+        clientView.setIconImage(myIcon);
         
  
        
@@ -538,7 +651,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){   
             }
         }); 
-        adminView.add(imgLoad);
+        clientView.add(imgLoad);
         //Creamos un botón de Carga Masiva de capas
         JButton layersLoad = new JButton("Cargar Capas");
         layersLoad.setLayout(null);
@@ -550,7 +663,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){   
             }
         }); 
-        adminView.add(layersLoad);
+        clientView.add(layersLoad);
         
         //Creamos un botón de reportes
         JButton reportsButton = new JButton("Generar Reportes");
@@ -560,10 +673,16 @@ public class LoginModule {
         reportsButton.setBackground(Color.blue);
         reportsButton.setFont(font3);
         reportsButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){ 
+                clientView.dispose();
+                try {
+                    clientReports();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
-        adminView.add(reportsButton);
+        clientView.add(reportsButton);
         
         
         //Botón para crear una nueva imagen
@@ -575,10 +694,12 @@ public class LoginModule {
         newImage.setBackground(Color.green);
         newImage.setIcon(iconobtn);
         newImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){ 
+                clientView.dispose();
+                imageCreation();
             }
         }); 
-        adminView.add(newImage);
+        clientView.add(newImage);
         
         //Botón para eliminar una imagen
         JButton deleteClient = new JButton("");
@@ -590,9 +711,11 @@ public class LoginModule {
         deleteClient.setIcon(iconobtn2);
         deleteClient.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){   
+                clientView.dispose();
+                deleteImage();
             }
         }); 
-        adminView.add(deleteClient);
+        clientView.add(deleteClient);
         
         
         //Botón para cerrar sesión como cliente
@@ -604,10 +727,16 @@ public class LoginModule {
         logOutButton.setBackground(Color.magenta);
         logOutButton.setIcon(iconobtn4);
         logOutButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                clientView.dispose();
+                try {
+                    loginFrameModule();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
-        adminView.add(logOutButton);
+        clientView.add(logOutButton);
         
         
         
@@ -622,7 +751,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){   
             }
         }); 
-        adminView.add(graphView);
+        clientView.add(graphView);
         
         //Label para mostrar grafo
         JLabel graphLabel = new JLabel("");
@@ -635,18 +764,10 @@ public class LoginModule {
         JScrollPane graphScroll= new JScrollPane();
         graphScroll.setBounds(850,20,700,600);
         graphScroll.setViewportView(graphLabel);
-        adminView.add(graphScroll);
+        clientView.add(graphScroll);
         
-        
-      
-       
-        
-        
-        
+        clientView.repaint();
 
-            
-            
-            
             
         }
     
@@ -672,7 +793,7 @@ public class LoginModule {
         clientsReports.getContentPane().setBackground(Color.orange);
         //Se le indica al frame que hacer en caso de que se cierre el mismo,
         //en este caso la aplicación termina su ejecución
-        clientsReports.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        clientsReports.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         // Con esto obtenemos las dimensiones de resolución de pantlla
         Toolkit myScreen= Toolkit.getDefaultToolkit();
         Dimension sizeScreen = myScreen.getScreenSize();
@@ -838,8 +959,39 @@ public class LoginModule {
         clientsReports.add(reportsButton);
       
        
+        //Label para mostrar imágen para decoración
+        JLabel ckDecoration = new JLabel("");
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/ckdecoration.png");
+        ckDecoration.setLayout(null);
+        ckDecoration.setVisible(true);
+        ckDecoration.setForeground(Color.BLACK);
+        ckDecoration.setBounds(700, 10, 800, 300);
+        ckDecoration.setIcon(iconobtn);
+        clientsReports.add(ckDecoration);
         
         
+        //Creamos el boton que regresará de ventana
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        JButton returnButton = new JButton("");
+        returnButton.setLayout(null);
+        returnButton.setVisible(true);
+        returnButton.setBounds(810, 630, 60, 60);
+        returnButton.setBackground(Color.magenta);
+        returnButton.setIcon(iconobtn2);
+        returnButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
+                clientsReports.dispose();
+                try {
+                    clientView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        
+            }
+        }); 
+        clientsReports.add(returnButton);
+        
+        clientsReports.repaint();
         
 
             
@@ -847,5 +999,919 @@ public class LoginModule {
             
             
         }
+    
+    public static void clientsCreation(){
+        //Creamos unos tipos de letra, que nos servirán más adelante
+        Font font =new Font("Arial",Font.BOLD,36);
+        Font font2 =new Font("Helvetica",Font.BOLD,30);
+        Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        
+        
+        //=========================Creación del Frame de la creación==============================
+        
+        //Se crea el frame y se le agrega un título
+        JFrame clientsCreation = new JFrame("UDrawingPaper");
+        clientsCreation.setLayout(null);
+        
+        //Se hace visible el frame
+        clientsCreation.setVisible(true);
+        // Se restringe al frame a no poder cambiar de tamaño
+        clientsCreation.setResizable(false);
+        //Se le coloca un color de fondo al frame
+        clientsCreation.getContentPane().setBackground(Color.BLUE);
+        //Se le indica al frame que hacer en caso de que se cierre el mismo,
+        //en este caso la aplicación termina su ejecución
+        clientsCreation.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        // Con esto obtenemos las dimensiones de resolución de pantlla
+        Toolkit myScreen= Toolkit.getDefaultToolkit();
+        Dimension sizeScreen = myScreen.getScreenSize();
+        // Guardamos la altura de la dimension de pantalla
+        int h= sizeScreen.height;
+        // Guardamos la anchura de la dimension de pantalla
+        int w= sizeScreen.width;
+        //Le agreamos un tamaño al frame admin
+        clientsCreation.setSize(900,600);
+        //Le agreamos una locación al frame admin
+        clientsCreation.setLocation(w/4,h/4);
+        //Le agreamos un  ícono al frame admin
+        Image myIcon= myScreen.getImage("iconoLogin.png");
+        clientsCreation.setIconImage(myIcon);
+        
+    
+      
+        JLabel titleM = new JLabel("UDrawingPaper");
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(320,20,450,60);
+        titleM.setFont(font3);
+        clientsCreation.add(titleM);
+        
+        //label que nos muestra el mensaje "DPI"
+        JLabel dpi = new JLabel("DPI: ");
+        dpi.setLayout(null);
+        dpi.setVisible(true);
+        dpi.setForeground(Color.BLACK);
+        dpi.setBounds(50,100,450,60);
+        dpi.setFont(font3);
+        clientsCreation.add(dpi);
+        //label que nos muestra el mensaje "Nombre"
+        JLabel name = new JLabel("Nombre: ");
+        name.setLayout(null);
+        name.setVisible(true);
+        name.setForeground(Color.BLACK);
+        name.setBounds(50,200,450,60);
+        name.setFont(font3);
+        clientsCreation.add(name);
+        //label que nos muestra el mensaje "Contraseña"
+        JLabel pass = new JLabel("Contraseña: ");
+        pass.setLayout(null);
+        pass.setVisible(true);
+        pass.setForeground(Color.BLACK);
+        pass.setBounds(50,300,450,60);
+        pass.setFont(font3);
+        clientsCreation.add(pass);
+        
+        //=========================Creación de TextFields =========================
+        
+        
+        //Creamos el campo de texto que recibirá el Código
+        JTextField codeT = new JTextField();
+        codeT.setLayout(null);
+        codeT.setVisible(true);
+        codeT.setBounds(300,110,400,40);
+        codeT.setBackground(Color.red);
+        codeT.setFont(font2);
+        clientsCreation.add(codeT);
+        
+        //Creamos el campo de texto que recibirá el Nombre
+        JTextField nameT = new JTextField();
+        nameT.setLayout(null);
+        nameT.setVisible(true);
+        nameT.setBounds(300,210,400,40);
+        nameT.setBackground(Color.red);
+        nameT.setFont(font2);
+        clientsCreation.add(nameT);
+       
+        //Creamos el campo de texto que recibirá el Contraseña
+        JTextField passT = new JTextField();
+        passT.setLayout(null);
+        passT.setVisible(true);
+        passT.setBounds(300,310,400,40);
+        passT.setBackground(Color.red);
+        passT.setFont(font2);
+        clientsCreation.add(passT);
+        
+        
+        
+        
+         //=========================Creación de los  Botones del frame creacion de profesores=========================
+        //Creamos un botón de registro de clientes
+        JButton registerButton = new JButton("");
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/new.png");
+        registerButton.setLayout(null);
+        registerButton.setVisible(true);
+        registerButton.setBounds(450, 470, 320, 60);
+        registerButton.setBackground(Color.yellow);
+        registerButton.setIcon(iconobtn);
+        registerButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e4){  
+                      
+                          
+            }      
+        }); 
+        
+        clientsCreation.add(registerButton);
+        
+        //Creamos un botón de registro de clientes
+        JButton exitButton = new JButton("");
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        exitButton.setLayout(null);
+        exitButton.setVisible(true);
+        exitButton.setBounds(80, 470, 320, 60);
+        exitButton.setBackground(Color.magenta);
+        exitButton.setIcon(iconobtn2);
+        exitButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e4){  
+                
+                try {
+                    clientsCreation.dispose();
+                    adminView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                          
+            }      
+        }); 
+        
+        clientsCreation.add(exitButton);
+        
+        clientsCreation.repaint();
+        
+    }
+    
+    public static  void deleteClient(){
+        //Creamos unos tipos de letra, que nos servirán más adelante
+        Font font =new Font("Arial",Font.BOLD,36);
+        Font font2 =new Font("Helvetica",Font.BOLD,30);
+        Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        
+        
+        //=========================Creación del Frame de la actualización==============================
+        
+        //Se crea el frame y se le agrega un título
+        JFrame deleteClient = new JFrame("UDrawing Paper");
+        deleteClient.setLayout(null);
+        
+        //Se hace visible el frame
+        deleteClient.setVisible(true);
+        // Se restringe al frame a no poder cambiar de tamaño
+        deleteClient.setResizable(false);
+        //Se le coloca un color de fondo al frame
+        deleteClient.getContentPane().setBackground(Color.ORANGE);
+        //Se le indica al frame que hacer en caso de que se cierre el mismo,
+        //en este caso la aplicación termina su ejecución
+        deleteClient.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        // Con esto obtenemos las dimensiones de resolución de pantlla
+        Toolkit myScreen= Toolkit.getDefaultToolkit();
+        Dimension sizeScreen = myScreen.getScreenSize();
+        // Guardamos la altura de la dimension de pantalla
+        int h= sizeScreen.height;
+        // Guardamos la anchura de la dimension de pantalla
+        int w= sizeScreen.width;
+        //Le agreamos un tamaño al frame admin
+        deleteClient.setSize(900,300);
+        //Le agreamos una locación al frame admin
+        deleteClient.setLocation(w/4,h/4);
+        //Le agreamos un  ícono al frame admin
+        Image myIcon= myScreen.getImage("iconoLogin.png");
+        deleteClient.setIconImage(myIcon);
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        //=========================Creación de Labels =========================
+        JLabel titleM = new JLabel("Eliminar Cliente");
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(300,20,600,60);
+        titleM.setFont(font3);
+        deleteClient.add(titleM);
+        
+        //label que nos muestra el mensaje "Código"
+        JLabel code = new JLabel("Dpi a eliminar:");
+        code.setLayout(null);
+        code.setVisible(true);
+        code.setForeground(Color.BLACK);
+        code.setBounds(10,100,450,60);
+        code.setFont(font3);
+        deleteClient.add(code);
+        
+        JLabel imgggg = new JLabel("");
+        ImageIcon icon= new ImageIcon("../imgUsadas/search.png");
+        imgggg.setLayout(null);
+        imgggg.setVisible(true);
+        imgggg.setForeground(Color.BLACK);
+        imgggg.setBounds(720,100,60,60);
+        imgggg.setFont(font3);
+        imgggg.setIcon(icon);
+        deleteClient.add(imgggg);
+       
+        
+        
+        
+        //Creamos el campo de texto que despliega los dpi
+        JComboBox dpiJ= new JComboBox ();
+        dpiJ.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        dpiJ.setLayout(null);
+        dpiJ.setVisible(true);
+        dpiJ.setBounds(300,110,400,30);
+        deleteClient.add(dpiJ);
+        deleteClient.repaint();
+        
+        
+        
+        
+          //=========================Creación de los  Botones del frame creacion de profesores=========================
+        
+        //Creamos el boton que buscará que eliminara al cliente seleccionado
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/delete.png");
+        JButton deleteButton = new JButton("");
+        deleteButton.setLayout(null);
+        deleteButton.setVisible(true);
+        deleteButton.setBounds(480, 200, 50, 50);
+        deleteButton.setBackground(Color.red);
+        deleteButton.setIcon(iconobtn);
+        deleteButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
+                        
+                        
+            }
+        }); 
+        deleteClient.add(deleteButton);
+        
+        //Creamos el boton que regresará de ventana
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        JButton returnButton = new JButton("");
+        returnButton.setLayout(null);
+        returnButton.setVisible(true);
+        returnButton.setBounds(400, 200, 50, 50);
+        returnButton.setBackground(Color.magenta);
+        returnButton.setIcon(iconobtn2);
+        returnButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
+                deleteClient.dispose();
+                try {
+                    adminView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        
+            }
+        }); 
+        deleteClient.add(returnButton);
+        
+        
+        deleteClient.repaint();
+    }
+    
+    public static void updateClient(){
+        
+        //Creamos unos tipos de letra, que nos servirán más adelante
+        Font font =new Font("Arial",Font.BOLD,50);
+        Font font2 =new Font("Helvetica",Font.BOLD,30);
+        Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        
+        //=========================Creación del Frame de la actualización==============================
+        
+        //Se crea el frame y se le agrega un título
+        JFrame updateClient = new JFrame("UDrawing Paper");
+        updateClient.setLayout(null);
+        
+        //Se hace visible el frame
+        updateClient.setVisible(true);
+        // Se restringe al frame a no poder cambiar de tamaño
+        updateClient.setResizable(false);
+        //Se le coloca un color de fondo al frame
+        updateClient.getContentPane().setBackground(Color.ORANGE);
+        //Se le indica al frame que hacer en caso de que se cierre el mismo,
+        //en este caso la aplicación termina su ejecución
+        updateClient.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        // Con esto obtenemos las dimensiones de resolución de pantlla
+        Toolkit myScreen= Toolkit.getDefaultToolkit();
+        Dimension sizeScreen = myScreen.getScreenSize();
+        // Guardamos la altura de la dimension de pantalla
+        int h= sizeScreen.height;
+        // Guardamos la anchura de la dimension de pantalla
+        int w= sizeScreen.width;
+        //Le agreamos un tamaño al frame admin
+        updateClient.setSize(900,550);
+        //Le agreamos una locación al frame admin
+        updateClient.setLocation(w/4,h/4);
+        //Le agreamos un  ícono al frame admin
+        Image myIcon= myScreen.getImage("iconoLogin.png");
+        updateClient.setIconImage(myIcon);
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        //=========================Creación de Labels =========================
+        //label que nos muestra el mensaje "Actualizar Datos Del Cliente"
+        JLabel titleM = new JLabel("Actualizar Datos Del Cliente");
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(190,20,600,60);
+        titleM.setFont(font3);
+        updateClient.add(titleM);
+        
+        //label que nos muestra el mensaje "Dpi"
+        JLabel code = new JLabel("Dpi:");
+        code.setLayout(null);
+        code.setVisible(true);
+        code.setForeground(Color.BLACK);
+        code.setBounds(100,100,450,60);
+        code.setFont(font2);
+        updateClient.add(code);
+        //label que nos muestra el mensaje "Nombre"
+        JLabel name = new JLabel("Nombre:");
+        name.setLayout(null);
+        name.setVisible(true);
+        name.setForeground(Color.BLACK);
+        name.setBounds(100,200,450,60);
+        name.setFont(font2);
+        updateClient.add(name);
+        //label que nos muestra el mensaje "contraseña"
+        JLabel password = new JLabel("contraseña:");
+        password.setLayout(null);
+        password.setVisible(true);
+        password.setForeground(Color.BLACK);
+        password.setBounds(100,300,450,60);
+        password.setFont(font2);
+        updateClient.add(password);
+        
+      
+        
+     
+        
+        //=========================Creación de TextFields =========================
+        
+        
+        //Creamos el campo de texto que despliega los dpi
+        JComboBox codeT= new JComboBox ();
+        codeT.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        codeT.setLayout(null);
+        codeT.setVisible(true);
+        codeT.setBounds(300,110,400,30);
+        updateClient.add(codeT);
+        updateClient.repaint();
+        
+        //Creamos el campo de texto que recibirá el Nombre
+        JTextField nameT = new JTextField();
+        nameT.setLayout(null);
+        nameT.setVisible(true);
+        nameT.setBounds(300,210,400,30);
+        updateClient.add(nameT);
+        
+        //Creamos el campo de texto que recibirá la contraseña
+        JTextField passwordT = new JTextField();
+        passwordT.setLayout(null);
+        passwordT.setVisible(true);
+        passwordT.setBounds(300,310,400,30);
+        updateClient.add(passwordT);
+    
+ 
+               
+
+        //Creamos un botón de creación de buscar dpi de cliente para buscar datos
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
+        JButton searchButton = new JButton("");
+        searchButton.setLayout(null);
+        searchButton.setVisible(true);
+        searchButton.setBounds(770, 100, 50, 50);
+        searchButton.setBackground(Color.LIGHT_GRAY);
+        searchButton.setIcon(iconobtn);
+        searchButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e8){  
+                        
+                        
+            }
+        }); 
+        updateClient.add(searchButton);
+        updateClient.repaint();
+        
+        //Creamos un botón de actualización de clientes
+        JButton updateButton = new JButton("");
+        ImageIcon iconobtnw = new ImageIcon("../imgUsadas/update2.png");
+        updateButton.setLayout(null);
+        updateButton.setVisible(true);
+        updateButton.setBounds(500, 400, 60, 60);
+        updateButton.setBackground(Color.green);
+        updateButton.setIcon(iconobtnw);
+        updateButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e4){  
+                        
+                      
+            }
+        }); 
+        updateClient.add(updateButton);
+        updateClient.repaint();
+        
+        //Creamos un botón de actualización de clientes
+        JButton returnButton = new JButton("");
+        ImageIcon iconobtnw2 = new ImageIcon("../imgUsadas/leave.png");
+        returnButton.setLayout(null);
+        returnButton.setVisible(true);
+        returnButton.setBounds(400, 400, 60, 60);
+        returnButton.setBackground(Color.magenta);
+        returnButton.setIcon(iconobtnw2);
+        returnButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e7){  
+                updateClient.dispose();
+                try {
+                    adminView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                      
+            }
+        }); 
+        updateClient.add(returnButton);
+        updateClient.repaint();
+    }
+    
+    public static void imageCreation(){
+        //Creamos unos tipos de letra, que nos servirán más adelante
+        Font font =new Font("Arial",Font.BOLD,36);
+        Font font2 =new Font("Helvetica",Font.BOLD,30);
+        Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        
+        
+        //=========================Creación del Frame de la creación==============================
+        
+        //Se crea el frame y se le agrega un título
+        JFrame imageCreation = new JFrame("UDrawingPaper");
+        imageCreation.setLayout(null);
+        
+        //Se hace visible el frame
+        imageCreation.setVisible(true);
+        // Se restringe al frame a no poder cambiar de tamaño
+        imageCreation.setResizable(false);
+        //Se le coloca un color de fondo al frame
+        imageCreation.getContentPane().setBackground(Color.BLUE);
+        //Se le indica al frame que hacer en caso de que se cierre el mismo,
+        //en este caso la aplicación termina su ejecución
+        imageCreation.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        // Con esto obtenemos las dimensiones de resolución de pantlla
+        Toolkit myScreen= Toolkit.getDefaultToolkit();
+        Dimension sizeScreen = myScreen.getScreenSize();
+        // Guardamos la altura de la dimension de pantalla
+        int h= sizeScreen.height;
+        // Guardamos la anchura de la dimension de pantalla
+        int w= sizeScreen.width;
+        //Le agreamos un tamaño al frame admin
+        imageCreation.setSize(900,600);
+        //Le agreamos una locación al frame admin
+        imageCreation.setLocation(w/4,h/4);
+        //Le agreamos un  ícono al frame admin
+        Image myIcon= myScreen.getImage("iconoLogin.png");
+        imageCreation.setIconImage(myIcon);
+        
+    
+      
+        JLabel titleM = new JLabel("UDrawingPaper");
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(320,20,450,60);
+        titleM.setFont(font3);
+        imageCreation.add(titleM);
+        
+        //label que nos muestra el mensaje "DPI"
+        JLabel id = new JLabel("Id: ");
+        id.setLayout(null);
+        id.setVisible(true);
+        id.setForeground(Color.BLACK);
+        id.setBounds(50,100,450,60);
+        id.setFont(font3);
+        imageCreation.add(id);
+        //label que nos muestra el mensaje "Nombre"
+        JLabel layers = new JLabel("Capas (Por Comas): ");
+        layers.setLayout(null);
+        layers.setVisible(true);
+        layers.setForeground(Color.BLACK);
+        layers.setBounds(50,200,450,60);
+        layers.setFont(font3);
+        imageCreation.add(layers);
+    
+        
+        //=========================Creación de TextFields =========================
+        
+        
+        //Creamos el campo de texto que recibirá el Código
+        JTextField idT = new JTextField();
+        idT.setLayout(null);
+        idT.setVisible(true);
+        idT.setBounds(400,110,400,40);
+        idT.setBackground(Color.red);
+        idT.setFont(font2);
+        imageCreation.add(idT);
+        
+        //Creamos el campo de texto que recibirá el Nombre
+        JTextField layersT = new JTextField();
+        layersT.setLayout(null);
+        layersT.setVisible(true);
+        layersT.setBounds(400,210,400,40);
+        layersT.setBackground(Color.red);
+        layersT.setFont(font2);
+        imageCreation.add(layersT);
+    
+        
+        
+        
+        
+      
+        JButton registerButton = new JButton("");
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/addimg.png");
+        registerButton.setLayout(null);
+        registerButton.setVisible(true);
+        registerButton.setBounds(450, 470, 320, 60);
+        registerButton.setBackground(Color.yellow);
+        registerButton.setIcon(iconobtn);
+        registerButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e4){  
+                      
+                          
+            }      
+        }); 
+        
+        imageCreation.add(registerButton);
+        
+      
+        JButton exitButton = new JButton("");
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        exitButton.setLayout(null);
+        exitButton.setVisible(true);
+        exitButton.setBounds(80, 470, 320, 60);
+        exitButton.setBackground(Color.magenta);
+        exitButton.setIcon(iconobtn2);
+        exitButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent e4){  
+                
+                try {
+                    imageCreation.dispose();
+                    clientView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                          
+            }      
+        }); 
+        
+        imageCreation.add(exitButton);
+        
+        imageCreation.repaint();
+        
+    }
+    
+    public static void deleteImage(){
+        //Creamos unos tipos de letra, que nos servirán más adelante
+        Font font =new Font("Arial",Font.BOLD,36);
+        Font font2 =new Font("Helvetica",Font.BOLD,30);
+        Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        
+        
+        //=========================Creación del Frame de la actualización==============================
+        
+        //Se crea el frame y se le agrega un título
+        JFrame deleteImage = new JFrame("UDrawing Paper");
+        deleteImage.setLayout(null);
+        
+        //Se hace visible el frame
+        deleteImage.setVisible(true);
+        // Se restringe al frame a no poder cambiar de tamaño
+        deleteImage.setResizable(false);
+        //Se le coloca un color de fondo al frame
+        deleteImage.getContentPane().setBackground(Color.ORANGE);
+        //Se le indica al frame que hacer en caso de que se cierre el mismo,
+        //en este caso la aplicación termina su ejecución
+        deleteImage.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        // Con esto obtenemos las dimensiones de resolución de pantlla
+        Toolkit myScreen= Toolkit.getDefaultToolkit();
+        Dimension sizeScreen = myScreen.getScreenSize();
+        // Guardamos la altura de la dimension de pantalla
+        int h= sizeScreen.height;
+        // Guardamos la anchura de la dimension de pantalla
+        int w= sizeScreen.width;
+        //Le agreamos un tamaño al frame admin
+        deleteImage.setSize(900,300);
+        //Le agreamos una locación al frame admin
+        deleteImage.setLocation(w/4,h/4);
+        //Le agreamos un  ícono al frame admin
+        Image myIcon= myScreen.getImage("iconoLogin.png");
+        deleteImage.setIconImage(myIcon);
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        //=========================Creación de Labels =========================
+        JLabel titleM = new JLabel("Eliminar Imagen");
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(300,20,600,60);
+        titleM.setFont(font3);
+        deleteImage.add(titleM);
+        
+        //label que nos muestra el mensaje "Código"
+        JLabel code = new JLabel("id a eliminar:");
+        code.setLayout(null);
+        code.setVisible(true);
+        code.setForeground(Color.BLACK);
+        code.setBounds(10,100,450,60);
+        code.setFont(font3);
+        deleteImage.add(code);
+        
+        JLabel imgggg = new JLabel("");
+        ImageIcon icon= new ImageIcon("../imgUsadas/search.png");
+        imgggg.setLayout(null);
+        imgggg.setVisible(true);
+        imgggg.setForeground(Color.BLACK);
+        imgggg.setBounds(720,100,60,60);
+        imgggg.setFont(font3);
+        imgggg.setIcon(icon);
+        deleteImage.add(imgggg);
+       
+        
+        
+        
+        //Creamos el campo de texto que despliega los id de imágenes del cliente
+        JComboBox idJ= new JComboBox ();
+        idJ.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idJ.setLayout(null);
+        idJ.setVisible(true);
+        idJ.setBounds(300,110,400,30);
+        deleteImage.add(idJ);
+        deleteImage.repaint();
+        
+        
+        
+        
+          //=========================Creación de los  Botones del frame creacion de profesores=========================
+        
+        //Creamos el boton que buscará que eliminara al cliente seleccionado
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/delete.png");
+        JButton deleteButton = new JButton("");
+        deleteButton.setLayout(null);
+        deleteButton.setVisible(true);
+        deleteButton.setBounds(480, 200, 50, 50);
+        deleteButton.setBackground(Color.red);
+        deleteButton.setIcon(iconobtn);
+        deleteButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
+                        
+                        
+            }
+        }); 
+        deleteImage.add(deleteButton);
+        
+        //Creamos el boton que regresará de ventana
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        JButton returnButton = new JButton("");
+        returnButton.setLayout(null);
+        returnButton.setVisible(true);
+        returnButton.setBounds(400, 200, 50, 50);
+        returnButton.setBackground(Color.magenta);
+        returnButton.setIcon(iconobtn2);
+        returnButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
+                deleteImage.dispose();
+                try {
+                    clientView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        
+            }
+        }); 
+        deleteImage.add(returnButton);
+        
+        
+        deleteImage.repaint();
+    }
+    
+    public static void readClientsJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        
+        try{
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    clientsJsonContent += line;
+
+            }
+                
+            } catch (Exception e) {
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+    public static void readImagesJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        
+        try{
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    imagesJsonContent += line;
+
+            }
+                
+            } catch (Exception e) {
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+    public static void readLayersJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        
+        try{
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    layersJsonContent += line;
+
+            }
+                
+            } catch (Exception e) {
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+    public static void readAlbumsJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        
+        try{
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    albumsJsonContent += line;
+
+            }
+                
+            } catch (Exception e) {
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+    
+    public static void clientsBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray clientsList = parser.parse(clientsJsonContent).getAsJsonArray();
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos al árbol B
+            for (int i = 0; i < clientsList.size(); i++) {
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = clientsList.get(i).getAsJsonObject();                
+                //Guardamos atributos del objeto en variables
+                BigInteger dpi = object.get("dpi").getAsBigInteger();
+
+                String name = object.get("nombe_cliente").getAsString();
+                String password = object.get("password").getAsString();
+                //Se crea un árbol AVL para cada cliente
+                SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                // Se crea el objeto cliente
+
+                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0);
+                clientListHandler.finalInsert(newClient);
+                clientsJsonContent ="";
+            
+            }
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Clientes Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    
     
 }

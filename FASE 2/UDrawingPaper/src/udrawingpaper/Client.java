@@ -1,23 +1,31 @@
 
 package udrawingpaper;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Erwin14k
  */
 public class Client {
-    private int dpi;
+    private BigInteger dpi;
     private String name;
     private String password;
     private SelfBalancingTree avlTree;
-    public Client(int  dpi, String name, String password,SelfBalancingTree avlTree){
+    private int albumsCounter;
+    private int imgCounter;
+    private int layersCounter;
+    public Client(BigInteger  dpi, String name, String password,SelfBalancingTree avlTree,int albumsCounter,int imgCounter,int layersCounter){
         this.dpi = dpi;
         this.name = name;
         this.password= password;  
         this.avlTree=avlTree;
+        this.albumsCounter=albumsCounter;
+        this.imgCounter=imgCounter;
+        this.layersCounter=layersCounter;
     }
 
-    public int getDpi() {
+    public BigInteger getDpi() {
         return dpi;
     }
 
@@ -29,7 +37,7 @@ public class Client {
         this.avlTree = avlTree;
     }
 
-    public void setDpi(int dpi) {
+    public void setDpi(BigInteger dpi) {
         this.dpi = dpi;
     }
 
@@ -48,7 +56,31 @@ public class Client {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
+    public int getAlbumsCounter() {
+        return albumsCounter;
+    }
+
+    public void setAlbumsCounter(int albumsCounter) {
+        this.albumsCounter = albumsCounter;
+    }
+
+    public int getImgCounter() {
+        return imgCounter;
+    }
+
+    public void setImgCounter(int imgCounter) {
+        this.imgCounter = imgCounter;
+    }
+
+    public int getLayersCounter() {
+        return layersCounter;
+    }
+
+    public void setLayersCounter(int layersCounter) {
+        this.layersCounter = layersCounter;
+    }
+    
+    
     
 }
