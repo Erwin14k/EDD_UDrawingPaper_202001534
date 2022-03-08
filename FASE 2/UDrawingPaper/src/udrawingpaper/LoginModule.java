@@ -31,6 +31,7 @@ public class LoginModule {
     static BinarySearchTree bstTreeHandler= new BinarySearchTree();
     static SelfBalancingTree avlTreeHandler= new SelfBalancingTree();
     static ClientList clientListHandler = new ClientList();
+    static Position positionHandler= new Position();
     //Objeto de tipo admin, este objeto es para validar el inicio de sesión como admin
     static BigInteger adminCode=new BigInteger("0");
     static Admin admin=new Admin("admin","EDD2022",adminCode);
@@ -331,7 +332,8 @@ public class LoginModule {
                     if((!nameT.getText().equals(""))&&(!passT.getText().equals(""))){
                         BigInteger temp=new BigInteger(codeT.getText());
                         SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0);
+                        BinarySearchTree tempBinarySearchTree= new BinarySearchTree();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree);
                         clientListHandler.finalInsert(newClient);
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
                         clientsRegister.dispose();
@@ -575,7 +577,10 @@ public class LoginModule {
                 adminView.dispose();
                 readClientsJson();
                 clientsBulkLoad();
+                System.out.println("Los clientes ingresados por carga Masiva:");
                 clientListHandler.travel();
+                System.out.println("=========================================");
+                System.out.println("\n\n\n");
                 try {
                     adminView();
                     
@@ -648,7 +653,9 @@ public class LoginModule {
         imgLoad.setBackground(Color.yellow);
         imgLoad.setFont(font3);
         imgLoad.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                //readImagesJson();
+                //imagesBulkLoad();
             }
         }); 
         clientView.add(imgLoad);
@@ -661,6 +668,15 @@ public class LoginModule {
         layersLoad.setFont(font3);
         layersLoad.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){   
+                clientView.dispose();
+                readLayersJson();
+                layersBulkLoad();
+                try {
+                    clientView();
+                    clientListHandler.graphClientTree(userLogged);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         clientView.add(layersLoad);
@@ -1116,7 +1132,28 @@ public class LoginModule {
         registerButton.setIcon(iconobtn);
         registerButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent e4){  
-                      
+                if(codeT.getText().matches("[0-9]+")){
+                    if((!nameT.getText().equals(""))&&(!passT.getText().equals(""))){
+                        BigInteger temp=new BigInteger(codeT.getText());
+                        SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                        BinarySearchTree tempBinary=new BinarySearchTree();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary);
+                        clientListHandler.finalInsert(newClient);
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
+                        clientsCreation.dispose();
+                        try {
+                            adminView();
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes llenar todos los campos, intenta de nuevo!!</p></html>" );
+                    }
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El dpi tiene que ser un número entero, intenta de nuevo!!</p></html>" );
+                }
                           
             }      
         }); 
@@ -1899,9 +1936,10 @@ public class LoginModule {
                 String password = object.get("password").getAsString();
                 //Se crea un árbol AVL para cada cliente
                 SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                BinarySearchTree tempBinaryTree = new BinarySearchTree();
                 // Se crea el objeto cliente
 
-                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0);
+                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree);
                 clientListHandler.finalInsert(newClient);
                 clientsJsonContent ="";
             
@@ -1913,5 +1951,66 @@ public class LoginModule {
     }
     
     
+    public static void imagesBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray imagesList = parser.parse(imagesJsonContent).getAsJsonArray();
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos al árbol B
+            for (int i = 0; i < imagesList.size(); i++) {
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = imagesList.get(i).getAsJsonObject();                
+                //Guardamos atributos del objeto en variables
+                int id = object.get("id").getAsInt();
+                BinarySearchTree tempTree =new BinarySearchTree();
+                JsonArray  layers = object.get("capas").getAsJsonArray();
+                //Img tempImg=new Img(id,tempTree,userLogged);
+                for(int j = 0; j < layers.size(); j++){
+                    System.out.println(layers.get(j));
+                }
+                imagesJsonContent ="";
+            
+            }
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Imágenes Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+    }
     
+    public static void layersBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray layersList = parser.parse(layersJsonContent).getAsJsonArray();
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos al árbol B
+            for (int i = 0; i < layersList.size(); i++) {
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = layersList.get(i).getAsJsonObject();                
+                //Guardamos atributos del objeto en variables
+                int id = object.get("id_capa").getAsInt();
+                System.out.println("La capa No.: "+id+" Tiene las posiciones:");
+                Position tempPosition = new Position();
+                JsonArray  pixelsList = object.get("pixeles").getAsJsonArray();
+                for (int j = 0; j < pixelsList.size(); j++) {
+                    JsonObject object2 = pixelsList.get(j).getAsJsonObject();
+                    int row = object2.get("fila").getAsInt();
+                    int column = object2.get("columna").getAsInt();
+                    String color = object2.get("color").getAsString();
+                    tempPosition.finalInsert(id, row, column, color); 
+                    System.out.println("fila: "+row);
+                    System.out.println("columna: "+column);
+                    System.out.println("color: "+color);
+                    System.out.println("=============================");
+                }
+                Layer tempLayer= new Layer(id, tempPosition,userLogged);
+                clientListHandler.clientNewLayer(userLogged, tempLayer);
+            }
+            layersJsonContent ="";
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Capas Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+    }
 }

@@ -5,21 +5,30 @@
  */
 package udrawingpaper;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Erwin14k
  */
 public class Layer {
     private int id;
-    private int row;
-    private int column;
-    private String color;
+    private Position position;
+    private BigInteger clientId;
     
-    public Layer(int  id, int row,int column, String color){
+    public Layer(int  id,Position position,BigInteger clientId){
         this.id = id;
-        this.row = row;
-        this.column= column;  
-        this.color=color;
+        this.position=position;
+        this.clientId=clientId;
+      
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public int getId() {
@@ -30,29 +39,16 @@ public class Layer {
         this.id = id;
     }
 
-    public int getRow() {
-        return row;
+    public BigInteger getClientId() {
+        return clientId;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setClientId(BigInteger clientId) {
+        this.clientId = clientId;
     }
+    
 
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
+ 
     
     
 }

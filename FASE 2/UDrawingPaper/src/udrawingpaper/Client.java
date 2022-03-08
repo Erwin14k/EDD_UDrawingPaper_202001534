@@ -15,7 +15,8 @@ public class Client {
     private int albumsCounter;
     private int imgCounter;
     private int layersCounter;
-    public Client(BigInteger  dpi, String name, String password,SelfBalancingTree avlTree,int albumsCounter,int imgCounter,int layersCounter){
+    private BinarySearchTree abbTree;
+    public Client(BigInteger  dpi, String name, String password,SelfBalancingTree avlTree,int albumsCounter,int imgCounter,int layersCounter,BinarySearchTree abbTree){
         this.dpi = dpi;
         this.name = name;
         this.password= password;  
@@ -23,6 +24,7 @@ public class Client {
         this.albumsCounter=albumsCounter;
         this.imgCounter=imgCounter;
         this.layersCounter=layersCounter;
+        this.abbTree=abbTree;
     }
 
     public BigInteger getDpi() {
@@ -71,6 +73,14 @@ public class Client {
 
     public void setImgCounter(int imgCounter) {
         this.imgCounter = imgCounter;
+    }
+
+    public BinarySearchTree getAbbTree() {
+        return abbTree;
+    }
+
+    public void setAbbTree(BinarySearchTree abbTree) {
+        this.abbTree = abbTree;
     }
 
     public int getLayersCounter() {

@@ -5,6 +5,7 @@
  */
 package udrawingpaper;
 
+import java.io.IOException;
 import java.math.BigInteger;
 
 /**
@@ -47,8 +48,42 @@ public class ClientList {
         else{
             ClientListNode temp = first;
             do{
-                if(temp.client.getDpi()==dpi){
+                if(temp.client.getDpi().compareTo(dpi)==0){
                     System.out.println(temp.client.getName());
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void clientNewLayer(BigInteger dpi,Layer layer){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAbbTree().insert(layer);
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void graphClientTree(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAbbTree().generateBstTreeGraph();
                     
                 }
                 

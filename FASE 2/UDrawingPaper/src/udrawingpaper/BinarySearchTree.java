@@ -48,7 +48,7 @@ public class BinarySearchTree {
         code+="\n}";
         return code;
     }
-    
+    //Método para graficar el árbol binario de Busqueda
     public void generateBstTreeGraph() throws IOException{
         String route="../Reportes Texto/Abb.txt";
         String graph="../Reportes Img/Abb.png";

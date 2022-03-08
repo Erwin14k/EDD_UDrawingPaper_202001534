@@ -1,36 +1,8 @@
 digraph G{
 node [shape=record,style=filled];
 rankdir=TB;
-N1 [ label ="<C0>|Capa 7|<C1>"];
-N10 [ label ="<C0>|Capa 3|<C1>"];
-N11 [ label ="<C0>|Capa 1|<C1>"];
-N13 [ label ="Capa 0"];
-N11:C0->N13
-N14 [ label ="Capa 2"];
-N11:C0->N14
-N10:C0->N11
-N12 [ label ="<C0>|Capa 5|<C1>"];
-N16 [ label ="Capa 4"];
-N12:C0->N16
-N15 [ label ="Capa 6"];
-N12:C0->N15
-N10:C0->N12
-N1:C0->N10
-N2 [ label ="<C0>|Capa 11|<C1>"];
-N3 [ label ="<C0>|Capa 9|<C1>"];
-N4 [ label ="Capa 8"];
-N3:C0->N4
-N5 [ label ="Capa 10"];
-N3:C0->N5
-N2:C0->N3
-N6 [ label ="<C0>|Capa 13|<C1>"];
-N7 [ label ="Capa 12"];
-N6:C0->N7
-N8 [ label ="<C0>|Capa 14|<C1>"];
-N9 [ label ="Capa 15"];
-N8:C0->N9
-N6:C0->N8
-N2:C0->N6
+N1 [ label ="<C0>|Capa 0|<C1>"];
+N2 [ label ="Capa 1"];
 N1:C0->N2
 
 }

@@ -5,6 +5,8 @@
  */
 package udrawingpaper;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Erwin14k
@@ -12,21 +14,21 @@ package udrawingpaper;
 public class Img {
     private int id;
     private BinarySearchTree tree;
-    private int clientId;
+    private BigInteger clientId;
 
     
-    public Img(int id,BinarySearchTree tree,int clientId){
+    public Img(int id,BinarySearchTree tree,BigInteger clientId){
         this.id = id;
         this.tree=tree;
         this.clientId=clientId;
    
     }
 
-    public int getClientId() {
+    public BigInteger getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(BigInteger clientId) {
         this.clientId = clientId;
     }
 
