@@ -8,6 +8,7 @@ package udrawingpaper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 
 /**
  *
@@ -71,5 +72,21 @@ public class BinarySearchTree {
         Runtime rt = Runtime.getRuntime();
 
         rt.exec( cmd );
+    }
+    
+    //Método para buscar un nodo y validar que exista
+    public Layer searchNodeAndReturnLayer(int id){
+        BinarySearchTreeNode temp=root;
+        while(temp.layer.getId()!=id){
+            if(id<temp.layer.getId()){
+                temp=temp.left;
+            }else{
+                temp=temp.right;
+            }
+            if(temp==null){
+                return null;
+            }
+        }
+        return temp.layer;
     }
 }

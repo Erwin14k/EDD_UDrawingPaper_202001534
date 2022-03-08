@@ -643,7 +643,73 @@ public class LoginModule {
         Image myIcon= myScreen.getImage("iconoLogin.png");
         clientView.setIconImage(myIcon);
         
- 
+        JLabel titleM = new JLabel("Cliente: "+clientListHandler.nameByDpi(userLogged));
+        titleM.setLayout(null);
+        titleM.setVisible(true);
+        titleM.setForeground(Color.BLACK);
+        titleM.setBounds(30,10,800,60);
+        titleM.setFont(font2);
+        clientView.add(titleM);
+        
+        JLabel layerLabel = new JLabel("Capa En Específico: ");
+        layerLabel.setLayout(null);
+        layerLabel.setVisible(true);
+        layerLabel.setForeground(Color.BLACK);
+        layerLabel.setBounds(90,120,800,60);
+        layerLabel.setFont(font3);
+        clientView.add(layerLabel);
+        
+        JLabel imgLabel = new JLabel("Imágen con árbol de capas: ");
+        imgLabel.setLayout(null);
+        imgLabel.setVisible(true);
+        imgLabel.setForeground(Color.BLACK);
+        imgLabel.setBounds(90,260,800,60);
+        imgLabel.setFont(font3);
+        clientView.add(imgLabel);
+        
+        //Creamos el campo de texto que despliega los id de las capas
+        JComboBox idLayers= new JComboBox ();
+        idLayers.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idLayers.setLayout(null);
+        idLayers.setVisible(true);
+        idLayers.setBounds(90,200,400,30);
+        clientView.add(idLayers);
+        
+        
+        JButton layerReportButton = new JButton("");
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
+        layerReportButton.setLayout(null);
+        layerReportButton.setVisible(true);
+        layerReportButton.setBounds(520, 180, 50, 60);
+        layerReportButton.setBackground(Color.green);
+        layerReportButton.setIcon(iconobtn);
+        layerReportButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+            }
+        }); 
+        clientView.add(layerReportButton);
+        
+        //Creamos el campo de texto que despliega los id de las imágenes
+        JComboBox idImages= new JComboBox ();
+        idImages.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idImages.setLayout(null);
+        idImages.setVisible(true);
+        idImages.setBounds(90,340,400,30);
+        clientView.add(idImages);
+        
+        JButton imageTreeReport = new JButton("");
+        ImageIcon iconobtn9 = new ImageIcon("../imgUsadas/search.png");
+        imageTreeReport.setLayout(null);
+        imageTreeReport.setVisible(true);
+        imageTreeReport.setBounds(520, 320, 50, 60);
+        imageTreeReport.setBackground(Color.green);
+        imageTreeReport.setIcon(iconobtn9);
+        imageTreeReport.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+            }
+        }); 
+        clientView.add(imageTreeReport);
+        
        
         //Creamos un botón de Carga Masiva de imágenes
         JButton imgLoad = new JButton("Cargar Img");
@@ -654,8 +720,8 @@ public class LoginModule {
         imgLoad.setFont(font3);
         imgLoad.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
-                //readImagesJson();
-                //imagesBulkLoad();
+                readImagesJson();
+                imagesBulkLoad();
             }
         }); 
         clientView.add(imgLoad);
@@ -703,12 +769,12 @@ public class LoginModule {
         
         //Botón para crear una nueva imagen
         JButton newImage = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/addImg.png");
+        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/addImg.png");
         newImage.setLayout(null);
         newImage.setVisible(true);
         newImage.setBounds(440, 630, 50, 60);
         newImage.setBackground(Color.green);
-        newImage.setIcon(iconobtn);
+        newImage.setIcon(iconobtn2);
         newImage.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
                 clientView.dispose();
@@ -719,12 +785,12 @@ public class LoginModule {
         
         //Botón para eliminar una imagen
         JButton deleteClient = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/delete.png");
+        ImageIcon iconobtn7 = new ImageIcon("../imgUsadas/delete.png");
         deleteClient.setLayout(null);
         deleteClient.setVisible(true);
         deleteClient.setBounds(530, 630, 50, 60);
         deleteClient.setBackground(Color.red);
-        deleteClient.setIcon(iconobtn2);
+        deleteClient.setIcon(iconobtn7);
         deleteClient.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){   
                 clientView.dispose();
@@ -756,20 +822,46 @@ public class LoginModule {
         
         
         
-        //Botón para eliminar un nuevo cliente
-        JButton graphView = new JButton("Ver Árbol De Clientes");
-        graphView.setLayout(null);
-        graphView.setVisible(true);
-        graphView.setBounds(925, 630, 600, 60);
-        graphView.setBackground(Color.white);
-        graphView.setFont(font3);
-        graphView.addMouseListener(new MouseAdapter(){  
+        //Botón para mostrar el grafo Avl de imágenes del cliente.
+        JButton avlImgButton = new JButton("Img");
+        avlImgButton.setLayout(null);
+        avlImgButton.setVisible(true);
+        avlImgButton.setBounds(940, 630, 150, 60);
+        avlImgButton.setBackground(Color.white);
+        avlImgButton.setFont(font3);
+        avlImgButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){   
             }
         }); 
-        clientView.add(graphView);
+        clientView.add(avlImgButton);
         
-        //Label para mostrar grafo
+        //Botón para mostrar el grafo ABB de capas del cliente.
+        JButton abbImgButton = new JButton("Capas");
+        abbImgButton.setLayout(null);
+        abbImgButton.setVisible(true);
+        abbImgButton.setBounds(1115, 630, 150, 60);
+        abbImgButton.setBackground(Color.white);
+        abbImgButton.setFont(font3);
+        abbImgButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){   
+            }
+        }); 
+        clientView.add(abbImgButton);
+        
+        //Botón para mostrar la lista circular doblemente enlazada de álbumes del cliente
+        JButton albumImgButton = new JButton("Álbums");
+        albumImgButton.setLayout(null);
+        albumImgButton.setVisible(true);
+        albumImgButton.setBounds(1300, 630, 200, 60);
+        albumImgButton.setBackground(Color.white);
+        albumImgButton.setFont(font3);
+        albumImgButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){   
+            }
+        }); 
+        clientView.add(albumImgButton);
+        
+        //Label para mostrar los grafos y reportes
         JLabel graphLabel = new JLabel("");
         graphLabel.setLayout(null);
         graphLabel.setVisible(true);
@@ -1966,10 +2058,20 @@ public class LoginModule {
                 int id = object.get("id").getAsInt();
                 BinarySearchTree tempTree =new BinarySearchTree();
                 JsonArray  layers = object.get("capas").getAsJsonArray();
-                //Img tempImg=new Img(id,tempTree,userLogged);
+                Img tempImg=new Img(id,tempTree,userLogged);
                 for(int j = 0; j < layers.size(); j++){
                     System.out.println(layers.get(j));
+                    Layer temp;
+                    Client tempClient;
+                    tempClient=clientListHandler.returnMeTheClient(userLogged);
+                    if(tempClient != null){
+                        temp=tempClient.getAbbTree().searchNodeAndReturnLayer(layers.get(j).getAsInt());
+                        if(temp!=null){
+                            tempImg.getTree().insert(temp);
+                        }
+                    }
                 }
+                clientListHandler.addImage(userLogged, tempImg); 
                 imagesJsonContent ="";
             
             }

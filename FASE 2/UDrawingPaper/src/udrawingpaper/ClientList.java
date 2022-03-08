@@ -67,12 +67,31 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAbbTree().insert(layer);
+                    temp.client.setLayersCounter(temp.client.getLayersCounter()+1);
                     
                 }
                 
                 temp = temp.next;
             }while(temp != null);
         }
+    }
+    
+    public Client returnMeTheClient(BigInteger dpi){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client;
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return null;
     }
     
     public void graphClientTree(BigInteger dpi) throws IOException{
@@ -108,6 +127,24 @@ public class ClientList {
             }while(temp != null);
         }
         return "";
+    }
+    
+    public void addImage(BigInteger dpi,Img img){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAvlTree().insert(img); 
+                    temp.client.setImgCounter(temp.client.getImgCounter()+1); 
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
     }
     
     public void travel(){

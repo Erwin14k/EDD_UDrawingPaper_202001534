@@ -9,11 +9,11 @@ package udrawingpaper;
  *
  * @author Erwin14k
  */
-public class ClientListNode {
-    public Client client;
-    public ClientListNode next = null;
-    public ClientListNode(Client client){
-            this.client = client;
-            
+public class ImageLinkedListNode {
+    public Img img;
+    public ImageLinkedListNode next = null;
+    public ImageLinkedListNode(Img img){
+            this.img = img;
         }
+    
 }
