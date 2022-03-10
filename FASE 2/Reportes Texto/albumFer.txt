@@ -1,0 +1,25 @@
+digraph G{
+node [shape=box];
+N315309928[label="Nombre Del Album: 
+Album1"];
+N2093168850[label="Img No. 1"];
+N526957871[label="Nombre Del Album: 
+Album2"];
+N1763566624[label="Img No. 2"];
+N577152532[label="Nombre Del Album: 
+Album3"];
+N1199968034[label="Img No. 3"];
+
+N315309928 -> N2093168850
+N315309928 -> N526957871;
+N526957871 -> N315309928;
+N526957871 -> N1763566624
+N526957871 -> N577152532;
+N577152532 -> N526957871;
+N577152532 -> N1199968034
+N577152532 -> N315309928;
+N315309928 -> N577152532;
+
+start [shape=Mdiamond label="Lista De Álbumes Del Cliente:
+ fer"];{rank=same; N315309928,N526957871,N577152532};}
+}

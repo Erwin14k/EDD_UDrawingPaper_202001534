@@ -21,6 +21,9 @@ public class SelfBalancingTree {
     }
     
     //Buscar
+    public SelfBalancingTreeNode returnMeTheRoot(){
+        return root;
+    }
     public SelfBalancingTreeNode search(Img img,SelfBalancingTreeNode root){
         if(root==null){
             return null;
@@ -31,6 +34,19 @@ public class SelfBalancingTree {
             return search(img,root.right);
         }else{
             return search(img, root.left);
+        }
+    }
+    
+    public Img searchNodeAndReturnMeTheImage(int id,SelfBalancingTreeNode root){
+        if(root==null){
+            return null;
+        }else if(root.img.getId()==id){
+            return root.img;
+            
+        }else if(root.img.getId()<id){
+            return searchNodeAndReturnMeTheImage(id,root.right);
+        }else{
+            return searchNodeAndReturnMeTheImage(id, root.left);
         }
     }
     //Obtener valor de equilibrio
@@ -148,6 +164,30 @@ public class SelfBalancingTree {
     public void generateAVLTreeGraph() throws IOException{
         String route="../Reportes Texto/avl.txt";
         String graph="../Reportes Img/avl.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(getAVLTreeGraphvizCode());
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+    }
+    
+    public void generatePersonalizeAVLTreeGraph(String name) throws IOException{
+        String route="../Reportes Texto/avl"+name+".txt";
+        String graph="../Reportes Img/avl"+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";

@@ -35,4 +35,39 @@ public class ImageLinkedList {
         }
         countImg++;
     }
+    
+    public String collectLinkedList(){
+        String graphText="";
+        String conections="";
+        ImageLinkedListNode temp=first;
+        while(temp!=null){
+            graphText+="N"+temp.hashCode()+"[label=\""+"Img No. "+temp.img.getId()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return graphText;
+        
+    }
+    public String collectConnections(){
+        String graphText="";
+        String conections="";
+        ImageLinkedListNode temp=first;
+        if(first!=null){
+           conections+="N"+first.hashCode()+"\n";
+        }
+        
+        while(temp!=null){
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+"Img No. "+temp.img.getId()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+                
+            }
+            temp=temp.next;
+        } 
+        return conections;
+        
+    }
 }

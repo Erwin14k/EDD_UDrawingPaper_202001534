@@ -74,6 +74,42 @@ public class BinarySearchTree {
         rt.exec( cmd );
     }
     
+    public void generatePersonalizeBstTreeGraph(String name) throws IOException{
+        String route="../Reportes Texto/Abb"+name+".txt";
+        String graph="../Reportes Img/Abb"+name+".png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(getBstTreeGraphvizCode());
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+    }
+    public String returnMeTheAbbRoute(String name) throws IOException{
+        
+        String graph="../Reportes Img/Abb"+name+".png";
+        return graph;
+        
+    }
+    public String returnMeTheAvlRoute(String name) throws IOException{
+        
+        String graph="../Reportes Img/Avl"+name+".png";
+        return graph;
+        
+    }
+    
     //Método para buscar un nodo y validar que exista
     public Layer searchNodeAndReturnLayer(int id){
         BinarySearchTreeNode temp=root;

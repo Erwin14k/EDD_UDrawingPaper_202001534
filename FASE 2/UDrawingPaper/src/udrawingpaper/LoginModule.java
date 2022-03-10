@@ -333,7 +333,8 @@ public class LoginModule {
                         BigInteger temp=new BigInteger(codeT.getText());
                         SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                         BinarySearchTree tempBinarySearchTree= new BinarySearchTree();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree);
+                        AlbumsCircularList albumsList = new AlbumsCircularList();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree,albumsList);
                         clientListHandler.finalInsert(newClient);
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
                         clientsRegister.dispose();
@@ -720,16 +721,43 @@ public class LoginModule {
         imgLoad.setFont(font3);
         imgLoad.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
+                clientView.dispose();
                 readImagesJson();
                 imagesBulkLoad();
+                try {
+                    clientView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         clientView.add(imgLoad);
+        
+        //Creamos un botón de Carga Masiva de Albumes
+        JButton albumLoad = new JButton("Cargar Album");
+        albumLoad.setLayout(null);
+        albumLoad.setVisible(true);
+        albumLoad.setBounds(20, 700, 300, 60);
+        albumLoad.setBackground(Color.yellow);
+        albumLoad.setFont(font3);
+        albumLoad.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                clientView.dispose();
+                readAlbumsJson();
+                albumsBulkLoad();
+                try {
+                    clientView();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }); 
+        clientView.add(albumLoad);
         //Creamos un botón de Carga Masiva de capas
         JButton layersLoad = new JButton("Cargar Capas");
         layersLoad.setLayout(null);
         layersLoad.setVisible(true);
-        layersLoad.setBounds(20, 700, 300, 60);
+        layersLoad.setBounds(20, 560, 300, 60);
         layersLoad.setBackground(Color.yellow);
         layersLoad.setFont(font3);
         layersLoad.addMouseListener(new MouseAdapter(){  
@@ -739,7 +767,7 @@ public class LoginModule {
                 layersBulkLoad();
                 try {
                     clientView();
-                    clientListHandler.graphClientTree(userLogged);
+                    //clientListHandler.graphClientTree(userLogged);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -822,44 +850,11 @@ public class LoginModule {
         
         
         
-        //Botón para mostrar el grafo Avl de imágenes del cliente.
-        JButton avlImgButton = new JButton("Img");
-        avlImgButton.setLayout(null);
-        avlImgButton.setVisible(true);
-        avlImgButton.setBounds(940, 630, 150, 60);
-        avlImgButton.setBackground(Color.white);
-        avlImgButton.setFont(font3);
-        avlImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-            }
-        }); 
-        clientView.add(avlImgButton);
         
-        //Botón para mostrar el grafo ABB de capas del cliente.
-        JButton abbImgButton = new JButton("Capas");
-        abbImgButton.setLayout(null);
-        abbImgButton.setVisible(true);
-        abbImgButton.setBounds(1115, 630, 150, 60);
-        abbImgButton.setBackground(Color.white);
-        abbImgButton.setFont(font3);
-        abbImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-            }
-        }); 
-        clientView.add(abbImgButton);
         
-        //Botón para mostrar la lista circular doblemente enlazada de álbumes del cliente
-        JButton albumImgButton = new JButton("Álbums");
-        albumImgButton.setLayout(null);
-        albumImgButton.setVisible(true);
-        albumImgButton.setBounds(1300, 630, 200, 60);
-        albumImgButton.setBackground(Color.white);
-        albumImgButton.setFont(font3);
-        albumImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-            }
-        }); 
-        clientView.add(albumImgButton);
+        
+        
+        
         
         //Label para mostrar los grafos y reportes
         JLabel graphLabel = new JLabel("");
@@ -873,6 +868,84 @@ public class LoginModule {
         graphScroll.setBounds(850,20,700,600);
         graphScroll.setViewportView(graphLabel);
         clientView.add(graphScroll);
+        
+        
+        
+        //Botón para mostrar el grafo ABB de capas del cliente.
+        JButton abbImgButton = new JButton("Capas");
+        abbImgButton.setLayout(null);
+        abbImgButton.setVisible(true);
+        abbImgButton.setBounds(1115, 630, 150, 60);
+        abbImgButton.setBackground(Color.white);
+        abbImgButton.setFont(font3);
+        abbImgButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                String abbRoute="";
+                try { 
+                    
+                    abbRoute=clientListHandler.personalizeAbbRoute(userLogged);
+                    System.out.println(abbRoute);
+                    
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ImageIcon abbIcon = new ImageIcon(abbRoute);
+                graphLabel.setIcon(abbIcon); 
+            }
+           
+        }); 
+        clientView.add(abbImgButton);
+        
+        //Botón para mostrar la lista circular doblemente enlazada de álbumes del cliente
+        JButton albumImgButton = new JButton("Álbums");
+        albumImgButton.setLayout(null);
+        albumImgButton.setVisible(true);
+        albumImgButton.setBounds(1300, 630, 200, 60);
+        albumImgButton.setBackground(Color.white);
+        albumImgButton.setFont(font3);
+        albumImgButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                String albumsRoute="";
+                try { 
+                    
+                    albumsRoute=clientListHandler.personalizeAlbumsListRoute(userLogged);
+                    System.out.println(albumsRoute);
+                    
+                    
+                 
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ImageIcon albumsListIcon = new ImageIcon(albumsRoute);
+                graphLabel.setIcon(albumsListIcon); 
+                
+            }
+        }); 
+        clientView.add(albumImgButton);
+        
+        //Botón para mostrar el grafo Avl de imágenes del cliente.
+        JButton avlImgButton = new JButton("Img");
+        avlImgButton.setLayout(null);
+        avlImgButton.setVisible(true);
+        avlImgButton.setBounds(940, 630, 150, 60);
+        avlImgButton.setBackground(Color.white);
+        avlImgButton.setFont(font3);
+        avlImgButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                String avlRoute="";
+                try { 
+                    
+                    avlRoute=clientListHandler.personalizeAvlRoute(userLogged);
+                    System.out.println(avlRoute);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                graphLabel.setIcon(new ImageIcon(avlRoute)); 
+            }
+        }); 
+        clientView.add(avlImgButton);
         
         clientView.repaint();
 
@@ -1229,7 +1302,8 @@ public class LoginModule {
                         BigInteger temp=new BigInteger(codeT.getText());
                         SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                         BinarySearchTree tempBinary=new BinarySearchTree();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary);
+                        AlbumsCircularList albumsList = new AlbumsCircularList();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList);
                         clientListHandler.finalInsert(newClient);
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
                         clientsCreation.dispose();
@@ -2029,9 +2103,10 @@ public class LoginModule {
                 //Se crea un árbol AVL para cada cliente
                 SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                 BinarySearchTree tempBinaryTree = new BinarySearchTree();
+                AlbumsCircularList albumsList = new AlbumsCircularList();
                 // Se crea el objeto cliente
 
-                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree);
+                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree,albumsList);
                 clientListHandler.finalInsert(newClient);
                 clientsJsonContent ="";
             
@@ -2045,10 +2120,13 @@ public class LoginModule {
     
     public static void imagesBulkLoad(){
         try {
+            //System.out.println("holla");
             //Empezamos el parseo
             JsonParser parser = new JsonParser();
+            //System.out.println(imagesJsonContent);
             // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
             JsonArray imagesList = parser.parse(imagesJsonContent).getAsJsonArray();
+            System.out.println(imagesList);
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < imagesList.size(); i++) {
@@ -2059,15 +2137,18 @@ public class LoginModule {
                 BinarySearchTree tempTree =new BinarySearchTree();
                 JsonArray  layers = object.get("capas").getAsJsonArray();
                 Img tempImg=new Img(id,tempTree,userLogged);
+                System.out.println(layers);
                 for(int j = 0; j < layers.size(); j++){
                     System.out.println(layers.get(j));
                     Layer temp;
                     Client tempClient;
                     tempClient=clientListHandler.returnMeTheClient(userLogged);
                     if(tempClient != null){
+                        System.out.println("si hay cliente");
                         temp=tempClient.getAbbTree().searchNodeAndReturnLayer(layers.get(j).getAsInt());
                         if(temp!=null){
                             tempImg.getTree().insert(temp);
+                            System.out.println("si hay capa");
                         }
                     }
                 }
@@ -2076,6 +2157,7 @@ public class LoginModule {
             
             }
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Imágenes Realizada Con Éxito!!</p></html>" );
+            clientListHandler.returnMeMyAvl(userLogged);
         } catch (Exception e) {
         }
     }
@@ -2112,6 +2194,46 @@ public class LoginModule {
             }
             layersJsonContent ="";
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Capas Realizada Con Éxito!!</p></html>" );
+            clientListHandler.returnMeMyAbb(userLogged);
+        } catch (Exception e) {
+        }
+    }
+    
+    public static void albumsBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray albumsList = parser.parse(albumsJsonContent).getAsJsonArray();
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos al árbol B
+            for (int i = 0; i < albumsList.size(); i++) {
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = albumsList.get(i).getAsJsonObject();                
+                //Guardamos atributos del objeto en variables
+                String name = object.get("nombre_album").getAsString();
+                
+                JsonArray  imgs = object.get("imgs").getAsJsonArray();
+                ImageLinkedList imgList=new ImageLinkedList();
+                for(int j = 0; j < imgs.size(); j++){
+                    //System.out.println(imgs.get(j));
+                    Img temp;
+                    Client tempClient;
+                    tempClient=clientListHandler.returnMeTheClient(userLogged);
+                    if(tempClient != null){
+                        temp=tempClient.getAvlTree().searchNodeAndReturnMeTheImage(imgs.get(j).getAsInt(),tempClient.getAvlTree().returnMeTheRoot());
+                        if(temp!=null){
+                            imgList.finalInsert(temp); 
+                        }
+                    }
+                }
+                Album album = new Album(name,imgList);
+                clientListHandler.addAlbum(userLogged, album); 
+                albumsJsonContent ="";
+            
+            }
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De álbumes Realizada Con Éxito!!</p></html>" );
+            clientListHandler.returnMeMyAlbumsList(userLogged);
         } catch (Exception e) {
         }
     }

@@ -1,0 +1,7 @@
+digraph G{
+node [shape=box];
+
+
+start [shape=Mdiamond label="Lista De Álbumes Del Cliente:
+ shrek"];{rank=same; };}
+}

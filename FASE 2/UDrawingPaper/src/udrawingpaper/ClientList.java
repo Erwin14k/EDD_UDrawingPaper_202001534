@@ -128,6 +128,58 @@ public class ClientList {
         }
         return "";
     }
+    public String personalizeAbbRoute(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getAbbTree().returnMeTheAbbRoute(temp.client.getName());
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    public String personalizeAlbumsListRoute(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getAlbumList().returnMeTheAlbumsListRoute(temp.client.getName());
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    
+    public String personalizeAvlRoute(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getAbbTree().returnMeTheAvlRoute(temp.client.getName());
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
     
     public void addImage(BigInteger dpi,Img img){
         if(first == null){
@@ -139,6 +191,74 @@ public class ClientList {
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAvlTree().insert(img); 
                     temp.client.setImgCounter(temp.client.getImgCounter()+1); 
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void addAlbum(BigInteger dpi,Album album){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAlbumList().finalInsert(album); 
+                    temp.client.setAlbumsCounter(temp.client.getAlbumsCounter()+1); 
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void returnMeMyAbb(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAbbTree().generatePersonalizeBstTreeGraph(temp.client.getName()); 
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    public void returnMeMyAlbumsList(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAlbumList().generatePersonalizeAlbum(temp.client.getName()); 
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void returnMeMyAvl(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAvlTree().generatePersonalizeAVLTreeGraph(temp.client.getName()); 
                     
                 }
                 
