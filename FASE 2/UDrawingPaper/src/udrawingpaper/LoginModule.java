@@ -49,7 +49,7 @@ public class LoginModule {
     
     //Frame para iniciar sesión, ya se como administrador o como cliente.
     public static void loginFrameModule() throws IOException{
-
+  
         //Creamos unos tipos de letra, que nos servirán más adelante
         Font font =new Font("Arial",Font.BOLD,50);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
@@ -1134,7 +1134,16 @@ public class LoginModule {
         reportsButton.setBackground(Color.blue);
         reportsButton.setFont(font3);
         reportsButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
+            public void mouseClicked(MouseEvent ecp){
+                try {
+                    clientListHandler.initializeMyTravelers(userLogged); 
+                    preOrder.setText(clientListHandler.preOrderOfMyAbb(userLogged));
+                    inOrder.setText(clientListHandler.inOrderOfMyAbb(userLogged));
+                    postOrder.setText(clientListHandler.postOrderOfMyAbb(userLogged));
+                    depthL.setText(clientListHandler.depthOfMyAbb(userLogged));
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         clientsReports.add(reportsButton);
@@ -2183,7 +2192,7 @@ public class LoginModule {
                     int row = object2.get("fila").getAsInt();
                     int column = object2.get("columna").getAsInt();
                     String color = object2.get("color").getAsString();
-                    tempPosition.finalInsert(id, row, column, color); 
+                    tempPosition.finalInsert(row, column, color); 
                     System.out.println("fila: "+row);
                     System.out.println("columna: "+column);
                     System.out.println("color: "+color);
@@ -2195,6 +2204,7 @@ public class LoginModule {
             layersJsonContent ="";
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Capas Realizada Con Éxito!!</p></html>" );
             clientListHandler.returnMeMyAbb(userLogged);
+            //clientListHandler.depthOfMyAbb(userLogged); 
         } catch (Exception e) {
         }
     }

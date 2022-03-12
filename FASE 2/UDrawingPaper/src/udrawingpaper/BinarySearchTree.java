@@ -16,6 +16,10 @@ import java.math.BigInteger;
  */
 public class BinarySearchTree {
     private BinarySearchTreeNode root;
+    public String depth;
+    public String preOrder;
+    public String inOrder;
+    public String postOrder;
     
     //Inseción al árbol de búsqueda binario
     
@@ -124,5 +128,74 @@ public class BinarySearchTree {
             }
         }
         return temp.layer;
+    }
+    public BinarySearchTreeNode returnMeTheRoot(){
+        return root;
+    }
+    public String rreturnMeThePreOrder(){
+        return preOrder;
+    }
+    public String returnMeTheInOrder(){
+        return inOrder;
+    }
+    public String returnMeThePostOrder(){
+        return postOrder;
+    }
+    public String returnMeTheDepth(){
+        return depth;
+    }
+    
+    public String inOrder(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            inOrder(root.left);
+            inOrder+=root.layer.getId()+",";
+            inOrder(root.right);
+        }
+        return inOrder;
+        
+    }
+    
+    public String preOrder(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            preOrder+=root.layer.getId()+",";
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+        return preOrder;
+        
+    }
+    public String postOrder(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            
+            preOrder(root.left);
+            preOrder(root.right);
+            postOrder+=root.layer.getId()+",";
+        }
+        return postOrder;
+    }
+    
+   
+    
+    public int depth(BinarySearchTreeNode root){
+        if(root!=null){
+            return 1+ Math.max(depth(root.left), depth(root.right));
+        }
+        return 0;
+        
+    }
+    
+    public void printTheTravels(){
+        System.out.println(preOrder);
+        System.out.println(inOrder);
+        System.out.println(postOrder);
+    }
+    
+    public void initialzeTheTravelers(){
+        preOrder="";
+        inOrder="";
+        postOrder="";
     }
 }

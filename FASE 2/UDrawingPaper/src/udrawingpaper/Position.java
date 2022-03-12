@@ -11,8 +11,8 @@ package udrawingpaper;
  */
 public class Position {
     private PositionNode first;
-    public void finalInsert(int layerId,int row, int column, String color){
-        PositionNode node= new PositionNode(layerId,row,column,color);
+    public void finalInsert(int row, int column, String color){
+        PositionNode node= new PositionNode(row,column,color);
         if(first==null){
         first=node;
         }else{

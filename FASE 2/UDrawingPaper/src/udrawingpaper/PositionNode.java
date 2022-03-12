@@ -10,13 +10,12 @@ package udrawingpaper;
  * @author Erwin14k
  */
 public class PositionNode {
-    public int layerId;
     public int row;
     public int column;
     public String color;
     public PositionNode next = null;
-    public PositionNode(int layerId,int row,int column,String color ){
-        this.layerId = layerId;
+    public PositionNode(int row,int column,String color ){
+       
         this.row = row;
         this.column = column;
         this.color = color;
