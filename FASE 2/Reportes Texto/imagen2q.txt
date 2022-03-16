@@ -1,0 +1,117 @@
+digraph {
+
+rankdir = TB;
+node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+//Las columnas cabeceras
+N1680570292[label="-6,-6" color="white" style="filled" ];
+N1689178411[label="0,-1" color="white" style="filled" ];
+N1575985852[label="1,-1" color="white" style="filled" ];
+N858193660[label="8,-1" color="white" style="filled" ];
+
+
+
+//Las filas cabeceras
+N202353147[label="-1,3" color="white" style="filled" ];
+N515507928[label="-1,4" color="white" style="filled" ];
+N1054911985[label="-1,5" color="white" style="filled" ];
+N984966607[label="-1,6" color="white" style="filled" ];
+N1266959123[label="-1,7" color="white" style="filled" ];
+N88477821[label="-1,8" color="white" style="filled" ];
+N1056090625[label="-1,9" color="white" style="filled" ];
+N796408589[label="-1,10" color="white" style="filled" ];
+N1175284010[label="-1,11" color="white" style="filled" ];
+N1937595502[label="-1,12" color="white" style="filled" ];
+
+
+
+//Los valores de la Matriz
+N1492402850[label="1,3" color="#000000" style="filled" ];
+N909814498[label="1,4" color="#000000" style="filled" ];
+N458473782[label="8,4" color="#FFCC27" style="filled" ];
+N47472670[label="0,5" color="#000000" style="filled" ];
+N2018493364[label="1,5" color="#000000" style="filled" ];
+N457247717[label="0,6" color="#000000" style="filled" ];
+N505295818[label="1,6" color="#FFFFFF" style="filled" ];
+N1072391303[label="0,7" color="#000000" style="filled" ];
+N960447149[label="1,7" color="#00FF00" style="filled" ];
+N716339276[label="0,8" color="#000000" style="filled" ];
+N1163759283[label="1,8" color="#00FF00" style="filled" ];
+N561382851[label="0,9" color="#000000" style="filled" ];
+N1654587754[label="1,9" color="#FFFFFF" style="filled" ];
+N1540781421[label="0,10" color="#000000" style="filled" ];
+N1926713522[label="1,10" color="#000000" style="filled" ];
+N1662913334[label="1,11" color="#000000" style="filled" ];
+N2039530094[label="1,12" color="#000000" style="filled" ];
+
+
+
+//Conexiones de cada columna
+N1680570292->N1689178411[dir=both];
+N1689178411->N1575985852[dir=both];
+N1689178411->N47472670[dir=both];
+N1575985852->N858193660[dir=both];
+N1575985852->N1492402850[dir=both];
+N858193660->N458473782[dir=both];
+
+
+
+//Conexiones de cada fila
+N1680570292->N202353147[dir=both];
+N202353147->N515507928[dir=both];
+N202353147->N1492402850[constraint=false,dir=both];
+N1492402850->N909814498[dir=both];
+N515507928->N1054911985[dir=both];
+N515507928->N909814498[constraint=false,dir=both];
+N909814498->N2018493364[dir=both];
+N909814498->N458473782[constraint=false,dir=both];
+N1054911985->N984966607[dir=both];
+N1054911985->N47472670[constraint=false,dir=both];
+N47472670->N457247717[dir=both];
+N47472670->N2018493364[constraint=false,dir=both];
+N2018493364->N505295818[dir=both];
+N984966607->N1266959123[dir=both];
+N984966607->N457247717[constraint=false,dir=both];
+N457247717->N1072391303[dir=both];
+N457247717->N505295818[constraint=false,dir=both];
+N505295818->N960447149[dir=both];
+N1266959123->N88477821[dir=both];
+N1266959123->N1072391303[constraint=false,dir=both];
+N1072391303->N716339276[dir=both];
+N1072391303->N960447149[constraint=false,dir=both];
+N960447149->N1163759283[dir=both];
+N88477821->N1056090625[dir=both];
+N88477821->N716339276[constraint=false,dir=both];
+N716339276->N561382851[dir=both];
+N716339276->N1163759283[constraint=false,dir=both];
+N1163759283->N1654587754[dir=both];
+N1056090625->N796408589[dir=both];
+N1056090625->N561382851[constraint=false,dir=both];
+N561382851->N1540781421[dir=both];
+N561382851->N1654587754[constraint=false,dir=both];
+N1654587754->N1926713522[dir=both];
+N796408589->N1175284010[dir=both];
+N796408589->N1540781421[constraint=false,dir=both];
+N1540781421->N1926713522[constraint=false,dir=both];
+N1926713522->N1662913334[dir=both];
+N1175284010->N1937595502[dir=both];
+N1175284010->N1662913334[constraint=false,dir=both];
+N1662913334->N2039530094[dir=both];
+N1937595502->N2039530094[constraint=false,dir=both];
+
+
+
+//Los rankSame
+{ rank=same; N1680570292;N1689178411;N1575985852;N858193660;}
+{rank=same; N202353147;N1492402850;}
+{rank=same; N515507928;N909814498;N458473782;}
+{rank=same; N1054911985;N47472670;N2018493364;}
+{rank=same; N984966607;N457247717;N505295818;}
+{rank=same; N1266959123;N1072391303;N960447149;}
+{rank=same; N88477821;N716339276;N1163759283;}
+{rank=same; N1056090625;N561382851;N1654587754;}
+{rank=same; N796408589;N1540781421;N1926713522;}
+{rank=same; N1175284010;N1662913334;}
+{rank=same; N1937595502;N2039530094;}
+
+}

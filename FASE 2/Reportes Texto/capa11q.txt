@@ -1,0 +1,38 @@
+digraph {
+
+rankdir = TB;
+node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+//Las columnas cabeceras
+N401758916[label="-6,-6" color="white" style="filled" ];
+N1024239739[label="12,-1" color="white" style="filled" ];
+
+
+
+//Las filas cabeceras
+N601539360[label="-1,11" color="white" style="filled" ];
+
+
+
+//Los valores de la Matriz
+N1815188134[label="12,11" color="#FFCC27" style="filled" ];
+
+
+
+//Conexiones de cada columna
+N401758916->N1024239739[dir=both];
+N1024239739->N1815188134[dir=both];
+
+
+
+//Conexiones de cada fila
+N401758916->N601539360[dir=both];
+N601539360->N1815188134[constraint=false,dir=both];
+
+
+
+//Los rankSame
+{ rank=same; N401758916;N1024239739;}
+{rank=same; N601539360;N1815188134;}
+
+}

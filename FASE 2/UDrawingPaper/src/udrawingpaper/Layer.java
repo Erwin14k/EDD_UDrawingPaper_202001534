@@ -15,11 +15,15 @@ public class Layer {
     private int id;
     private Position position;
     private BigInteger clientId;
+    private int idImg;
+    private Matrix matrix;
     
-    public Layer(int  id,Position position,BigInteger clientId){
+    public Layer(int  id,Position position,BigInteger clientId,int idImg, Matrix matrix){
         this.id = id;
         this.position=position;
         this.clientId=clientId;
+        this.idImg=idImg;
+        this.matrix=matrix;
       
     }
 
@@ -45,6 +49,22 @@ public class Layer {
 
     public void setClientId(BigInteger clientId) {
         this.clientId = clientId;
+    }
+
+    public int getIdImg() {
+        return idImg;
+    }
+
+    public void setIdImg(int idImg) {
+        this.idImg = idImg;
+    }
+
+    public Matrix getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(Matrix matrix) {
+        this.matrix = matrix;
     }
     
 

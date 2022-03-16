@@ -2144,24 +2144,39 @@ public class LoginModule {
                 //Guardamos atributos del objeto en variables
                 int id = object.get("id").getAsInt();
                 BinarySearchTree tempTree =new BinarySearchTree();
+                Matrix tempMatrix = new Matrix();
                 JsonArray  layers = object.get("capas").getAsJsonArray();
-                Img tempImg=new Img(id,tempTree,userLogged);
-                System.out.println(layers);
+                Img tempImg=new Img(id,tempTree,userLogged,tempMatrix,0);
+                //System.out.println(layers);
                 for(int j = 0; j < layers.size(); j++){
                     System.out.println(layers.get(j));
+                    //Capa temporal
                     Layer temp;
+                    //Cliente temporal
                     Client tempClient;
+                    //Se busca al cliente
                     tempClient=clientListHandler.returnMeTheClient(userLogged);
+                    //Se valida que el cliente exista
                     if(tempClient != null){
-                        System.out.println("si hay cliente");
+                        //Si existe:
+                        //System.out.println("si hay cliente");
+                        //se busca en su arbol ABB la capa actual en el ciclo.
                         temp=tempClient.getAbbTree().searchNodeAndReturnLayer(layers.get(j).getAsInt());
+                        //Se valida que la capa temporal exista
                         if(temp!=null){
+                            //Si existe la capa:
+                            //Se agrega la capa al árbol de la imagen actual
                             tempImg.getTree().insert(temp);
-                            System.out.println("si hay capa");
+                            //System.out.println("si hay capa");
+                            //Se llena la matriz de la imágen con la sub matriz de la capa
+                            temp.getPosition().fillImgMatrix(tempImg);
+                            tempImg.setLayersCounter(tempImg.getLayersCounter()+1); 
                         }
                     }
                 }
-                clientListHandler.addImage(userLogged, tempImg); 
+                 
+                tempImg.getMatrix().GraphSparseMatrixOfImg(tempImg.getId(),clientListHandler.nameByDpi(userLogged)); 
+                clientListHandler.addImage(userLogged, tempImg);
                 imagesJsonContent ="";
             
             }
@@ -2184,8 +2199,9 @@ public class LoginModule {
                 JsonObject object = layersList.get(i).getAsJsonObject();                
                 //Guardamos atributos del objeto en variables
                 int id = object.get("id_capa").getAsInt();
-                System.out.println("La capa No.: "+id+" Tiene las posiciones:");
+                //System.out.println("La capa No.: "+id+" Tiene las posiciones:");
                 Position tempPosition = new Position();
+                Matrix tempMatrix=new Matrix();
                 JsonArray  pixelsList = object.get("pixeles").getAsJsonArray();
                 for (int j = 0; j < pixelsList.size(); j++) {
                     JsonObject object2 = pixelsList.get(j).getAsJsonObject();
@@ -2193,12 +2209,14 @@ public class LoginModule {
                     int column = object2.get("columna").getAsInt();
                     String color = object2.get("color").getAsString();
                     tempPosition.finalInsert(row, column, color); 
-                    System.out.println("fila: "+row);
+                    tempMatrix.insert(column, row, color);
+                    /*System.out.println("fila: "+row);
                     System.out.println("columna: "+column);
                     System.out.println("color: "+color);
-                    System.out.println("=============================");
+                    System.out.println("=============================");*/
                 }
-                Layer tempLayer= new Layer(id, tempPosition,userLogged);
+                Layer tempLayer= new Layer(id, tempPosition,userLogged,-1,tempMatrix);
+                tempMatrix.GraphSparseMatrixOfLayer(id, clientListHandler.nameByDpi(userLogged)); 
                 clientListHandler.clientNewLayer(userLogged, tempLayer);
             }
             layersJsonContent ="";

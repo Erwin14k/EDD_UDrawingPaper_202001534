@@ -24,4 +24,12 @@ public class Position {
         }
         
     }
+    
+    public void fillImgMatrix(Img img){
+        PositionNode temp=first;
+        while(temp!=null){
+            img.getMatrix().insert(temp.column, temp.row, temp.color);
+            temp=temp.next;
+        }
+    }
 }

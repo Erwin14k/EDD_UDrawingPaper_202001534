@@ -15,12 +15,16 @@ public class Img {
     private int id;
     private BinarySearchTree tree;
     private BigInteger clientId;
+    private Matrix matrix;
+    private int layersCounter;
 
     
-    public Img(int id,BinarySearchTree tree,BigInteger clientId){
+    public Img(int id,BinarySearchTree tree,BigInteger clientId,Matrix matrix,int layersCounter){
         this.id = id;
         this.tree=tree;
         this.clientId=clientId;
+        this.matrix=matrix;
+        this.layersCounter=layersCounter;
    
     }
 
@@ -46,6 +50,22 @@ public class Img {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Matrix getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(Matrix matrix) {
+        this.matrix = matrix;
+    }
+
+    public int getLayersCounter() {
+        return layersCounter;
+    }
+
+    public void setLayersCounter(int layersCounter) {
+        this.layersCounter = layersCounter;
     }
     
 

@@ -107,4 +107,26 @@ public class AlbumsCircularList {
         return finalText;
     }
     
+    
+    public void generatePersonalizeAlbum2(String name) throws IOException{
+        String route="C:\\Users\\Erwin14k\\Desktop\\matriz.png";
+        String graph="C:\\Users\\Erwin14k\\Desktop\\matrizzzzz.txt";
+        String tParam = "-Ttxt";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+    }
+    
+    
 }
