@@ -310,7 +310,7 @@ public class Matrix {
          graphText+=rankDirTotals;
          graphText+="\n}";
          return graphText;
-    }*/
+    }
    
    
    /*

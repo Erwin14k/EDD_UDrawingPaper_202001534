@@ -12,10 +12,12 @@ package udrawingpaper;
 public class Album {
     private String name;
     private ImageLinkedList imgList;
+    private int imgCounter;
     
-    public Album(String name, ImageLinkedList imgList){
+    public Album(String name, ImageLinkedList imgList,int imgCounter){
         this.name=name;
         this.imgList=imgList;
+        this.imgCounter=imgCounter;
     }
 
     public String getName() {
@@ -32,6 +34,14 @@ public class Album {
 
     public void setImgList(ImageLinkedList imgList) {
         this.imgList = imgList;
+    }
+
+    public int getImgCounter() {
+        return imgCounter;
+    }
+
+    public void setImgCounter(int imgCounter) {
+        this.imgCounter = imgCounter;
     }
     
     

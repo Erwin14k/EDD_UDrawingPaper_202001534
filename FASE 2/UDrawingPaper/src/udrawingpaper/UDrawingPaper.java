@@ -19,8 +19,8 @@ public class UDrawingPaper {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
        
-        /*Matrix matrix1=new Matrix();
-        System.out.println("=============================");
+        //Matrix matrix1=new Matrix();
+        /*System.out.println("=============================");
         matrix1.insert(1, 1, "#8CF201");
         matrix1.insert(3, 1, "#8CF201");
         matrix1.insert(4, 1, "#8CF201");
@@ -158,12 +158,12 @@ public class UDrawingPaper {
 			matrix1.insert(11,7,"#00FF00");
 			matrix1.insert(11,8,"#00FF00");
 			matrix1.insert(5,5,"#00FF00");
-			matrix1.insert(10,5,"#00FF00");*
+			matrix1.insert(10,5,"#00FF00");
         
         matrix1.printData();
         System.out.println("=============================");
-        System.out.println(matrix1.GraphMatrix4());
-        //System.out.println(matrix1.GraphMatrix());*/
+        System.out.println(matrix1.GraphMatrix());
+        System.out.println(matrix1.GraphMatrix());*/
         LoginModule loginModuleHandler = new LoginModule();
         loginModuleHandler.loginFrameModule();
     }

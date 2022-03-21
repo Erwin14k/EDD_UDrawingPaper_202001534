@@ -20,6 +20,7 @@ public class BinarySearchTree {
     public String preOrder;
     public String inOrder;
     public String postOrder;
+    public String allCodes="";
     
     //Inseción al árbol de búsqueda binario
     
@@ -101,6 +102,31 @@ public class BinarySearchTree {
 
         rt.exec( cmd );
     }
+    
+    
+    public void generatePersonalizeBstTreeGraphForEachImage(int id,String name) throws IOException{
+        String route="../Reportes Texto/ArbolImagen"+id+name+".txt";
+        String graph="../Reportes Img/ArbolImagen"+id+name+".png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(getBstTreeGraphvizCode());
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;//bin de graphviz
+        cmd[1] = tParam;//-Tpng
+        cmd[2] = route;//
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+    }
     public String returnMeTheAbbRoute(String name) throws IOException{
         
         String graph="../Reportes Img/Abb"+name+".png";
@@ -170,8 +196,8 @@ public class BinarySearchTree {
         
         if(root!=null){
             
-            preOrder(root.left);
-            preOrder(root.right);
+            postOrder(root.left);
+            postOrder(root.right);
             postOrder+=root.layer.getId()+",";
         }
         return postOrder;
@@ -197,5 +223,24 @@ public class BinarySearchTree {
         preOrder="";
         inOrder="";
         postOrder="";
+    }
+    
+    public void collectCodes(){
+        allCodes="";
+        layersCodes(root);
+    }
+    //Este método recolecta todos los id´s de las capas para mostrarlas dentro de un combobx en la interfaz
+    public String[] layersCodes(BinarySearchTreeNode root){
+        if(root!=null){
+            allCodes+=root.layer.getId()+",";
+            layersCodes(root.left);
+            layersCodes(root.right);
+        }
+        if(allCodes.equals("")){ 
+            String temp="";
+            temp+="No hay capas!!,";
+            return temp.split(",");
+        }
+        return allCodes.split(",");
     }
 }

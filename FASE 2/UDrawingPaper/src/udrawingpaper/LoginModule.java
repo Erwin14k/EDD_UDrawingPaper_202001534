@@ -334,7 +334,8 @@ public class LoginModule {
                         SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                         BinarySearchTree tempBinarySearchTree= new BinarySearchTree();
                         AlbumsCircularList albumsList = new AlbumsCircularList();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree,albumsList);
+                        ImageLinkedList imgList = new ImageLinkedList();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree,albumsList,imgList);
                         clientListHandler.finalInsert(newClient);
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
                         clientsRegister.dispose();
@@ -656,60 +657,56 @@ public class LoginModule {
         layerLabel.setLayout(null);
         layerLabel.setVisible(true);
         layerLabel.setForeground(Color.BLACK);
-        layerLabel.setBounds(90,120,800,60);
+        layerLabel.setBounds(90,80,800,60);
         layerLabel.setFont(font3);
         clientView.add(layerLabel);
         
-        JLabel imgLabel = new JLabel("Imágen con árbol de capas: ");
+        JLabel imgLabel = new JLabel("Imágen En Específico: ");
         imgLabel.setLayout(null);
         imgLabel.setVisible(true);
         imgLabel.setForeground(Color.BLACK);
-        imgLabel.setBounds(90,260,800,60);
+        imgLabel.setBounds(90,220,800,60);
         imgLabel.setFont(font3);
         clientView.add(imgLabel);
         
-        //Creamos el campo de texto que despliega los id de las capas
+        JLabel imgTreeLabel = new JLabel("Árbol En Específico: ");
+        imgTreeLabel.setLayout(null);
+        imgTreeLabel.setVisible(true);
+        imgTreeLabel.setForeground(Color.BLACK);
+        imgTreeLabel.setBounds(90,360,800,60);
+        imgTreeLabel.setFont(font3);
+        clientView.add(imgTreeLabel);
+        
+        //Creamos el combobox que despliega los id de las capas
         JComboBox idLayers= new JComboBox ();
-        idLayers.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idLayers.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyLayersCodes(userLogged)));        
         idLayers.setLayout(null);
         idLayers.setVisible(true);
-        idLayers.setBounds(90,200,400,30);
+        idLayers.setBounds(90,160,400,30);
         clientView.add(idLayers);
         
         
-        JButton layerReportButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
-        layerReportButton.setLayout(null);
-        layerReportButton.setVisible(true);
-        layerReportButton.setBounds(520, 180, 50, 60);
-        layerReportButton.setBackground(Color.green);
-        layerReportButton.setIcon(iconobtn);
-        layerReportButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-            }
-        }); 
-        clientView.add(layerReportButton);
         
-        //Creamos el campo de texto que despliega los id de las imágenes
+       
+        
+        
+        
+        //Creamos el combobox que despliega los id de las imágenes
         JComboBox idImages= new JComboBox ();
-        idImages.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idImages.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyImgsCodes(userLogged)));       
         idImages.setLayout(null);
         idImages.setVisible(true);
-        idImages.setBounds(90,340,400,30);
+        idImages.setBounds(90,300,400,30);
         clientView.add(idImages);
         
-        JButton imageTreeReport = new JButton("");
-        ImageIcon iconobtn9 = new ImageIcon("../imgUsadas/search.png");
-        imageTreeReport.setLayout(null);
-        imageTreeReport.setVisible(true);
-        imageTreeReport.setBounds(520, 320, 50, 60);
-        imageTreeReport.setBackground(Color.green);
-        imageTreeReport.setIcon(iconobtn9);
-        imageTreeReport.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-            }
-        }); 
-        clientView.add(imageTreeReport);
+        JComboBox idImagesForTree= new JComboBox ();
+        idImagesForTree.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyImgsCodes(userLogged)));       
+        idImagesForTree.setLayout(null);
+        idImagesForTree.setVisible(true);
+        idImagesForTree.setBounds(90,440,400,30);
+        clientView.add(idImagesForTree);
+        
+        
         
        
         //Creamos un botón de Carga Masiva de imágenes
@@ -869,6 +866,54 @@ public class LoginModule {
         graphScroll.setViewportView(graphLabel);
         clientView.add(graphScroll);
         
+        
+        JButton layerReportButton = new JButton("");
+        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
+        layerReportButton.setLayout(null);
+        layerReportButton.setVisible(true);
+        layerReportButton.setBounds(520, 140, 50, 60);
+        layerReportButton.setBackground(Color.green);
+        layerReportButton.setIcon(iconobtn);
+        layerReportButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+         
+                String route="../Reportes Img/Capa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                ImageIcon layerIcon = new ImageIcon(route);
+                graphLabel.setIcon(layerIcon); 
+            }
+        }); 
+        clientView.add(layerReportButton);
+        
+        JButton specificImage = new JButton("");
+        ImageIcon iconobtn9 = new ImageIcon("../imgUsadas/search.png");
+        specificImage.setLayout(null);
+        specificImage.setVisible(true);
+        specificImage.setBounds(520, 280, 50, 60);
+        specificImage.setBackground(Color.green);
+        specificImage.setIcon(iconobtn9);
+        specificImage.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+                String route="../Reportes Img/imagen"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        clientView.add(specificImage);
+        
+        JButton imageTree = new JButton("");
+        imageTree.setLayout(null);
+        imageTree.setVisible(true);
+        imageTree.setBounds(520, 420, 50, 60);
+        imageTree.setBackground(Color.green);
+        imageTree.setIcon(iconobtn9);
+        imageTree.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+                String route="../Reportes Img/ArbolImagen"+idImagesForTree.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        clientView.add(imageTree);
         
         
         //Botón para mostrar el grafo ABB de capas del cliente.
@@ -1312,7 +1357,8 @@ public class LoginModule {
                         SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                         BinarySearchTree tempBinary=new BinarySearchTree();
                         AlbumsCircularList albumsList = new AlbumsCircularList();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList);
+                        ImageLinkedList imgList = new ImageLinkedList();
+                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList,imgList);
                         clientListHandler.finalInsert(newClient);
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
                         clientsCreation.dispose();
@@ -1932,18 +1978,20 @@ public class LoginModule {
           File archive = null;
           FileReader fr = null;
           BufferedReader br;
-        
+        //System.out.println("ooooooo");
         try{
+            //System.out.println("Aqui si entra 1");
            
             JFileChooser fc = new JFileChooser();
             int op;
               op = fc.showOpenDialog(fc);
             if (op == JFileChooser.APPROVE_OPTION) {
-                
+                //System.out.println("Aqui si entra 2");
                 archive = fc.getSelectedFile();
             }
             try {
                 // HACEMOS LA LECTURA DEL ARCHIVO
+                //System.out.println("Aqui si entra 3");
                 fr = new FileReader(archive);
                 br = new BufferedReader(fr);
                 String line;
@@ -1951,14 +1999,17 @@ public class LoginModule {
                 while ((line = br.readLine()) != null) {
                     // Solo agregamos el contenido a un String
                     clientsJsonContent += line;
+                    //System.out.println("siu");
 
             }
                 
             } catch (Exception e) {
+                System.out.println("No se pudo 1."+e);
             }
             
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("No se pudo 2."+e);
         } finally {
             try {
                 if (null != fr) {
@@ -1966,6 +2017,7 @@ public class LoginModule {
                 }
             } catch (Exception e2) {
                 e2.printStackTrace();
+                System.out.println("No se pudo 3."+e2);
             }
         }
     }
@@ -2023,6 +2075,7 @@ public class LoginModule {
             if (op == JFileChooser.APPROVE_OPTION) {
                 
                 archive = fc.getSelectedFile();
+                //System.out.println("hola 1");
             }
             try {
                 // HACEMOS LA LECTURA DEL ARCHIVO
@@ -2030,9 +2083,13 @@ public class LoginModule {
                 br = new BufferedReader(fr);
                 String line;
                 // LEER LINEA POR LINEA
+                //System.out.println("hola 2");
+                int counter=1;
                 while ((line = br.readLine()) != null) {
                     // Solo agregamos el contenido a un String
                     layersJsonContent += line;
+                    System.out.println(counter);
+                    counter++;                   
 
             }
                 
@@ -2113,9 +2170,10 @@ public class LoginModule {
                 SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                 BinarySearchTree tempBinaryTree = new BinarySearchTree();
                 AlbumsCircularList albumsList = new AlbumsCircularList();
+                ImageLinkedList imgList= new ImageLinkedList();
                 // Se crea el objeto cliente
 
-                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree,albumsList);
+                Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree,albumsList,imgList);
                 clientListHandler.finalInsert(newClient);
                 clientsJsonContent ="";
             
@@ -2135,7 +2193,7 @@ public class LoginModule {
             //System.out.println(imagesJsonContent);
             // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
             JsonArray imagesList = parser.parse(imagesJsonContent).getAsJsonArray();
-            System.out.println(imagesList);
+            //System.out.println(imagesList);
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < imagesList.size(); i++) {
@@ -2146,10 +2204,10 @@ public class LoginModule {
                 BinarySearchTree tempTree =new BinarySearchTree();
                 Matrix tempMatrix = new Matrix();
                 JsonArray  layers = object.get("capas").getAsJsonArray();
-                Img tempImg=new Img(id,tempTree,userLogged,tempMatrix,0);
+                Img tempImg=new Img(id,tempTree,userLogged,tempMatrix,0,-1);
                 //System.out.println(layers);
                 for(int j = 0; j < layers.size(); j++){
-                    System.out.println(layers.get(j));
+                    //System.out.println(layers.get(j));
                     //Capa temporal
                     Layer temp;
                     //Cliente temporal
@@ -2176,6 +2234,7 @@ public class LoginModule {
                 }
                  
                 tempImg.getMatrix().GraphSparseMatrixOfImg(tempImg.getId(),clientListHandler.nameByDpi(userLogged)); 
+                tempImg.getTree().generatePersonalizeBstTreeGraphForEachImage(id, clientListHandler.nameByDpi(userLogged)); 
                 clientListHandler.addImage(userLogged, tempImg);
                 imagesJsonContent ="";
             
@@ -2187,6 +2246,7 @@ public class LoginModule {
     }
     
     public static void layersBulkLoad(){
+        //System.out.println(layersJsonContent);
         try {
             //Empezamos el parseo
             JsonParser parser = new JsonParser();
@@ -2194,6 +2254,7 @@ public class LoginModule {
             JsonArray layersList = parser.parse(layersJsonContent).getAsJsonArray();
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
+            //System.out.println(layersList.size());
             for (int i = 0; i < layersList.size(); i++) {
                 // JsonObject = Toma el Objeto del Json actual
                 JsonObject object = layersList.get(i).getAsJsonObject();                
@@ -2231,10 +2292,10 @@ public class LoginModule {
         try {
             //Empezamos el parseo
             JsonParser parser = new JsonParser();
-            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            // JsonArray = arreglo de objetos Json, en este caso de tipo album.
             JsonArray albumsList = parser.parse(albumsJsonContent).getAsJsonArray();
-            //System.out.println(clientsList);
-            //Ya con el arreglo con objetos, para meterlos al árbol B
+          
+            
             for (int i = 0; i < albumsList.size(); i++) {
                 // JsonObject = Toma el Objeto del Json actual
                 JsonObject object = albumsList.get(i).getAsJsonObject();                
@@ -2243,6 +2304,7 @@ public class LoginModule {
                 
                 JsonArray  imgs = object.get("imgs").getAsJsonArray();
                 ImageLinkedList imgList=new ImageLinkedList();
+                int counter=0;
                 for(int j = 0; j < imgs.size(); j++){
                     //System.out.println(imgs.get(j));
                     Img temp;
@@ -2252,10 +2314,11 @@ public class LoginModule {
                         temp=tempClient.getAvlTree().searchNodeAndReturnMeTheImage(imgs.get(j).getAsInt(),tempClient.getAvlTree().returnMeTheRoot());
                         if(temp!=null){
                             imgList.finalInsert(temp); 
+                            counter++;
                         }
                     }
                 }
-                Album album = new Album(name,imgList);
+                Album album = new Album(name,imgList,counter);
                 clientListHandler.addAlbum(userLogged, album); 
                 albumsJsonContent ="";
             

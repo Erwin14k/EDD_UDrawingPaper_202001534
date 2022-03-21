@@ -1,0 +1,300 @@
+digraph {
+
+rankdir = TB;
+node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+//Las columnas cabeceras
+N1645637315[label="-6,-6" color="white" style="filled" ];
+N308000919[label="3,-1" color="white" style="filled" ];
+N322856185[label="4,-1" color="white" style="filled" ];
+N1259079362[label="5,-1" color="white" style="filled" ];
+N448600342[label="6,-1" color="white" style="filled" ];
+N1441633750[label="7,-1" color="white" style="filled" ];
+N898902590[label="8,-1" color="white" style="filled" ];
+N512032856[label="9,-1" color="white" style="filled" ];
+N1820516151[label="10,-1" color="white" style="filled" ];
+N1442362452[label="11,-1" color="white" style="filled" ];
+N1101635855[label="12,-1" color="white" style="filled" ];
+N1998126754[label="13,-1" color="white" style="filled" ];
+N219806737[label="14,-1" color="white" style="filled" ];
+N500409330[label="15,-1" color="white" style="filled" ];
+N301914270[label="16,-1" color="white" style="filled" ];
+N555993581[label="17,-1" color="white" style="filled" ];
+
+
+
+//Las filas cabeceras
+N1670926508[label="-1,1" color="white" style="filled" ];
+N1674883870[label="-1,2" color="white" style="filled" ];
+N76131794[label="-1,3" color="white" style="filled" ];
+N995778575[label="-1,4" color="white" style="filled" ];
+N442915576[label="-1,5" color="white" style="filled" ];
+N1558988521[label="-1,6" color="white" style="filled" ];
+N356685723[label="-1,7" color="white" style="filled" ];
+N2104547108[label="-1,8" color="white" style="filled" ];
+N1433007080[label="-1,9" color="white" style="filled" ];
+N1804352674[label="-1,10" color="white" style="filled" ];
+N1785958407[label="-1,11" color="white" style="filled" ];
+N289518490[label="-1,14" color="white" style="filled" ];
+
+
+
+//Los valores de la Matriz
+N187561193[label="4,1" color="#0B1FCB" style="filled" ];
+N30318594[label="7,1" color="#0B1FCB" style="filled" ];
+N2001468308[label="8,1" color="#0B1FCB" style="filled" ];
+N1804225412[label="9,1" color="#0B1FCB" style="filled" ];
+N266629280[label="10,1" color="#0B1FCB" style="filled" ];
+N2069766126[label="11,1" color="#0B1FCB" style="filled" ];
+N1407306826[label="12,1" color="#0B1FCB" style="filled" ];
+N1779330009[label="13,1" color="#0B1FCB" style="filled" ];
+N1187211080[label="14,1" color="#0B1FCB" style="filled" ];
+N1298768145[label="15,1" color="#0B1FCB" style="filled" ];
+N272086890[label="16,1" color="#0B1FCB" style="filled" ];
+N167663126[label="17,1" color="#0B1FCB" style="filled" ];
+N1415219526[label="4,2" color="#0B1FCB" style="filled" ];
+N1413204981[label="5,2" color="#0B1FCB" style="filled" ];
+N2040179455[label="6,2" color="#0B1FCB" style="filled" ];
+N36638012[label="7,2" color="#0B1FCB" style="filled" ];
+N46118022[label="15,2" color="#0B1FCB" style="filled" ];
+N139572039[label="16,2" color="#0B1FCB" style="filled" ];
+N607141344[label="4,3" color="#0B1FCB" style="filled" ];
+N1586270903[label="5,3" color="#0B1FCB" style="filled" ];
+N560469604[label="14,3" color="#0B1FCB" style="filled" ];
+N614879877[label="15,3" color="#0B1FCB" style="filled" ];
+N31241420[label="3,4" color="#0B1FCB" style="filled" ];
+N998217578[label="4,4" color="#0B1FCB" style="filled" ];
+N1522892119[label="5,4" color="#0B1FCB" style="filled" ];
+N1289830128[label="6,4" color="#0B1FCB" style="filled" ];
+N687839604[label="7,4" color="#0B1FCB" style="filled" ];
+N1878826950[label="8,4" color="#0B1FCB" style="filled" ];
+N513960107[label="13,4" color="#0B1FCB" style="filled" ];
+N1542574897[label="14,4" color="#0B1FCB" style="filled" ];
+N252822786[label="3,5" color="#0B1FCB" style="filled" ];
+N68708745[label="4,5" color="#0B1FCB" style="filled" ];
+N158514833[label="5,5" color="#0B1FCB" style="filled" ];
+N1548721365[label="8,5" color="#0B1FCB" style="filled" ];
+N1576496011[label="9,5" color="#0B1FCB" style="filled" ];
+N442766749[label="13,5" color="#0B1FCB" style="filled" ];
+N117356150[label="14,5" color="#0B1FCB" style="filled" ];
+N653736776[label="3,6" color="#0B1FCB" style="filled" ];
+N1085974318[label="4,6" color="#0B1FCB" style="filled" ];
+N2059962969[label="9,6" color="#0B1FCB" style="filled" ];
+N167169648[label="13,6" color="#0B1FCB" style="filled" ];
+N373594493[label="14,6" color="#0B1FCB" style="filled" ];
+N64151372[label="3,7" color="#0B1FCB" style="filled" ];
+N1031149357[label="4,7" color="#0B1FCB" style="filled" ];
+N38587325[label="9,7" color="#0B1FCB" style="filled" ];
+N812725752[label="13,7" color="#0B1FCB" style="filled" ];
+N625783813[label="14,7" color="#0B1FCB" style="filled" ];
+N680399102[label="15,7" color="#0B1FCB" style="filled" ];
+N1291532145[label="3,8" color="#0B1FCB" style="filled" ];
+N1964770787[label="4,8" color="#0B1FCB" style="filled" ];
+N892365785[label="9,8" color="#0B1FCB" style="filled" ];
+N1843496033[label="13,8" color="#0B1FCB" style="filled" ];
+N2025088531[label="8,9" color="#0B1FCB" style="filled" ];
+N1838307323[label="9,9" color="#0B1FCB" style="filled" ];
+N1531610931[label="10,9" color="#0B1FCB" style="filled" ];
+N980009655[label="13,9" color="#0B1FCB" style="filled" ];
+N1639362327[label="14,9" color="#0B1FCB" style="filled" ];
+N518263125[label="10,10" color="#0B1FCB" style="filled" ];
+N295202469[label="14,10" color="#0B1FCB" style="filled" ];
+N1695578715[label="15,10" color="#0B1FCB" style="filled" ];
+N831172601[label="10,11" color="#0B1FCB" style="filled" ];
+N257588772[label="11,11" color="#0B1FCB" style="filled" ];
+N1575339052[label="12,11" color="#0B1FCB" style="filled" ];
+N1002553193[label="13,11" color="#0B1FCB" style="filled" ];
+N1599089295[label="14,11" color="#0B1FCB" style="filled" ];
+N61330463[label="15,11" color="#0B1FCB" style="filled" ];
+N1888531683[label="16,11" color="#0B1FCB" style="filled" ];
+N1184655215[label="7,14" color="#0B1FCB" style="filled" ];
+
+
+
+//Conexiones de cada columna
+N1645637315->N308000919[dir=both];
+N308000919->N322856185[dir=both];
+N308000919->N31241420[dir=both];
+N322856185->N1259079362[dir=both];
+N322856185->N187561193[dir=both];
+N1259079362->N448600342[dir=both];
+N1259079362->N1413204981[dir=both];
+N448600342->N1441633750[dir=both];
+N448600342->N2040179455[dir=both];
+N1441633750->N898902590[dir=both];
+N1441633750->N30318594[dir=both];
+N898902590->N512032856[dir=both];
+N898902590->N2001468308[dir=both];
+N512032856->N1820516151[dir=both];
+N512032856->N1804225412[dir=both];
+N1820516151->N1442362452[dir=both];
+N1820516151->N266629280[dir=both];
+N1442362452->N1101635855[dir=both];
+N1442362452->N2069766126[dir=both];
+N1101635855->N1998126754[dir=both];
+N1101635855->N1407306826[dir=both];
+N1998126754->N219806737[dir=both];
+N1998126754->N1779330009[dir=both];
+N219806737->N500409330[dir=both];
+N219806737->N1187211080[dir=both];
+N500409330->N301914270[dir=both];
+N500409330->N1298768145[dir=both];
+N301914270->N555993581[dir=both];
+N301914270->N272086890[dir=both];
+N555993581->N167663126[dir=both];
+
+
+
+//Conexiones de cada fila
+N1645637315->N1670926508[dir=both];
+N1670926508->N1674883870[dir=both];
+N1670926508->N187561193[constraint=false,dir=both];
+N187561193->N1415219526[dir=both];
+N187561193->N30318594[constraint=false,dir=both];
+N30318594->N36638012[dir=both];
+N30318594->N2001468308[constraint=false,dir=both];
+N2001468308->N1878826950[dir=both];
+N2001468308->N1804225412[constraint=false,dir=both];
+N1804225412->N1576496011[dir=both];
+N1804225412->N266629280[constraint=false,dir=both];
+N266629280->N1531610931[dir=both];
+N266629280->N2069766126[constraint=false,dir=both];
+N2069766126->N257588772[dir=both];
+N2069766126->N1407306826[constraint=false,dir=both];
+N1407306826->N1575339052[dir=both];
+N1407306826->N1779330009[constraint=false,dir=both];
+N1779330009->N513960107[dir=both];
+N1779330009->N1187211080[constraint=false,dir=both];
+N1187211080->N560469604[dir=both];
+N1187211080->N1298768145[constraint=false,dir=both];
+N1298768145->N46118022[dir=both];
+N1298768145->N272086890[constraint=false,dir=both];
+N272086890->N139572039[dir=both];
+N272086890->N167663126[constraint=false,dir=both];
+N1674883870->N76131794[dir=both];
+N1674883870->N1415219526[constraint=false,dir=both];
+N1415219526->N607141344[dir=both];
+N1415219526->N1413204981[constraint=false,dir=both];
+N1413204981->N1586270903[dir=both];
+N1413204981->N2040179455[constraint=false,dir=both];
+N2040179455->N1289830128[dir=both];
+N2040179455->N36638012[constraint=false,dir=both];
+N36638012->N687839604[dir=both];
+N36638012->N46118022[constraint=false,dir=both];
+N46118022->N614879877[dir=both];
+N46118022->N139572039[constraint=false,dir=both];
+N139572039->N1888531683[dir=both];
+N76131794->N995778575[dir=both];
+N76131794->N607141344[constraint=false,dir=both];
+N607141344->N998217578[dir=both];
+N607141344->N1586270903[constraint=false,dir=both];
+N1586270903->N1522892119[dir=both];
+N1586270903->N560469604[constraint=false,dir=both];
+N560469604->N1542574897[dir=both];
+N560469604->N614879877[constraint=false,dir=both];
+N614879877->N680399102[dir=both];
+N995778575->N442915576[dir=both];
+N995778575->N31241420[constraint=false,dir=both];
+N31241420->N252822786[dir=both];
+N31241420->N998217578[constraint=false,dir=both];
+N998217578->N68708745[dir=both];
+N998217578->N1522892119[constraint=false,dir=both];
+N1522892119->N158514833[dir=both];
+N1522892119->N1289830128[constraint=false,dir=both];
+N1289830128->N687839604[constraint=false,dir=both];
+N687839604->N1184655215[dir=both];
+N687839604->N1878826950[constraint=false,dir=both];
+N1878826950->N1548721365[dir=both];
+N1878826950->N513960107[constraint=false,dir=both];
+N513960107->N442766749[dir=both];
+N513960107->N1542574897[constraint=false,dir=both];
+N1542574897->N117356150[dir=both];
+N442915576->N1558988521[dir=both];
+N442915576->N252822786[constraint=false,dir=both];
+N252822786->N653736776[dir=both];
+N252822786->N68708745[constraint=false,dir=both];
+N68708745->N1085974318[dir=both];
+N68708745->N158514833[constraint=false,dir=both];
+N158514833->N1548721365[constraint=false,dir=both];
+N1548721365->N2025088531[dir=both];
+N1548721365->N1576496011[constraint=false,dir=both];
+N1576496011->N2059962969[dir=both];
+N1576496011->N442766749[constraint=false,dir=both];
+N442766749->N167169648[dir=both];
+N442766749->N117356150[constraint=false,dir=both];
+N117356150->N373594493[dir=both];
+N1558988521->N356685723[dir=both];
+N1558988521->N653736776[constraint=false,dir=both];
+N653736776->N64151372[dir=both];
+N653736776->N1085974318[constraint=false,dir=both];
+N1085974318->N1031149357[dir=both];
+N1085974318->N2059962969[constraint=false,dir=both];
+N2059962969->N38587325[dir=both];
+N2059962969->N167169648[constraint=false,dir=both];
+N167169648->N812725752[dir=both];
+N167169648->N373594493[constraint=false,dir=both];
+N373594493->N625783813[dir=both];
+N356685723->N2104547108[dir=both];
+N356685723->N64151372[constraint=false,dir=both];
+N64151372->N1291532145[dir=both];
+N64151372->N1031149357[constraint=false,dir=both];
+N1031149357->N1964770787[dir=both];
+N1031149357->N38587325[constraint=false,dir=both];
+N38587325->N892365785[dir=both];
+N38587325->N812725752[constraint=false,dir=both];
+N812725752->N1843496033[dir=both];
+N812725752->N625783813[constraint=false,dir=both];
+N625783813->N1639362327[dir=both];
+N625783813->N680399102[constraint=false,dir=both];
+N680399102->N1695578715[dir=both];
+N2104547108->N1433007080[dir=both];
+N2104547108->N1291532145[constraint=false,dir=both];
+N1291532145->N1964770787[constraint=false,dir=both];
+N1964770787->N892365785[constraint=false,dir=both];
+N892365785->N1838307323[dir=both];
+N892365785->N1843496033[constraint=false,dir=both];
+N1843496033->N980009655[dir=both];
+N1433007080->N1804352674[dir=both];
+N1433007080->N2025088531[constraint=false,dir=both];
+N2025088531->N1838307323[constraint=false,dir=both];
+N1838307323->N1531610931[constraint=false,dir=both];
+N1531610931->N518263125[dir=both];
+N1531610931->N980009655[constraint=false,dir=both];
+N980009655->N1002553193[dir=both];
+N980009655->N1639362327[constraint=false,dir=both];
+N1639362327->N295202469[dir=both];
+N1804352674->N1785958407[dir=both];
+N1804352674->N518263125[constraint=false,dir=both];
+N518263125->N831172601[dir=both];
+N518263125->N295202469[constraint=false,dir=both];
+N295202469->N1599089295[dir=both];
+N295202469->N1695578715[constraint=false,dir=both];
+N1695578715->N61330463[dir=both];
+N1785958407->N289518490[dir=both];
+N1785958407->N831172601[constraint=false,dir=both];
+N831172601->N257588772[constraint=false,dir=both];
+N257588772->N1575339052[constraint=false,dir=both];
+N1575339052->N1002553193[constraint=false,dir=both];
+N1002553193->N1599089295[constraint=false,dir=both];
+N1599089295->N61330463[constraint=false,dir=both];
+N61330463->N1888531683[constraint=false,dir=both];
+N289518490->N1184655215[constraint=false,dir=both];
+
+
+
+//Los rankSame
+{ rank=same; N1645637315;N308000919;N322856185;N1259079362;N448600342;N1441633750;N898902590;N512032856;N1820516151;N1442362452;N1101635855;N1998126754;N219806737;N500409330;N301914270;N555993581;}
+{rank=same; N1670926508;N187561193;N30318594;N2001468308;N1804225412;N266629280;N2069766126;N1407306826;N1779330009;N1187211080;N1298768145;N272086890;N167663126;}
+{rank=same; N1674883870;N1415219526;N1413204981;N2040179455;N36638012;N46118022;N139572039;}
+{rank=same; N76131794;N607141344;N1586270903;N560469604;N614879877;}
+{rank=same; N995778575;N31241420;N998217578;N1522892119;N1289830128;N687839604;N1878826950;N513960107;N1542574897;}
+{rank=same; N442915576;N252822786;N68708745;N158514833;N1548721365;N1576496011;N442766749;N117356150;}
+{rank=same; N1558988521;N653736776;N1085974318;N2059962969;N167169648;N373594493;}
+{rank=same; N356685723;N64151372;N1031149357;N38587325;N812725752;N625783813;N680399102;}
+{rank=same; N2104547108;N1291532145;N1964770787;N892365785;N1843496033;}
+{rank=same; N1433007080;N2025088531;N1838307323;N1531610931;N980009655;N1639362327;}
+{rank=same; N1804352674;N518263125;N295202469;N1695578715;}
+{rank=same; N1785958407;N831172601;N257588772;N1575339052;N1002553193;N1599089295;N61330463;N1888531683;}
+{rank=same; N289518490;N1184655215;}
+
+}

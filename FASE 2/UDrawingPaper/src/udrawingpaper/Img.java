@@ -17,14 +17,16 @@ public class Img {
     private BigInteger clientId;
     private Matrix matrix;
     private int layersCounter;
+    private int albumId;
 
     
-    public Img(int id,BinarySearchTree tree,BigInteger clientId,Matrix matrix,int layersCounter){
+    public Img(int id,BinarySearchTree tree,BigInteger clientId,Matrix matrix,int layersCounter,int albumId){
         this.id = id;
         this.tree=tree;
         this.clientId=clientId;
         this.matrix=matrix;
         this.layersCounter=layersCounter;
+        this.albumId=albumId;
    
     }
 
@@ -66,6 +68,14 @@ public class Img {
 
     public void setLayersCounter(int layersCounter) {
         this.layersCounter = layersCounter;
+    }
+
+    public int getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
     
 

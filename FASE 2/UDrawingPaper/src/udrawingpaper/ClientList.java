@@ -292,6 +292,7 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAvlTree().insert(img); 
+                    temp.client.getImgList().finalInsert(img); 
                     temp.client.setImgCounter(temp.client.getImgCounter()+1); 
                     
                 }
@@ -335,6 +336,44 @@ public class ClientList {
             }while(temp != null);
         }
     }
+    public String[] returnMyLayersCodes(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                   temp.client.getAbbTree().collectCodes(); 
+                   return temp.client.getAbbTree().allCodes.split(",");
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return null;
+    }
+    public String[] returnMyImgsCodes(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                   temp.client.getImgList().imgCodes();
+                   return temp.client.getImgList().allCodes.split(",");
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return null;
+    }
+    
+    
     public void returnMeMyAlbumsList(BigInteger dpi) throws IOException{
         if(first == null){
             System.err.print("La lista se encuentra vacia");
@@ -400,6 +439,10 @@ public class ClientList {
         }
         return false;
     }
+    /*Método que sirve para meter todo en una tabla en la interfaz
+    Por eso se usan los [], ya que eso nos pide el objeto tabla
+    como parámtetro.
+    */
     
     public  Object[][] returnClientsData(){
         int rows = 0;
@@ -433,6 +476,8 @@ public class ClientList {
         clientsMatrix = new Object[rows][6];
         return clientsMatrix;
     }
+    
+    
         
     
 }

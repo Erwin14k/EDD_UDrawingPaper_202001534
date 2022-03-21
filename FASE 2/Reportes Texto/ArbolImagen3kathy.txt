@@ -1,0 +1,30 @@
+digraph G{
+node [shape=record,style=filled];
+rankdir=TB;
+N14 [ label ="<C0>|Capa 0|<C1>"];
+N15 [ label ="<C0>|Capa 1|<C1>"];
+N16 [ label ="<C0>|Capa 2|<C1>"];
+N17 [ label ="<C0>|Capa 3|<C1>"];
+N18 [ label ="<C0>|Capa 4|<C1>"];
+N19 [ label ="<C0>|Capa 5|<C1>"];
+N20 [ label ="<C0>|Capa 6|<C1>"];
+N21 [ label ="<C0>|Capa 7|<C1>"];
+N22 [ label ="<C0>|Capa 8|<C1>"];
+N23 [ label ="<C0>|Capa 9|<C1>"];
+N24 [ label ="<C0>|Capa 10|<C1>"];
+N25 [ label ="<C0>|Capa 11|<C1>"];
+N26 [ label ="Capa 12"];
+N25:C0->N26
+N24:C0->N25
+N23:C0->N24
+N22:C0->N23
+N21:C0->N22
+N20:C0->N21
+N19:C0->N20
+N18:C0->N19
+N17:C0->N18
+N16:C0->N17
+N15:C0->N16
+N14:C0->N15
+
+}

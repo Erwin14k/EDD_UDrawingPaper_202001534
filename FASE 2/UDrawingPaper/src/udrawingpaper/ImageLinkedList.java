@@ -12,6 +12,7 @@ package udrawingpaper;
 public class ImageLinkedList {
     private ImageLinkedListNode first;
     private int countImg=0;
+    public String allCodes="";
     
     public boolean isEmpty(){
         return first==null;
@@ -70,4 +71,23 @@ public class ImageLinkedList {
         return conections;
         
     }
+    
+    //Este método recolecta todos los id´s de las imagenes para mostrarlas dentro de un combobx en la interfaz
+    public String[] imgCodes(){
+        allCodes="";
+        ImageLinkedListNode temp=first;
+        while(temp!=null){
+            allCodes+=temp.img.getId()+",";
+            temp=temp.next;
+                
+            }
+            
+        if(allCodes.equals("")){ 
+            String empty="";
+            empty+="No hay imagenes!!,";
+            return empty.split(",");
+        }
+        return allCodes.split(",");
+    }
+        
 }
