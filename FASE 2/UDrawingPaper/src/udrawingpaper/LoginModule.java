@@ -32,6 +32,7 @@ public class LoginModule {
     static SelfBalancingTree avlTreeHandler= new SelfBalancingTree();
     static ClientList clientListHandler = new ClientList();
     static Position positionHandler= new Position();
+    static BTree bTreeHandler=new BTree();
     //Objeto de tipo admin, este objeto es para validar el inicio de sesión como admin
     static BigInteger adminCode=new BigInteger("0");
     static Admin admin=new Admin("admin","EDD2022",adminCode);
@@ -2156,6 +2157,7 @@ public class LoginModule {
             JsonParser parser = new JsonParser();
             // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
             JsonArray clientsList = parser.parse(clientsJsonContent).getAsJsonArray();
+            System.out.println("el numero de clientes es: "+clientsList.size());
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < clientsList.size(); i++) {
@@ -2175,9 +2177,12 @@ public class LoginModule {
 
                 Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree,albumsList,imgList);
                 clientListHandler.finalInsert(newClient);
+                bTreeHandler.insert(newClient);
                 clientsJsonContent ="";
             
             }
+            //System.out.println(bTreeHandler.getCode());
+            //System.out.println("Ese fue el codigo del arbol");
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Clientes Realizada Con Éxito!!</p></html>" );
         } catch (Exception e) {
         }

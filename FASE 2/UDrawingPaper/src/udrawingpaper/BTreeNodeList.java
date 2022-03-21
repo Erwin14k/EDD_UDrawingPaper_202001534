@@ -24,87 +24,83 @@ public class BTreeNodeList {
             head=newNode;
             end=newNode;
             size++;
+            System.out.println("se inserto: "+newNode.client.getName());
             return true;
         }else{
-            
-        }
-        
-    }
-    /*
-    insertar(nuevo){
-        if(this.head==null){
-            this.head=nuevo
-            this.end=nuevo;
-            this.size++;
-            return true;
-        }else{// esto valida si solo se tiene un dato en el arbol
-            if(this.head == this.end){ 
-                if(nuevo.data.id < this.head.data.id){
-                    nuevo.siguiente = this.head;
-                    this.head.prev = nuevo;
-                    //cambiar punteros de paginas
-                    this.head.izquierda = nuevo.der;
-
-                    this.head = nuevo;
-                    this.size++;
+            if(head==end){
+                if(newNode.client.getDpi().compareTo(head.client.getDpi())==-1){
+                    newNode.next=head;
+                    head.previous=newNode;
+                    //Cambiar los punteros en las ramas
+                    head.left=newNode.right;
+                    head=newNode;
+                    size++;
+                    System.out.println("se inserto: "+newNode.client.getName());
                     return true;
-                }else if(nuevo.data.id> this.end.data.id){
-                    this.end.siguiente = nuevo;
-                    nuevo.prev = this.end;
-                    //cambiar punteros de paginas
-                    this.end.der = nuevo.izquierda;
-
-                    this.end = nuevo;
-                    this.size++;
-                    return true;
-                }else{ // el dato es igual al primero
-                    console.log("Ya existe un dato con ese valor en la lista");
-                    return false;
-                }
-            }else{ //ahora bien si se tiene mas de un dato
-                if(nuevo.data.id < this.head.data.id){
-                    //si el dato es menor que mi cabeza
-                    nuevo.siguiente = this.head;
-                    this.head.prev = nuevo;
-                    //se cambian los punteros de mi pagina
-                    this.head.izquierda = nuevo.derecha;
-
-                    this.head = nuevo;
-                    this.size++;
-                    return true;
-                }else if(nuevo.data.id> this.end.data.id){
-                    this.end.siguiente = nuevo;
-                    nuevo.prev = this.end;
-                    //cambiar punteros de paginas
-                    this.end.derecha = nuevo.izquierda;
-
-                    this.end = nuevo;
-                    this.size++;
+                }else if(newNode.client.getDpi().compareTo(end.client.getDpi())==1){
+                    end.next=newNode;
+                    newNode.previous=end;
+                    //Cambiar los punteros de las ramas
+                    end.right=newNode.left;
+                    end=newNode;
+                    size++;
+                    System.out.println("se inserto: "+newNode.client.getName());
                     return true;
                 }else{
-                    let aux = this.head;
-                    while(aux != null){
-                        if(nuevo.data.id < aux.data.id){
-                            nuevo.siguiente = aux;
-                            nuevo.prev = aux.prev;
-                            // se cambian los punteros de las paginas
-                            aux.izquierda= nuevo.derecha;
-                            aux.prev.derecha = nuevo.izquierda;
-                            
-                            aux.prev.siguiente = nuevo;
-                            aux.prev = nuevo;
-                            this.size++;
+                    //Quiere decir que es igual que el primero
+                    System.out.println("Dato repetido en Árbol B");
+                    System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
+                    return false;
+                }
+            }else{
+                //Si hay más de un dato
+                if(newNode.client.getDpi().compareTo(head.client.getDpi())==-1){
+                    //Si el dato es menor que la cabeza
+                    newNode.next=head;
+                    head.previous=newNode;
+                    //Cambian los punteros de la rama
+                    head.left=newNode.right;
+                    head=newNode;
+                    size++;
+                    System.out.println("se inserto: "+newNode.client.getName());
+                    return true;
+                }else if(newNode.client.getDpi().compareTo(end.client.getDpi())==1){
+                    end.next=newNode;
+                    newNode.previous=end;
+                    //Cambiar los punteros de las ramas
+                    end.right=newNode.left;
+                    end=newNode;
+                    size++;
+                    System.out.println("se inserto: "+newNode.client.getName());
+                    return true;
+                }else{
+                    BTreeNode temp=head;
+                    while(temp!=null){
+                        if(newNode.client.getDpi().compareTo(temp.client.getDpi())==-1){
+                            newNode.next=temp;
+                            newNode.previous=temp.previous;
+                            //Cambian punteros de ramas
+                            temp.left=newNode.right;
+                            temp.previous.right=newNode.left;
+                            temp.previous.next=newNode;
+                            temp.previous=newNode;
+                            size++;
+                            System.out.println("se inserto: "+newNode.client.getName());
                             return true;
-                        }else if(nuevo.data.id == aux.data.id){
-                            console.log("Ya existe un dato con ese valor en la lista");
+                        }else if(newNode.client.getDpi().compareTo(temp.client.getDpi())==0){
+                            System.out.println("Nodo repetido");
+                            System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
                             return false;
                         }else{
-                            aux = aux.siguiente;
+                            temp=temp.next;
                         }
                     }
                 }
+                
             }
         }
+        System.out.println("se inserto: "+newNode.client.getName()+"NOOOOOOOO");
+        return false;
     }
-}*/
+
 }

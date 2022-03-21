@@ -10,6 +10,80 @@ package udrawingpaper;
  * @author Erwin14k
  */
 public class BTreeBranch {
+    boolean root;
+    int max;
+    int min;
+    int size;
+    BTreeNodeList list;
+    public BTreeBranch(){
+        this.max=4;
+        this.min=2;
+        this.size=0;
+        this.list=new BTreeNodeList();
+    }
+    
+    public  Object insertInBranch(Object node){
+        if(list.insert((BTreeNode)node)){
+            size=list.size;
+            if(size<5){
+                System.out.println(this);
+                return this;
+            }else if(size==5){
+                return divide(this);
+            }
+        }
+        return null;
+    }
+   
+    
+    public BTreeNode divide(BTreeBranch branch){
+        BTreeNode temp=branch.list.head; 
+        //Ubicamos la mitad de la rama
+        for (int i = 0; i < 2; i++) {
+            temp=temp.next;
+        }
+        BTreeNode first=branch.list.head;
+        BTreeNode second=branch.list.head.next;
+        BTreeNode third=temp.next;
+        BTreeNode fourth=branch.list.end;
+        
+        first.next=null;
+        first.previous=null;
+        second.next=null;
+        second.previous=null;
+        third.next=null;
+        third.previous=null;
+        fourth.next=null;
+        fourth.previous=null;
+        temp.next=null;
+        temp.previous=null;
+        
+        //Se crean las nuevas ramas
+        BTreeBranch leftBranch=new BTreeBranch();
+        leftBranch.insertInBranch(first);
+        leftBranch.insertInBranch(second);
+        
+        BTreeBranch rightBranch=new BTreeBranch();
+        rightBranch.insertInBranch(third);
+        rightBranch.insertInBranch(fourth);
+        
+        temp.left=leftBranch;
+        temp.right=rightBranch;
+        return temp;
+    }
+    public boolean isLeaf(BTreeBranch branch){
+        if(branch.list.head.left==null){
+            System.out.println("Es hoja");
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+        
+    
+   
+}
     
     
     /*boolean leaf;
@@ -66,4 +140,4 @@ public class BTreeBranch {
             }
         }
     }*/
-}
+
