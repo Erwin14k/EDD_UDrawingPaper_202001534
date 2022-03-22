@@ -23,12 +23,15 @@ public class BTreeBranch {
     }
     
     public  Object insertInBranch(Object node){
+        //System.out.println(node);
         if(list.insert((BTreeNode)node)){
             size=list.size;
             if(size<5){
-                System.out.println(this);
+                //System.out.println("queeee"+size);
+                //System.out.println(this);
                 return this;
             }else if(size==5){
+                //System.out.println("siuuu"+size);
                 return divide(this);
             }
         }
@@ -73,7 +76,7 @@ public class BTreeBranch {
     }
     public boolean isLeaf(BTreeBranch branch){
         if(branch.list.head.left==null){
-            System.out.println("Es hoja");
+            //System.out.println("Es hoja");
             return true;
         }else{
             return false;

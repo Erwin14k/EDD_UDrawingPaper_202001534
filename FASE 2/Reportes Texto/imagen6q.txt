@@ -4,28 +4,117 @@ rankdir = TB;
 node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
 //Las columnas cabeceras
-N1980731833[label="-6,-6" color="white" style="filled" ];
+N1870258812[label="-6,-6" color="white" style="filled" ];
+N1574409230[label="0,-1" color="white" style="filled" ];
+N380191382[label="1,-1" color="white" style="filled" ];
+N655087236[label="5,-1" color="white" style="filled" ];
 
 
 
 //Las filas cabeceras
+N121743899[label="-1,3" color="white" style="filled" ];
+N1716988185[label="-1,4" color="white" style="filled" ];
+N985037495[label="-1,5" color="white" style="filled" ];
+N1139811475[label="-1,6" color="white" style="filled" ];
+N1231769476[label="-1,7" color="white" style="filled" ];
+N371959889[label="-1,8" color="white" style="filled" ];
+N524360673[label="-1,9" color="white" style="filled" ];
+N1566007334[label="-1,10" color="white" style="filled" ];
+N1322455911[label="-1,11" color="white" style="filled" ];
+N91309004[label="-1,12" color="white" style="filled" ];
+N309907088[label="-1,15" color="white" style="filled" ];
 
 
 
 //Los valores de la Matriz
+N1959320233[label="1,3" color="#000000" style="filled" ];
+N584497020[label="1,4" color="#000000" style="filled" ];
+N758579145[label="0,5" color="#000000" style="filled" ];
+N2037295281[label="1,5" color="#000000" style="filled" ];
+N1262565543[label="0,6" color="#000000" style="filled" ];
+N1555766244[label="1,6" color="#FFFFFF" style="filled" ];
+N1181314829[label="0,7" color="#000000" style="filled" ];
+N1255042129[label="1,7" color="#00FF00" style="filled" ];
+N143192495[label="0,8" color="#000000" style="filled" ];
+N208187233[label="1,8" color="#00FF00" style="filled" ];
+N24422630[label="0,9" color="#000000" style="filled" ];
+N945942653[label="1,9" color="#FFFFFF" style="filled" ];
+N1999338327[label="0,10" color="#000000" style="filled" ];
+N1056031092[label="1,10" color="#000000" style="filled" ];
+N451313108[label="1,11" color="#000000" style="filled" ];
+N758355181[label="1,12" color="#000000" style="filled" ];
+N32420831[label="5,15" color="#FFCC27" style="filled" ];
 
 
 
 //Conexiones de cada columna
+N1870258812->N1574409230[dir=both];
+N1574409230->N380191382[dir=both];
+N1574409230->N758579145[dir=both];
+N380191382->N655087236[dir=both];
+N380191382->N1959320233[dir=both];
+N655087236->N32420831[dir=both];
 
 
 
 //Conexiones de cada fila
+N1870258812->N121743899[dir=both];
+N121743899->N1716988185[dir=both];
+N121743899->N1959320233[constraint=false,dir=both];
+N1959320233->N584497020[dir=both];
+N1716988185->N985037495[dir=both];
+N1716988185->N584497020[constraint=false,dir=both];
+N584497020->N2037295281[dir=both];
+N985037495->N1139811475[dir=both];
+N985037495->N758579145[constraint=false,dir=both];
+N758579145->N1262565543[dir=both];
+N758579145->N2037295281[constraint=false,dir=both];
+N2037295281->N1555766244[dir=both];
+N1139811475->N1231769476[dir=both];
+N1139811475->N1262565543[constraint=false,dir=both];
+N1262565543->N1181314829[dir=both];
+N1262565543->N1555766244[constraint=false,dir=both];
+N1555766244->N1255042129[dir=both];
+N1231769476->N371959889[dir=both];
+N1231769476->N1181314829[constraint=false,dir=both];
+N1181314829->N143192495[dir=both];
+N1181314829->N1255042129[constraint=false,dir=both];
+N1255042129->N208187233[dir=both];
+N371959889->N524360673[dir=both];
+N371959889->N143192495[constraint=false,dir=both];
+N143192495->N24422630[dir=both];
+N143192495->N208187233[constraint=false,dir=both];
+N208187233->N945942653[dir=both];
+N524360673->N1566007334[dir=both];
+N524360673->N24422630[constraint=false,dir=both];
+N24422630->N1999338327[dir=both];
+N24422630->N945942653[constraint=false,dir=both];
+N945942653->N1056031092[dir=both];
+N1566007334->N1322455911[dir=both];
+N1566007334->N1999338327[constraint=false,dir=both];
+N1999338327->N1056031092[constraint=false,dir=both];
+N1056031092->N451313108[dir=both];
+N1322455911->N91309004[dir=both];
+N1322455911->N451313108[constraint=false,dir=both];
+N451313108->N758355181[dir=both];
+N91309004->N309907088[dir=both];
+N91309004->N758355181[constraint=false,dir=both];
+N309907088->N32420831[constraint=false,dir=both];
 
 
 
 //Los rankSame
-{ rank=same; N1980731833;}
-{rank=same; N1980731833;}
+{ rank=same; N1870258812;N1574409230;N380191382;N655087236;}
+{rank=same; N121743899;N1959320233;}
+{rank=same; N1716988185;N584497020;}
+{rank=same; N985037495;N758579145;N2037295281;}
+{rank=same; N1139811475;N1262565543;N1555766244;}
+{rank=same; N1231769476;N1181314829;N1255042129;}
+{rank=same; N371959889;N143192495;N208187233;}
+{rank=same; N524360673;N24422630;N945942653;}
+{rank=same; N1566007334;N1999338327;N1056031092;}
+{rank=same; N1322455911;N451313108;}
+{rank=same; N91309004;N758355181;}
+{rank=same; N309907088;N32420831;}
 
 }

@@ -4,28 +4,109 @@ rankdir = TB;
 node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
 //Las columnas cabeceras
-N919398490[label="-6,-6" color="white" style="filled" ];
+N851688847[label="-6,-6" color="white" style="filled" ];
+N599139035[label="0,-1" color="white" style="filled" ];
+N383721523[label="1,-1" color="white" style="filled" ];
 
 
 
 //Las filas cabeceras
+N1990126379[label="-1,3" color="white" style="filled" ];
+N1503530930[label="-1,4" color="white" style="filled" ];
+N1269587616[label="-1,5" color="white" style="filled" ];
+N605888862[label="-1,6" color="white" style="filled" ];
+N626737477[label="-1,7" color="white" style="filled" ];
+N202455491[label="-1,8" color="white" style="filled" ];
+N635514815[label="-1,9" color="white" style="filled" ];
+N1757146508[label="-1,10" color="white" style="filled" ];
+N387307703[label="-1,11" color="white" style="filled" ];
+N315569335[label="-1,12" color="white" style="filled" ];
 
 
 
 //Los valores de la Matriz
+N1048538502[label="1,3" color="#000000" style="filled" ];
+N153034824[label="1,4" color="#000000" style="filled" ];
+N821465532[label="0,5" color="#000000" style="filled" ];
+N1534554521[label="1,5" color="#000000" style="filled" ];
+N505488428[label="0,6" color="#000000" style="filled" ];
+N1858882240[label="1,6" color="#FFFFFF" style="filled" ];
+N1781747156[label="0,7" color="#000000" style="filled" ];
+N178786994[label="1,7" color="#00FF00" style="filled" ];
+N490686351[label="0,8" color="#000000" style="filled" ];
+N296326306[label="1,8" color="#00FF00" style="filled" ];
+N1636050606[label="0,9" color="#000000" style="filled" ];
+N728995246[label="1,9" color="#FFFFFF" style="filled" ];
+N1285012592[label="0,10" color="#000000" style="filled" ];
+N298204612[label="1,10" color="#000000" style="filled" ];
+N1362614276[label="1,11" color="#000000" style="filled" ];
+N1725884777[label="1,12" color="#000000" style="filled" ];
 
 
 
 //Conexiones de cada columna
+N851688847->N599139035[dir=both];
+N599139035->N383721523[dir=both];
+N599139035->N821465532[dir=both];
+N383721523->N1048538502[dir=both];
 
 
 
 //Conexiones de cada fila
+N851688847->N1990126379[dir=both];
+N1990126379->N1503530930[dir=both];
+N1990126379->N1048538502[constraint=false,dir=both];
+N1048538502->N153034824[dir=both];
+N1503530930->N1269587616[dir=both];
+N1503530930->N153034824[constraint=false,dir=both];
+N153034824->N1534554521[dir=both];
+N1269587616->N605888862[dir=both];
+N1269587616->N821465532[constraint=false,dir=both];
+N821465532->N505488428[dir=both];
+N821465532->N1534554521[constraint=false,dir=both];
+N1534554521->N1858882240[dir=both];
+N605888862->N626737477[dir=both];
+N605888862->N505488428[constraint=false,dir=both];
+N505488428->N1781747156[dir=both];
+N505488428->N1858882240[constraint=false,dir=both];
+N1858882240->N178786994[dir=both];
+N626737477->N202455491[dir=both];
+N626737477->N1781747156[constraint=false,dir=both];
+N1781747156->N490686351[dir=both];
+N1781747156->N178786994[constraint=false,dir=both];
+N178786994->N296326306[dir=both];
+N202455491->N635514815[dir=both];
+N202455491->N490686351[constraint=false,dir=both];
+N490686351->N1636050606[dir=both];
+N490686351->N296326306[constraint=false,dir=both];
+N296326306->N728995246[dir=both];
+N635514815->N1757146508[dir=both];
+N635514815->N1636050606[constraint=false,dir=both];
+N1636050606->N1285012592[dir=both];
+N1636050606->N728995246[constraint=false,dir=both];
+N728995246->N298204612[dir=both];
+N1757146508->N387307703[dir=both];
+N1757146508->N1285012592[constraint=false,dir=both];
+N1285012592->N298204612[constraint=false,dir=both];
+N298204612->N1362614276[dir=both];
+N387307703->N315569335[dir=both];
+N387307703->N1362614276[constraint=false,dir=both];
+N1362614276->N1725884777[dir=both];
+N315569335->N1725884777[constraint=false,dir=both];
 
 
 
 //Los rankSame
-{ rank=same; N919398490;}
-{rank=same; N919398490;}
+{ rank=same; N851688847;N599139035;N383721523;}
+{rank=same; N1990126379;N1048538502;}
+{rank=same; N1503530930;N153034824;}
+{rank=same; N1269587616;N821465532;N1534554521;}
+{rank=same; N605888862;N505488428;N1858882240;}
+{rank=same; N626737477;N1781747156;N178786994;}
+{rank=same; N202455491;N490686351;N296326306;}
+{rank=same; N635514815;N1636050606;N728995246;}
+{rank=same; N1757146508;N1285012592;N298204612;}
+{rank=same; N387307703;N1362614276;}
+{rank=same; N315569335;N1725884777;}
 
 }

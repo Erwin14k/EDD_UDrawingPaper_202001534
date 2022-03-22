@@ -4,224 +4,109 @@ rankdir = TB;
 node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
 //Las columnas cabeceras
-N512985934[label="-6,-6" color="white" style="filled" ];
-N254411171[label="54,-1" color="white" style="filled" ];
-N232960582[label="55,-1" color="white" style="filled" ];
-N965134212[label="56,-1" color="white" style="filled" ];
-N1003352577[label="57,-1" color="white" style="filled" ];
-N1681251266[label="58,-1" color="white" style="filled" ];
-N2094867840[label="59,-1" color="white" style="filled" ];
-N1936222072[label="60,-1" color="white" style="filled" ];
-N669114094[label="61,-1" color="white" style="filled" ];
-N1841363483[label="80,-1" color="white" style="filled" ];
-N2015638278[label="81,-1" color="white" style="filled" ];
+N1717511358[label="-6,-6" color="white" style="filled" ];
+N582125355[label="0,-1" color="white" style="filled" ];
+N130355340[label="1,-1" color="white" style="filled" ];
 
 
 
 //Las filas cabeceras
-N1221056733[label="-1,109" color="white" style="filled" ];
-N1643669893[label="-1,110" color="white" style="filled" ];
-N184702851[label="-1,111" color="white" style="filled" ];
-N1382545894[label="-1,112" color="white" style="filled" ];
-N605078087[label="-1,113" color="white" style="filled" ];
-N101069569[label="-1,114" color="white" style="filled" ];
-N522310157[label="-1,115" color="white" style="filled" ];
+N540975753[label="-1,3" color="white" style="filled" ];
+N1062930660[label="-1,4" color="white" style="filled" ];
+N157703163[label="-1,5" color="white" style="filled" ];
+N638090027[label="-1,6" color="white" style="filled" ];
+N1945612169[label="-1,7" color="white" style="filled" ];
+N336368955[label="-1,8" color="white" style="filled" ];
+N789495234[label="-1,9" color="white" style="filled" ];
+N1245334059[label="-1,10" color="white" style="filled" ];
+N75448066[label="-1,11" color="white" style="filled" ];
+N1948964859[label="-1,12" color="white" style="filled" ];
 
 
 
 //Los valores de la Matriz
-N1927590086[label="54,109" color="#FFEB00" style="filled" ];
-N1346651687[label="55,109" color="#FFEB00" style="filled" ];
-N1735260437[label="56,109" color="#FFEB00" style="filled" ];
-N1993211471[label="57,109" color="#FFEB00" style="filled" ];
-N569905872[label="58,109" color="#FFEB00" style="filled" ];
-N1400839606[label="59,109" color="#FFEB00" style="filled" ];
-N1540551581[label="60,109" color="#FFEB00" style="filled" ];
-N1123307822[label="61,109" color="#FFEB00" style="filled" ];
-N595309874[label="80,109" color="#FFEB00" style="filled" ];
-N146968134[label="81,109" color="#FFEB00" style="filled" ];
-N1153489624[label="54,110" color="#FFEB00" style="filled" ];
-N618499663[label="55,110" color="#FFEB00" style="filled" ];
-N1525775811[label="56,110" color="#FFEB00" style="filled" ];
-N1180526693[label="57,110" color="#FFEB00" style="filled" ];
-N67730540[label="58,110" color="#FFEB00" style="filled" ];
-N1282291028[label="59,110" color="#FFEB00" style="filled" ];
-N488654463[label="60,110" color="#FFEB00" style="filled" ];
-N806558718[label="61,110" color="#FFEB00" style="filled" ];
-N2134305676[label="80,110" color="#FFEB00" style="filled" ];
-N1120904619[label="81,110" color="#FFEB00" style="filled" ];
-N1573064755[label="54,111" color="#FFEB00" style="filled" ];
-N1973890206[label="55,111" color="#FFEB00" style="filled" ];
-N1032176429[label="56,111" color="#FFEB00" style="filled" ];
-N47766475[label="57,111" color="#FFEB00" style="filled" ];
-N1197408555[label="58,111" color="#FFEB00" style="filled" ];
-N198186626[label="59,111" color="#FFEB00" style="filled" ];
-N408887422[label="60,111" color="#FFEB00" style="filled" ];
-N1545446973[label="61,111" color="#FFEB00" style="filled" ];
-N1676976844[label="80,111" color="#FFEB00" style="filled" ];
-N1746656310[label="81,111" color="#FFEB00" style="filled" ];
-N161897883[label="54,112" color="#FFEB00" style="filled" ];
-N943402716[label="55,112" color="#FFEB00" style="filled" ];
-N2124351957[label="56,112" color="#FFEB00" style="filled" ];
-N1221824604[label="57,112" color="#FFEB00" style="filled" ];
-N1931626072[label="58,112" color="#FFEB00" style="filled" ];
-N311348014[label="59,112" color="#FFEB00" style="filled" ];
-N349808907[label="60,112" color="#FFEB00" style="filled" ];
-N1088195260[label="61,112" color="#FFEB00" style="filled" ];
-N564991097[label="80,112" color="#FFEB00" style="filled" ];
-N1168014553[label="81,112" color="#FFEB00" style="filled" ];
-N483787920[label="58,113" color="#FFEB00" style="filled" ];
-N956032220[label="59,113" color="#FFEB00" style="filled" ];
-N1908154726[label="60,113" color="#FFEB00" style="filled" ];
-N1207104316[label="61,113" color="#FFEB00" style="filled" ];
-N1806474710[label="58,114" color="#FFEB00" style="filled" ];
-N202787195[label="59,114" color="#FFEB00" style="filled" ];
-N481422990[label="60,114" color="#FFEB00" style="filled" ];
-N1284150583[label="61,114" color="#FFEB00" style="filled" ];
-N1137177437[label="58,115" color="#FFEB00" style="filled" ];
-N2099525583[label="59,115" color="#FFEB00" style="filled" ];
-N1852994427[label="60,115" color="#FFEB00" style="filled" ];
-N1984524463[label="61,115" color="#FFEB00" style="filled" ];
+N781222929[label="1,3" color="#000000" style="filled" ];
+N920905978[label="1,4" color="#000000" style="filled" ];
+N1268340235[label="0,5" color="#000000" style="filled" ];
+N1773061516[label="1,5" color="#000000" style="filled" ];
+N1127507108[label="0,6" color="#000000" style="filled" ];
+N1782177792[label="1,6" color="#FFFFFF" style="filled" ];
+N1804716610[label="0,7" color="#000000" style="filled" ];
+N1955393561[label="1,7" color="#00FF00" style="filled" ];
+N352168808[label="0,8" color="#000000" style="filled" ];
+N828469271[label="1,8" color="#00FF00" style="filled" ];
+N1422360483[label="0,9" color="#000000" style="filled" ];
+N1205358874[label="1,9" color="#FFFFFF" style="filled" ];
+N1049035874[label="0,10" color="#000000" style="filled" ];
+N81537645[label="1,10" color="#000000" style="filled" ];
+N1795778354[label="1,11" color="#000000" style="filled" ];
+N1851571144[label="1,12" color="#000000" style="filled" ];
 
 
 
 //Conexiones de cada columna
-N512985934->N254411171[dir=both];
-N254411171->N232960582[dir=both];
-N254411171->N1927590086[dir=both];
-N232960582->N965134212[dir=both];
-N232960582->N1346651687[dir=both];
-N965134212->N1003352577[dir=both];
-N965134212->N1735260437[dir=both];
-N1003352577->N1681251266[dir=both];
-N1003352577->N1993211471[dir=both];
-N1681251266->N2094867840[dir=both];
-N1681251266->N569905872[dir=both];
-N2094867840->N1936222072[dir=both];
-N2094867840->N1400839606[dir=both];
-N1936222072->N669114094[dir=both];
-N1936222072->N1540551581[dir=both];
-N669114094->N1841363483[dir=both];
-N669114094->N1123307822[dir=both];
-N1841363483->N2015638278[dir=both];
-N1841363483->N595309874[dir=both];
-N2015638278->N146968134[dir=both];
+N1717511358->N582125355[dir=both];
+N582125355->N130355340[dir=both];
+N582125355->N1268340235[dir=both];
+N130355340->N781222929[dir=both];
 
 
 
 //Conexiones de cada fila
-N512985934->N1221056733[dir=both];
-N1221056733->N1643669893[dir=both];
-N1221056733->N1927590086[constraint=false,dir=both];
-N1927590086->N1153489624[dir=both];
-N1927590086->N1346651687[constraint=false,dir=both];
-N1346651687->N618499663[dir=both];
-N1346651687->N1735260437[constraint=false,dir=both];
-N1735260437->N1525775811[dir=both];
-N1735260437->N1993211471[constraint=false,dir=both];
-N1993211471->N1180526693[dir=both];
-N1993211471->N569905872[constraint=false,dir=both];
-N569905872->N67730540[dir=both];
-N569905872->N1400839606[constraint=false,dir=both];
-N1400839606->N1282291028[dir=both];
-N1400839606->N1540551581[constraint=false,dir=both];
-N1540551581->N488654463[dir=both];
-N1540551581->N1123307822[constraint=false,dir=both];
-N1123307822->N806558718[dir=both];
-N1123307822->N595309874[constraint=false,dir=both];
-N595309874->N2134305676[dir=both];
-N595309874->N146968134[constraint=false,dir=both];
-N146968134->N1120904619[dir=both];
-N1643669893->N184702851[dir=both];
-N1643669893->N1153489624[constraint=false,dir=both];
-N1153489624->N1573064755[dir=both];
-N1153489624->N618499663[constraint=false,dir=both];
-N618499663->N1973890206[dir=both];
-N618499663->N1525775811[constraint=false,dir=both];
-N1525775811->N1032176429[dir=both];
-N1525775811->N1180526693[constraint=false,dir=both];
-N1180526693->N47766475[dir=both];
-N1180526693->N67730540[constraint=false,dir=both];
-N67730540->N1197408555[dir=both];
-N67730540->N1282291028[constraint=false,dir=both];
-N1282291028->N198186626[dir=both];
-N1282291028->N488654463[constraint=false,dir=both];
-N488654463->N408887422[dir=both];
-N488654463->N806558718[constraint=false,dir=both];
-N806558718->N1545446973[dir=both];
-N806558718->N2134305676[constraint=false,dir=both];
-N2134305676->N1676976844[dir=both];
-N2134305676->N1120904619[constraint=false,dir=both];
-N1120904619->N1746656310[dir=both];
-N184702851->N1382545894[dir=both];
-N184702851->N1573064755[constraint=false,dir=both];
-N1573064755->N161897883[dir=both];
-N1573064755->N1973890206[constraint=false,dir=both];
-N1973890206->N943402716[dir=both];
-N1973890206->N1032176429[constraint=false,dir=both];
-N1032176429->N2124351957[dir=both];
-N1032176429->N47766475[constraint=false,dir=both];
-N47766475->N1221824604[dir=both];
-N47766475->N1197408555[constraint=false,dir=both];
-N1197408555->N1931626072[dir=both];
-N1197408555->N198186626[constraint=false,dir=both];
-N198186626->N311348014[dir=both];
-N198186626->N408887422[constraint=false,dir=both];
-N408887422->N349808907[dir=both];
-N408887422->N1545446973[constraint=false,dir=both];
-N1545446973->N1088195260[dir=both];
-N1545446973->N1676976844[constraint=false,dir=both];
-N1676976844->N564991097[dir=both];
-N1676976844->N1746656310[constraint=false,dir=both];
-N1746656310->N1168014553[dir=both];
-N1382545894->N605078087[dir=both];
-N1382545894->N161897883[constraint=false,dir=both];
-N161897883->N943402716[constraint=false,dir=both];
-N943402716->N2124351957[constraint=false,dir=both];
-N2124351957->N1221824604[constraint=false,dir=both];
-N1221824604->N1931626072[constraint=false,dir=both];
-N1931626072->N483787920[dir=both];
-N1931626072->N311348014[constraint=false,dir=both];
-N311348014->N956032220[dir=both];
-N311348014->N349808907[constraint=false,dir=both];
-N349808907->N1908154726[dir=both];
-N349808907->N1088195260[constraint=false,dir=both];
-N1088195260->N1207104316[dir=both];
-N1088195260->N564991097[constraint=false,dir=both];
-N564991097->N1168014553[constraint=false,dir=both];
-N605078087->N101069569[dir=both];
-N605078087->N483787920[constraint=false,dir=both];
-N483787920->N1806474710[dir=both];
-N483787920->N956032220[constraint=false,dir=both];
-N956032220->N202787195[dir=both];
-N956032220->N1908154726[constraint=false,dir=both];
-N1908154726->N481422990[dir=both];
-N1908154726->N1207104316[constraint=false,dir=both];
-N1207104316->N1284150583[dir=both];
-N101069569->N522310157[dir=both];
-N101069569->N1806474710[constraint=false,dir=both];
-N1806474710->N1137177437[dir=both];
-N1806474710->N202787195[constraint=false,dir=both];
-N202787195->N2099525583[dir=both];
-N202787195->N481422990[constraint=false,dir=both];
-N481422990->N1852994427[dir=both];
-N481422990->N1284150583[constraint=false,dir=both];
-N1284150583->N1984524463[dir=both];
-N522310157->N1137177437[constraint=false,dir=both];
-N1137177437->N2099525583[constraint=false,dir=both];
-N2099525583->N1852994427[constraint=false,dir=both];
-N1852994427->N1984524463[constraint=false,dir=both];
+N1717511358->N540975753[dir=both];
+N540975753->N1062930660[dir=both];
+N540975753->N781222929[constraint=false,dir=both];
+N781222929->N920905978[dir=both];
+N1062930660->N157703163[dir=both];
+N1062930660->N920905978[constraint=false,dir=both];
+N920905978->N1773061516[dir=both];
+N157703163->N638090027[dir=both];
+N157703163->N1268340235[constraint=false,dir=both];
+N1268340235->N1127507108[dir=both];
+N1268340235->N1773061516[constraint=false,dir=both];
+N1773061516->N1782177792[dir=both];
+N638090027->N1945612169[dir=both];
+N638090027->N1127507108[constraint=false,dir=both];
+N1127507108->N1804716610[dir=both];
+N1127507108->N1782177792[constraint=false,dir=both];
+N1782177792->N1955393561[dir=both];
+N1945612169->N336368955[dir=both];
+N1945612169->N1804716610[constraint=false,dir=both];
+N1804716610->N352168808[dir=both];
+N1804716610->N1955393561[constraint=false,dir=both];
+N1955393561->N828469271[dir=both];
+N336368955->N789495234[dir=both];
+N336368955->N352168808[constraint=false,dir=both];
+N352168808->N1422360483[dir=both];
+N352168808->N828469271[constraint=false,dir=both];
+N828469271->N1205358874[dir=both];
+N789495234->N1245334059[dir=both];
+N789495234->N1422360483[constraint=false,dir=both];
+N1422360483->N1049035874[dir=both];
+N1422360483->N1205358874[constraint=false,dir=both];
+N1205358874->N81537645[dir=both];
+N1245334059->N75448066[dir=both];
+N1245334059->N1049035874[constraint=false,dir=both];
+N1049035874->N81537645[constraint=false,dir=both];
+N81537645->N1795778354[dir=both];
+N75448066->N1948964859[dir=both];
+N75448066->N1795778354[constraint=false,dir=both];
+N1795778354->N1851571144[dir=both];
+N1948964859->N1851571144[constraint=false,dir=both];
 
 
 
 //Los rankSame
-{ rank=same; N512985934;N254411171;N232960582;N965134212;N1003352577;N1681251266;N2094867840;N1936222072;N669114094;N1841363483;N2015638278;}
-{rank=same; N1221056733;N1927590086;N1346651687;N1735260437;N1993211471;N569905872;N1400839606;N1540551581;N1123307822;N595309874;N146968134;}
-{rank=same; N1643669893;N1153489624;N618499663;N1525775811;N1180526693;N67730540;N1282291028;N488654463;N806558718;N2134305676;N1120904619;}
-{rank=same; N184702851;N1573064755;N1973890206;N1032176429;N47766475;N1197408555;N198186626;N408887422;N1545446973;N1676976844;N1746656310;}
-{rank=same; N1382545894;N161897883;N943402716;N2124351957;N1221824604;N1931626072;N311348014;N349808907;N1088195260;N564991097;N1168014553;}
-{rank=same; N605078087;N483787920;N956032220;N1908154726;N1207104316;}
-{rank=same; N101069569;N1806474710;N202787195;N481422990;N1284150583;}
-{rank=same; N522310157;N1137177437;N2099525583;N1852994427;N1984524463;}
+{ rank=same; N1717511358;N582125355;N130355340;}
+{rank=same; N540975753;N781222929;}
+{rank=same; N1062930660;N920905978;}
+{rank=same; N157703163;N1268340235;N1773061516;}
+{rank=same; N638090027;N1127507108;N1782177792;}
+{rank=same; N1945612169;N1804716610;N1955393561;}
+{rank=same; N336368955;N352168808;N828469271;}
+{rank=same; N789495234;N1422360483;N1205358874;}
+{rank=same; N1245334059;N1049035874;N81537645;}
+{rank=same; N75448066;N1795778354;}
+{rank=same; N1948964859;N1851571144;}
 
 }

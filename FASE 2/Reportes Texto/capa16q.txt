@@ -4,35 +4,35 @@ rankdir = TB;
 node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
 //Las columnas cabeceras
-N1681350370[label="-6,-6" color="white" style="filled" ];
-N501555918[label="6,-1" color="white" style="filled" ];
+N1026976493[label="-6,-6" color="white" style="filled" ];
+N887616643[label="6,-1" color="white" style="filled" ];
 
 
 
 //Las filas cabeceras
-N1657055266[label="-1,15" color="white" style="filled" ];
+N1791711637[label="-1,15" color="white" style="filled" ];
 
 
 
 //Los valores de la Matriz
-N460149662[label="6,15" color="#FFCC27" style="filled" ];
+N1037081485[label="6,15" color="#FFCC27" style="filled" ];
 
 
 
 //Conexiones de cada columna
-N1681350370->N501555918[dir=both];
-N501555918->N460149662[dir=both];
+N1026976493->N887616643[dir=both];
+N887616643->N1037081485[dir=both];
 
 
 
 //Conexiones de cada fila
-N1681350370->N1657055266[dir=both];
-N1657055266->N460149662[constraint=false,dir=both];
+N1026976493->N1791711637[dir=both];
+N1791711637->N1037081485[constraint=false,dir=both];
 
 
 
 //Los rankSame
-{ rank=same; N1681350370;N501555918;}
-{rank=same; N1657055266;N460149662;}
+{ rank=same; N1026976493;N887616643;}
+{rank=same; N1791711637;N1037081485;}
 
 }

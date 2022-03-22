@@ -72,6 +72,43 @@ public class ImageLinkedList {
         
     }
     
+    public void imageDataSorting(Img img){
+        ImageLinkedListNode newNode=new ImageLinkedListNode(img);
+        ImageLinkedListNode temp1;
+        ImageLinkedListNode temp2;
+        if(first==null){
+            first=newNode;
+            newNode.next=null;
+            
+        }else{
+            temp1=first;
+            while(temp1!=null){
+                temp2=temp1.next;
+                if(newNode.img.getLayersCounter()>temp1.img.getLayersCounter()){
+                    newNode.next=first;
+                    first=newNode;
+                    break;
+                }else{
+                    if(newNode.img.getLayersCounter()<temp1.img.getLayersCounter()&&temp2==null){
+                        temp1.next=newNode;
+                        newNode.next=null;
+                        break;
+                    }else{
+                        if(temp1.img.getLayersCounter()>newNode.img.getLayersCounter()&& temp2.img.getLayersCounter()<=newNode.img.getLayersCounter()){
+                            temp1.next=newNode;
+                            newNode.next=temp2;
+                            break;
+                        }else{
+                            temp1=temp1.next;
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    
     //Este método recolecta todos los id´s de las imagenes para mostrarlas dentro de un combobx en la interfaz
     public String[] imgCodes(){
         allCodes="";
@@ -88,6 +125,41 @@ public class ImageLinkedList {
             return empty.split(",");
         }
         return allCodes.split(",");
+    }
+    
+    /*Método que sirve para meter todo en una tabla en la interfaz
+    Por eso se usan los [], ya que eso nos pide el objeto tabla
+    como parámtetro.
+    */
+    
+    public  Object[][] returnImgData(){
+        int rows = 0;
+        Object[][] imgTopData;
+        if(first!=null){
+            
+        
+            ImageLinkedListNode temp = first;
+            do{
+                rows++;
+                temp = temp.next;
+            }while(temp != null);
+            
+            imgTopData = new Object[rows][3];
+            ImageLinkedListNode aux = first;
+            int counter =0;
+            do{
+                imgTopData[counter][0] = counter+1+".";
+                imgTopData[counter][1] = aux.img.getId();
+                imgTopData[counter][2] = aux.img.getLayersCounter();
+                counter++;
+                aux = aux.next;
+            }while(aux != null);
+
+            return imgTopData;
+        
+        }
+        imgTopData = new Object[rows][3];
+        return imgTopData;
     }
         
 }

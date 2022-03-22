@@ -21,40 +21,47 @@ public class BTreeNodeList {
     
     public boolean  insert(BTreeNode newNode){
         if(head==null){
+            //System.out.println("ya no está vacía");
             head=newNode;
             end=newNode;
             size++;
-            System.out.println("se inserto: "+newNode.client.getName());
+            //System.out.println("se inserto: "+newNode.client.getDpi());
+            //System.out.println("se inserto: "+newNode.client.getName());
             return true;
         }else{
             if(head==end){
-                if(newNode.client.getDpi().compareTo(head.client.getDpi())==-1){
+                if(newNode.client.getDpi().compareTo(head.client.getDpi())==(0-1)){
+                    //System.out.println("menor? "+newNode.client.getDpi()+"-"+head.client.getDpi());
                     newNode.next=head;
                     head.previous=newNode;
                     //Cambiar los punteros en las ramas
                     head.left=newNode.right;
                     head=newNode;
                     size++;
-                    System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getDpi());
+                    //System.out.println("se inserto: "+newNode.client.getName());
                     return true;
-                }else if(newNode.client.getDpi().compareTo(end.client.getDpi())==1){
+                }else if(newNode.client.getDpi().compareTo(end.client.getDpi())== 1){
+                    //System.out.println("mayor? "+newNode.client.getDpi()+"-"+end.client.getDpi());
                     end.next=newNode;
                     newNode.previous=end;
                     //Cambiar los punteros de las ramas
                     end.right=newNode.left;
                     end=newNode;
                     size++;
-                    System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getDpi());
+                    //System.out.println("se inserto: "+newNode.client.getName());
                     return true;
                 }else{
                     //Quiere decir que es igual que el primero
                     System.out.println("Dato repetido en Árbol B");
-                    System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
+                    //System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
                     return false;
                 }
             }else{
                 //Si hay más de un dato
-                if(newNode.client.getDpi().compareTo(head.client.getDpi())==-1){
+                if(newNode.client.getDpi().compareTo(head.client.getDpi())==(0-1)){
+                    //System.out.println("menor? "+newNode.client.getDpi()+"-"+head.client.getDpi());
                     //Si el dato es menor que la cabeza
                     newNode.next=head;
                     head.previous=newNode;
@@ -62,21 +69,26 @@ public class BTreeNodeList {
                     head.left=newNode.right;
                     head=newNode;
                     size++;
-                    System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getDpi());
                     return true;
                 }else if(newNode.client.getDpi().compareTo(end.client.getDpi())==1){
+                    //System.out.println("mayor? "+newNode.client.getDpi()+"-"+end.client.getDpi());
                     end.next=newNode;
                     newNode.previous=end;
                     //Cambiar los punteros de las ramas
                     end.right=newNode.left;
                     end=newNode;
                     size++;
-                    System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getName());
+                    //System.out.println("se inserto: "+newNode.client.getDpi());
                     return true;
                 }else{
                     BTreeNode temp=head;
                     while(temp!=null){
                         if(newNode.client.getDpi().compareTo(temp.client.getDpi())==-1){
+                            //System.out.println("menor? "+newNode.client.getDpi()+"-"+temp.client.getDpi());
+                            //System.out.println("hola pues");
                             newNode.next=temp;
                             newNode.previous=temp.previous;
                             //Cambian punteros de ramas
@@ -85,11 +97,12 @@ public class BTreeNodeList {
                             temp.previous.next=newNode;
                             temp.previous=newNode;
                             size++;
-                            System.out.println("se inserto: "+newNode.client.getName());
+                            //System.out.println("se inserto: "+newNode.client.getName());
+                            //System.out.println("se inserto: "+newNode.client.getDpi());
                             return true;
                         }else if(newNode.client.getDpi().compareTo(temp.client.getDpi())==0){
                             System.out.println("Nodo repetido");
-                            System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
+                            //System.out.println("se inserto: "+newNode.client.getName()+"REPETIDO");
                             return false;
                         }else{
                             temp=temp.next;
@@ -99,7 +112,7 @@ public class BTreeNodeList {
                 
             }
         }
-        System.out.println("se inserto: "+newNode.client.getName()+"NOOOOOOOO");
+        //System.out.println("se inserto: "+newNode.client.getName()+"NOOOOOOOO");
         return false;
     }
 

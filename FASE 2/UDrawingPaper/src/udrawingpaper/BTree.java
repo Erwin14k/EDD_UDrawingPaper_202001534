@@ -5,6 +5,10 @@
  */
 package udrawingpaper;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 /**
  *
@@ -32,14 +36,15 @@ public class BTree {
             root=(BTreeBranch)root.insertInBranch(newNode);
         }else{
             if(height==0){
-                Object response=(BTreeBranch)root.insertInBranch(newNode);
+                Object response=root.insertInBranch(newNode);
                 //Si la cabeza no se ha dividido:
                 if(response instanceof BTreeBranch){
+                    //System.out.println("rama11");
                     root=(BTreeBranch)response;
                 }else{
                     height++;
                     root=new BTreeBranch();
-                    root=(BTreeBranch) root.insertInBranch((BTreeNode) response);
+                    root=(BTreeBranch) root.insertInBranch( response);
                 }
             }else{
                 //Hay que validar si hay más de una rama para recorrer el arbol e insertar el nodo.
@@ -47,12 +52,14 @@ public class BTree {
                     System.out.println("Raíz Vacía");
                     return;
                 }
-                Object response=this.travelInsert(newNode,root);
+                Object response=travelInsert(newNode,root);
                 if(response instanceof BTreeNode){//Se dividió root
+                    //System.out.println("Nodo11");
                     height++;
                     root=new BTreeBranch();
                     root=(BTreeBranch)root.insertInBranch(response);
                 }else if(response instanceof BTreeBranch){
+                    //System.out.println("rama22");
                     root=(BTreeBranch)response;
                 }
             }
@@ -62,47 +69,55 @@ public class BTree {
     
     public Object travelInsert(BTreeNode newNode, BTreeBranch branch){
         if(branch.isLeaf(branch)){
-            Object response=branch.insertInBranch(newNode);
+            //System.out.println("ES HOJAAAAAAAAAAAAA");
+            Object response= branch.insertInBranch(newNode);
             return response;
         }else{
-            if(newNode.client.getDpi().compareTo(branch.list.head.client.getDpi())==-1){
-                Object response=travelInsert(newNode, branch);
+            //if(BigInteger.compare(newNode.client.getDpi(),branch.list.head.client.getDpi())==-1
+            System.out.println("ssss"+newNode.client.getDpi().compareTo(branch.list.head.client.getDpi()));
+            if(newNode.client.getDpi().compareTo(branch.list.head.client.getDpi())==(-1)){
+                System.out.println("por que no entras?");
+                //System.out.println(newNode.client.getDpi()+"-"+branch.list.head.client.getDpi());
+                Object response=travelInsert(newNode, branch.list.head.left);
                 if(response instanceof BTreeNode){
-                    System.out.println("Nodo");
-                    return branch.insertInBranch(response);
+                    //System.out.println("Nodo1");
+                    return branch.insertInBranch((BTreeNode)response);
                 }else if(response instanceof BTreeBranch){
-                    System.out.println("Rama");
+                    //System.out.println("Rama1");
                     branch.list.head.left=(BTreeBranch)response;
                     return branch;
                 }
             }else if(newNode.client.getDpi().compareTo(branch.list.end.client.getDpi())==1){
+                //System.out.println("Si es mayor");
                 Object response=travelInsert(newNode, branch.list.end.right);
                 if(response instanceof BTreeNode){
-                    System.out.println("Nodo");
-                    return branch.insertInBranch(response);
+                    //System.out.println("Nodo2");
+                    return branch.insertInBranch((BTreeNode)response);
                 }else if(response instanceof BTreeBranch){
-                    System.out.println("Rama");
+                    //System.out.println("Rama2");
                     branch.list.end.right=(BTreeBranch)response;
                     return branch;
                 }
             }else{
                 BTreeNode temp=branch.list.head;
                 while(temp!=null){
-                    if(newNode.client.getDpi().compareTo(temp.client.getDpi())==-1){
-                        Object response =travelInsert(newNode, temp.left);
-                        if(response instanceof BTreeNode){
-                            System.out.println("Nodo");
-                            return branch.insertInBranch(response);
-                        }else if(response instanceof BTreeBranch){
-                            System.out.println("Rama");
-                            temp.left=(BTreeBranch)response;
-                            temp.previous.right=(BTreeBranch)response;
+                    switch (newNode.client.getDpi().compareTo(temp.client.getDpi())) {
+                        case -1:
+                            Object response =travelInsert(newNode, temp.left);
+                            if(response instanceof BTreeNode){
+                                //System.out.println("Nodo3");
+                                return branch.insertInBranch((BTreeNode)response);
+                            }else if(response instanceof BTreeBranch){
+                                //System.out.println("Rama3");
+                                temp.left=(BTreeBranch)response;
+                                temp.previous.right=(BTreeBranch)response;
+                                return branch;
+                            }   break;
+                        case 0:
                             return branch;
-                        }
-                    }else if(newNode.client.getDpi().compareTo(temp.client.getDpi())==0){
-                        return branch;
-                    }else{
-                        temp=temp.next;
+                        default:
+                            temp=temp.next;
+                            
                     }
                 }
             }
@@ -110,13 +125,13 @@ public class BTree {
         return this;
     }
     
-    public String getCode(){
-        System.out.println("INICIA");
+    public String getCode() throws IOException{
+        //System.out.println("INICIA");
         String dot="digraph B_Tree{\n";
         //this.code="{\n";
         dot+="rankr=TB;\n";
         //this.code+="rankr=TB;\n";
-        dot+="node[shape = box,fillcolor=\"yellow\" color=\"black\" style=\"filled\"];\n";
+        dot+="node[shape = box,fillcolor=\"#01F2C1\" color=\"black\" style=\"filled\"];\n";
         dot+= graph1(root);
         
         //this.code+= this.graph2(this.root);
@@ -124,7 +139,27 @@ public class BTree {
         //this.code+=  this.connect(this.root);
         dot+="}\n";
         //this.code+="}\n";
-        System.out.println("FINALIZA");
+        //System.out.println("FINALIZA");
+        String route="../Reportes Texto/ARBOLB.txt";
+        String graph="../Reportes Img/ARBOLB.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(dot);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
         return dot;
     }
     public String graph1(BTreeBranch root){
@@ -135,7 +170,7 @@ public class BTree {
             BTreeNode temp=root.list.head;
             while(temp!=null){
                 counter++;
-                string1+="|{"+temp.client.getDpi()+"/"+temp.client.getName()+"}|<p"+counter+"> ";
+                string1+="|{"+temp.client.getDpi()+"  ---  "+temp.client.getName()+"   "+  "}|<p"+counter+"> ";
                 temp=temp.next;
             }
             string1+="\"]"+root.list.head.client.getDpi()+";\n";
@@ -147,7 +182,7 @@ public class BTree {
             
             while(temp!=null){
                 counter++;
-                string1+="|{"+temp.client.getDpi()+"/"+temp.client.getName()+"}|<p"+counter+"> ";
+                string1+="|{"+temp.client.getDpi()+"  ---  "+temp.client.getName()+"   "+"}|<p"+counter+"> ";
                 temp= temp.next;
             }
             string1+="\"]"+root.list.head.client.getDpi()+";\n";
@@ -164,40 +199,7 @@ public class BTree {
     }
     
     
-    public String graph2(BTreeBranch root){
-        String string2="";
-        if(root.isLeaf(root)){ 
-            string2+="node[shape=record fillcolor=\"yellow\" label= \"";
-            int counter=0;
-            BTreeNode temp = root.list.head;
-            while(temp!=null){
-                counter++;
-                string2+="|{"+temp.client.getDpi()+"}|";
-                temp= temp.next;
-            }
-            string2+="\"]"+root.list.head.client.getDpi()+";\n";
-            return string2;
-        }else{
-            string2+="node[shape=record fillcolor=\"yellow\" label= \"";
-            int counter=0;
-            BTreeNode temp = root.list.head;
-            while(temp!=null){
-                counter++;
-                string2+="|{"+temp.client.getDpi()+"}|";
-                temp= temp.next;
-            }
-            string2+="\"]"+root.list.head.client.getDpi()+";\n";
-
-            //recorrer los hicos de cada clave
-            temp = root.list.head;
-            while(temp != null){
-                string2+= graph2(temp.left);
-                temp = temp.next;
-            }
-            string2+= graph2(root.list.end.right);
-            return string2;
-        }
-    }
+    
   
     
     public String connect(BTreeBranch root){

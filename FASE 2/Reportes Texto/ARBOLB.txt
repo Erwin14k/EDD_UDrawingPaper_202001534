@@ -1,0 +1,11 @@
+digraph B_Tree{
+rankr=TB;
+node[shape = box,fillcolor="#01F2C1" color="black" style="filled"];
+node[shape=record label= "<p0>|{4999062130101  ---  AUX EDD3   }|<p1> "]4999062130101;
+node[shape=record label= "<p0>|{2299062130101  ---  AUX EDD10   }|<p1> |{2999062130101  ---  AUX EDD   }|<p2> |{3999062130101  ---  AUX EDD2   }|<p3> "]2299062130101;
+node[shape=record label= "<p0>|{6999062130101  ---  AUX EDD5   }|<p1> |{7999062130101  ---  AUX EDD6   }|<p2> |{8999062130101  ---  AUX EDD7   }|<p3> |{9999062130101  ---  AUX EDD8   }|<p4> "]6999062130101;
+
+4999062130101:p0->2299062130101;
+
+4999062130101:p1->6999062130101;
+}

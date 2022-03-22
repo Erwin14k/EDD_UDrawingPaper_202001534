@@ -1,5 +1,8 @@
 digraph G{
 node [shape=record,style=filled];
 rankdir=TB;
+N22 [ label ="<C0>|Capa 10|<C1>"];
+N23 [ label ="Capa 8"];
+N22:C0->N23
 
 }

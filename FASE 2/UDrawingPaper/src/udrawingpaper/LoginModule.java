@@ -512,20 +512,7 @@ public class LoginModule {
         }); 
         adminView.add(logOutButton);
         
-        //Botón para eliminar un nuevo cliente
-        JButton graphView = new JButton("Ver Árbol De Clientes");
-        graphView.setLayout(null);
-        graphView.setVisible(true);
-        graphView.setBounds(925, 630, 600, 60);
-        graphView.setBackground(Color.white);
-        graphView.setFont(font3);
-        graphView.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-            }
-        }); 
-        adminView.add(graphView);
-        
-        //Label para mostrar grafo
+         //Label para mostrar grafo
         JLabel graphLabel = new JLabel("");
         graphLabel.setLayout(null);
         graphLabel.setVisible(true);
@@ -537,6 +524,25 @@ public class LoginModule {
         graphScroll.setBounds(850,20,700,600);
         graphScroll.setViewportView(graphLabel);
         adminView.add(graphScroll);
+        
+        
+        //Botón para eliminar un nuevo cliente
+        JButton graphView = new JButton("Ver Árbol De Clientes");
+        graphView.setLayout(null);
+        graphView.setVisible(true);
+        graphView.setBounds(925, 630, 600, 60);
+        graphView.setBackground(Color.white);
+        graphView.setFont(font3);
+        graphView.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){  
+                String route="../Reportes Img/ARBOLB.png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        adminView.add(graphView);
+        
+       
         //=========================Creación de Tabla =========================
         
         int n=0;
@@ -1004,7 +1010,7 @@ public class LoginModule {
         Font font =new Font("Arial",Font.BOLD,36);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
         Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
-        
+        Font font4 =new Font("Arial",Font.BOLD,18);
         
         //=========================Creación del Frame del Admin==============================
         
@@ -1057,7 +1063,7 @@ public class LoginModule {
         clientsDataTableSC.getViewport().setBackground(Color.white);
         //Aignando el tamaño
         //Creando la tabla con los datos definidos anteriormente
-        JTable clientable = new JTable(clientArray, header);
+        JTable clientable = new JTable(clientListHandler.getMyImgTop(userLogged), header); 
         clientable.getTableHeader().setBackground(Color.decode("#1D2A3B"));
         clientable.getTableHeader().setForeground(Color.WHITE);
         clientable.setBackground(Color.WHITE);
@@ -1065,6 +1071,8 @@ public class LoginModule {
         clientsDataTableSC.setViewportView(clientable);
         clientsDataTableSC.setBounds(140, 100, 400, 200);
         clientsReports.add(clientsDataTableSC);
+        clientable.setRowHeight(40);
+        clientable.setFont(font4);
         
         
         //Label para mostrar Titulo Pre orden
@@ -2161,13 +2169,18 @@ public class LoginModule {
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < clientsList.size(); i++) {
+                //System.out.println("EMPIEZAAAAAAAAA");
                 // JsonObject = Toma el Objeto del Json actual
-                JsonObject object = clientsList.get(i).getAsJsonObject();                
+                JsonObject object = clientsList.get(i).getAsJsonObject();     
+                //System.out.println(object);
                 //Guardamos atributos del objeto en variables
                 BigInteger dpi = object.get("dpi").getAsBigInteger();
-
-                String name = object.get("nombe_cliente").getAsString();
+                //System.out.println(dpi);
+                String name = object.get("nombre_cliente").getAsString();
+                //System.out.println(name);
                 String password = object.get("password").getAsString();
+                //System.out.println(password);
+                
                 //Se crea un árbol AVL para cada cliente
                 SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
                 BinarySearchTree tempBinaryTree = new BinarySearchTree();
@@ -2176,12 +2189,17 @@ public class LoginModule {
                 // Se crea el objeto cliente
 
                 Client newClient = new Client(dpi, name,password,tempSelfBalancingTree,0,0,0,tempBinaryTree,albumsList,imgList);
-                clientListHandler.finalInsert(newClient);
-                bTreeHandler.insert(newClient);
+                if(clientListHandler.exist(dpi)==true){
+                    clientListHandler.finalInsert(newClient);
+                    bTreeHandler.insert(newClient);
+                }else{
+                    //System.out.println("ya repetido");
+                }
+                
                 clientsJsonContent ="";
             
             }
-            //System.out.println(bTreeHandler.getCode());
+            bTreeHandler.getCode();
             //System.out.println("Ese fue el codigo del arbol");
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Clientes Realizada Con Éxito!!</p></html>" );
         } catch (Exception e) {

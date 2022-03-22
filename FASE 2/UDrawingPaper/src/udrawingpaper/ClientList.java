@@ -128,6 +128,29 @@ public class ClientList {
         }
         return "";
     }
+    
+    public boolean exist(BigInteger dpi){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+            return true;
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    System.out.println("Cliente repetido");
+                    return false;
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        return true;
+    }
+    
+    
     public String personalizeAbbRoute(BigInteger dpi) throws IOException{
         if(first == null){
             System.err.print("La lista se encuentra vacia");
@@ -292,7 +315,7 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAvlTree().insert(img); 
-                    temp.client.getImgList().finalInsert(img); 
+                    temp.client.getImgList().imageDataSorting(img); 
                     temp.client.setImgCounter(temp.client.getImgCounter()+1); 
                     
                 }
@@ -300,6 +323,26 @@ public class ClientList {
                 temp = temp.next;
             }while(temp != null);
         }
+    }
+    
+    public Object[][] getMyImgTop(BigInteger dpi){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getImgList().returnImgData();
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        Object[][] imgTopData;
+        imgTopData = new Object[0][3];
+        return imgTopData;
     }
     
     public void addAlbum(BigInteger dpi,Album album){
