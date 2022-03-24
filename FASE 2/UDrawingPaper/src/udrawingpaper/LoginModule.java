@@ -332,18 +332,25 @@ public class LoginModule {
                 if(codeT.getText().matches("[0-9]+")){
                     if((!nameT.getText().equals(""))&&(!passT.getText().equals(""))){
                         BigInteger temp=new BigInteger(codeT.getText());
-                        SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
-                        BinarySearchTree tempBinarySearchTree= new BinarySearchTree();
-                        AlbumsCircularList albumsList = new AlbumsCircularList();
-                        ImageLinkedList imgList = new ImageLinkedList();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinarySearchTree,albumsList,imgList);
-                        clientListHandler.finalInsert(newClient);
-                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
-                        clientsRegister.dispose();
-                        try {
-                            loginFrameModule();
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                        if(clientListHandler.exist(temp)){ 
+                            
+                            SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                            BinarySearchTree tempBinary=new BinarySearchTree();
+                            AlbumsCircularList albumsList = new AlbumsCircularList();
+                            ImageLinkedList imgList = new ImageLinkedList();
+                            Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList,imgList);
+                            clientListHandler.finalInsert(newClient);
+                            bTreeHandler.insert(newClient); 
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
+                            clientsRegister.dispose();
+                            try {
+                                loginFrameModule();
+                            } catch (IOException ex) {
+                                Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El dpi ya existe, intenta con otro!!</p></html>" );
+                            
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes llenar todos los campos, intenta de nuevo!!</p></html>" );
@@ -1363,18 +1370,25 @@ public class LoginModule {
                 if(codeT.getText().matches("[0-9]+")){
                     if((!nameT.getText().equals(""))&&(!passT.getText().equals(""))){
                         BigInteger temp=new BigInteger(codeT.getText());
-                        SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
-                        BinarySearchTree tempBinary=new BinarySearchTree();
-                        AlbumsCircularList albumsList = new AlbumsCircularList();
-                        ImageLinkedList imgList = new ImageLinkedList();
-                        Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList,imgList);
-                        clientListHandler.finalInsert(newClient);
-                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
-                        clientsCreation.dispose();
-                        try {
-                            adminView();
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                        if(clientListHandler.exist(temp)){ 
+                            
+                            SelfBalancingTree tempSelfBalancingTree = new SelfBalancingTree();
+                            BinarySearchTree tempBinary=new BinarySearchTree();
+                            AlbumsCircularList albumsList = new AlbumsCircularList();
+                            ImageLinkedList imgList = new ImageLinkedList();
+                            Client newClient= new Client(temp,nameT.getText(),passT.getText(),tempSelfBalancingTree,0,0,0,tempBinary,albumsList,imgList);
+                            clientListHandler.finalInsert(newClient);
+                            bTreeHandler.insert(newClient); 
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Registrad@ Con Éxito!!</p></html>" );
+                            clientsCreation.dispose();
+                            try {
+                                adminView();
+                            } catch (IOException ex) {
+                                Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El dpi ya existe, intenta con otro!!</p></html>" );
+                            
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes llenar todos los campos, intenta de nuevo!!</p></html>" );
@@ -2257,6 +2271,7 @@ public class LoginModule {
                 }
                  
                 tempImg.getMatrix().GraphSparseMatrixOfImg(tempImg.getId(),clientListHandler.nameByDpi(userLogged)); 
+                tempImg.getMatrix().GraphBeautifulImgMatrix(tempImg.getId(), clientListHandler.nameByDpi(userLogged));
                 tempImg.getTree().generatePersonalizeBstTreeGraphForEachImage(id, clientListHandler.nameByDpi(userLogged)); 
                 clientListHandler.addImage(userLogged, tempImg);
                 imagesJsonContent ="";
@@ -2301,6 +2316,7 @@ public class LoginModule {
                 }
                 Layer tempLayer= new Layer(id, tempPosition,userLogged,-1,tempMatrix);
                 tempMatrix.GraphSparseMatrixOfLayer(id, clientListHandler.nameByDpi(userLogged)); 
+                tempMatrix.GraphBeautifulLayerMatrix(id, clientListHandler.nameByDpi(userLogged));
                 clientListHandler.clientNewLayer(userLogged, tempLayer);
             }
             layersJsonContent ="";

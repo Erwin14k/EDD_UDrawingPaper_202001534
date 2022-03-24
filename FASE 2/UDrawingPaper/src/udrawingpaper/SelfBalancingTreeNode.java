@@ -29,9 +29,9 @@ public class SelfBalancingTreeNode {
     public String selfBalalancingTreeGraphvizCode(){
         String code="";
         if(left==null && right==null){
-            code+="N"+id+" [ label =\""+"Capa "+img.getId()+"\"];\n";
+            code+="N"+id+" [ label =\""+"IMG "+img.getId()+"\"];\n";
         }else{
-            code="N"+id+" [ label =\"<C0>|"+"Capa "+img.getId()+"|<C1>\"];\n";
+            code="N"+id+" [ label =\"<C0>|"+"IMG "+img.getId()+"|<C1>\"];\n";
         }
         if(left!=null){
             code=code+left.selfBalalancingTreeGraphvizCode()+"N"+id+":C0->N"+left.id+"\n";

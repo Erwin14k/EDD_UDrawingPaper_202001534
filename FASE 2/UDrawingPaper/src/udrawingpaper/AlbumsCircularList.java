@@ -108,7 +108,7 @@ public class AlbumsCircularList {
     }
     
     
-    public void generatePersonalizeAlbum2(String name) throws IOException{
+    /*public void generatePersonalizeAlbum2(String name) throws IOException{
         String route="C:\\Users\\Erwin14k\\Desktop\\matriz.png";
         String graph="C:\\Users\\Erwin14k\\Desktop\\matrizzzzz.txt";
         String tParam = "-Ttxt";
@@ -126,7 +126,7 @@ public class AlbumsCircularList {
 
         rt.exec( cmd );
         
-    }
+    }*/
     
     
 }

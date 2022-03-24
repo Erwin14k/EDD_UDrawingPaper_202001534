@@ -1,8 +1,0 @@
-digraph G{
-node [shape=record,style=filled];
-rankdir=TB;
-N16 [ label ="<C0>|Capa 10|<C1>"];
-N17 [ label ="Capa 13"];
-N16:C0->N17
-
-}

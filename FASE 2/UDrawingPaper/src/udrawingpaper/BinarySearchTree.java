@@ -23,8 +23,6 @@ public class BinarySearchTree {
     public String allCodes="";
     
     //Inseción al árbol de búsqueda binario
-    
-  
     public void insert(Layer layer){
         root=recursiveInsert(layer, root);
     }
