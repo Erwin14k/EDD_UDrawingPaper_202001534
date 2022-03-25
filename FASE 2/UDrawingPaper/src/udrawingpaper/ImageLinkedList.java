@@ -5,6 +5,8 @@
  */
 package udrawingpaper;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Erwin14k
@@ -107,6 +109,27 @@ public class ImageLinkedList {
             }
         }
         
+    }
+    
+    public boolean exist(int id){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+            return true;
+        }
+        else{
+            ImageLinkedListNode temp = first;
+            do{
+                if(temp.img.getId()==id){
+                    //System.out.println("Imagen repetido");
+                    return false;
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        return true;
     }
     
     //Este método recolecta todos los id´s de las imagenes para mostrarlas dentro de un combobx en la interfaz

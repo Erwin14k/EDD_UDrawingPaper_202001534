@@ -190,7 +190,7 @@ public class Matrix {
    
    public void GraphBeautifulLayerMatrix(int idLayer, String name) throws IOException{
        String route="../Reportes Texto/Bonitacapa"+idLayer+name+".txt";
-        String graph="../Reportes Img/Bonitacapacapa"+idLayer+name+".png";
+        String graph="../Reportes Img/Bonitacapa"+idLayer+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";

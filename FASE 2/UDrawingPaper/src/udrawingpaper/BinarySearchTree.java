@@ -20,6 +20,7 @@ public class BinarySearchTree {
     public String preOrder;
     public String inOrder;
     public String postOrder;
+    public String leafs;
     public String allCodes="";
     
     //Inseción al árbol de búsqueda binario
@@ -190,6 +191,20 @@ public class BinarySearchTree {
         return preOrder;
         
     }
+    
+    public String collectTheLeafs(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            if(root.left==null & root.right==null){
+                leafs+=root.layer.getId()+",";
+            }
+            
+            collectTheLeafs(root.left);
+            collectTheLeafs(root.right);
+        }
+        return leafs;
+        
+    }
     public String postOrder(BinarySearchTreeNode root){
         
         if(root!=null){
@@ -221,6 +236,7 @@ public class BinarySearchTree {
         preOrder="";
         inOrder="";
         postOrder="";
+        leafs="";
     }
     
     public void collectCodes(){

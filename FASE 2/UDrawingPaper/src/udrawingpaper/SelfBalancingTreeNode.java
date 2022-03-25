@@ -37,7 +37,7 @@ public class SelfBalancingTreeNode {
             code=code+left.selfBalalancingTreeGraphvizCode()+"N"+id+":C0->N"+left.id+"\n";
         }
         if(right!=null){
-           code=code+right.selfBalalancingTreeGraphvizCode()+"N"+id+":C0->N"+right.id+"\n";
+           code=code+right.selfBalalancingTreeGraphvizCode()+"N"+id+":C1->N"+right.id+"\n";
             }
         return code;
         

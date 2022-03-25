@@ -898,6 +898,23 @@ public class LoginModule {
         }); 
         clientView.add(layerReportButton);
         
+        JButton layerReportButton2 = new JButton("");
+        ImageIcon iconobtn99 = new ImageIcon("../imgUsadas/search.png");
+        layerReportButton2.setLayout(null);
+        layerReportButton2.setVisible(true);
+        layerReportButton2.setBounds(600, 140, 50, 60);
+        layerReportButton2.setBackground(Color.magenta);
+        layerReportButton2.setIcon(iconobtn99);
+        layerReportButton2.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+         
+                String route="../Reportes Img/Bonitacapa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                ImageIcon layerIcon = new ImageIcon(route);
+                graphLabel.setIcon(layerIcon); 
+            }
+        }); 
+        clientView.add(layerReportButton2);
+        
         JButton specificImage = new JButton("");
         ImageIcon iconobtn9 = new ImageIcon("../imgUsadas/search.png");
         specificImage.setLayout(null);
@@ -913,6 +930,23 @@ public class LoginModule {
             }
         }); 
         clientView.add(specificImage);
+        
+        JButton specificImage2 = new JButton("");
+        ImageIcon iconobtn91 = new ImageIcon("../imgUsadas/search.png");
+        specificImage2.setLayout(null);
+        specificImage2.setVisible(true);
+        specificImage2.setBounds(600, 280, 50, 60);
+        specificImage2.setBackground(Color.magenta);
+        specificImage2.setIcon(iconobtn91);
+        specificImage2.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+                String route="../Reportes Img/BonitaImg"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        clientView.add(specificImage2);
+        
         
         JButton imageTree = new JButton("");
         imageTree.setLayout(null);
@@ -1202,6 +1236,7 @@ public class LoginModule {
                     inOrder.setText(clientListHandler.inOrderOfMyAbb(userLogged));
                     postOrder.setText(clientListHandler.postOrderOfMyAbb(userLogged));
                     depthL.setText(clientListHandler.depthOfMyAbb(userLogged));
+                    leaf.setText(clientListHandler.leafsOfMyAbb(userLogged)); 
                 } catch (IOException ex) {
                     Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1831,7 +1866,70 @@ public class LoginModule {
         registerButton.setBackground(Color.yellow);
         registerButton.setIcon(iconobtn);
         registerButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent e4){  
+            public void mouseClicked(MouseEvent e4){
+                if(idT.getText().matches("[0-9]+")){
+                    if((!layersT.getText().equals(""))){
+                        int tempId=Integer.parseInt(idT.getText());
+                        if(clientListHandler.imageExist(userLogged,tempId)){ 
+                            BinarySearchTree tempTree =new BinarySearchTree();
+                            Matrix tempMatrix = new Matrix();
+                            Img tempImg=new Img(tempId,tempTree,userLogged,tempMatrix,0,-1);
+                            String[] allTheLayers=layersT.getText().split(",");
+                            for (int i = 0; i < allTheLayers.length; i++) {
+                                //Capa temporal
+                                Layer temp;
+                                //Cliente temporal
+                                Client tempClient;
+                                //Se busca al cliente
+                                tempClient=clientListHandler.returnMeTheClient(userLogged);
+                                //Se valida que el cliente exista
+                                if(tempClient != null){
+                                    //Si existe:
+                                    //System.out.println("si hay cliente");
+                                    //se busca en su arbol ABB la capa actual en el ciclo.
+                                    temp=tempClient.getAbbTree().searchNodeAndReturnLayer(Integer.parseInt(allTheLayers[i]));
+                                    //Se valida que la capa temporal exista
+                                    if(temp!=null){
+                                        //Si existe la capa:
+                                        //Se agrega la capa al árbol de la imagen actual
+                                        tempImg.getTree().insert(temp);
+                                        //System.out.println("si hay capa");
+                                        //Se llena la matriz de la imágen con la sub matriz de la capa
+                                        temp.getPosition().fillImgMatrix(tempImg);
+                                        tempImg.setLayersCounter(tempImg.getLayersCounter()+1); 
+                                    }
+                                }
+                                
+                            }
+                            try { 
+                                tempImg.getMatrix().GraphSparseMatrixOfImg(tempImg.getId(),clientListHandler.nameByDpi(userLogged));
+                                tempImg.getMatrix().GraphBeautifulImgMatrix(tempImg.getId(), clientListHandler.nameByDpi(userLogged));
+                                tempImg.getTree().generatePersonalizeBstTreeGraphForEachImage(tempImg.getId(), clientListHandler.nameByDpi(userLogged)); 
+                                clientListHandler.addImage(userLogged, tempImg);
+                                clientListHandler.returnMeMyAvl(userLogged);
+                            } catch (IOException ex) {
+                                Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Imagen Creada Con Éxito!!</p></html>" );
+                            imageCreation.dispose();
+                            try {
+                                clientView();
+                            } catch (IOException ex) {
+                                Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El id ya existe, intenta con otro!!</p></html>" );
+                            
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes llenar todos los campos, intenta de nuevo!!</p></html>" );
+                    }
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">El id tiene que ser un número entero, intenta de nuevo!!</p></html>" );
+                }
                       
                           
             }      
@@ -2179,7 +2277,10 @@ public class LoginModule {
             JsonParser parser = new JsonParser();
             // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
             JsonArray clientsList = parser.parse(clientsJsonContent).getAsJsonArray();
+            System.out.println("=============================================");
             System.out.println("el numero de clientes es: "+clientsList.size());
+            System.out.println("Si existen repetidos se descartan!!");
+            System.out.println("=============================================");
             //System.out.println(clientsList);
             //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < clientsList.size(); i++) {
@@ -2214,6 +2315,7 @@ public class LoginModule {
             
             }
             bTreeHandler.getCode();
+            System.out.println("siss");
             //System.out.println("Ese fue el codigo del arbol");
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Clientes Realizada Con Éxito!!</p></html>" );
         } catch (Exception e) {

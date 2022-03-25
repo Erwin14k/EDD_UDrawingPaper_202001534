@@ -20,12 +20,14 @@ public class BTree {
     int order;
     int height;
     String code;
+    int level;
     
     public BTree(){
         this.root=null;
         this.order=5;
         this.height=0;
         this.code="";
+        this.level=0;
     }
     
     public void insert(Client client){
@@ -74,9 +76,9 @@ public class BTree {
             return response;
         }else{
             //if(BigInteger.compare(newNode.client.getDpi(),branch.list.head.client.getDpi())==-1
-            System.out.println("ssss"+newNode.client.getDpi().compareTo(branch.list.head.client.getDpi()));
+            //System.out.println("ssss"+newNode.client.getDpi().compareTo(branch.list.head.client.getDpi()));
             if(newNode.client.getDpi().compareTo(branch.list.head.client.getDpi())==(-1)){
-                System.out.println("por que no entras?");
+                //System.out.println("por que no entras?");
                 //System.out.println(newNode.client.getDpi()+"-"+branch.list.head.client.getDpi());
                 Object response=travelInsert(newNode, branch.list.head.left);
                 if(response instanceof BTreeNode){
@@ -137,6 +139,15 @@ public class BTree {
         //this.code+= this.graph2(this.root);
         dot+=  connect(root);
         //this.code+=  this.connect(this.root);
+        for (int i = 0; i < level; i++) {
+            if(i+1>=level){
+                
+            }else{
+                dot+="N"+i+" -> "+"N"+(i+1)+";\n";
+            }
+            
+            
+        }
         dot+="}\n";
         //this.code+="}\n";
         //System.out.println("FINALIZA");
@@ -170,10 +181,12 @@ public class BTree {
             BTreeNode temp=root.list.head;
             while(temp!=null){
                 counter++;
-                string1+="|{"+temp.client.getDpi()+"  ---  "+temp.client.getName()+"   "+  "}|<p"+counter+"> ";
+                string1+="|{"+temp.client.getDpi()+"\\n"+temp.client.getName()+"\\n"+"No Img: "+temp.client.getImgCounter()+  "}|<p"+counter+"> ";
                 temp=temp.next;
             }
             string1+="\"]"+root.list.head.client.getDpi()+";\n";
+            string1+="N"+level+"[label=\""+"Nivel: "+level+"\" fillcolor=yellow];\n";
+            //level++;
             return string1;
         }else{
             string1+="node[shape=record label= \"<p0>";
@@ -182,18 +195,22 @@ public class BTree {
             
             while(temp!=null){
                 counter++;
-                string1+="|{"+temp.client.getDpi()+"  ---  "+temp.client.getName()+"   "+"}|<p"+counter+"> ";
+                string1+="|{"+temp.client.getDpi()+"\\n"+temp.client.getName()+"\\n"+"No Img: "+temp.client.getImgCounter()+"}|<p"+counter+"> ";
                 temp= temp.next;
             }
             string1+="\"]"+root.list.head.client.getDpi()+";\n";
-            
+            //string1+="N"+level+"[label=\""+"Nivel: "+level+"\" fillcolor=yellow];\n";
             //recorrer los hijos de cada clave
             temp = root.list.head;
             while(temp != null){
                 string1+= graph1(temp.left);
                 temp = temp.next;
             }
+            //string1+="N"+level+"[label=\""+"Nivel: "+level+"\"];\n";
+            //level++;
             string1+= graph1(root.list.end.right);
+            string1+="N"+level+"[label=\""+"Nivel: "+level+"\" fillcolor=yellow];\n";
+            level++;
             return string1;
         }
     }
@@ -205,10 +222,10 @@ public class BTree {
     public String connect(BTreeBranch root){
         String stringConnect="";
         if(root.isLeaf(root)){
-            System.out.println("Si es hoja");
+            //System.out.println("Si es hoja");
             return ""+root.list.head.client.getDpi()+";\n";
         }else{
-            System.out.println("No es hoja perro");
+            //System.out.println("No es hoja perro");
 
             BTreeNode temp = root.list.head;
             int counter =0;
@@ -219,7 +236,7 @@ public class BTree {
                 temp = temp.next;
             }
             stringConnect+="\n"+currentRoot+":p"+counter+"->"+connect(root.list.end.right);
-            System.out.println("----"+stringConnect);
+            //System.out.println("----"+stringConnect);
             return stringConnect;
         }
     }

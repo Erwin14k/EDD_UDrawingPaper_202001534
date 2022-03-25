@@ -34,7 +34,7 @@ public class BinarySearchTreeNode {
             code=code+left.bstTreeGraphvizCode()+"N"+id+":C0->N"+left.id+"\n";
         }
         if(right!=null){
-           code=code+right.bstTreeGraphvizCode()+"N"+id+":C0->N"+right.id+"\n";
+           code=code+right.bstTreeGraphvizCode()+"N"+id+":C1->N"+right.id+"\n";
             }
         return code;
         

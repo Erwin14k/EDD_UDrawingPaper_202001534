@@ -138,7 +138,7 @@ public class ClientList {
             ClientListNode temp = first;
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
-                    System.out.println("Cliente repetido");
+                    //System.out.println("Cliente repetido");
                     return false;
                     
                 }
@@ -148,6 +148,27 @@ public class ClientList {
             
         }
         return true;
+    }
+    
+    public boolean imageExist(BigInteger dpi,int id){
+        if(first == null){
+            //System.err.print("La lista se encuentra vacia");
+            return true;
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getImgList().exist(id);
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+            
+        }
+        return true;
+      
     }
     
     
@@ -286,6 +307,29 @@ public class ClientList {
         }
         return "";
     }
+    
+    public String leafsOfMyAbb(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("hola bro");
+                    temp.client.getAbbTree().collectTheLeafs(temp.client.getAbbTree().returnMeTheRoot());
+                    return temp.client.getAbbTree().leafs;
+                   
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    
+    
     
     public void initializeMyTravelers(BigInteger dpi) throws IOException{
         if(first == null){
