@@ -16,6 +16,7 @@ public class ClientList {
     
     private ClientListNode first;
     private int countClients=0;
+    public String allCodes;
     
     public boolean isEmpty(){
         return first==null;
@@ -120,6 +121,43 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     return temp.client.getName();
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    
+    public void updateClient(BigInteger dpi,String name, String password){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.setName(name); 
+                    temp.client.setPassword(password);
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+      
+    }
+    
+    public String passwordByDpi(BigInteger dpi){
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    return temp.client.getPassword();
                     
                 }
                 
@@ -235,7 +273,7 @@ public class ClientList {
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     //System.out.println("hola bro");
                     temp.client.getAbbTree().depth="La profundidad del árbol es: "+temp.client.getAbbTree().depth(temp.client.getAbbTree().returnMeTheRoot());
-                    temp.client.getAbbTree().printTheTravels();
+                    //temp.client.getAbbTree().printTheTravels();
                     return temp.client.getAbbTree().depth;
                     
                 }
@@ -524,6 +562,7 @@ public class ClientList {
     public String[] returnMyImgsCodes(BigInteger dpi) throws IOException{
         if(first == null){
             System.err.print("La lista se encuentra vacia");
+            
         }
         else{
             ClientListNode temp = first;
@@ -538,6 +577,19 @@ public class ClientList {
             }while(temp != null);
         }
         return null;
+    }
+    
+    public String[] returnMeClientsCodes() throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+            String temp="";
+            return temp.split(";");
+        }
+        else{
+            return clientsCodes(); 
+            
+        }
+     
     }
     
     
@@ -642,6 +694,24 @@ public class ClientList {
         }
         clientsMatrix = new Object[rows][6];
         return clientsMatrix;
+    }
+    
+    //Se utiliza para mandarle como parametro a un combobox todos los dpi existentes.
+    public String[] clientsCodes(){
+        allCodes="";
+        ClientListNode temp=first;
+        while(temp!=null){
+            allCodes+=temp.client.getDpi()+",";
+            temp=temp.next;
+                
+            }
+            
+        if(allCodes.equals("")){ 
+            String empty="";
+            empty+="No hay clientes!!,";
+            return empty.split(",");
+        }
+        return allCodes.split(",");
     }
     
     

@@ -494,7 +494,11 @@ public class LoginModule {
         updateClient.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
                 adminView.dispose();
-                updateClient();
+                try {
+                    updateClient();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         adminView.add(updateClient);
@@ -1624,13 +1628,13 @@ public class LoginModule {
         deleteClient.repaint();
     }
     
-    public static void updateClient(){
+    public static void updateClient() throws IOException{
         
         //Creamos unos tipos de letra, que nos servirán más adelante
         Font font =new Font("Arial",Font.BOLD,50);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
         Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
-        
+        Font font4 =new Font("Arial",Font.BOLD,18);
         //=========================Creación del Frame de la actualización==============================
         
         //Se crea el frame y se le agrega un título
@@ -1713,7 +1717,7 @@ public class LoginModule {
         
         //Creamos el campo de texto que despliega los dpi
         JComboBox codeT= new JComboBox ();
-        codeT.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        codeT.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMeClientsCodes()));       
         codeT.setLayout(null);
         codeT.setVisible(true);
         codeT.setBounds(300,110,400,30);
@@ -1725,6 +1729,7 @@ public class LoginModule {
         nameT.setLayout(null);
         nameT.setVisible(true);
         nameT.setBounds(300,210,400,30);
+        nameT.setFont(font4); 
         updateClient.add(nameT);
         
         //Creamos el campo de texto que recibirá la contraseña
@@ -1732,6 +1737,7 @@ public class LoginModule {
         passwordT.setLayout(null);
         passwordT.setVisible(true);
         passwordT.setBounds(300,310,400,30);
+        passwordT.setFont(font4);
         updateClient.add(passwordT);
     
  
@@ -1746,9 +1752,10 @@ public class LoginModule {
         searchButton.setBackground(Color.LIGHT_GRAY);
         searchButton.setIcon(iconobtn);
         searchButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent e8){  
-                        
-                        
+            public void mouseClicked(MouseEvent e8){
+                BigInteger tempId=new BigInteger(codeT.getSelectedItem().toString()); 
+                nameT.setText(clientListHandler.nameByDpi(tempId)); 
+                passwordT.setText(clientListHandler.passwordByDpi(tempId));  
             }
         }); 
         updateClient.add(searchButton);
@@ -1763,7 +1770,22 @@ public class LoginModule {
         updateButton.setBackground(Color.green);
         updateButton.setIcon(iconobtnw);
         updateButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent e4){  
+            public void mouseClicked(MouseEvent e4){
+                if(!nameT.getText().equals("") && !passwordT.getText().equals("")){
+                    BigInteger tempId=new BigInteger(codeT.getSelectedItem().toString()); 
+                    clientListHandler.updateClient(tempId, nameT.getText(), passwordT.getText());
+                    JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Actualizado Con Éxito!!!</p></html>" );
+                    updateClient.dispose();
+                    try {
+                        adminView();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Debes Llenar Todos Los Campos!!</p></html>" );
+                }
+                
+                
                         
                       
             }
