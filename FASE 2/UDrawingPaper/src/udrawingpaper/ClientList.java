@@ -266,6 +266,26 @@ public class ClientList {
         }
         return "";
     }
+    public String inOrderLimitedOfMyAbb(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("hola bro");
+                    temp.client.getAbbTree().inOrderLimited(temp.client.getAbbTree().returnMeTheRoot());
+                    return temp.client.getAbbTree().inOrderLimited;
+                   
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
     public String preOrderOfMyAbb(BigInteger dpi) throws IOException{
         if(first == null){
             System.err.print("La lista se encuentra vacia");
@@ -287,6 +307,27 @@ public class ClientList {
         return "";
     }
     
+    public String preOrderLimitedOfMyAbb(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("hola bro");
+                    temp.client.getAbbTree().preOrderLimited(temp.client.getAbbTree().returnMeTheRoot());
+                    return temp.client.getAbbTree().preOrderLimited;
+                   
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    
     public String postOrderOfMyAbb(BigInteger dpi) throws IOException{
         if(first == null){
             System.err.print("La lista se encuentra vacia");
@@ -298,6 +339,27 @@ public class ClientList {
                     //System.out.println("hola bro");
                     temp.client.getAbbTree().postOrder(temp.client.getAbbTree().returnMeTheRoot());
                     return temp.client.getAbbTree().postOrder;
+                   
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+        return "";
+    }
+    
+    public String postOrderLimitedOfMyAbb(BigInteger dpi) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("hola bro");
+                    temp.client.getAbbTree().postOrderLimited(temp.client.getAbbTree().returnMeTheRoot());
+                    return temp.client.getAbbTree().postOrderLimited;
                    
                     
                 }
@@ -340,6 +402,24 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAbbTree().initialzeTheTravelers();
+                   
+                    
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+    }
+    
+    public void initializeMyTravelersLimited(BigInteger dpi,int limit) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getAbbTree().initialzeTheTravelersLimited(limit);
                    
                     
                 }

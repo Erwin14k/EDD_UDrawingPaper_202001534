@@ -8,7 +8,7 @@ package udrawingpaper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
+
 
 /**
  *
@@ -18,8 +18,15 @@ public class BinarySearchTree {
     private BinarySearchTreeNode root;
     public String depth;
     public String preOrder;
+    public String preOrderLimited;
     public String inOrder;
+    public String inOrderLimited;
     public String postOrder;
+    public String postOrderLimited;
+    public int  tempLimit;
+    public int  tempLimit2;
+    public int  tempLimit3;
+    public int  limit;
     public String leafs;
     public String allCodes="";
     
@@ -160,11 +167,20 @@ public class BinarySearchTree {
     public String rreturnMeThePreOrder(){
         return preOrder;
     }
+    public String rreturnMeThePreOrderLimited(){
+        return preOrderLimited;
+    }
     public String returnMeTheInOrder(){
         return inOrder;
     }
+    public String returnMeTheInOrderLimited(){
+        return inOrderLimited;
+    }
     public String returnMeThePostOrder(){
         return postOrder;
+    }
+    public String returnMeThePostOrderLimited(){
+        return postOrderLimited;
     }
     public String returnMeTheDepth(){
         return depth;
@@ -181,6 +197,20 @@ public class BinarySearchTree {
         
     }
     
+    public String inOrderLimited(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            inOrderLimited(root.left);
+            if(tempLimit<limit){
+                inOrderLimited+=root.layer.getId()+",";
+                tempLimit++;
+            }
+            inOrderLimited(root.right);
+        }
+        return inOrderLimited;
+        
+    }
+    
     public String preOrder(BinarySearchTreeNode root){
         
         if(root!=null){
@@ -189,6 +219,20 @@ public class BinarySearchTree {
             preOrder(root.right);
         }
         return preOrder;
+        
+    }
+    
+    public String preOrderLimited(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            if(tempLimit2<limit){
+                preOrderLimited+=root.layer.getId()+",";
+                tempLimit2++;
+            }
+            preOrderLimited(root.left);
+            preOrderLimited(root.right);
+        }
+        return preOrderLimited;
         
     }
     
@@ -216,6 +260,20 @@ public class BinarySearchTree {
         return postOrder;
     }
     
+    public String postOrderLimited(BinarySearchTreeNode root){
+        
+        if(root!=null){
+            
+            postOrderLimited(root.left);
+            postOrderLimited(root.right);
+            if(tempLimit3<limit){
+                postOrderLimited+=root.layer.getId()+",";
+                tempLimit3++;
+            }
+        }
+        return postOrderLimited;
+    }
+    
    
     
     public int depth(BinarySearchTreeNode root){
@@ -237,6 +295,18 @@ public class BinarySearchTree {
         inOrder="";
         postOrder="";
         leafs="";
+    }
+    
+    public void initialzeTheTravelersLimited(int limitOfTravel){
+        preOrderLimited="";
+        inOrderLimited="";
+        postOrderLimited="";
+        limit=limitOfTravel;
+        tempLimit=0;
+        tempLimit2=0;
+        tempLimit3=0;
+        leafs="";
+        
     }
     
     public void collectCodes(){

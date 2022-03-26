@@ -1155,6 +1155,23 @@ public class LoginModule {
         preOrderScroll.setViewportView(preOrder);
         clientsReports.add(preOrderScroll);
         
+        //Label para mostrar Titulo In orden
+        JLabel numberOfLayers = new JLabel("No. Capas: ");
+        numberOfLayers.setLayout(null);
+        numberOfLayers.setVisible(true);
+        numberOfLayers.setForeground(Color.BLACK);
+        numberOfLayers.setBounds(580,480,500,60);
+        numberOfLayers.setFont(font3);
+        clientsReports.add(numberOfLayers);
+        
+        JTextField number = new JTextField();
+        number.setLayout(null);
+        number.setVisible(true);
+        number.setBounds(620,540,80,40);
+        number.setFont(font2);
+        number.setBackground(Color.white);
+        clientsReports.add(number);
+        
         //Label que muestra las capas en inorden
         JLabel inOrder = new JLabel("¡Nada que mostrar! ");
         inOrder.setLayout(null);
@@ -1231,12 +1248,22 @@ public class LoginModule {
         reportsButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
                 try {
-                    clientListHandler.initializeMyTravelers(userLogged); 
-                    preOrder.setText(clientListHandler.preOrderOfMyAbb(userLogged));
-                    inOrder.setText(clientListHandler.inOrderOfMyAbb(userLogged));
-                    postOrder.setText(clientListHandler.postOrderOfMyAbb(userLogged));
-                    depthL.setText(clientListHandler.depthOfMyAbb(userLogged));
-                    leaf.setText(clientListHandler.leafsOfMyAbb(userLogged)); 
+                    if(number.getText().equals("")){ 
+                        clientListHandler.initializeMyTravelers(userLogged); 
+                        preOrder.setText(clientListHandler.preOrderOfMyAbb(userLogged));
+                        inOrder.setText(clientListHandler.inOrderOfMyAbb(userLogged));
+                        postOrder.setText(clientListHandler.postOrderOfMyAbb(userLogged));
+                        depthL.setText(clientListHandler.depthOfMyAbb(userLogged));
+                        leaf.setText(clientListHandler.leafsOfMyAbb(userLogged)); 
+                    }else{
+                        clientListHandler.initializeMyTravelersLimited(userLogged,Integer.parseInt(number.getText()));  
+                        preOrder.setText(clientListHandler.preOrderLimitedOfMyAbb(userLogged));
+                        inOrder.setText(clientListHandler.inOrderLimitedOfMyAbb(userLogged));
+                        postOrder.setText(clientListHandler.postOrderLimitedOfMyAbb(userLogged));
+                        depthL.setText(clientListHandler.depthOfMyAbb(userLogged));
+                        leaf.setText(clientListHandler.leafsOfMyAbb(userLogged));
+                        
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
                 }

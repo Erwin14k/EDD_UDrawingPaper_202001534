@@ -1,0 +1,16 @@
+digraph G{
+node [shape=record,style=filled];
+rankdir=TB;
+N10 [ label ="<C0>|Capa 6|<C1>"];
+N11 [ label ="<C0>|Capa 7|<C1>"];
+N12 [ label ="<C0>|Capa 8|<C1>"];
+N13 [ label ="<C0>|Capa 10|<C1>"];
+N14 [ label ="<C0>|Capa 11|<C1>"];
+N15 [ label ="Capa 12"];
+N14:C1->N15
+N13:C1->N14
+N12:C1->N13
+N11:C1->N12
+N10:C1->N11
+
+}
