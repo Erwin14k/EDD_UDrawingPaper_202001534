@@ -189,8 +189,8 @@ public class Matrix {
    }
    
    public void GraphBeautifulLayerMatrix(int idLayer, String name) throws IOException{
-       String route="../Reportes Texto/Bonitacapa"+idLayer+name+".txt";
-        String graph="../Reportes Img/Bonitacapa"+idLayer+name+".png";
+       String route="Reportes Texto/Bonitacapa"+idLayer+name+".txt";
+        String graph="Reportes Img/Bonitacapa"+idLayer+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -265,8 +265,8 @@ public class Matrix {
    
    
    public void GraphBeautifulImgMatrix(int idImg, String name) throws IOException{
-       String route="../Reportes Texto/BonitaImg"+idImg+name+".txt";
-        String graph="../Reportes Img/BonitaImg"+idImg+name+".png";
+       String route="Reportes Texto/BonitaImg"+idImg+name+".txt";
+        String graph="Reportes Img/BonitaImg"+idImg+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -341,8 +341,8 @@ public class Matrix {
    
    
    public void GraphSparseMatrixOfLayer(int idLayer,String name) throws IOException{
-        String route="../Reportes Texto/capa"+idLayer+name+".txt";
-        String graph="../Reportes Img/capa"+idLayer+name+".png";
+        String route="Reportes Texto/capa"+idLayer+name+".txt";
+        String graph="Reportes Img/capa"+idLayer+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -470,8 +470,8 @@ public class Matrix {
    
    
    public void GraphSparseMatrixOfImg(int idImg,String name) throws IOException{
-        String route="../Reportes Texto/imagen"+idImg+name+".txt";
-        String graph="../Reportes Img/imagen"+idImg+name+".png";
+        String route="Reportes Texto/imagen"+idImg+name+".txt";
+        String graph="Reportes Img/imagen"+idImg+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";

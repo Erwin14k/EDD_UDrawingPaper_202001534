@@ -8,6 +8,7 @@ package udrawingpaper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 
 /**
  *
@@ -162,8 +163,8 @@ public class SelfBalancingTree {
     }
     
     public void generateAVLTreeGraph() throws IOException{
-        String route="../Reportes Texto/avl.txt";
-        String graph="../Reportes Img/avl.png";
+        String route="Reportes Texto/avl.txt";
+        String graph="Reportes Img/avl.png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -186,8 +187,8 @@ public class SelfBalancingTree {
     }
     
     public void generatePersonalizeAVLTreeGraph(String name) throws IOException{
-        String route="../Reportes Texto/avl"+name+".txt";
-        String graph="../Reportes Img/avl"+name+".png";
+        String route="Reportes Texto/avl"+name+".txt";
+        String graph="Reportes Img/avl"+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -209,5 +210,76 @@ public class SelfBalancingTree {
         rt.exec( cmd );
     }
     
+    
+    public  SelfBalancingTreeNode removeNode(SelfBalancingTreeNode root, int id)
+    {
+        if (root == null)
+            return root;
+
+        else if (id  < root.img.getId())
+            root.left = removeNode(root.left, id);
+
+        else if (id > root.img.getId())
+            root.right = removeNode(root.right, id);
+
+        else
+        {
+            if (root.right == null)
+                root = root.left;
+
+            else if (root.left == null)
+                root = root.right;
+
+            else
+            {
+                SelfBalancingTreeNode temp = findSuccessor(root.right);
+                root.img.setId(temp.img.getId()); 
+                root.right = removeNode(root.right, root.img.getId());
+            }
+        }
+
+        if (root == null)
+            return root;
+
+        else
+            return balanceTree(root);
+    }
+    
+    public SelfBalancingTreeNode findSuccessor(SelfBalancingTreeNode root)
+    {
+        if (root.left != null)
+            return findSuccessor(root.left);
+
+        else
+            return root;
+    }
+    
+    public SelfBalancingTreeNode balanceTree(SelfBalancingTreeNode root)
+    {
+        //updateHeight(root);
+
+        int balance = getEquilibrium(root);
+
+        if (balance == 2)
+        {
+            if (getEquilibrium(root.right) < 0)
+                root.right = rightRotation(root.right);
+
+            return leftRotation(root);
+        }
+
+        if (balance == -2)
+        {
+            if (getEquilibrium(root.left) > 0)
+                root.left = leftRotation(root.left);
+
+            return rightRotation(root);
+        }
+
+        return root;
+    }
+    
+    
+ 
     
 }

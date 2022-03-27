@@ -149,6 +149,25 @@ public class ClientList {
       
     }
     
+    public void deleteClientImg(BigInteger dpi,int id) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            ClientListNode temp = first;
+            do{
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    temp.client.getImgList().deleteImg(id); 
+                    temp.client.getAvlTree().removeNode(temp.client.getAvlTree().returnMeTheRoot(), id);
+                    returnMeMyAvl(dpi); 
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+      
+    }
+    
     public String passwordByDpi(BigInteger dpi){
         if(first == null){
             System.err.print("La lista se encuentra vacia");
@@ -619,6 +638,7 @@ public class ClientList {
             do{
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getAvlTree().generatePersonalizeAVLTreeGraph(temp.client.getName()); 
+                 
                     
                 }
                 

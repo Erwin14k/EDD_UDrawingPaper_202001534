@@ -41,15 +41,15 @@ public class AlbumsCircularList {
     }
     public String returnMeTheAlbumsListRoute(String name) throws IOException{
         
-        String graph="../Reportes Img/album"+name+".png";
+        String graph="Reportes Img/album"+name+".png";
         
         return graph;
         
     }
     
     public String generatePersonalizeAlbum(String name) throws IOException{
-        String route="../Reportes Texto/album"+name+".txt";
-        String graph="../Reportes Img/album"+name+".png";
+        String route="Reportes Texto/album"+name+".txt";
+        String graph="Reportes Img/album"+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";

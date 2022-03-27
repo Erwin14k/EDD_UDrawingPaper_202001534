@@ -62,8 +62,8 @@ public class BinarySearchTree {
     }
     //Método para graficar el árbol binario de Busqueda
     public void generateBstTreeGraph() throws IOException{
-        String route="../Reportes Texto/Abb.txt";
-        String graph="../Reportes Img/Abb.png";
+        String route="Reportes Texto/Abb.txt";
+        String graph="Reportes Img/Abb.png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -86,8 +86,8 @@ public class BinarySearchTree {
     }
     
     public void generatePersonalizeBstTreeGraph(String name) throws IOException{
-        String route="../Reportes Texto/Abb"+name+".txt";
-        String graph="../Reportes Img/Abb"+name+".png";
+        String route="Reportes Texto/Abb"+name+".txt";
+        String graph="Reportes Img/Abb"+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -111,8 +111,8 @@ public class BinarySearchTree {
     
     
     public void generatePersonalizeBstTreeGraphForEachImage(int id,String name) throws IOException{
-        String route="../Reportes Texto/ArbolImagen"+id+name+".txt";
-        String graph="../Reportes Img/ArbolImagen"+id+name+".png";
+        String route="Reportes Texto/ArbolImagen"+id+name+".txt";
+        String graph="Reportes Img/ArbolImagen"+id+name+".png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -135,13 +135,13 @@ public class BinarySearchTree {
     }
     public String returnMeTheAbbRoute(String name) throws IOException{
         
-        String graph="../Reportes Img/Abb"+name+".png";
+        String graph="Reportes Img/Abb"+name+".png";
         return graph;
         
     }
     public String returnMeTheAvlRoute(String name) throws IOException{
         
-        String graph="../Reportes Img/Avl"+name+".png";
+        String graph="Reportes Img/Avl"+name+".png";
         return graph;
         
     }

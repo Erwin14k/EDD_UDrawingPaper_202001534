@@ -5,7 +5,7 @@
  */
 package udrawingpaper;
 
-import java.math.BigInteger;
+
 
 /**
  *
@@ -130,6 +130,24 @@ public class ImageLinkedList {
             
         }
         return true;
+    }
+    
+    public void  deleteImg(int id){
+        ImageLinkedListNode temp=first;
+        ImageLinkedListNode previous = null;
+        while(temp!=null && temp.img.getId()!=id){
+            previous=temp;
+            temp=temp.next;
+        }
+        if(previous==null){
+            first=temp.next;
+            temp.next=null;
+        }else if(temp!=null){
+            previous.next=temp.next;
+            temp.next=null;
+        }
+   
+
     }
     
     //Este método recolecta todos los id´s de las imagenes para mostrarlas dentro de un combobx en la interfaz

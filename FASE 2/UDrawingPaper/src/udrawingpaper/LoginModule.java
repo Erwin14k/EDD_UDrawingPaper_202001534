@@ -321,7 +321,7 @@ public class LoginModule {
          //=========================Creación de los  Botones del frame creacion de profesores=========================
         //Creamos un botón de registro de clientes
         JButton registerButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/new.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/new.png");
         registerButton.setLayout(null);
         registerButton.setVisible(true);
         registerButton.setBounds(450, 470, 320, 60);
@@ -370,7 +370,7 @@ public class LoginModule {
         
         //Creamos un botón de registro de clientes
         JButton exitButton = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         exitButton.setLayout(null);
         exitButton.setVisible(true);
         exitButton.setBounds(80, 470, 320, 60);
@@ -453,7 +453,7 @@ public class LoginModule {
         
         //Botón para crear un nuevo cliente
         JButton newClient = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/new.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/new.png");
         newClient.setLayout(null);
         newClient.setVisible(true);
         newClient.setBounds(360, 630, 50, 60);
@@ -469,7 +469,7 @@ public class LoginModule {
         
         //Botón para eliminar un cliente
         JButton deleteClient = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/delete.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/delete.png");
         deleteClient.setLayout(null);
         deleteClient.setVisible(true);
         deleteClient.setBounds(450, 630, 50, 60);
@@ -485,7 +485,7 @@ public class LoginModule {
         
         //Botón para actualizar un cliente
         JButton updateClient = new JButton("");
-        ImageIcon iconobtn3 = new ImageIcon("../imgUsadas/update2.png");
+        ImageIcon iconobtn3 = new ImageIcon("imgUsadas/update2.png");
         updateClient.setLayout(null);
         updateClient.setVisible(true);
         updateClient.setBounds(540, 630, 50, 60);
@@ -505,7 +505,7 @@ public class LoginModule {
         
         //Botón para cerrar sesión como admin
         JButton logOutButton = new JButton("");
-        ImageIcon iconobtn4 = new ImageIcon("../imgUsadas/logout.png");
+        ImageIcon iconobtn4 = new ImageIcon("imgUsadas/logout.png");
         logOutButton.setLayout(null);
         logOutButton.setVisible(true);
         logOutButton.setBounds(630, 630, 50, 60);
@@ -529,7 +529,7 @@ public class LoginModule {
         graphLabel.setVisible(true);
         graphLabel.setForeground(Color.BLACK);
         graphLabel.setBounds(850,20,800,600);
-        ImageIcon iconobtn5 = new ImageIcon("../imgUsadas/iconologin.png");
+        ImageIcon iconobtn5 = new ImageIcon("imgUsadas/iconologin.png");
         graphLabel.setIcon(iconobtn5);
         JScrollPane graphScroll= new JScrollPane();
         graphScroll.setBounds(850,20,700,600);
@@ -537,7 +537,7 @@ public class LoginModule {
         adminView.add(graphScroll);
         
         
-        //Botón para eliminar un nuevo cliente
+        //Botón para ver arbol de clientes
         JButton graphView = new JButton("Ver Árbol De Clientes");
         graphView.setLayout(null);
         graphView.setVisible(true);
@@ -546,8 +546,9 @@ public class LoginModule {
         graphView.setFont(font3);
         graphView.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){  
-                String route="../Reportes Img/ARBOLB.png";
+                String route="Reportes Img/ARBOLB.png";
                 ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
                 graphLabel.setIcon(imgIcon); 
             }
         }); 
@@ -812,7 +813,7 @@ public class LoginModule {
         
         //Botón para crear una nueva imagen
         JButton newImage = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/addImg.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/addImg.png");
         newImage.setLayout(null);
         newImage.setVisible(true);
         newImage.setBounds(440, 630, 50, 60);
@@ -828,7 +829,7 @@ public class LoginModule {
         
         //Botón para eliminar una imagen
         JButton deleteClient = new JButton("");
-        ImageIcon iconobtn7 = new ImageIcon("../imgUsadas/delete.png");
+        ImageIcon iconobtn7 = new ImageIcon("imgUsadas/delete.png");
         deleteClient.setLayout(null);
         deleteClient.setVisible(true);
         deleteClient.setBounds(530, 630, 50, 60);
@@ -837,7 +838,11 @@ public class LoginModule {
         deleteClient.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){   
                 clientView.dispose();
-                deleteImage();
+                try {
+                    deleteImage();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         clientView.add(deleteClient);
@@ -845,7 +850,7 @@ public class LoginModule {
         
         //Botón para cerrar sesión como cliente
         JButton logOutButton = new JButton("");
-        ImageIcon iconobtn4 = new ImageIcon("../imgUsadas/logout.png");
+        ImageIcon iconobtn4 = new ImageIcon("imgUsadas/logout.png");
         logOutButton.setLayout(null);
         logOutButton.setVisible(true);
         logOutButton.setBounds(620, 630, 50, 60);
@@ -877,7 +882,7 @@ public class LoginModule {
         graphLabel.setVisible(true);
         graphLabel.setForeground(Color.BLACK);
         graphLabel.setBounds(850,20,800,600);
-        ImageIcon iconobtn5 = new ImageIcon("../imgUsadas/iconologin.png");
+        ImageIcon iconobtn5 = new ImageIcon("imgUsadas/iconologin.png");
         graphLabel.setIcon(iconobtn5);
         JScrollPane graphScroll= new JScrollPane();
         graphScroll.setBounds(850,20,700,600);
@@ -886,7 +891,7 @@ public class LoginModule {
         
         
         JButton layerReportButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/search.png");
         layerReportButton.setLayout(null);
         layerReportButton.setVisible(true);
         layerReportButton.setBounds(520, 140, 50, 60);
@@ -895,7 +900,7 @@ public class LoginModule {
         layerReportButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
          
-                String route="../Reportes Img/Capa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                String route="Reportes Img/Capa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon layerIcon = new ImageIcon(route);
                 graphLabel.setIcon(layerIcon); 
             }
@@ -903,7 +908,7 @@ public class LoginModule {
         clientView.add(layerReportButton);
         
         JButton layerReportButton2 = new JButton("");
-        ImageIcon iconobtn99 = new ImageIcon("../imgUsadas/search.png");
+        ImageIcon iconobtn99 = new ImageIcon("imgUsadas/search.png");
         layerReportButton2.setLayout(null);
         layerReportButton2.setVisible(true);
         layerReportButton2.setBounds(600, 140, 50, 60);
@@ -912,7 +917,7 @@ public class LoginModule {
         layerReportButton2.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
          
-                String route="../Reportes Img/Bonitacapa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                String route="Reportes Img/Bonitacapa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon layerIcon = new ImageIcon(route);
                 graphLabel.setIcon(layerIcon); 
             }
@@ -920,7 +925,7 @@ public class LoginModule {
         clientView.add(layerReportButton2);
         
         JButton specificImage = new JButton("");
-        ImageIcon iconobtn9 = new ImageIcon("../imgUsadas/search.png");
+        ImageIcon iconobtn9 = new ImageIcon("imgUsadas/search.png");
         specificImage.setLayout(null);
         specificImage.setVisible(true);
         specificImage.setBounds(520, 280, 50, 60);
@@ -928,7 +933,7 @@ public class LoginModule {
         specificImage.setIcon(iconobtn9);
         specificImage.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
-                String route="../Reportes Img/imagen"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                String route="Reportes Img/imagen"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
                 graphLabel.setIcon(imgIcon); 
             }
@@ -936,7 +941,7 @@ public class LoginModule {
         clientView.add(specificImage);
         
         JButton specificImage2 = new JButton("");
-        ImageIcon iconobtn91 = new ImageIcon("../imgUsadas/search.png");
+        ImageIcon iconobtn91 = new ImageIcon("imgUsadas/search.png");
         specificImage2.setLayout(null);
         specificImage2.setVisible(true);
         specificImage2.setBounds(600, 280, 50, 60);
@@ -944,7 +949,7 @@ public class LoginModule {
         specificImage2.setIcon(iconobtn91);
         specificImage2.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
-                String route="../Reportes Img/BonitaImg"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                String route="Reportes Img/BonitaImg"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
                 graphLabel.setIcon(imgIcon); 
             }
@@ -960,7 +965,7 @@ public class LoginModule {
         imageTree.setIcon(iconobtn9);
         imageTree.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){ 
-                String route="../Reportes Img/ArbolImagen"+idImagesForTree.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
+                String route="Reportes Img/ArbolImagen"+idImagesForTree.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
                 graphLabel.setIcon(imgIcon); 
             }
@@ -1278,7 +1283,7 @@ public class LoginModule {
        
         //Label para mostrar imágen para decoración
         JLabel ckDecoration = new JLabel("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/ckdecoration.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/ckdecoration.png");
         ckDecoration.setLayout(null);
         ckDecoration.setVisible(true);
         ckDecoration.setForeground(Color.BLACK);
@@ -1288,7 +1293,7 @@ public class LoginModule {
         
         
         //Creamos el boton que regresará de ventana
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         JButton returnButton = new JButton("");
         returnButton.setLayout(null);
         returnButton.setVisible(true);
@@ -1425,7 +1430,7 @@ public class LoginModule {
          //=========================Creación de los  Botones del frame creacion de profesores=========================
         //Creamos un botón de registro de clientes
         JButton registerButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/new.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/new.png");
         registerButton.setLayout(null);
         registerButton.setVisible(true);
         registerButton.setBounds(450, 470, 320, 60);
@@ -1472,7 +1477,7 @@ public class LoginModule {
         
         //Creamos un botón de registro de clientes
         JButton exitButton = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         exitButton.setLayout(null);
         exitButton.setVisible(true);
         exitButton.setBounds(80, 470, 320, 60);
@@ -1561,7 +1566,7 @@ public class LoginModule {
         deleteClient.add(code);
         
         JLabel imgggg = new JLabel("");
-        ImageIcon icon= new ImageIcon("../imgUsadas/search.png");
+        ImageIcon icon= new ImageIcon("imgUsadas/search.png");
         imgggg.setLayout(null);
         imgggg.setVisible(true);
         imgggg.setForeground(Color.BLACK);
@@ -1588,7 +1593,7 @@ public class LoginModule {
           //=========================Creación de los  Botones del frame creacion de profesores=========================
         
         //Creamos el boton que buscará que eliminara al cliente seleccionado
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/delete.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/delete.png");
         JButton deleteButton = new JButton("");
         deleteButton.setLayout(null);
         deleteButton.setVisible(true);
@@ -1604,7 +1609,7 @@ public class LoginModule {
         deleteClient.add(deleteButton);
         
         //Creamos el boton que regresará de ventana
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         JButton returnButton = new JButton("");
         returnButton.setLayout(null);
         returnButton.setVisible(true);
@@ -1744,7 +1749,7 @@ public class LoginModule {
                
 
         //Creamos un botón de creación de buscar dpi de cliente para buscar datos
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/search.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/search.png");
         JButton searchButton = new JButton("");
         searchButton.setLayout(null);
         searchButton.setVisible(true);
@@ -1763,7 +1768,7 @@ public class LoginModule {
         
         //Creamos un botón de actualización de clientes
         JButton updateButton = new JButton("");
-        ImageIcon iconobtnw = new ImageIcon("../imgUsadas/update2.png");
+        ImageIcon iconobtnw = new ImageIcon("imgUsadas/update2.png");
         updateButton.setLayout(null);
         updateButton.setVisible(true);
         updateButton.setBounds(500, 400, 60, 60);
@@ -1774,6 +1779,13 @@ public class LoginModule {
                 if(!nameT.getText().equals("") && !passwordT.getText().equals("")){
                     BigInteger tempId=new BigInteger(codeT.getSelectedItem().toString()); 
                     clientListHandler.updateClient(tempId, nameT.getText(), passwordT.getText());
+                    bTreeHandler.updateClient(bTreeHandler.returnMeMyRoot(), tempId, nameT.getText(), passwordT.getText());
+                    try {
+                        bTreeHandler.getCode();
+                        System.out.println("Arbol Actualizado");
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Cliente Actualizado Con Éxito!!!</p></html>" );
                     updateClient.dispose();
                     try {
@@ -1795,7 +1807,7 @@ public class LoginModule {
         
         //Creamos un botón de actualización de clientes
         JButton returnButton = new JButton("");
-        ImageIcon iconobtnw2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtnw2 = new ImageIcon("imgUsadas/leave.png");
         returnButton.setLayout(null);
         returnButton.setVisible(true);
         returnButton.setBounds(400, 400, 60, 60);
@@ -1908,7 +1920,7 @@ public class LoginModule {
         
       
         JButton registerButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/addimg.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/addimg.png");
         registerButton.setLayout(null);
         registerButton.setVisible(true);
         registerButton.setBounds(450, 470, 320, 60);
@@ -1988,7 +2000,7 @@ public class LoginModule {
         
       
         JButton exitButton = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         exitButton.setLayout(null);
         exitButton.setVisible(true);
         exitButton.setBounds(80, 470, 320, 60);
@@ -2013,7 +2025,7 @@ public class LoginModule {
         
     }
     
-    public static void deleteImage(){
+    public static void deleteImage() throws IOException{
         //Creamos unos tipos de letra, que nos servirán más adelante
         Font font =new Font("Arial",Font.BOLD,36);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
@@ -2077,7 +2089,7 @@ public class LoginModule {
         deleteImage.add(code);
         
         JLabel imgggg = new JLabel("");
-        ImageIcon icon= new ImageIcon("../imgUsadas/search.png");
+        ImageIcon icon= new ImageIcon("imgUsadas/search.png");
         imgggg.setLayout(null);
         imgggg.setVisible(true);
         imgggg.setForeground(Color.BLACK);
@@ -2091,7 +2103,7 @@ public class LoginModule {
         
         //Creamos el campo de texto que despliega los id de imágenes del cliente
         JComboBox idJ= new JComboBox ();
-        idJ.setModel(new javax.swing.DefaultComboBoxModel<>());       
+        idJ.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyImgsCodes(userLogged)));       
         idJ.setLayout(null);
         idJ.setVisible(true);
         idJ.setBounds(300,110,400,30);
@@ -2104,7 +2116,7 @@ public class LoginModule {
           //=========================Creación de los  Botones del frame creacion de profesores=========================
         
         //Creamos el boton que buscará que eliminara al cliente seleccionado
-        ImageIcon iconobtn = new ImageIcon("../imgUsadas/delete.png");
+        ImageIcon iconobtn = new ImageIcon("imgUsadas/delete.png");
         JButton deleteButton = new JButton("");
         deleteButton.setLayout(null);
         deleteButton.setVisible(true);
@@ -2113,14 +2125,18 @@ public class LoginModule {
         deleteButton.setIcon(iconobtn);
         deleteButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent buscarProfesorPorCodigo){  
-                        
+                try { 
+                    clientListHandler.deleteClientImg(userLogged, Integer.parseInt(idJ.getSelectedItem().toString())); 
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
                         
             }
         }); 
         deleteImage.add(deleteButton);
         
         //Creamos el boton que regresará de ventana
-        ImageIcon iconobtn2 = new ImageIcon("../imgUsadas/leave.png");
+        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/leave.png");
         JButton returnButton = new JButton("");
         returnButton.setLayout(null);
         returnButton.setVisible(true);

@@ -8,6 +8,7 @@ package udrawingpaper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 
 
 /**
@@ -28,6 +29,10 @@ public class BTree {
         this.height=0;
         this.code="";
         this.level=0;
+    }
+    
+    public BTreeBranch returnMeMyRoot(){
+        return root;
     }
     
     public void insert(Client client){
@@ -146,13 +151,16 @@ public class BTree {
                 dot+="N"+i+" -> "+"N"+(i+1)+";\n";
             }
             
+         
+            
             
         }
+        level=0;
         dot+="}\n";
         //this.code+="}\n";
         //System.out.println("FINALIZA");
-        String route="../Reportes Texto/ARBOLB.txt";
-        String graph="../Reportes Img/ARBOLB.png";
+        String route="Reportes Texto/ARBOLB.txt";
+        String graph="Reportes Img/ARBOLB.png";
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
@@ -240,6 +248,52 @@ public class BTree {
             return stringConnect;
         }
     }
+    
+    
+    
+    public void updateClient(BTreeBranch root,BigInteger dpi, String name, String password){
+        if(root.isLeaf(root)){
+       
+            BTreeNode temp=root.list.head;
+            while(temp!=null){
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("Encontrado 1");
+                    temp.client.setName(name);
+                    temp.client.setPassword(password);
+                }
+                
+                temp=temp.next;
+            }
+           
+        }else{
+            
+          
+            BTreeNode temp = root.list.head;
+            
+            while(temp!=null){
+                if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("Encontrado 2");
+                    temp.client.setName(name);
+                    temp.client.setPassword(password);
+                }
+                
+                temp= temp.next;
+            }
+            
+            temp = root.list.head;
+            while(temp != null){
+               if(temp.client.getDpi().compareTo(dpi)==0){
+                    //System.out.println("Encontrado 3");
+                    temp.client.setName(name);
+                    temp.client.setPassword(password);
+                }
+                temp = temp.next;
+            }
+          
+        
+        }
+    }
+    
     
     
    
