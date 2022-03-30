@@ -595,6 +595,137 @@ public class Matrix {
 
         rt.exec( cmd );
    }
+   
+   
+   
+   
+   
+   public void GraphSparseMatrixOfPersonalizeImg(String name) throws IOException{
+        String route="Reportes Texto/"+name+".txt";
+        String graph="Reportes Img/"+name+".png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        MatrixNode temp=root;
+        //Temporal para recorrer cada fila
+        MatrixNode temp2;
+   
+        String rankSame="";
+       
+        String rankSameTotals="";
+        
+        
+        graphText="";
+        graphText+="digraph {\n" +
+            "\n" +
+            "rankdir = TB;\n" +
+            "node [shape=rectangle, height=0.5, width=0.5];\n" +
+            "graph[ nodesep = 0.5];\n" ;
+            
+        graphText+="//Las columnas cabeceras\n";
+        while(temp!= null){
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+temp.x+","+temp.y+"\" color=\""+temp.color+"\" style=\"filled\" ];\n";
+            temp=temp.next;
+            
+        }
+        temp=root;
+        graphText+="\n\n\n//Las filas cabeceras\n";
+        while(temp!= null){
+            if(temp.x!=-6){
+                
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+temp.x+","+temp.y+"\" color=\""+temp.color+"\" style=\"filled\" ];\n";
+            }
+            temp=temp.down;
+            
+        }
+        temp=root;
+        graphText+="\n\n\n//Los valores de la Matriz\n";
+        while(temp!=null){
+            temp2=temp;
+            rankSame="{rank=same; ";
+            
+            while(temp2!=null){
+                if(temp2.up!=null && temp2.previous!=null){
+                    graphText+="N"+temp2.hashCode()+"[label=\""+temp2.x+","+temp2.y+"\" color=\""+temp2.color+"\" style=\"filled\" ];\n";
+                }
+                temp2=temp2.next;
+            }
+            temp=temp.down;
+        }
+        
+        temp=root;
+        graphText+="\n\n\n//Conexiones de cada columna\n";
+        rankSame="{ rank=same; ";
+        while(temp!=null){
+            
+            
+            
+            if(temp.next!=null){
+                graphText+="N"+temp.hashCode()+"->"+"N"+temp.next.hashCode()+"[dir=both];\n";
+            }
+            if(temp.down!=null && temp.down.x!=-1){
+                graphText+="N"+temp.hashCode()+"->"+"N"+temp.down.hashCode()+"[dir=both];\n";
+            }
+            rankSame+="N"+temp.hashCode()+";";
+            //System.out.println(rankSame);
+            temp=temp.next;
+           
+        }
+        //System.out.println(rankSame);
+        rankSame+="}\n";
+        rankSameTotals+=rankSame;
+        rankSame="";
+        temp=root;
+        graphText+="\n\n\n//Conexiones de cada fila\n";
+        if(temp.down!=null){
+            graphText+="N"+temp.hashCode()+"->"+"N"+temp.down.hashCode()+"[dir=both];\n";
+            temp=temp.down;
+        }
+        while(temp!=null){
+            temp2=temp;
+            rankSame="{rank=same; ";
+            while(temp2!=null){
+                if(temp2.down!=null){
+                    graphText+="N"+temp2.hashCode()+"->"+"N"+temp2.down.hashCode()+"[dir=both];\n";
+                }
+                if(temp2.next!=null){
+                    graphText+="N"+temp2.hashCode()+"->"+"N"+temp2.next.hashCode()+"[constraint=false,dir=both];\n";
+                }
+                rankSame+="N"+temp2.hashCode()+";";
+                
+                temp2=temp2.next;
+            }
+            rankSame+="}\n";
+            rankSameTotals+=rankSame;
+            
+            temp=temp.down;
+        }
+        
+        
+        graphText+="\n\n\n//Los rankSame\n";
+        graphText+=rankSameTotals;
+        
+      
+        
+        graphText+="\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(graphText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+   }
 }
        
        

@@ -41,6 +41,12 @@ public class LoginModule {
     public static String imagesJsonContent="";
     public static String layersJsonContent="";
     public static String albumsJsonContent="";
+    //Variables que guardan la ruta de las imagenes por recorridos limitados
+    public static String personalizePreOrder="";
+    public static String personalizeInOrder="";
+    public static String personalizePostOrder="";
+    public static int limitOfLayers=0;
+    public static int personalizeimg=9989;
     
     
     
@@ -632,6 +638,7 @@ public class LoginModule {
         Font font =new Font("Arial",Font.BOLD,36);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
         Font font3 =new Font("Showcard Gothic",Font.BOLD,30);
+        Font font4 =new Font("Showcard Gothic",Font.BOLD,18);
         
         
         //=========================Creación del Frame del Admin==============================
@@ -890,6 +897,62 @@ public class LoginModule {
         clientView.add(graphScroll);
         
         
+        
+        
+        JButton personalizePreOrderImage = new JButton("P");
+        personalizePreOrderImage.setLayout(null);
+        personalizePreOrderImage.setVisible(true);
+        personalizePreOrderImage.setBounds(440, 530, 50, 60);
+        personalizePreOrderImage.setBackground(Color.cyan);
+        personalizePreOrderImage.setFont(font4);
+        personalizePreOrderImage.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+         
+                String route="Reportes Img/PersonalizePreOrder.png";
+                ImageIcon layerIcon = new ImageIcon(route);
+                layerIcon.getImage().flush();
+                graphLabel.setIcon(layerIcon); 
+            }
+        }); 
+        clientView.add(personalizePreOrderImage);
+        
+        JButton personalizeInOrderImage = new JButton("I");
+        personalizeInOrderImage.setLayout(null);
+        personalizeInOrderImage.setVisible(true);
+        personalizeInOrderImage.setBounds(530, 530, 50, 60);
+        personalizeInOrderImage.setBackground(Color.cyan);
+        personalizeInOrderImage.setFont(font4);
+        personalizeInOrderImage.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+         
+                String route="Reportes Img/PersonalizeInOrder.png";
+                ImageIcon layerIcon = new ImageIcon(route);
+                layerIcon.getImage().flush();
+                graphLabel.setIcon(layerIcon); 
+            }
+        }); 
+        clientView.add(personalizeInOrderImage);
+        
+        
+        JButton personalizePostOrderImage = new JButton("T");
+        personalizePostOrderImage.setLayout(null);
+        personalizePostOrderImage.setVisible(true);
+        personalizePostOrderImage.setBounds(620, 530, 50, 60);
+        personalizePostOrderImage.setBackground(Color.cyan);
+        personalizePostOrderImage.setFont(font4);
+        personalizePostOrderImage.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){ 
+         
+                String route="Reportes Img/PersonalizePostOrder.png";
+                ImageIcon layerIcon = new ImageIcon(route);
+                layerIcon.getImage().flush();
+                graphLabel.setIcon(layerIcon); 
+            }
+        }); 
+        clientView.add(personalizePostOrderImage);
+        
+        
+        
         JButton layerReportButton = new JButton("");
         ImageIcon iconobtn = new ImageIcon("imgUsadas/search.png");
         layerReportButton.setLayout(null);
@@ -902,6 +965,7 @@ public class LoginModule {
          
                 String route="Reportes Img/Capa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon layerIcon = new ImageIcon(route);
+                layerIcon.getImage().flush();
                 graphLabel.setIcon(layerIcon); 
             }
         }); 
@@ -919,6 +983,7 @@ public class LoginModule {
          
                 String route="Reportes Img/Bonitacapa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon layerIcon = new ImageIcon(route);
+                layerIcon.getImage().flush();
                 graphLabel.setIcon(layerIcon); 
             }
         }); 
@@ -935,6 +1000,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){ 
                 String route="Reportes Img/imagen"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
                 graphLabel.setIcon(imgIcon); 
             }
         }); 
@@ -951,6 +1017,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){ 
                 String route="Reportes Img/BonitaImg"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
                 graphLabel.setIcon(imgIcon); 
             }
         }); 
@@ -967,6 +1034,7 @@ public class LoginModule {
             public void mouseClicked(MouseEvent ecp){ 
                 String route="Reportes Img/ArbolImagen"+idImagesForTree.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
                 ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
                 graphLabel.setIcon(imgIcon); 
             }
         }); 
@@ -1276,9 +1344,143 @@ public class LoginModule {
                 } catch (IOException ex) {
                     Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Reportes Generados!!</p></html>" );
             }
         }); 
         clientsReports.add(reportsButton);
+        
+        
+        
+        
+        
+        //Creamos un botón de reportes
+        JButton reportsButton2 = new JButton("Generar IMG");
+        reportsButton2.setLayout(null);
+        reportsButton2.setVisible(true);
+        reportsButton2.setBounds(900, 700, 400, 60);
+        reportsButton2.setBackground(Color.cyan);
+        reportsButton2.setFont(font3);
+        reportsButton2.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                
+                
+                if(!preOrder.getText().equals("")){
+                    Matrix tempMatrix = new Matrix();
+                    String[] allTheLayers=preOrder.getText().split(",");
+                    for (int i = 0; i < allTheLayers.length; i++) {
+                        //Capa temporal
+                        Layer temp;
+                        //Cliente temporal
+                        Client tempClient;
+                        //Se busca al cliente
+                        tempClient=clientListHandler.returnMeTheClient(userLogged);
+                        //Se valida que el cliente exista
+                        if(tempClient != null){
+                            //Si existe:
+                            //System.out.println("si hay cliente");
+                            //se busca en su arbol ABB la capa actual en el ciclo.
+                            temp=tempClient.getAbbTree().searchNodeAndReturnLayer(Integer.parseInt(allTheLayers[i]));
+                            //Se valida que la capa temporal exista
+                            if(temp!=null){
+                                //Si existe la capa:
+                                //System.out.println("si hay capa");
+                                //Se llena la matriz de la imágen con la sub matriz de la capa
+                                temp.getPosition().fillImgMatrix2(tempMatrix);
+                            }
+                        }
+
+                    }
+                    try {          
+                        tempMatrix.GraphSparseMatrixOfPersonalizeImg("PersonalizePreOrder");
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                
+                
+                
+                if(!inOrder.getText().equals("")){
+                    Matrix tempMatrix = new Matrix();
+                    String[] allTheLayers=inOrder.getText().split(",");
+                    for (int i = 0; i < allTheLayers.length; i++) {
+                        //Capa temporal
+                        Layer temp;
+                        //Cliente temporal
+                        Client tempClient;
+                        //Se busca al cliente
+                        tempClient=clientListHandler.returnMeTheClient(userLogged);
+                        //Se valida que el cliente exista
+                        if(tempClient != null){
+                            //Si existe:
+                            //System.out.println("si hay cliente");
+                            //se busca en su arbol ABB la capa actual en el ciclo.
+                            temp=tempClient.getAbbTree().searchNodeAndReturnLayer(Integer.parseInt(allTheLayers[i]));
+                            //Se valida que la capa temporal exista
+                            if(temp!=null){
+                                //Si existe la capa:
+                                //System.out.println("si hay capa");
+                                //Se llena la matriz de la imágen con la sub matriz de la capa
+                                temp.getPosition().fillImgMatrix2(tempMatrix);
+                            }
+                        }
+
+                    }
+                    try {          
+                        tempMatrix.GraphSparseMatrixOfPersonalizeImg("PersonalizeInOrder");
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                
+                if(!postOrder.getText().equals("")){
+                    Matrix tempMatrix = new Matrix();
+                    String[] allTheLayers=postOrder.getText().split(",");
+                    for (int i = 0; i < allTheLayers.length; i++) {
+                        //Capa temporal
+                        Layer temp;
+                        //Cliente temporal
+                        Client tempClient;
+                        //Se busca al cliente
+                        tempClient=clientListHandler.returnMeTheClient(userLogged);
+                        //Se valida que el cliente exista
+                        if(tempClient != null){
+                            //Si existe:
+                            //System.out.println("si hay cliente");
+                            //se busca en su arbol ABB la capa actual en el ciclo.
+                            temp=tempClient.getAbbTree().searchNodeAndReturnLayer(Integer.parseInt(allTheLayers[i]));
+                            //Se valida que la capa temporal exista
+                            if(temp!=null){
+                                //Si existe la capa:
+                                //System.out.println("si hay capa");
+                                //Se llena la matriz de la imágen con la sub matriz de la capa
+                                temp.getPosition().fillImgMatrix2(tempMatrix);
+                            }
+                        }
+
+                    }
+                    try {          
+                        tempMatrix.GraphSparseMatrixOfPersonalizeImg("PersonalizePostOrder");
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Imágenes Por Recorrido Limitado Creadas Con Éxito!!</p></html>" );
+                    
+                    
+                    
+                
+            }
+        }); 
+        clientsReports.add(reportsButton2);
       
        
         //Label para mostrar imágen para decoración

@@ -159,6 +159,8 @@ public class ClientList {
                 if(temp.client.getDpi().compareTo(dpi)==0){
                     temp.client.getImgList().deleteImg(id); 
                     temp.client.getAvlTree().removeNode(temp.client.getAvlTree().returnMeTheRoot(), id);
+                    temp.client.getAlbumList().deleteImgOfTheAlbum(id);
+                    temp.client.getAlbumList().generatePersonalizeAlbum(temp.client.getName());
                     returnMeMyAvl(dpi); 
                 }
                 

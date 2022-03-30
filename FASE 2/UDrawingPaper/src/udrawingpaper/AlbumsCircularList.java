@@ -8,6 +8,7 @@ package udrawingpaper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 
 /**
  *
@@ -107,6 +108,23 @@ public class AlbumsCircularList {
         return finalText;
     }
     
+    
+    public void deleteImgOfTheAlbum(int id) throws IOException{
+        if(first == null){
+            System.err.print("La lista se encuentra vacia");
+        }
+        else{
+            AlbumsCircularListNode temp = first;
+            do{
+                if(temp.album.getImgList().exist(id)==false){
+                    temp.album.getImgList().deleteImg(id); 
+                }
+                
+                temp = temp.next;
+            }while(temp != null);
+        }
+      
+    }
     
     /*public void generatePersonalizeAlbum2(String name) throws IOException{
         String route="C:\\Users\\Erwin14k\\Desktop\\matriz.png";

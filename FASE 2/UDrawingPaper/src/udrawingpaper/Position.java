@@ -32,4 +32,12 @@ public class Position {
             temp=temp.next;
         }
     }
+    
+    public void fillImgMatrix2(Matrix matrix){
+        PositionNode temp=first;
+        while(temp!=null){
+            matrix.insert(temp.column, temp.row, temp.color);
+            temp=temp.next;
+        }
+    }
 }
