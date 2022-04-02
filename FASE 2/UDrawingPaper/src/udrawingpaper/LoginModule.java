@@ -41,12 +41,6 @@ public class LoginModule {
     public static String imagesJsonContent="";
     public static String layersJsonContent="";
     public static String albumsJsonContent="";
-    //Variables que guardan la ruta de las imagenes por recorridos limitados
-    public static String personalizePreOrder="";
-    public static String personalizeInOrder="";
-    public static String personalizePostOrder="";
-    public static int limitOfLayers=0;
-    public static int personalizeimg=9989;
     
     
     
@@ -2472,12 +2466,11 @@ public class LoginModule {
                 String line;
                 // LEER LINEA POR LINEA
                 //System.out.println("hola 2");
-                int counter=1;
+                
                 while ((line = br.readLine()) != null) {
                     // Solo agregamos el contenido a un String
                     layersJsonContent += line;
-                    System.out.println(counter);
-                    counter++;                   
+                                      
 
             }
                 
