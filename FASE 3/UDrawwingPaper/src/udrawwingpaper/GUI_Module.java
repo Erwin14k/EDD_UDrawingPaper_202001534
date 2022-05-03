@@ -1,6 +1,9 @@
 
 package udrawwingpaper;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,6 +11,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.logging.Level;
@@ -15,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,11 +43,13 @@ public class GUI_Module {
     static String userLogged;
     //Lista enlazada donde se guardan todos los clientes registrados
     static ClientList clientListHandler = new ClientList();
+    //Variables que almacenan el texto de los json antes de ser parseados
+    public static String deliveryCourierJsonContent="";
     
+    public static HashTable hastTable = new HashTable();
     
     //Frame para iniciar sesión, ya se como administrador o como cliente.
     public static void loginFrameModule() throws IOException{
-  
         //Creamos unos tipos de letra, que nos servirán más adelante
         Font font =new Font("Arial",Font.BOLD,50);
         Font font2 =new Font("Helvetica",Font.BOLD,30);
@@ -666,11 +675,12 @@ public class GUI_Module {
         bulkLoadButton.setFont(font3);
         bulkLoadButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
+                hastTable.initialize();
                 adminView.dispose();
-                //readClientsJson();
-                //clientsBulkLoad();
-                System.out.println("Los clientes ingresados por carga Masiva:");
-                clientListHandler.travel();
+                readDeliveryCouriersJson();
+                deliveryCouriersBulkLoad();
+                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                //clientListHandler.travel();
                 System.out.println("=========================================");
                 System.out.println("\n\n\n");
                 try {
@@ -696,6 +706,120 @@ public class GUI_Module {
             
             
         }
+    
+    public static void readDeliveryCouriersJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        //System.out.println("ooooooo");
+        try{
+            //System.out.println("Aqui si entra 1");
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                //System.out.println("Aqui si entra 2");
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                //System.out.println("Aqui si entra 3");
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    deliveryCourierJsonContent += line;
+                    //System.out.println("siu");
+
+            }
+                
+            } catch (Exception e) {
+                System.out.println("No se pudo 1."+e);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo 2."+e);
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                System.out.println("No se pudo 3."+e2);
+            }
+        }
+    }
+    public static void deliveryCouriersBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray deliveryCouriersList = parser.parse(deliveryCourierJsonContent).getAsJsonArray();
+            System.out.println("=============================================");
+            System.out.println("el numero de mensajeros es: "+deliveryCouriersList.size());
+            System.out.println("Si existen repetidos se descartan!!");
+            System.out.println("=============================================");
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos al árbol B
+            for (int i = 0; i < deliveryCouriersList.size(); i++) {
+                //System.out.println("EMPIEZAAAAAAAAA");
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = deliveryCouriersList.get(i).getAsJsonObject();     
+                //System.out.println(object);
+                //Guardamos atributos del objeto en variables
+                BigInteger dpi = object.get("dpi").getAsBigInteger();
+                //System.out.println(dpi);
+                String name = object.get("nombres").getAsString();
+                //System.out.println(name);
+                String lastName = object.get("apellidos").getAsString();
+                String license = object.get("tipo_licencia").getAsString();
+                String gender = object.get("genero").getAsString();
+                String direction = object.get("direccion").getAsString();
+                String phone = object.get("telefono").getAsString();
+                
+                
+                // Se crea el objeto mensajero
+
+                DeliveryCourier newDeliveryCourier = new DeliveryCourier(dpi,name,lastName,license,gender,phone,direction);
+                hastTable.insert(newDeliveryCourier); 
+                
+                
+                
+                
+            
+            }
+            deliveryCourierJsonContent ="";
+            hastTable.generateGraph();
+            hastTable.printData();
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Mensajeros Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     //El frame que visualiza el cliente al estar loggeado.
     public static void clientView() throws IOException {
