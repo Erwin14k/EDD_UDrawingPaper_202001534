@@ -31,7 +31,7 @@ public class HashTable {
     a ser llenadas.*/
     public void initialize(){
         for(int i=0;i<size;i++){
-            HashTableNode node= new HashTableNode(i+1,null);
+            HashTableNode node= new HashTableNode(i,null);
             if(first==null){
                 first=node;
             }else{
@@ -74,10 +74,9 @@ public class HashTable {
     //Si se llega al máximo porcentaje de ocupación, se agranda la tabla hash.
     public void rehash(){
         int newSize=findNextPrimeNumber();
-        System.out.println("Nuevo tamaño---"+newSize);
         int iterations=newSize-size;
         for(int i=0;i<iterations;i++){
-            HashTableNode node= new HashTableNode(size+(i+1),null);
+            HashTableNode node= new HashTableNode(size+(i),null);
             System.out.println(node.key+"JJJJJJJJJJJJ");
             HashTableNode pointer= first;
             while(pointer.next!=null){
@@ -88,6 +87,8 @@ public class HashTable {
         
         size=newSize;
         max=(int) Math.round(size*0.75);
+        System.out.println("Nuevo tamaño---"+size);
+        System.out.println("Nuevo max---"+max);
     }
     //Verifica si el espacio de la llave está libre.
     public boolean isFree(int key){
@@ -98,13 +99,19 @@ public class HashTable {
             }
             temp = temp.next;
         }while(temp != null);
-        System.out.println("No se encontró");
+        //System.out.println("No se encontró");
         return false; 
     }
     public void printData(){
+        //System.out.println("Que empieceeeeeeeee");
         HashTableNode temp = first;
         do{
-            System.out.println(temp.key+"----"+temp.deliveryCourier.getName());
+            if(temp.deliveryCourier!=null){
+                System.out.println(temp.key+"----"+temp.deliveryCourier.getName());
+            }else{
+                System.out.println(temp.key+"----"+temp.deliveryCourier);
+            }
+            
             temp = temp.next;
         }while(temp != null);
     }
@@ -182,49 +189,29 @@ public class HashTable {
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
         
-        String finalText="digraph G{\nnode [shape=box];\n";
+        String finalText="digraph HashTable{\n node[shape = record,fillcolor=\"bisque1\" color=\"black\" style=\"filled\" label=\"{Posición|Mensajero}|";
+        
         HashTableNode temp = first;
-        String rankSame="{rank=same; ";
-        String conections="";
-        String nodes="";
         while(temp != null){
-            nodes+="N"+temp.hashCode()+"[label=\""+"Posición: "+temp.key+"\n "+temp.deliveryCourier.getName()+"\"];\n";
-            if (temp.next!=null){
-                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
-                conections+="N"+temp.next.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
-                //conections+="N"+temp.hashCode()+ " -> "+"NM"+temp.next.hashCode()+";\n";
-                rankSame+="N"+temp.hashCode()+",";
+            if(temp.deliveryCourier!=null){
+                finalText+="{"+temp.key+"| DPI: "+temp.deliveryCourier.getDpi()+"\\n"+temp.deliveryCourier.getName()+" "+temp.deliveryCourier.getLastName()+"\\nLicencia Tipo: "+temp.deliveryCourier.getLicenseType()+"\\nDirección: "+temp.deliveryCourier.getDirection()+"}|";
             }else{
-                conections+="N"+temp.hashCode()+ " -> "+"N"+first.hashCode()+";\n";
-                conections+="N"+first.hashCode()+ " -> "+"N"+temp.hashCode()+";\n";
-                rankSame+="N"+temp.hashCode();
+                finalText+="{"+temp.key+"|"+temp.deliveryCourier+"}|";
             }
-            
             temp = temp.next;
-            
         }
-        rankSame+="};";
-        
-        
-        finalText+=nodes+"\n";
-        finalText+=conections+"\n";
-        finalText+="start [shape=Mdiamond label=\"Tabla Hash Mensajeros\n\"];";
-        finalText+=rankSame;
-        finalText+="}\n}";
+        finalText+="\"]Erwin;\n}";
         FileWriter fw = new FileWriter(route);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(finalText);
         bw.close();
-        
         String[] cmd = new String[5];
         cmd[0] = pathString;
         cmd[1] = tParam;
         cmd[2] = route;
         cmd[3] = tOParam;
         cmd[4] = graph;
-
         Runtime rt = Runtime.getRuntime();
-
         rt.exec( cmd );
         //System.out.println(finalText);
         return finalText;

@@ -795,7 +795,7 @@ public class GUI_Module {
             }
             deliveryCourierJsonContent ="";
             hastTable.generateGraph();
-            hastTable.printData();
+            //hastTable.printData();
             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Mensajeros Realizada Con Éxito!!</p></html>" );
         } catch (Exception e) {
         }
