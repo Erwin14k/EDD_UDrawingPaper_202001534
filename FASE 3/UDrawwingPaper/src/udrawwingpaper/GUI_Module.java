@@ -536,38 +536,9 @@ public class GUI_Module {
  
        
         
+   
         
-        //Botón para crear un nuevo cliente
-        JButton newClient = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("imgUsadas/new.png");
-        newClient.setLayout(null);
-        newClient.setVisible(true);
-        newClient.setBounds(360, 630, 50, 60);
-        newClient.setBackground(Color.green);
-        newClient.setIcon(iconobtn);
-        newClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                adminView.dispose();
-                //clientsCreation();
-            }
-        }); 
-        adminView.add(newClient);
         
-        //Botón para eliminar un cliente
-        JButton deleteClient = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/delete.png");
-        deleteClient.setLayout(null);
-        deleteClient.setVisible(true);
-        deleteClient.setBounds(450, 630, 50, 60);
-        deleteClient.setBackground(Color.red);
-        deleteClient.setIcon(iconobtn2);
-        deleteClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){  
-                adminView.dispose();
-                //deleteClient();
-            }
-        }); 
-        adminView.add(deleteClient);
         
         //Botón para actualizar un cliente
         JButton updateClient = new JButton("");
@@ -666,14 +637,14 @@ public class GUI_Module {
         adminView.add(clientsDataTableSC);
       
         
-        //Creamos un botón de Carga Masiva
-        JButton bulkLoadButton = new JButton("Carga Masiva");
-        bulkLoadButton.setLayout(null);
-        bulkLoadButton.setVisible(true);
-        bulkLoadButton.setBounds(20, 630, 300, 60);
-        bulkLoadButton.setBackground(Color.yellow);
-        bulkLoadButton.setFont(font3);
-        bulkLoadButton.addMouseListener(new MouseAdapter(){  
+        //Creamos un botón de Carga Masiva de mensajeros
+        JButton deliveryCouriersbulkLoadButton = new JButton("Mensajeros");
+        deliveryCouriersbulkLoadButton.setLayout(null);
+        deliveryCouriersbulkLoadButton.setVisible(true);
+        deliveryCouriersbulkLoadButton.setBounds(20, 630, 300, 60);
+        deliveryCouriersbulkLoadButton.setBackground(Color.yellow);
+        deliveryCouriersbulkLoadButton.setFont(font3);
+        deliveryCouriersbulkLoadButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
                 hastTable.initialize();
                 adminView.dispose();
@@ -693,10 +664,37 @@ public class GUI_Module {
             
             }
         }); 
-        adminView.add(bulkLoadButton);
+        adminView.add(deliveryCouriersbulkLoadButton);
         
       
-       
+       //Creamos un botón de Carga Masiva de clientes
+        JButton clientsBulkLoadButton = new JButton("Clientes");
+        clientsBulkLoadButton.setLayout(null);
+        clientsBulkLoadButton.setVisible(true);
+        clientsBulkLoadButton.setBounds(20, 700, 300, 60);
+        clientsBulkLoadButton.setBackground(Color.yellow);
+        clientsBulkLoadButton.setFont(font3);
+        clientsBulkLoadButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                hastTable.initialize();
+                adminView.dispose();
+                readDeliveryCouriersJson();
+                deliveryCouriersBulkLoad();
+                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                //clientListHandler.travel();
+                System.out.println("=========================================");
+                System.out.println("\n\n\n");
+                try {
+                    adminView();
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI_Module.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+            }
+        }); 
+        adminView.add(clientsBulkLoadButton);
         
         
         
