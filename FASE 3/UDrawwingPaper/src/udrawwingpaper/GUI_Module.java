@@ -45,6 +45,9 @@ public class GUI_Module {
     static ClientList clientListHandler = new ClientList();
     //Variables que almacenan el texto de los json antes de ser parseados
     public static String deliveryCourierJsonContent="";
+    public static String clientsJsonContent="";
+    public static String citiesJsonContent="";
+    public static String routesJsonContent="";
     
     public static HashTable hastTable = new HashTable();
     
@@ -545,7 +548,7 @@ public class GUI_Module {
         ImageIcon iconobtn3 = new ImageIcon("imgUsadas/update2.png");
         updateClient.setLayout(null);
         updateClient.setVisible(true);
-        updateClient.setBounds(540, 630, 50, 60);
+        updateClient.setBounds(700, 630, 50, 60);
         updateClient.setBackground(Color.magenta);
         updateClient.setIcon(iconobtn3);
         updateClient.addMouseListener(new MouseAdapter(){  
@@ -561,7 +564,7 @@ public class GUI_Module {
         ImageIcon iconobtn4 = new ImageIcon("imgUsadas/logout.png");
         logOutButton.setLayout(null);
         logOutButton.setVisible(true);
-        logOutButton.setBounds(630, 630, 50, 60);
+        logOutButton.setBounds(770, 630, 50, 60);
         logOutButton.setBackground(Color.red);
         logOutButton.setIcon(iconobtn4);
         logOutButton.addMouseListener(new MouseAdapter(){  
@@ -650,10 +653,10 @@ public class GUI_Module {
                 adminView.dispose();
                 readDeliveryCouriersJson();
                 deliveryCouriersBulkLoad();
-                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                //System.out.println("Los mensajeros ingresados por carga Masiva:");
                 //clientListHandler.travel();
-                System.out.println("=========================================");
-                System.out.println("\n\n\n");
+                //System.out.println("=========================================");
+                //System.out.println("\n\n\n");
                 try {
                     adminView();
                     
@@ -676,6 +679,35 @@ public class GUI_Module {
         clientsBulkLoadButton.setFont(font3);
         clientsBulkLoadButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
+ 
+                adminView.dispose();
+                readClientsJson();
+                clientsBulkLoad();
+                //System.out.println("Los clientes ingresados por carga Masiva:");
+                //clientListHandler.travel();
+                //System.out.println("=========================================");
+                //System.out.println("\n\n\n");
+                try {
+                    adminView();
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI_Module.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+            }
+        }); 
+        adminView.add(clientsBulkLoadButton);
+        
+        
+        JButton citiesBulkLoadButton = new JButton("Lugares");
+        citiesBulkLoadButton.setLayout(null);
+        citiesBulkLoadButton.setVisible(true);
+        citiesBulkLoadButton.setBounds(350, 630, 300, 60);
+        citiesBulkLoadButton.setBackground(Color.yellow);
+        citiesBulkLoadButton.setFont(font3);
+        citiesBulkLoadButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
                 hastTable.initialize();
                 adminView.dispose();
                 readDeliveryCouriersJson();
@@ -694,11 +726,36 @@ public class GUI_Module {
             
             }
         }); 
-        adminView.add(clientsBulkLoadButton);
+        adminView.add(citiesBulkLoadButton);
         
         
-        
-
+        JButton routesBulkLoadButton = new JButton("Rutas");
+        routesBulkLoadButton.setLayout(null);
+        routesBulkLoadButton.setVisible(true);
+        routesBulkLoadButton.setBounds(350, 700, 300, 60);
+        routesBulkLoadButton.setBackground(Color.yellow);
+        routesBulkLoadButton.setFont(font3);
+        routesBulkLoadButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){
+                hastTable.initialize();
+                adminView.dispose();
+                readDeliveryCouriersJson();
+                deliveryCouriersBulkLoad();
+                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                //clientListHandler.travel();
+                System.out.println("=========================================");
+                System.out.println("\n\n\n");
+                try {
+                    adminView();
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI_Module.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+            }
+        }); 
+        adminView.add(routesBulkLoadButton);
             
             
             
@@ -762,8 +819,6 @@ public class GUI_Module {
             System.out.println("el numero de mensajeros es: "+deliveryCouriersList.size());
             System.out.println("Si existen repetidos se descartan!!");
             System.out.println("=============================================");
-            //System.out.println(clientsList);
-            //Ya con el arreglo con objetos, para meterlos al árbol B
             for (int i = 0; i < deliveryCouriersList.size(); i++) {
                 //System.out.println("EMPIEZAAAAAAAAA");
                 // JsonObject = Toma el Objeto del Json actual
@@ -800,7 +855,194 @@ public class GUI_Module {
         
     }
     
+    public static void readClientsJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        //System.out.println("ooooooo");
+        try{
+            //System.out.println("Aqui si entra 1");
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                //System.out.println("Aqui si entra 2");
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                //System.out.println("Aqui si entra 3");
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    clientsJsonContent += line;
+                    //System.out.println("siu");
+
+            }
+                
+            } catch (Exception e) {
+                System.out.println("No se pudo 1."+e);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo 2."+e);
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                System.out.println("No se pudo 3."+e2);
+            }
+        }
+    }
     
+    public static void clientsBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo cliente.
+            JsonArray clientsList = parser.parse(clientsJsonContent).getAsJsonArray();
+            System.out.println("=============================================");
+            System.out.println("el numero de clientes es: "+clientsList.size());
+            System.out.println("Si existen repetidos se descartan!!");
+            System.out.println("=============================================");
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos a una lista enlazada
+            for (int i = 0; i < clientsList.size(); i++) {
+                //System.out.println("EMPIEZAAAAAAAAA");
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = clientsList.get(i).getAsJsonObject();     
+                //System.out.println(object);
+                //Guardamos atributos del objeto en variables
+                BigInteger dpi = object.get("dpi").getAsBigInteger();
+                //System.out.println(dpi);
+                String name = object.get("nombre_completo").getAsString();
+                //System.out.println(name);
+                String userName = object.get("nombre_usuario").getAsString();
+                String mail = object.get("correo").getAsString();
+                String password = object.get("contrasenia").getAsString();
+                String phone = object.get("telefono").getAsString();
+                String direction = object.get("direccion").getAsString();
+                int cityId = object.get("id_municipio").getAsInt();
+                System.out.println(name);
+                
+                // Se crea el objeto cliente
+
+                Client newClient = new Client(dpi,name,userName,mail,password,direction,cityId);
+                clientListHandler.finalInsert(newClient); 
+
+            }
+            clientsJsonContent ="";
+            //clientListHandler.generateGraph();
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Clientes Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    public static void readCitiesJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        //System.out.println("ooooooo");
+        try{
+            //System.out.println("Aqui si entra 1");
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                //System.out.println("Aqui si entra 2");
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                //System.out.println("Aqui si entra 3");
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    citiesJsonContent += line;
+                    //System.out.println("siu");
+
+            }
+                
+            } catch (Exception e) {
+                System.out.println("No se pudo 1."+e);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo 2."+e);
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                System.out.println("No se pudo 3."+e2);
+            }
+        }
+    }
+    
+    
+    public static void readCRoutesJson(){
+          File archive = null;
+          FileReader fr = null;
+          BufferedReader br;
+        //System.out.println("ooooooo");
+        try{
+            //System.out.println("Aqui si entra 1");
+           
+            JFileChooser fc = new JFileChooser();
+            int op;
+              op = fc.showOpenDialog(fc);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                //System.out.println("Aqui si entra 2");
+                archive = fc.getSelectedFile();
+            }
+            try {
+                // HACEMOS LA LECTURA DEL ARCHIVO
+                //System.out.println("Aqui si entra 3");
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                // LEER LINEA POR LINEA
+                while ((line = br.readLine()) != null) {
+                    // Solo agregamos el contenido a un String
+                    routesJsonContent += line;
+                    //System.out.println("siu");
+
+            }
+                
+            } catch (Exception e) {
+                System.out.println("No se pudo 1."+e);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo 2."+e);
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                System.out.println("No se pudo 3."+e2);
+            }
+        }
+    }
     
     
     
