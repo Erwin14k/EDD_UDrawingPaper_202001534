@@ -75,7 +75,7 @@ public class RoutesList {
         RoutesListNode temp=first;
         
         while(temp!=null){
-            conections+=hashCode+ " -> "+temp.route.getWeight()+" -> "+"N"+temp.route.getEnd()+";\n";
+            conections+=hashCode+ " -> "+temp.route.getWeight() +" -> "+"N"+temp.route.getEnd()+"[dir=none];\n";
             System.out.println("hola");
             temp=temp.next;
         } 

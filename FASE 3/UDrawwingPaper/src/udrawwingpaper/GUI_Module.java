@@ -169,7 +169,11 @@ public class GUI_Module {
                             JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Le Damos La Bienvenida A: </p><center><p style=\"color:blue; font:20px;\">"+tempName+"</p></center></html>" );
                             userLogged=usernameTF.getText();
                             loginFrame.dispose();
-                            //clientView();
+                            try {
+                                clientView();
+                            } catch (IOException ex) {
+                                Logger.getLogger(GUI_Module.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                 
                         }else{
                             JOptionPane.showMessageDialog(null,"<html><p style=\"color:red; font:20px;\">Nombre de Usuario / Contraseña Incorrectos, Intente De Nuevo!!</p></html>" );
@@ -1199,7 +1203,7 @@ public class GUI_Module {
     
     
     
-    /*
+
     //El frame que visualiza el cliente al estar loggeado.
     public static void clientView() throws IOException {
             
@@ -1240,189 +1244,13 @@ public class GUI_Module {
         Image myIcon= myScreen.getImage("iconoLogin.png");
         clientView.setIconImage(myIcon);
         
-        JLabel titleM = new JLabel("Cliente: "+clientListHandler.nameByDpi(userLogged));
+        JLabel titleM = new JLabel("Cliente: "+clientListHandler.nameByUserName(userLogged));
         titleM.setLayout(null);
         titleM.setVisible(true);
         titleM.setForeground(Color.BLACK);
         titleM.setBounds(30,10,800,60);
         titleM.setFont(font2);
         clientView.add(titleM);
-        
-        JLabel layerLabel = new JLabel("Capa En Específico: ");
-        layerLabel.setLayout(null);
-        layerLabel.setVisible(true);
-        layerLabel.setForeground(Color.BLACK);
-        layerLabel.setBounds(90,80,800,60);
-        layerLabel.setFont(font3);
-        clientView.add(layerLabel);
-        
-        JLabel imgLabel = new JLabel("Imágen En Específico: ");
-        imgLabel.setLayout(null);
-        imgLabel.setVisible(true);
-        imgLabel.setForeground(Color.BLACK);
-        imgLabel.setBounds(90,220,800,60);
-        imgLabel.setFont(font3);
-        clientView.add(imgLabel);
-        
-        JLabel imgTreeLabel = new JLabel("Árbol En Específico: ");
-        imgTreeLabel.setLayout(null);
-        imgTreeLabel.setVisible(true);
-        imgTreeLabel.setForeground(Color.BLACK);
-        imgTreeLabel.setBounds(90,360,800,60);
-        imgTreeLabel.setFont(font3);
-        clientView.add(imgTreeLabel);
-        
-        //Creamos el combobox que despliega los id de las capas
-        JComboBox idLayers= new JComboBox ();
-        idLayers.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyLayersCodes(userLogged)));        
-        idLayers.setLayout(null);
-        idLayers.setVisible(true);
-        idLayers.setBounds(90,160,400,30);
-        clientView.add(idLayers);
-        
-        
-        
-       
-        
-        
-        
-        //Creamos el combobox que despliega los id de las imágenes
-        JComboBox idImages= new JComboBox ();
-        idImages.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyImgsCodes(userLogged)));       
-        idImages.setLayout(null);
-        idImages.setVisible(true);
-        idImages.setBounds(90,300,400,30);
-        clientView.add(idImages);
-        
-        JComboBox idImagesForTree= new JComboBox ();
-        idImagesForTree.setModel(new javax.swing.DefaultComboBoxModel<>(clientListHandler.returnMyImgsCodes(userLogged)));       
-        idImagesForTree.setLayout(null);
-        idImagesForTree.setVisible(true);
-        idImagesForTree.setBounds(90,440,400,30);
-        clientView.add(idImagesForTree);
-        
-        
-        
-       
-        //Creamos un botón de Carga Masiva de imágenes
-        JButton imgLoad = new JButton("Cargar Img");
-        imgLoad.setLayout(null);
-        imgLoad.setVisible(true);
-        imgLoad.setBounds(20, 630, 300, 60);
-        imgLoad.setBackground(Color.yellow);
-        imgLoad.setFont(font3);
-        imgLoad.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                clientView.dispose();
-                readImagesJson();
-                imagesBulkLoad();
-                try {
-                    clientView();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-        clientView.add(imgLoad);
-        
-        //Creamos un botón de Carga Masiva de Albumes
-        JButton albumLoad = new JButton("Cargar Album");
-        albumLoad.setLayout(null);
-        albumLoad.setVisible(true);
-        albumLoad.setBounds(20, 700, 300, 60);
-        albumLoad.setBackground(Color.yellow);
-        albumLoad.setFont(font3);
-        albumLoad.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                clientView.dispose();
-                readAlbumsJson();
-                albumsBulkLoad();
-                try {
-                    clientView();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-        clientView.add(albumLoad);
-        //Creamos un botón de Carga Masiva de capas
-        JButton layersLoad = new JButton("Cargar Capas");
-        layersLoad.setLayout(null);
-        layersLoad.setVisible(true);
-        layersLoad.setBounds(20, 560, 300, 60);
-        layersLoad.setBackground(Color.yellow);
-        layersLoad.setFont(font3);
-        layersLoad.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-                clientView.dispose();
-                readLayersJson();
-                layersBulkLoad();
-                try {
-                    clientView();
-                    //clientListHandler.graphClientTree(userLogged);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-        clientView.add(layersLoad);
-        
-        //Creamos un botón de reportes
-        JButton reportsButton = new JButton("Generar Reportes");
-        reportsButton.setLayout(null);
-        reportsButton.setVisible(true);
-        reportsButton.setBounds(350, 700, 400, 60);
-        reportsButton.setBackground(Color.blue);
-        reportsButton.setFont(font3);
-        reportsButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-                clientView.dispose();
-                try {
-                    clientReports();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-        clientView.add(reportsButton);
-        
-        
-        //Botón para crear una nueva imagen
-        JButton newImage = new JButton("");
-        ImageIcon iconobtn2 = new ImageIcon("imgUsadas/addImg.png");
-        newImage.setLayout(null);
-        newImage.setVisible(true);
-        newImage.setBounds(440, 630, 50, 60);
-        newImage.setBackground(Color.green);
-        newImage.setIcon(iconobtn2);
-        newImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-                clientView.dispose();
-                imageCreation();
-            }
-        }); 
-        clientView.add(newImage);
-        
-        //Botón para eliminar una imagen
-        JButton deleteClient = new JButton("");
-        ImageIcon iconobtn7 = new ImageIcon("imgUsadas/delete.png");
-        deleteClient.setLayout(null);
-        deleteClient.setVisible(true);
-        deleteClient.setBounds(530, 630, 50, 60);
-        deleteClient.setBackground(Color.red);
-        deleteClient.setIcon(iconobtn7);
-        deleteClient.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){   
-                clientView.dispose();
-                try {
-                    deleteImage();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-        clientView.add(deleteClient);
-        
         
         //Botón para cerrar sesión como cliente
         JButton logOutButton = new JButton("");
@@ -1438,257 +1266,15 @@ public class GUI_Module {
                 try {
                     loginFrameModule();
                 } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GUI_Module.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }); 
         clientView.add(logOutButton);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        //Label para mostrar los grafos y reportes
-        JLabel graphLabel = new JLabel("");
-        graphLabel.setLayout(null);
-        graphLabel.setVisible(true);
-        graphLabel.setForeground(Color.BLACK);
-        graphLabel.setBounds(850,20,800,600);
-        ImageIcon iconobtn5 = new ImageIcon("imgUsadas/iconologin.png");
-        graphLabel.setIcon(iconobtn5);
-        JScrollPane graphScroll= new JScrollPane();
-        graphScroll.setBounds(850,20,700,600);
-        graphScroll.setViewportView(graphLabel);
-        clientView.add(graphScroll);
-        
-        
-        
-        
-        JButton personalizePreOrderImage = new JButton("P");
-        personalizePreOrderImage.setLayout(null);
-        personalizePreOrderImage.setVisible(true);
-        personalizePreOrderImage.setBounds(440, 530, 50, 60);
-        personalizePreOrderImage.setBackground(Color.cyan);
-        personalizePreOrderImage.setFont(font4);
-        personalizePreOrderImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-         
-                String route="Reportes Img/PersonalizePreOrder.png";
-                ImageIcon layerIcon = new ImageIcon(route);
-                layerIcon.getImage().flush();
-                graphLabel.setIcon(layerIcon); 
-            }
-        }); 
-        clientView.add(personalizePreOrderImage);
-        
-        JButton personalizeInOrderImage = new JButton("I");
-        personalizeInOrderImage.setLayout(null);
-        personalizeInOrderImage.setVisible(true);
-        personalizeInOrderImage.setBounds(530, 530, 50, 60);
-        personalizeInOrderImage.setBackground(Color.cyan);
-        personalizeInOrderImage.setFont(font4);
-        personalizeInOrderImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-         
-                String route="Reportes Img/PersonalizeInOrder.png";
-                ImageIcon layerIcon = new ImageIcon(route);
-                layerIcon.getImage().flush();
-                graphLabel.setIcon(layerIcon); 
-            }
-        }); 
-        clientView.add(personalizeInOrderImage);
-        
-        
-        JButton personalizePostOrderImage = new JButton("T");
-        personalizePostOrderImage.setLayout(null);
-        personalizePostOrderImage.setVisible(true);
-        personalizePostOrderImage.setBounds(620, 530, 50, 60);
-        personalizePostOrderImage.setBackground(Color.cyan);
-        personalizePostOrderImage.setFont(font4);
-        personalizePostOrderImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-         
-                String route="Reportes Img/PersonalizePostOrder.png";
-                ImageIcon layerIcon = new ImageIcon(route);
-                layerIcon.getImage().flush();
-                graphLabel.setIcon(layerIcon); 
-            }
-        }); 
-        clientView.add(personalizePostOrderImage);
-        
-        
-        
-        JButton layerReportButton = new JButton("");
-        ImageIcon iconobtn = new ImageIcon("imgUsadas/search.png");
-        layerReportButton.setLayout(null);
-        layerReportButton.setVisible(true);
-        layerReportButton.setBounds(520, 140, 50, 60);
-        layerReportButton.setBackground(Color.green);
-        layerReportButton.setIcon(iconobtn);
-        layerReportButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-         
-                String route="Reportes Img/Capa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
-                ImageIcon layerIcon = new ImageIcon(route);
-                layerIcon.getImage().flush();
-                graphLabel.setIcon(layerIcon); 
-            }
-        }); 
-        clientView.add(layerReportButton);
-        
-        JButton layerReportButton2 = new JButton("");
-        ImageIcon iconobtn99 = new ImageIcon("imgUsadas/search.png");
-        layerReportButton2.setLayout(null);
-        layerReportButton2.setVisible(true);
-        layerReportButton2.setBounds(600, 140, 50, 60);
-        layerReportButton2.setBackground(Color.magenta);
-        layerReportButton2.setIcon(iconobtn99);
-        layerReportButton2.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-         
-                String route="Reportes Img/Bonitacapa"+idLayers.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
-                ImageIcon layerIcon = new ImageIcon(route);
-                layerIcon.getImage().flush();
-                graphLabel.setIcon(layerIcon); 
-            }
-        }); 
-        clientView.add(layerReportButton2);
-        
-        JButton specificImage = new JButton("");
-        ImageIcon iconobtn9 = new ImageIcon("imgUsadas/search.png");
-        specificImage.setLayout(null);
-        specificImage.setVisible(true);
-        specificImage.setBounds(520, 280, 50, 60);
-        specificImage.setBackground(Color.green);
-        specificImage.setIcon(iconobtn9);
-        specificImage.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-                String route="Reportes Img/imagen"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
-                ImageIcon imgIcon = new ImageIcon(route);
-                imgIcon.getImage().flush();
-                graphLabel.setIcon(imgIcon); 
-            }
-        }); 
-        clientView.add(specificImage);
-        
-        JButton specificImage2 = new JButton("");
-        ImageIcon iconobtn91 = new ImageIcon("imgUsadas/search.png");
-        specificImage2.setLayout(null);
-        specificImage2.setVisible(true);
-        specificImage2.setBounds(600, 280, 50, 60);
-        specificImage2.setBackground(Color.magenta);
-        specificImage2.setIcon(iconobtn91);
-        specificImage2.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-                String route="Reportes Img/BonitaImg"+idImages.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
-                ImageIcon imgIcon = new ImageIcon(route);
-                imgIcon.getImage().flush();
-                graphLabel.setIcon(imgIcon); 
-            }
-        }); 
-        clientView.add(specificImage2);
-        
-        
-        JButton imageTree = new JButton("");
-        imageTree.setLayout(null);
-        imageTree.setVisible(true);
-        imageTree.setBounds(520, 420, 50, 60);
-        imageTree.setBackground(Color.green);
-        imageTree.setIcon(iconobtn9);
-        imageTree.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){ 
-                String route="Reportes Img/ArbolImagen"+idImagesForTree.getSelectedItem().toString()+clientListHandler.nameByDpi(userLogged)+".png";
-                ImageIcon imgIcon = new ImageIcon(route);
-                imgIcon.getImage().flush();
-                graphLabel.setIcon(imgIcon); 
-            }
-        }); 
-        clientView.add(imageTree);
-        
-        
-        //Botón para mostrar el grafo ABB de capas del cliente.
-        JButton abbImgButton = new JButton("Capas");
-        abbImgButton.setLayout(null);
-        abbImgButton.setVisible(true);
-        abbImgButton.setBounds(1115, 630, 150, 60);
-        abbImgButton.setBackground(Color.white);
-        abbImgButton.setFont(font3);
-        abbImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                String abbRoute="";
-                try { 
-                    
-                    abbRoute=clientListHandler.personalizeAbbRoute(userLogged);
-                    System.out.println(abbRoute);
-                    
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ImageIcon abbIcon = new ImageIcon(abbRoute);
-                graphLabel.setIcon(abbIcon); 
-            }
-           
-        }); 
-        clientView.add(abbImgButton);
-        
-        //Botón para mostrar la lista circular doblemente enlazada de álbumes del cliente
-        JButton albumImgButton = new JButton("Álbums");
-        albumImgButton.setLayout(null);
-        albumImgButton.setVisible(true);
-        albumImgButton.setBounds(1300, 630, 200, 60);
-        albumImgButton.setBackground(Color.white);
-        albumImgButton.setFont(font3);
-        albumImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                String albumsRoute="";
-                try { 
-                    
-                    albumsRoute=clientListHandler.personalizeAlbumsListRoute(userLogged);
-                    System.out.println(albumsRoute);
-                    
-                    
-                 
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ImageIcon albumsListIcon = new ImageIcon(albumsRoute);
-                graphLabel.setIcon(albumsListIcon); 
-                
-            }
-        }); 
-        clientView.add(albumImgButton);
-        
-        //Botón para mostrar el grafo Avl de imágenes del cliente.
-        JButton avlImgButton = new JButton("Img");
-        avlImgButton.setLayout(null);
-        avlImgButton.setVisible(true);
-        avlImgButton.setBounds(940, 630, 150, 60);
-        avlImgButton.setBackground(Color.white);
-        avlImgButton.setFont(font3);
-        avlImgButton.addMouseListener(new MouseAdapter(){  
-            public void mouseClicked(MouseEvent ecp){
-                String avlRoute="";
-                try { 
-                    
-                    avlRoute=clientListHandler.personalizeAvlRoute(userLogged);
-                    System.out.println(avlRoute);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                graphLabel.setIcon(new ImageIcon(avlRoute)); 
-            }
-        }); 
-        clientView.add(avlImgButton);
-        
         clientView.repaint();
 
             
         }
-    */
+    
 }
