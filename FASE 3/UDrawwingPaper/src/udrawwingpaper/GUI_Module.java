@@ -595,22 +595,55 @@ public class GUI_Module {
         adminView.add(graphScroll);
         
         
-        //Botón para ver arbol de clientes
-        JButton graphView = new JButton("Ver Árbol De Clientes");
-        graphView.setLayout(null);
-        graphView.setVisible(true);
-        graphView.setBounds(925, 630, 600, 60);
-        graphView.setBackground(Color.white);
-        graphView.setFont(font3);
-        graphView.addMouseListener(new MouseAdapter(){  
+        //Botón para ver la tabla hash
+        JButton hashButton = new JButton("HASH");
+        hashButton.setLayout(null);
+        hashButton.setVisible(true);
+        hashButton.setBounds(875, 630, 150, 60);
+        hashButton.setBackground(Color.white);
+        hashButton.setFont(font3);
+        hashButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){  
-                String route="Reportes Img/ARBOLB.png";
+                String route="Reportes Img/Tabla Hash.png";
                 ImageIcon imgIcon = new ImageIcon(route);
                 imgIcon.getImage().flush();
                 graphLabel.setIcon(imgIcon); 
             }
         }); 
-        adminView.add(graphView);
+        adminView.add(hashButton);
+        
+        
+        JButton adjacencyButton = new JButton("Adyacencia");
+        adjacencyButton.setLayout(null);
+        adjacencyButton.setVisible(true);
+        adjacencyButton.setBounds(1045, 630, 300, 60);
+        adjacencyButton.setBackground(Color.white);
+        adjacencyButton.setFont(font3);
+        adjacencyButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){  
+                String route="Reportes Img/listaAdyacente.png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        adminView.add(adjacencyButton);
+        
+        JButton undirectedButton = new JButton("Grafo");
+        undirectedButton.setLayout(null);
+        undirectedButton.setVisible(true);
+        undirectedButton.setBounds(1375, 630, 200, 60);
+        undirectedButton.setBackground(Color.white);
+        undirectedButton.setFont(font3);
+        undirectedButton.addMouseListener(new MouseAdapter(){  
+            public void mouseClicked(MouseEvent ecp){  
+                String route="Reportes Img/Grafo.png";
+                ImageIcon imgIcon = new ImageIcon(route);
+                imgIcon.getImage().flush();
+                graphLabel.setIcon(imgIcon); 
+            }
+        }); 
+        adminView.add(undirectedButton);
         
        
         //=========================Creación de Tabla =========================
