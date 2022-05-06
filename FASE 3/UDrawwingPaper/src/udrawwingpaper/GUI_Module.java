@@ -748,6 +748,7 @@ public class GUI_Module {
                 System.out.println("=========================================");
                 System.out.println("\n\n\n");
                 try {
+                    citiesListHandler.generateAdjancecyList();
                     adminView();
                     
                 } catch (IOException ex) {
@@ -1112,7 +1113,7 @@ public class GUI_Module {
                   
                 Route newRoute = new Route(start,end,weight);
                 citiesListHandler.cityNewRoute(start,newRoute);
-                citiesListHandler.cityNewRoute(end,newRoute); 
+                //citiesListHandler.cityNewRoute(end,newRoute); 
 
             }
             routesJsonContent ="";

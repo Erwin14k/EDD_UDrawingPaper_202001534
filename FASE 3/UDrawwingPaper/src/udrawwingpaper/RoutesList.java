@@ -33,4 +33,39 @@ public class RoutesList {
             pointer.next=node;
         }
     }
+    
+    public String collectLinkedList(){
+        String graphText="";
+        String conections="";
+        RoutesListNode temp=first;
+        while(temp!=null){
+            graphText+="N"+temp.hashCode()+"[label=\""+"Ciduad No. "+temp.route.getEnd()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+            }
+            temp=temp.next;
+        } 
+        return graphText;
+        
+    }
+    public String collectConnections(){
+        String graphText="";
+        String conections="";
+        RoutesListNode temp=first;
+        if(first!=null){
+           conections+="N"+first.hashCode()+"\n";
+        }
+        
+        while(temp!=null){
+            
+            graphText+="N"+temp.hashCode()+"[label=\""+"Ciudad No. "+temp.route.getEnd()+"\"];\n";
+            if(temp.next != null){
+                conections+="N"+temp.hashCode()+ " -> "+"N"+temp.next.hashCode()+";\n";
+                
+            }
+            temp=temp.next;
+        } 
+        return conections;
+        
+    }
 }
