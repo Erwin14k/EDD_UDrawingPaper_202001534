@@ -1,0 +1,24 @@
+digraph G{
+node [shape=box];
+N1[label="Ciudad No. 1"];
+N2[label="Ciudad No. 2"];
+N3[label="Ciudad No. 3"];
+N4[label="Ciudad No. 4"];
+N5[label="Ciudad No. 5"];
+N6[label="Ciudad No. 6"];
+N7[label="Ciudad No. 7"];
+N8[label="Ciudad No. 8"];
+N9[label="Ciudad No. 9"];
+N10[label="Ciudad No. 10"];
+N11[label="Ciudad No. 11"];
+
+N1 -> 20 -> N2[dir=none];
+N1 -> 50 -> N4[dir=none];
+N1 -> 45 -> N5[dir=none];
+N2 -> 15 -> N3[dir=none];
+N4 -> 24 -> N3[dir=none];
+N4 -> 23 -> N5[dir=none];
+
+start [shape=Mdiamond label="Grafo De Rutas:
+ "];{rank=same; };}
+}

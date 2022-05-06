@@ -84,7 +84,6 @@ public class HashTable {
             }
             pointer.next=node;
         }
-        
         size=newSize;
         max=(int) Math.round(size*0.75);
         System.out.println("Nuevo tamaño---"+size);
@@ -188,9 +187,7 @@ public class HashTable {
         String tParam = "-Tpng";
         String tOParam = "-o";
         String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
-        
         String finalText="digraph HashTable{\n node[shape = record,fillcolor=\"bisque1\" color=\"black\" style=\"filled\" label=\"{Posición|Mensajero}|";
-        
         HashTableNode temp = first;
         while(temp != null){
             if(temp.deliveryCourier!=null){
