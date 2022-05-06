@@ -5,9 +5,11 @@
  */
 package udrawwingpaper;
 
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 
 /**
  *
@@ -91,6 +93,62 @@ public class CitiesList {
         finalText+=nodes+"\n";
         finalText+=conections+"\n";
         finalText+="start [shape=Mdiamond label=\"Lista De Adyacencia:\n "+""+"\"];";
+        finalText+=rankSame;
+        finalText+="}\n}";
+        FileWriter fw = new FileWriter(route);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(finalText);
+        bw.close();
+        
+        String[] cmd = new String[5];
+        cmd[0] = pathString;
+        cmd[1] = tParam;
+        cmd[2] = route;
+        cmd[3] = tOParam;
+        cmd[4] = graph;
+
+        Runtime rt = Runtime.getRuntime();
+
+        rt.exec( cmd );
+        
+        return finalText;
+    }
+    
+    public String generateUndirectedGraph() throws IOException{
+        String route="Reportes Texto/Grafo.txt";
+        String graph="Reportes Img/Grafo.png";
+        String tParam = "-Tpng";
+        String tOParam = "-o";
+        String pathString = "C:\\Program Files\\Graphviz\\bin\\dot.exe";
+        
+        String finalText="digraph G{\nnode [shape=box];\n";
+        CitiesListNode temp = first;
+        String rankSame="{rank=same; ";
+        String conections="";
+        String nodes="";
+  
+        while(temp != null ){
+            nodes+="N"+temp.city.getId()+"[label=\""+"Ciudad No. "+temp.city.getId()+"\"];\n";
+            temp=temp.next;
+        }
+        temp = first;
+        while(temp != null ){
+            if(!temp.city.getRoutesList().isEmpty()){
+                //nodes+=temp.city.getRoutesList().collectLinkedList();
+                conections+=temp.city.getRoutesList().collectConnections2("N"+temp.city.getId());
+                //conections+="start"+ " -> "+"N"+temp.hashCode()+";\n";
+            }
+           
+            
+            temp = temp.next;
+            
+        }
+        rankSame+="};";
+        
+        
+        finalText+=nodes+"\n";
+        finalText+=conections+"\n";
+        finalText+="start [shape=Mdiamond label=\"Grafo De Rutas:\n "+""+"\"];";
         finalText+=rankSame;
         finalText+="}\n}";
         FileWriter fw = new FileWriter(route);

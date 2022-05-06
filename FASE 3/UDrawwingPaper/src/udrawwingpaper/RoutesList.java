@@ -68,4 +68,18 @@ public class RoutesList {
         return conections;
         
     }
+    
+    public String collectConnections2(String hashCode){
+        String graphText="";
+        String conections="";
+        RoutesListNode temp=first;
+        
+        while(temp!=null){
+            conections+=hashCode+ " -> "+temp.route.getWeight()+" -> "+"N"+temp.route.getEnd()+";\n";
+            System.out.println("hola");
+            temp=temp.next;
+        } 
+        return conections;
+        
+    }
 }

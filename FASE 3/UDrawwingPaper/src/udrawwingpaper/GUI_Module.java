@@ -749,6 +749,7 @@ public class GUI_Module {
                 System.out.println("\n\n\n");
                 try {
                     citiesListHandler.generateAdjancecyList();
+                    citiesListHandler.generateUndirectedGraph();
                     adminView();
                     
                 } catch (IOException ex) {
