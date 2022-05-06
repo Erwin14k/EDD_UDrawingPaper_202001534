@@ -14,11 +14,13 @@ public class City {
     private String department;
     private String name;
     private String office;
-    public City(int id, String department,String name, String office){
+    private RoutesList routesList;
+    public City(int id, String department,String name, String office,RoutesList routesList){
         this.id=id;
         this.department=department;
         this.name=name;
         this.office=office;
+        this.routesList=routesList;
     }
 
     public int getId() {
@@ -51,6 +53,14 @@ public class City {
 
     public void setOffice(String office) {
         this.office = office;
+    }
+
+    public RoutesList getRoutesList() {
+        return routesList;
+    }
+
+    public void setRoutesList(RoutesList routesList) {
+        this.routesList = routesList;
     }
     
     

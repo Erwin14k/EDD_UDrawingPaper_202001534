@@ -48,8 +48,10 @@ public class GUI_Module {
     public static String clientsJsonContent="";
     public static String citiesJsonContent="";
     public static String routesJsonContent="";
-    
+    //Tabla hash donde se guardan los mensajeros
     public static HashTable hastTable = new HashTable();
+    //Lista donde se guardan los municipios o ciudades
+    public static CitiesList citiesListHandler=new CitiesList();
     
     //Frame para iniciar sesión, ya se como administrador o como cliente.
     public static void loginFrameModule() throws IOException{
@@ -710,9 +712,9 @@ public class GUI_Module {
             public void mouseClicked(MouseEvent ecp){
                 hastTable.initialize();
                 adminView.dispose();
-                readDeliveryCouriersJson();
-                deliveryCouriersBulkLoad();
-                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                readCitiesJson();
+                citiesBulkLoad();
+                System.out.println("Los lugares ingresados por carga Masiva:");
                 //clientListHandler.travel();
                 System.out.println("=========================================");
                 System.out.println("\n\n\n");
@@ -737,11 +739,11 @@ public class GUI_Module {
         routesBulkLoadButton.setFont(font3);
         routesBulkLoadButton.addMouseListener(new MouseAdapter(){  
             public void mouseClicked(MouseEvent ecp){
-                hastTable.initialize();
+                
                 adminView.dispose();
-                readDeliveryCouriersJson();
-                deliveryCouriersBulkLoad();
-                System.out.println("Los mensajeros ingresados por carga Masiva:");
+                readRoutesJson();
+                routesBulkLoad();
+                System.out.println("Las rutas ingresadas por carga Masiva:");
                 //clientListHandler.travel();
                 System.out.println("=========================================");
                 System.out.println("\n\n\n");
@@ -993,10 +995,48 @@ public class GUI_Module {
                 System.out.println("No se pudo 3."+e2);
             }
         }
+        
+        citiesJsonContent=personalizeCitiesJson(citiesJsonContent);
+    }
+    public static void citiesBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            System.out.println(citiesJsonContent);
+            // JsonArray = arreglo de objetos Json, en este caso de tipo ciudad.
+            JsonArray citiesList = parser.parse(citiesJsonContent).getAsJsonArray();
+            System.out.println("=============================================");
+            System.out.println("el numero de ciudades es: "+citiesList.size());
+            System.out.println("Si existen repetidos se descartan!!");
+            System.out.println("=============================================");
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos a una lista enlazada
+            for (int i = 0; i < citiesList.size(); i++) {
+                //System.out.println("EMPIEZAAAAAAAAA");
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = citiesList.get(i).getAsJsonObject();     
+
+                //Guardamos atributos del objeto en variables
+                int id = object.get("id").getAsInt();
+
+                String department = object.get("departamento").getAsString();
+                String name = object.get("nombre").getAsString();
+                String office = object.get("sn_sucursal").getAsString();
+                
+                // Se crea el objeto cliente
+                RoutesList routesList=new  RoutesList();   
+                City newCity = new City(id,department,name,office,routesList);
+                citiesListHandler.finalInsert(newCity); 
+
+            }
+            citiesJsonContent ="";
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Lugares Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+        
     }
     
-    
-    public static void readCRoutesJson(){
+    public static void readRoutesJson(){
           File archive = null;
           FileReader fr = null;
           BufferedReader br;
@@ -1042,9 +1082,73 @@ public class GUI_Module {
                 System.out.println("No se pudo 3."+e2);
             }
         }
+        routesJsonContent=personalizeRoutesJson(routesJsonContent);
     }
     
+    public static void routesBulkLoad(){
+        try {
+            //Empezamos el parseo
+            JsonParser parser = new JsonParser();
+            // JsonArray = arreglo de objetos Json, en este caso de tipo ciudad.
+            JsonArray routesList = parser.parse(routesJsonContent).getAsJsonArray();
+            System.out.println("=============================================");
+            System.out.println("el numero de rutas es: "+routesList.size());
+            System.out.println("Si existen repetidos se descartan!!");
+            System.out.println("=============================================");
+            //System.out.println(clientsList);
+            //Ya con el arreglo con objetos, para meterlos a una lista enlazada
+            for (int i = 0; i < routesList.size(); i++) {
+                //System.out.println("EMPIEZAAAAAAAAA");
+                // JsonObject = Toma el Objeto del Json actual
+                JsonObject object = routesList.get(i).getAsJsonObject();     
+
+                //Guardamos atributos del objeto en variables
+                int start = object.get("inicio").getAsInt();
+                int end = object.get("final").getAsInt();
+                int weight = object.get("peso").getAsInt();
+                
+                
+                // Se crea el objeto ruta
+                  
+                Route newRoute = new Route(start,end,weight);
+                citiesListHandler.cityNewRoute(start,newRoute);
+                citiesListHandler.cityNewRoute(end,newRoute); 
+
+            }
+            routesJsonContent ="";
+            JOptionPane.showMessageDialog(null,"<html><p style=\"color:green; font:20px;\">Carga Masiva De Rutas Realizada Con Éxito!!</p></html>" );
+        } catch (Exception e) {
+        }
+        
+    }
     
+    public static String personalizeCitiesJson(String content){
+        /*Variable importantísima llamada rgxIDontWant, la cuál almacena una expresión 
+        regular para eliminar del archivo json todas las coincidencias.*/
+        String rgxIDontWant="\"Lugares\":";
+        //Variable para almacenar content con las coincidencias borradas
+        String contentWithoutRgx = content.replaceAll(rgxIDontWant, "");
+        //Variable la cuál guarda un string reemplaza el primer caracter "{" por "["
+        String firstSymbolDelete= contentWithoutRgx.replaceFirst("\\{", "");
+        //Variable la cuál guarda un string reemplaza el ultimo caracter "}" por "]" 
+        String lastSymbolDelete = firstSymbolDelete.replaceFirst(".$", "");
+        //Ya con un string adecuado lo devolvemos para que lo pueda utilizar otro método.
+        return lastSymbolDelete;
+    }
+    
+    public static String personalizeRoutesJson(String content){
+        /*Variable importantísima llamada rgxIDontWant, la cuál almacena una expresión 
+        regular para eliminar del archivo json todas las coincidencias.*/
+        String rgxIDontWant="\"Grafo\":";
+        //Variable para almacenar content con las coincidencias borradas
+        String contentWithoutRgx = content.replaceAll(rgxIDontWant, "");
+        //Variable la cuál guarda un string reemplaza el primer caracter "{" por "["
+        String firstSymbolDelete= contentWithoutRgx.replaceFirst("\\{", "");
+        //Variable la cuál guarda un string reemplaza el ultimo caracter "}" por "]" 
+        String lastSymbolDelete = firstSymbolDelete.replaceFirst(".$", "");
+        //Ya con un string adecuado lo devolvemos para que lo pueda utilizar otro método.
+        return lastSymbolDelete;
+    }
     
     
     
